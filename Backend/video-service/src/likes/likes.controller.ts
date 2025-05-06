@@ -9,8 +9,8 @@ export class LikesController {
   toggleLike(user,dto){
     this.likesService.toggleLike(user,dto)
   }
-  getLikeCount(data:{video_id:string}){
-    this.likesService.getLikeCount(+video_id)
+  getLikeCount(data:{video_id:number}){
+    this.likesService.getLikeCount(data.video_id)
   }
 
 

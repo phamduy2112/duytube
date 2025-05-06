@@ -4,23 +4,56 @@ import { UpdateLikeDto } from './dto/update-like.dto';
 
 @Injectable()
 export class LikesService {
-  create(createLikeDto: CreateLikeDto) {
-    return 'This action adds a new like';
+  
+  async toggleLike(userId: number, dto: any) {
+    const existing=await this.prisma.like.findUnique({
+      where: {
+        userId_videoId: {
+          userId,
+          videoId: dto.videoId,
+        },
+      },
+    })
+    if(existing){
+      if(existing.type===dto.type){
+        await this.prisma.like.delete({
+          where:{id:existing.id}
+        })
+        return `Delete ${dto.type} Commented`
+      }
+      return this.prima.like.update({
+        where: { id: existing.id },
+        data: { type: dto.type },
+      })
+    }
+      // Nếu chưa tồn tại => tạo mới
+  return this.prisma.like.create({
+    data: {
+      userId,
+      videoId: dto.videoId,
+      type: dto.type,
+    },
+  });
   }
 
-  findAll() {
-    return `This action returns all likes`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} like`;
-  }
-
-  update(id: number, updateLikeDto: UpdateLikeDto) {
-    return `This action updates a #${id} like`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} like`;
-  }
+ async getLikeCount(video_id:number){
+  const [likeCount,unlikeCount]=await Promise.all([
+    this.prisma.like.count({
+      where:{
+        video_id,
+        type:"like",
+      }
+    }),
+    this.prisma.like.count({
+      where: {
+        video_id,
+        type: 'unlike',
+      },
+    }),
+  ])
+  return {
+    like: likeCount,
+    unlike: unlikeCount,
+  };
+ }
 }

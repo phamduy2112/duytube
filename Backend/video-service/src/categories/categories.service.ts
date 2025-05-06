@@ -58,4 +58,17 @@ export class CategoriesService {
       
     }
   }
+  async delete(id:number){
+    try {
+      const deleted=await this.prismaService.category.delete({
+        where:{
+          id
+        }
+      })
+      return this.response.responseSend(deleted,"Delete Category Successfully",200)
+
+    } catch (error) {
+      
+    }
+  }
 }

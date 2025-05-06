@@ -34,8 +34,7 @@ export class MediaService {
         playbackId: upload.id,
         assetId: upload.asset_id,
         videoUrl: upload.url,
-        title: createMediaDto.videoTitle,   // Dùng thông tin từ DTO
-        description: createMediaDto.description,  // Dùng thông tin từ DTO
+      
       },
     });
 

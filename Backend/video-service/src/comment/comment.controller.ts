@@ -6,22 +6,22 @@ export class CommentController {
   constructor(private readonly commentService: CommentService) {}
 
   @Post()
-  create(@Body() body: any) {
+  create(body: any) {
     return this.commentService.create(body);
   }
 
   @Get(':videoId')
-  findByVideo(@Param('videoId') videoId: string) {
+  findByVideo( videoId: string) {
     return this.commentService.findByVideo(+videoId);
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() body: any) {
+  update( id: string,  body: any) {
     return this.commentService.update(+id, body);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(id: string) {
     return this.commentService.remove(+id);
   }
 }

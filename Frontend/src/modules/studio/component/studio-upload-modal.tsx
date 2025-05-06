@@ -14,7 +14,7 @@ export const StudioUpLoadModal=()=>{
         onOpenChange={()=>{}}
         >
 
-            <StudioUpLoader/>
+            <StudioUpLoader />
         </ResponsiveModal>
         <Button
             variant="secondary"

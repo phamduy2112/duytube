@@ -1,26 +1,66 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCommentDto } from './dto/create-comment.dto';
-import { UpdateCommentDto } from './dto/update-comment.dto';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class CommentService {
-  create(createCommentDto: CreateCommentDto) {
-    return 'This action adds a new comment';
+  constructor(private prisma: PrismaService) {}
+
+  // Thêm comment hoặc reply
+  async create(data: {
+    content: string;
+    videoId: number;
+    userId: number;
+    parentId?: number;
+  }) {
+    return this.prisma.comment.create({
+      data: {
+        content: data.content,
+        videoId: data.videoId,
+        userId: data.userId,
+        parentId: data.parentId || null,
+      },
+    });
   }
 
-  findAll() {
-    return `This action returns all comment`;
+  // Lấy danh sách comment + reply của video
+  async findByVideo(videoId: number) {
+    return this.prisma.comment.findMany({
+      where: {
+        videoId,
+        parentId: null,
+      },
+      include: {
+        user: true,
+        replies: {
+          include: {
+            user: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} comment`;
+  // Sửa comment
+  async update(id: number, data: { content: string }) {
+    return this.prisma.comment.update({
+      where: { id },
+      data: { content: data.content },
+    });
   }
 
-  update(id: number, updateCommentDto: UpdateCommentDto) {
-    return `This action updates a #${id} comment`;
-  }
+  // Xóa comment (và reply nếu có)
+  async remove(id: number) {
+    // Xóa replies trước (nếu có)
+    await this.prisma.comment.deleteMany({
+      where: { parentId: id },
+    });
 
-  remove(id: number) {
-    return `This action removes a #${id} comment`;
+    // Xóa comment cha
+    return this.prisma.comment.delete({
+      where: { id },
+    });
   }
 }
