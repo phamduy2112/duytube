@@ -2,6 +2,7 @@ import { Sidebar, SidebarContent } from "@/components/ui/sidebar"
 import { MainSection } from "./main-section"
 import { Separator } from "@/components/ui/separator"
 import { PersonalSection } from "./personal-section"
+import { SubscriptionsSection } from "@/modules/studio/ui/layouts/components/studio-sidebar/subscriptions-section"
 
 export const HomeSidebar=()=>{
     return (
@@ -10,6 +11,9 @@ export const HomeSidebar=()=>{
                    <MainSection></MainSection>
                    <Separator></Separator>
                    <PersonalSection/>
+                                      <Separator></Separator>
+
+                     <SubscriptionsSection/>
             </SidebarContent>
         </Sidebar>
     )

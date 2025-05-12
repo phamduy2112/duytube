@@ -1,5 +1,7 @@
 import { Suspense } from "react";
 import { CategoriesSection } from "../sections/category-section";
+import { HomeVideoSection } from "@/modules/home/ui/sections/home-videos-sections";
+import { TrendingView } from "./trending-view";
 
 interface HomeViewProps{
     categoryId?:string;
@@ -11,6 +13,8 @@ export const HomeView=({categoryId}:HomeViewProps)=>{
                 {/*  */}
                
                 <CategoriesSection categoryId={categoryId}></CategoriesSection>
+                <HomeVideoSection categoryId={categoryId}/>
+                <TrendingView/>
 
               
         </div>

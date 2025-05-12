@@ -4,6 +4,8 @@ import { FormSectionSuspense } from "../../ui/sections/form-section";
 // interface PageProps {
 //     params: { id: string };
 //   }
+export const dynamic="force-dynamic";
+
 const Page=async ({params})=>{
     const  {videoId}=await params;
     console.log(videoId)

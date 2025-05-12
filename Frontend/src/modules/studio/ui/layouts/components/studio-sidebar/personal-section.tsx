@@ -1,6 +1,7 @@
 import { SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
 import { FlameIcon, HistoryIcon, HomeIcon, ListVideoIcon, PlaySquareIcon, ThumbsUpIcon } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const items = [
     {
@@ -24,6 +25,7 @@ const items = [
   ];
   
   export const PersonalSection = () => {
+    const pathname=usePathname()
     return (
       <SidebarGroup>
         <SidebarGroupLabel>You</SidebarGroupLabel>
@@ -33,7 +35,7 @@ const items = [
               <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton asChild 
                 tooltip={item.title}
-                isActive={false}
+                isActive={pathname===item.url}
                 
                 >
                   <Link href={item.url} className="flex items-center gap-4">

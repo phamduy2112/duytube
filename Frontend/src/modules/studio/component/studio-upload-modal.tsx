@@ -6,6 +6,15 @@ import { StudioUpLoader } from "./studio-uploader";
 export const StudioUpLoadModal=()=>{
     let isPending=false;
     let open=false
+    // const router=Router;
+    const onSuccess=()=>{
+        // router.push("/studio/videos/")
+    }
+    let create={
+        data:{
+            url:"ABC"
+        }
+    }
     return (    
         <>
         <ResponsiveModal
@@ -14,7 +23,10 @@ export const StudioUpLoadModal=()=>{
         onOpenChange={()=>{}}
         >
 
-            <StudioUpLoader />
+{
+    create.data?.url? <StudioUpLoader endpoint={create.data?.url} onSuccess={onSuccess} />:<Loader2Icon/>
+}
+           
         </ResponsiveModal>
         <Button
             variant="secondary"

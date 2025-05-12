@@ -8,6 +8,8 @@ import Link from "next/link"
 import { LogOutIcon, VideoIcon } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { StudioSidebarHeader } from "./studio-sidebar-header"
+import { SignedIn } from "@clerk/nextjs"
+import { SubscriptionsSection } from "./subscriptions-section"
 
 export const SudioSidebar=()=>{
     const pathname=usePathname()
@@ -17,6 +19,14 @@ export const SudioSidebar=()=>{
                   
                     <SidebarGroup>
                     <SidebarMenu>
+                        {/* <SignedIn>
+                            <>
+                            <Separator/>
+                            <SubscriptionsSection/>
+                            </>
+                        </SignedIn> */}
+                        
+                          
                         {/* StudioSidebarHeader */}
                         <StudioSidebarHeader/>
                  <SidebarMenuItem>

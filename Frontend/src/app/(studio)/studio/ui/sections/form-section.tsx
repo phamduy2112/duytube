@@ -7,10 +7,12 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { snakeCaseToTitle } from "@/lib/utils";
+import { ThumbnailUploadModal } from "@/modules/studio/ui/component/thumbnail-upload-modal";
 import { VideoPlayer } from "@/modules/videos/ui/components/video-player";
 import { categoryNames, mockVideos } from "@/scripts/seed-catelogries";
-import { CopyCheckIcon, CopyIcon, Globe2Icon, LockIcon, MoreVerticalIcon, TrashIcon } from "lucide-react"
+import { CopyCheckIcon, CopyIcon, Globe2Icon, ImagePlus, ImagePlusIcon, LockIcon, MoreVerticalIcon, RotateCcwIcon, TrashIcon } from "lucide-react"
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
+import Image from "next/image";
 import Link from "next/link";
 import { Suspense, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
@@ -31,12 +33,15 @@ interface FormSectionProps {
 
 export const FormSectionSuspense = ({ videoId }) => {
     const video = mockVideos.find((item) => item.id == videoId)
+        const fullUrl=`localhost:3000/videos/${videoId}`
+
     const form = useForm({
         defaultValues: video
     })
     const onSubmit = async (data) => {
         console.log(data)
     }
+    
     const [isCopied, setIsCopied] = useState(false);
     const onCopy = async () => {
         await navigator.clipboard.writeText("localhost:3000")
@@ -45,7 +50,11 @@ export const FormSectionSuspense = ({ videoId }) => {
             setIsCopied(false);
         }, 2000)
     }
+    const [thumbnailModalOpen,setThumbnailModalOpen]=useState(false);
+
     return (
+    <>
+    <ThumbnailUploadModal open={thumbnailModalOpen} onOpenChange={setThumbnailModalOpen} videoId={videoId}/>
         <FormProvider {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
                 <div className="flex items-center justify-between mb-6">
@@ -62,7 +71,7 @@ export const FormSectionSuspense = ({ videoId }) => {
                                 </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">
-                                <DropdownMenuItem>
+                                <DropdownMenuItem onClick={()=>{}}>
                                     <TrashIcon className="size-4 mr-2" />
                                     Delete
                                 </DropdownMenuItem>
@@ -230,6 +239,44 @@ export const FormSectionSuspense = ({ videoId }) => {
                                 </FormItem>
                             )}
                         />
+                        <FormField 
+                        name="thmbnaiUrl"
+                        control={form.control}
+                        render={()=>(
+                            <FormItem>
+                                <FormLabel>Thumbnail</FormLabel>
+                                <FormControl>
+                                    <div className="p-0.5 border border-dashed border-neutral-400 relative h-[84px] w-[153px] group">
+                                        <Image 
+                                        
+                                        src={video?.thumbnail ??"/placeholder.svg"} className="object-cover" fill alt="Thmbnail"></Image>
+
+                                    </div>
+                                </FormControl>
+                            </FormItem>
+                        )}
+                        >
+                          <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                    <Button
+                                    type="button"
+                                    size="icon"
+                                    className="bg-black/50 hover:bg-black/50 absolute top-1 right-1 rounded-full opacity-100 md:opacity-0 group-hover:opacity-100">
+                                        <MoreVerticalIcon className="text-white"></MoreVerticalIcon>
+                                    </Button>
+                                    <DropdownMenuContent align="start" side="right">
+                                        <DropdownMenuItem onClick={()=>setThumbnailModalOpen(true)}>
+                                            <ImagePlusIcon className="size-4 mr-1"></ImagePlusIcon>
+                                            Changne
+                                        </DropdownMenuItem>
+                                        <DropdownMenuItem >
+                                            <RotateCcwIcon className="size-4 mr-1"></RotateCcwIcon>
+                                            Restore
+                                        </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                </DropdownMenuTrigger>
+                          </DropdownMenu>
+                        </FormField>
 
                     </div>
 
@@ -239,5 +286,7 @@ export const FormSectionSuspense = ({ videoId }) => {
 
             </form>
         </FormProvider>
+    </>
+
     )
 }
