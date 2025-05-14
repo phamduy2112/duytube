@@ -34,16 +34,21 @@ export const SearchInput=()=>{
                 
                 />
             </div>
-          {
+          {/* {
             value &&
             (
                 <button
                 type="submit"
                 disabled={!value.trim()}
                 className="px-5 py-2.5 bg-gray-100 border border-l-0 rounded-r-full hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
-               ><SearchIcon className="size-4"/></button>
+               ><SearchIcon className="size-4"/>asd</button>
             )
-          }
+          } */}
+           <button
+                type="submit"
+                disabled={!value.trim()}
+                className="px-5 py-2.5 bg-gray-100 border border-l-0 rounded-r-full hover:bg-gray-200 disabled:opacity-50 "
+               ><SearchIcon className="size-4"/></button>
         </form>
     )
 }

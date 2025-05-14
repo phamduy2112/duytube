@@ -20,7 +20,7 @@ function VideoReactions() {
         <Separator orientation='vertical' className='h-7'/>
         <Button
            variant="secondary"
-        className='rounded-l-full rounded-r-full pr-4'
+        className='rounded-l-none rounded-r-full pr-4'
         >
             <ThumbsDownIcon className={cn("size-5",viewerReaction !=="like" && "fill-black")}></ThumbsDownIcon>
             {1}

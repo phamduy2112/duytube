@@ -1,3 +1,5 @@
+'use client'
+
 import { useIsMobile } from "@/hooks/use-mobile";
 import { CategoriesSection } from "../sections/categories-section";
 import { ResultsSection } from "../sections/results-section";

@@ -1,7 +1,8 @@
 import { InfiniteScroll } from "@/components/infinite-scroll";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { VideoGridCard, VideoGridCardSkeleton } from "@/modules/videos/ui/components/video-grid-card";
-import { VideoRowCardSkeleton } from "@/modules/videos/ui/components/video-row-card";
+import { VideoRowCard, VideoRowCardSkeleton } from "@/modules/videos/ui/components/video-row-card";
+import { mockVideos } from "@/scripts/seed-catelogries";
 
 interface ResultsSectionProps{
     query:string|undefined;
@@ -43,18 +44,18 @@ export const ResultsSection=({
         ):(
             <div className="hidden flex-col gap-4 md:flex">
                 {
-                    results.map((video)=>(
-                        <VideoGridCard key={video.id} data={video} size="default"/>
+                    mockVideos.map((video)=>(
+                        <VideoRowCard key={video.id} data={video} size="default"/>
                     ))
                 }
             </div>
         )}
-        <InfiniteScroll
+        {/* <InfiniteScroll
         hasNextPage={resultsQuery.hasNextPage}
         isFetchingNextPage={resultsQuery.isFetchingNextPage}
         fetchNextPage={resultsQuery.fetchNextPage}
         
-        />
+        /> */}
         </>
     )
 }

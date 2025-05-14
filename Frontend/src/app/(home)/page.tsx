@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { HomeView } from "./ui/views/subscribed";
+import { HomeView } from "./ui/views/home-view";
 
 export default function Home() {
   return (

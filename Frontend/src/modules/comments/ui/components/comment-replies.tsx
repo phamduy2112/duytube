@@ -1,6 +1,7 @@
 import { CornerDownRightIcon, Loader2Icon } from "lucide-react";
 import { CommentItem } from "./comment-items";
 import { Button } from "@/components/ui/button";
+import { mockComments } from "@/scripts/seed-catelogries";
 
 interface CommentRepliesProps{
     parentId:string;
@@ -14,7 +15,7 @@ export const CommentReplies=({
     hasNextPage,
     isFetchingNextPage
 }:CommentRepliesProps)=>{
-    const isLoading=true
+    const isLoading=false
     return (
         <div className="pl-14">
                 <div className="flex flex-col gap-4 mt-2">
@@ -26,15 +27,18 @@ export const CommentReplies=({
                         )
                     }
 
-                    {!isLoading && 
-                    Array(5).map((comment)=>{
-                        <CommentItem
-                        key={comment.id}
-                        comment={comment}
-                        variant="reply"
-                        />
-                    })
-                    }
+                {!isLoading && 
+  mockComments.map((comment) => {
+    return (
+      <CommentItem
+        key={comment.id}
+        comment={comment}
+        variant="reply"
+      />
+    );
+  })
+}
+
                 </div>
 
 {

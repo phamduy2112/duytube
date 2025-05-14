@@ -1,7 +1,9 @@
+"use client"
 import React, { Suspense } from 'react'
 import { VideoRowCard, VideoRowCardSkeleton } from '../ui/components/video-row-card'
 import { InfiniteScroll } from '@/components/infinite-scroll'
 import { VideoGridCardSkeleton } from '../ui/components/video-grid-card';
+import { mockVideos } from '@/scripts/seed-catelogries';
 
 interface SuggestionsSectionProps{
     videoId:string;
@@ -41,32 +43,39 @@ function SuggestionsSectionSuspense({
     videoId,
     isManual
 }:SuggestionsSectionProps) {
+const suggestedVideos = mockVideos.filter((item) => item.id !== String(videoId));
+
   return (
   <>
-    <div className='hidden md:block space-x-3'>
-        {Array(5).map((video)=>{
-            <VideoRowCard
-            key={video.id}
-            data={video}
-            size="compact"
-            ></VideoRowCard>
-        })}
+    <div className='hidden md:block space-y-3'>
+        
+    {suggestedVideos.map((video) => {
+ return <VideoRowCard
+    key={video.id}
+    data={video}
+    size="compact"
+  />
+})}
+
     </div>
     <div className='block md:hidden space-y-10'>
-        {Array(5).map((video)=>{
-            <VideoRowCard
-            key={video.id}
-            data={video}
-            size="compact"
-            ></VideoRowCard>
-        })}
+        {suggestedVideos.map((video) => {
+  return (
+    <VideoRowCard
+      key={video.id}
+      data={video}
+      size="compact"
+    />
+  );
+})}
+
     </div>
-    <InfiniteScroll
+    {/* <InfiniteScroll
     isManual={isManual}
     hasNextPage={query.hasNextPage}
     isFetchingNextPage={query.isFetchingNextPage}
     fetchNextPage={query.fetchNextPage}
-    />
+    /> */}
   </>
   )
 }

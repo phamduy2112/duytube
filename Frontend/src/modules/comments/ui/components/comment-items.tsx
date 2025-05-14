@@ -1,3 +1,4 @@
+'use client'
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { UserAvatar } from "@/components/user-avatar";
@@ -22,11 +23,11 @@ import { CommentReplies } from "./comment-replies";
     const [isRepliesOpen,setIsRepliesOpen]=useState(false);
     const variant="comment"
     return(
-            <div>
+            <>
                 <div className="flex gap-4">
                     <Link href={`/users/${comment?.userId}`}>
                         <UserAvatar 
-                        imageUrl={comment.user.imageUrl}
+                        imageUrl={"https://scontent.fsgn8-4.fna.fbcdn.net/v/t39.30808-6/496150454_3799684950248327_219587134787243704_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=JoJycapiivkQ7kNvwETfRna&_nc_oc=AdnI0UiR2vtsakP9xxDf8G3C9uGBZ4mwWjPkMnw3sLrj0J3HMUbfzdnw8hcTspUvCm8&_nc_zt=23&_nc_ht=scontent.fsgn8-4.fna&_nc_gid=CjRhbKdWtEGcd4ihhRB8_Q&oh=00_AfK9WouNqY2fQfnGo9oyJ5VmSQtiHyf_6-M7LZ0rNtm2kw&oe=6829235B"}
                         name={comment.user.name}
                         size={variant==="comment"?"lg":"sm"}>
                         
@@ -45,7 +46,7 @@ import { CommentReplies } from "./comment-replies";
                              
                                 </div></Link>
                                 <p className="text-sm">{comment.value}</p>
-                                <div className="flex items-center gap-2 mt-4">
+                                <div className="flex items-center gap-2">
                                     <div className="flex items-center">
                                         <Button disabled={false} variant="ghost" size="icon" className="size-8" onClick={()=>{}}>
                                             <ThumbsUpIcon className={cn(
@@ -60,7 +61,7 @@ import { CommentReplies } from "./comment-replies";
                                     </div>
                                     {
                                         variant==="comment"&&(
-                                            <Button variant="ghost" size="sm" className="h-8" onClick={()=>setIsReplyOpen(true)}>
+                                            <Button variant="ghost" size="sm" className="h-8" onClick={()=>setIsReplyOpen((current)=>!current)}>
                                                 Reply
                                             </Button>
                                         )
@@ -76,7 +77,7 @@ import { CommentReplies } from "./comment-replies";
                                 </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">
-                                <DropdownMenuItem onClick={()=>setIsReplyOpen(true)}>
+                                <DropdownMenuItem onClick={()=>setIsReplyOpen((current)=>!current)}>
                                     <MessageSquareIcon className="size-4"/>
                                     Reply
                                 </DropdownMenuItem>
@@ -90,48 +91,42 @@ import { CommentReplies } from "./comment-replies";
                         </DropdownMenu>
                 
                 </div>
-                {
-                    isRepliesOpen&&variant==="comment"&&(
-                        <div className="mt-4 pl-14">
-                            <CommentForm
-                            variant="reply"
-                            parentId={comment.id}
-                            videoId={comment.videoId}
-                            onCancel={()=>setIsReplyOpen(false)}
+             {!isReplyOpen && variant === "comment" && (
+  <div className="mt-4 pl-14">
+    <CommentForm
+      variant="reply"
+      parentId={comment.id}
+      videoId={comment.videoId}
+      onCancel={() => setIsReplyOpen(false)}
+      onSuccess={() => {
+        setIsReplyOpen(false)
+        setIsRepliesOpen(true) // <- đoạn này không được gọi nếu CommentForm không hiển thị
+      }}
+    />
+  </div>
+)}
 
-                            onSuccess={()=>{
-                                setIsReplyOpen(false)
-                                setIsRepliesOpen(true)
-                            }}
-                            >
 
-                            </CommentForm>
-                        </div>
+           {comment.replyCount > 0 && variant === "comment" && (
+  <div className="pl-14">
+    <Button
+      variant="tertiary"
+      size="sm"
+      onClick={() => setIsRepliesOpen((current) => !current)}
+    >
+      {isRepliesOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
+      {comment.replyCount} replies
+    </Button>
+  </div>
+)}
 
-                    )
-                }
 
-                {comment.replyCount>0 && variant==="comment" &&(
-                    <div className="pl-14">
-                        <Button
-                        variant="tertiary"
-                        size="sm"
-                        onClick={()=>setIsRepliesOpen((current)=>!current)}
-                        >
-                            {/* {comment.replyCount}
-                             */}
-                             {isRepliesOpen?<ChevronUpIcon/>:<ChevronDownIcon/>}
-                             0 replies
-                        </Button>
-                    </div>
-                )}
-
-                {comment.replyCount>0 && variant==="comment"&&isRepliesOpen&&(
+                {comment.replyCount>0 && variant=="comment" && isRepliesOpen &&(
                     <CommentReplies
-                    parentId={comment.id};
+                    parentId={comment.id}
                     video={comment.videoId}
                     />
                 )}
-            </div>
+            </>
     )
  }

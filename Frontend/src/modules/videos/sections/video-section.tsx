@@ -1,8 +1,10 @@
-import { mockVideos } from "@/scripts/seed-catelogries";
+import { mockComments, mockVideos } from "@/scripts/seed-catelogries";
 import { VideoBanner } from "../ui/components/video-banner";
 import { VideoPlayer, VideoPlayerSkeleton } from "../ui/components/video-player";
 import { Suspense } from "react";
-import { VideoTopRowSkeleton } from "../ui/components/video-top-row";
+import { VideoTopRow, VideoTopRowSkeleton } from "../ui/components/video-top-row";
+import { CommentForm } from "@/modules/comments/ui/components/comment-form";
+import { CommentItem } from "@/modules/comments/ui/components/comment-items";
 
 export const videoSection=({videoId})=>{
   return (
@@ -19,28 +21,33 @@ const VideoSectionSekeleton=()=>{
     </>
   )
 }
-const VideoSectionSuspense = ({ videoId }) => {
+export const VideoSectionSuspense = ({ videoId }) => {
   const videoDetail = mockVideos.find((item) => item.id === String(videoId));
 
   if (!videoDetail) {
     return <div>Không tìm thấy video.</div>;
   }
-
+  console.log(videoDetail)
 
 
   return (
     <div>
-      <h2>{videoDetail.title}</h2>
-      <p>{videoDetail.description}</p>
-      <video controls width="640">
-        <source src={videoDetail.url} type="video/mp4" />
-        Trình duyệt của bạn không hỗ trợ video.
-      </video>
-      <p>Thể loại: {videoDetail.category}</p>
-      <p>Lượt xem: {videoDetail.views}</p>
-      <p>Hiển thị: {videoDetail.visibility}</p>
-      <VideoPlayer autoPlay onPlay={()=>{}} playBackId="" thumbnaiUrl=""></VideoPlayer>
-      <VideoBanner status=""></VideoBanner>
+   
+      <VideoPlayer autoPlay playBackId="" thumbnaiUrl=""></VideoPlayer>
+    <VideoTopRow video={videoDetail}/>
+  <div>
+      <p className="font-bold text-[1.2rem] py-3">
+      136 Comments
+    </p>
+      <CommentForm/>
+  </div>
+    {
+  mockComments.map((item) => {
+    return <CommentItem key={item.id} comment={item} />;
+  })
+}
+
+     
     </div>
   );
 };

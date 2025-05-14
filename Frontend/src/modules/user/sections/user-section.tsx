@@ -1,4 +1,4 @@
-import { mockUser, mockUsers } from "@/scripts/seed-catelogries";
+import {  subscriptions } from "@/scripts/seed-catelogries";
 import { UserPageBanner, UserPageBannerSkeleton } from "../ui/components/user-page-banner";
 import { UserPageInfo, UserPageInfoSkeleton } from "../ui/components/user-page-info";
 import { Separator } from "@/components/ui/separator";
@@ -24,7 +24,7 @@ const UserSectionSkeleton=()=>{
     )
 }
 const UserSection = ({ userId }: Props) => {
-  const user = mockUsers.find((u) => u.id === userId);
+  const user = subscriptions.find((u) => u.id === userId);
 
   if (!user) {
     return <div>Không tìm thấy người dùng.</div>;

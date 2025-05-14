@@ -20,14 +20,56 @@ export const categoryNames = [
     { id: "19", name: "Animation" },
     { id: "20", name: "Spirituality" },
   ];
-export const mockUsers = [
-  { id: "1", name: "Nguyễn Văn A" ,
-    subscriberCount:3,
-    videoCount:4,
-    clerkId:1,
-    bannerUrl:"https://scontent.fsgn8-3.fna.fbcdn.net/v/t39.30808-6/495829766_3798618053688350_7263700441877599386_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=127cfc&_nc_ohc=RzUOGY55YLwQ7kNvwEshM1E&_nc_oc=AdmBhQritYhokjOBABxavxOuWpAX3CbI3dpFL_6UqtFMF--S-Z6V0PBBxOvi4-RzDybzvu6LKfMITBGCJlqbpxxD&_nc_zt=23&_nc_ht=scontent.fsgn8-3.fna&_nc_gid=8f0KTX6YQGl7E7_0QezX1g&oh=00_AfIniVQ1W7Gg54rgraPQ6Ur9hNIkDDtGYWMb8OxhxH1wEw&oe=6826555D"},
-  { id: "2", name: "Trần Thị B" },
-  { id: "3", name: "Lê Văn C" }
+export const mockComments = [
+  {
+    id: "1",
+    userId: "1",
+    user: {
+      name: "John Doe",
+      imageUrl: "https://i.pravatar.cc/150?img=1"
+    },
+    value: "This is a comment.",
+    createAt: "2025-05-12T12:34:56Z",
+    replyCount: 2,
+    videoId: "video_1",
+    replies: [
+      {
+        id: "1-1",
+        userId: "2",
+        user: {
+          name: "Jane Smith",
+          imageUrl: "https://i.pravatar.cc/150?img=2"
+        },
+        value: "This is a reply to the comment.",
+        createAt: "2025-05-12T13:00:00Z",
+        videoId: "video_1",
+      },
+      {
+        id: "1-2",
+        userId: "3",
+        user: {
+          name: "Alice Johnson",
+          imageUrl: "https://i.pravatar.cc/150?img=3"
+        },
+        value: "Another reply to the comment.",
+        createAt: "2025-05-12T14:00:00Z",
+        videoId: "video_1",
+      }
+    ]
+  },
+  {
+    id: "2",
+    userId: "4",
+    user: {
+      name: "Bob Lee",
+      imageUrl: "https://i.pravatar.cc/150?img=4"
+    },
+    value: "Here is another comment.",
+    createAt: "2025-05-12T15:00:00Z",
+    replyCount: 0,
+    videoId: "video_2",
+    replies: []
+  }
 ];
 
 
