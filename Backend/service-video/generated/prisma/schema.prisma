@@ -1,0 +1,118 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model comments {
+  id                String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  parent_id         String?             @db.Uuid
+  user_id           String              @db.Uuid
+  video_id          String              @db.Uuid
+  value             String
+  created_at        DateTime            @default(now()) @db.Timestamptz(6)
+  updated_at        DateTime            @default(now()) @db.Timestamptz(6)
+  comment_reactions comment_reactions[]
+  comments          comments?           @relation("commentsTocomments", fields: [parent_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  other_comments    comments[]          @relation("commentsTocomments")
+  users             users               @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_user")
+  videos            videos              @relation(fields: [video_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_video")
+}
+
+model subscriptions {
+  id                                    String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  viewer_id                             String   @db.Uuid
+  creator_id                            String   @db.Uuid
+  created_at                            DateTime @default(now()) @db.Timestamptz(6)
+  updated_at                            DateTime @default(now()) @db.Timestamptz(6)
+  users_subscriptions_creator_idTousers users    @relation("subscriptions_creator_idTousers", fields: [creator_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_creator")
+  users_subscriptions_viewer_idTousers  users    @relation("subscriptions_viewer_idTousers", fields: [viewer_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_viewer")
+
+  @@unique([viewer_id, creator_id], map: "unique_subscription")
+}
+
+model users {
+  id                                            String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  clerk_user_id                                 String              @unique
+  channel_name                                  String
+  avatar_url                                    String?
+  bio                                           String?
+  created_at                                    DateTime?           @default(now()) @db.Timestamptz(6)
+  comment_reactions                             comment_reactions[]
+  comments                                      comments[]
+  subscriptions_subscriptions_creator_idTousers subscriptions[]     @relation("subscriptions_creator_idTousers")
+  subscriptions_subscriptions_viewer_idTousers  subscriptions[]     @relation("subscriptions_viewer_idTousers")
+  video_reactions                               video_reactions[]
+  video_views                                   video_views[]
+  videos                                        videos[]
+}
+
+model categories {
+  id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name       String
+  slug       String    @unique
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at DateTime? @default(now()) @db.Timestamptz(6)
+  videos     videos[]
+}
+
+model videos {
+  id               String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title            String
+  description      String?
+  mux_status       String?
+  mux_asset_id     String?           @unique
+  mux_upload_id    String?           @unique
+  mux_playback_id  String?           @unique
+  mux_track_id     String?           @unique
+  mux_track_status String?
+  user_id          String            @db.Uuid
+  category_id      String?           @db.Uuid
+  created_at       DateTime?         @default(now()) @db.Timestamptz(6)
+  updated_at       DateTime?         @default(now()) @db.Timestamptz(6)
+  comments         comments[]
+  video_reactions  video_reactions[]
+  video_views      video_views[]
+  categories       categories?       @relation(fields: [category_id], references: [id], onUpdate: NoAction)
+  users            users             @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model comment_reactions {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id    String   @db.Uuid
+  comment_id String   @db.Uuid
+  type       String
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  updated_at DateTime @default(now()) @db.Timestamptz(6)
+  comments   comments @relation(fields: [comment_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_comment")
+  users      users    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_user")
+
+  @@unique([user_id, comment_id], map: "unique_user_comment")
+}
+
+model video_reactions {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id    String   @db.Uuid
+  video_id   String   @db.Uuid
+  type       String
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  updated_at DateTime @default(now()) @db.Timestamptz(6)
+  users      users    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_user")
+  videos     videos   @relation(fields: [video_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_video")
+}
+
+model video_views {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id    String   @db.Uuid
+  video_id   String   @db.Uuid
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  updated_at DateTime @default(now()) @db.Timestamptz(6)
+  users      users    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_user")
+  videos     videos   @relation(fields: [video_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_video")
+
+  @@unique([user_id, video_id], map: "unique_user_video")
+}

@@ -1,0 +1,15687 @@
+
+/**
+ * Client
+**/
+
+import * as runtime from './runtime/library.js';
+import $Types = runtime.Types // general types
+import $Public = runtime.Types.Public
+import $Utils = runtime.Types.Utils
+import $Extensions = runtime.Types.Extensions
+import $Result = runtime.Types.Result
+
+export type PrismaPromise<T> = $Public.PrismaPromise<T>
+
+
+/**
+ * Model comments
+ * 
+ */
+export type comments = $Result.DefaultSelection<Prisma.$commentsPayload>
+/**
+ * Model subscriptions
+ * 
+ */
+export type subscriptions = $Result.DefaultSelection<Prisma.$subscriptionsPayload>
+/**
+ * Model users
+ * 
+ */
+export type users = $Result.DefaultSelection<Prisma.$usersPayload>
+/**
+ * Model categories
+ * 
+ */
+export type categories = $Result.DefaultSelection<Prisma.$categoriesPayload>
+/**
+ * Model videos
+ * 
+ */
+export type videos = $Result.DefaultSelection<Prisma.$videosPayload>
+/**
+ * Model comment_reactions
+ * 
+ */
+export type comment_reactions = $Result.DefaultSelection<Prisma.$comment_reactionsPayload>
+/**
+ * Model video_reactions
+ * 
+ */
+export type video_reactions = $Result.DefaultSelection<Prisma.$video_reactionsPayload>
+/**
+ * Model video_views
+ * 
+ */
+export type video_views = $Result.DefaultSelection<Prisma.$video_viewsPayload>
+
+/**
+ * ##  Prisma Client ʲˢ
+ *
+ * Type-safe database client for TypeScript & Node.js
+ * @example
+ * ```
+ * const prisma = new PrismaClient()
+ * // Fetch zero or more Comments
+ * const comments = await prisma.comments.findMany()
+ * ```
+ *
+ *
+ * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
+ */
+export class PrismaClient<
+  ClientOptions extends Prisma.PrismaClientOptions = Prisma.PrismaClientOptions,
+  U = 'log' extends keyof ClientOptions ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<ClientOptions['log']> : never : never,
+  ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
+> {
+  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['other'] }
+
+    /**
+   * ##  Prisma Client ʲˢ
+   *
+   * Type-safe database client for TypeScript & Node.js
+   * @example
+   * ```
+   * const prisma = new PrismaClient()
+   * // Fetch zero or more Comments
+   * const comments = await prisma.comments.findMany()
+   * ```
+   *
+   *
+   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
+   */
+
+  constructor(optionsArg ?: Prisma.Subset<ClientOptions, Prisma.PrismaClientOptions>);
+  $on<V extends U>(eventType: V, callback: (event: V extends 'query' ? Prisma.QueryEvent : Prisma.LogEvent) => void): PrismaClient;
+
+  /**
+   * Connect with the database
+   */
+  $connect(): $Utils.JsPromise<void>;
+
+  /**
+   * Disconnect from the database
+   */
+  $disconnect(): $Utils.JsPromise<void>;
+
+  /**
+   * Add a middleware
+   * @deprecated since 4.16.0. For new code, prefer client extensions instead.
+   * @see https://pris.ly/d/extensions
+   */
+  $use(cb: Prisma.Middleware): void
+
+/**
+   * Executes a prepared raw query and returns the number of affected rows.
+   * @example
+   * ```
+   * const result = await prisma.$executeRaw`UPDATE User SET cool = ${true} WHERE email = ${'user@email.com'};`
+   * ```
+   *
+   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   */
+  $executeRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<number>;
+
+  /**
+   * Executes a raw query and returns the number of affected rows.
+   * Susceptible to SQL injections, see documentation.
+   * @example
+   * ```
+   * const result = await prisma.$executeRawUnsafe('UPDATE User SET cool = $1 WHERE email = $2 ;', true, 'user@email.com')
+   * ```
+   *
+   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   */
+  $executeRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<number>;
+
+  /**
+   * Performs a prepared raw query and returns the `SELECT` data.
+   * @example
+   * ```
+   * const result = await prisma.$queryRaw`SELECT * FROM User WHERE id = ${1} OR email = ${'user@email.com'};`
+   * ```
+   *
+   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   */
+  $queryRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<T>;
+
+  /**
+   * Performs a raw query and returns the `SELECT` data.
+   * Susceptible to SQL injections, see documentation.
+   * @example
+   * ```
+   * const result = await prisma.$queryRawUnsafe('SELECT * FROM User WHERE id = $1 OR email = $2;', 1, 'user@email.com')
+   * ```
+   *
+   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   */
+  $queryRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<T>;
+
+
+  /**
+   * Allows the running of a sequence of read/write operations that are guaranteed to either succeed or fail as a whole.
+   * @example
+   * ```
+   * const [george, bob, alice] = await prisma.$transaction([
+   *   prisma.user.create({ data: { name: 'George' } }),
+   *   prisma.user.create({ data: { name: 'Bob' } }),
+   *   prisma.user.create({ data: { name: 'Alice' } }),
+   * ])
+   * ```
+   * 
+   * Read more in our [docs](https://www.prisma.io/docs/concepts/components/prisma-client/transactions).
+   */
+  $transaction<P extends Prisma.PrismaPromise<any>[]>(arg: [...P], options?: { isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>
+
+  $transaction<R>(fn: (prisma: Omit<PrismaClient, runtime.ITXClientDenyList>) => $Utils.JsPromise<R>, options?: { maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<R>
+
+
+  $extends: $Extensions.ExtendsHook<"extends", Prisma.TypeMapCb<ClientOptions>, ExtArgs, $Utils.Call<Prisma.TypeMapCb<ClientOptions>, {
+    extArgs: ExtArgs
+  }>>
+
+      /**
+   * `prisma.comments`: Exposes CRUD operations for the **comments** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Comments
+    * const comments = await prisma.comments.findMany()
+    * ```
+    */
+  get comments(): Prisma.commentsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.subscriptions`: Exposes CRUD operations for the **subscriptions** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Subscriptions
+    * const subscriptions = await prisma.subscriptions.findMany()
+    * ```
+    */
+  get subscriptions(): Prisma.subscriptionsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.users`: Exposes CRUD operations for the **users** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Users
+    * const users = await prisma.users.findMany()
+    * ```
+    */
+  get users(): Prisma.usersDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.categories`: Exposes CRUD operations for the **categories** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Categories
+    * const categories = await prisma.categories.findMany()
+    * ```
+    */
+  get categories(): Prisma.categoriesDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.videos`: Exposes CRUD operations for the **videos** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Videos
+    * const videos = await prisma.videos.findMany()
+    * ```
+    */
+  get videos(): Prisma.videosDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.comment_reactions`: Exposes CRUD operations for the **comment_reactions** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Comment_reactions
+    * const comment_reactions = await prisma.comment_reactions.findMany()
+    * ```
+    */
+  get comment_reactions(): Prisma.comment_reactionsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.video_reactions`: Exposes CRUD operations for the **video_reactions** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Video_reactions
+    * const video_reactions = await prisma.video_reactions.findMany()
+    * ```
+    */
+  get video_reactions(): Prisma.video_reactionsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.video_views`: Exposes CRUD operations for the **video_views** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Video_views
+    * const video_views = await prisma.video_views.findMany()
+    * ```
+    */
+  get video_views(): Prisma.video_viewsDelegate<ExtArgs, ClientOptions>;
+}
+
+export namespace Prisma {
+  export import DMMF = runtime.DMMF
+
+  export type PrismaPromise<T> = $Public.PrismaPromise<T>
+
+  /**
+   * Validator
+   */
+  export import validator = runtime.Public.validator
+
+  /**
+   * Prisma Errors
+   */
+  export import PrismaClientKnownRequestError = runtime.PrismaClientKnownRequestError
+  export import PrismaClientUnknownRequestError = runtime.PrismaClientUnknownRequestError
+  export import PrismaClientRustPanicError = runtime.PrismaClientRustPanicError
+  export import PrismaClientInitializationError = runtime.PrismaClientInitializationError
+  export import PrismaClientValidationError = runtime.PrismaClientValidationError
+
+  /**
+   * Re-export of sql-template-tag
+   */
+  export import sql = runtime.sqltag
+  export import empty = runtime.empty
+  export import join = runtime.join
+  export import raw = runtime.raw
+  export import Sql = runtime.Sql
+
+
+
+  /**
+   * Decimal.js
+   */
+  export import Decimal = runtime.Decimal
+
+  export type DecimalJsLike = runtime.DecimalJsLike
+
+  /**
+   * Metrics
+   */
+  export type Metrics = runtime.Metrics
+  export type Metric<T> = runtime.Metric<T>
+  export type MetricHistogram = runtime.MetricHistogram
+  export type MetricHistogramBucket = runtime.MetricHistogramBucket
+
+  /**
+  * Extensions
+  */
+  export import Extension = $Extensions.UserArgs
+  export import getExtensionContext = runtime.Extensions.getExtensionContext
+  export import Args = $Public.Args
+  export import Payload = $Public.Payload
+  export import Result = $Public.Result
+  export import Exact = $Public.Exact
+
+  /**
+   * Prisma Client JS version: 6.7.0
+   * Query Engine version: 3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
+   */
+  export type PrismaVersion = {
+    client: string
+  }
+
+  export const prismaVersion: PrismaVersion
+
+  /**
+   * Utility Types
+   */
+
+
+  export import JsonObject = runtime.JsonObject
+  export import JsonArray = runtime.JsonArray
+  export import JsonValue = runtime.JsonValue
+  export import InputJsonObject = runtime.InputJsonObject
+  export import InputJsonArray = runtime.InputJsonArray
+  export import InputJsonValue = runtime.InputJsonValue
+
+  /**
+   * Types of the values used to represent different kinds of `null` values when working with JSON fields.
+   *
+   * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+   */
+  namespace NullTypes {
+    /**
+    * Type of `Prisma.DbNull`.
+    *
+    * You cannot use other instances of this class. Please use the `Prisma.DbNull` value.
+    *
+    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+    */
+    class DbNull {
+      private DbNull: never
+      private constructor()
+    }
+
+    /**
+    * Type of `Prisma.JsonNull`.
+    *
+    * You cannot use other instances of this class. Please use the `Prisma.JsonNull` value.
+    *
+    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+    */
+    class JsonNull {
+      private JsonNull: never
+      private constructor()
+    }
+
+    /**
+    * Type of `Prisma.AnyNull`.
+    *
+    * You cannot use other instances of this class. Please use the `Prisma.AnyNull` value.
+    *
+    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+    */
+    class AnyNull {
+      private AnyNull: never
+      private constructor()
+    }
+  }
+
+  /**
+   * Helper for filtering JSON entries that have `null` on the database (empty on the db)
+   *
+   * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+   */
+  export const DbNull: NullTypes.DbNull
+
+  /**
+   * Helper for filtering JSON entries that have JSON `null` values (not empty on the db)
+   *
+   * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+   */
+  export const JsonNull: NullTypes.JsonNull
+
+  /**
+   * Helper for filtering JSON entries that are `Prisma.DbNull` or `Prisma.JsonNull`
+   *
+   * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+   */
+  export const AnyNull: NullTypes.AnyNull
+
+  type SelectAndInclude = {
+    select: any
+    include: any
+  }
+
+  type SelectAndOmit = {
+    select: any
+    omit: any
+  }
+
+  /**
+   * Get the type of the value, that the Promise holds.
+   */
+  export type PromiseType<T extends PromiseLike<any>> = T extends PromiseLike<infer U> ? U : T;
+
+  /**
+   * Get the return type of a function which returns a Promise.
+   */
+  export type PromiseReturnType<T extends (...args: any) => $Utils.JsPromise<any>> = PromiseType<ReturnType<T>>
+
+  /**
+   * From T, pick a set of properties whose keys are in the union K
+   */
+  type Prisma__Pick<T, K extends keyof T> = {
+      [P in K]: T[P];
+  };
+
+
+  export type Enumerable<T> = T | Array<T>;
+
+  export type RequiredKeys<T> = {
+    [K in keyof T]-?: {} extends Prisma__Pick<T, K> ? never : K
+  }[keyof T]
+
+  export type TruthyKeys<T> = keyof {
+    [K in keyof T as T[K] extends false | undefined | null ? never : K]: K
+  }
+
+  export type TrueKeys<T> = TruthyKeys<Prisma__Pick<T, RequiredKeys<T>>>
+
+  /**
+   * Subset
+   * @desc From `T` pick properties that exist in `U`. Simple version of Intersection
+   */
+  export type Subset<T, U> = {
+    [key in keyof T]: key extends keyof U ? T[key] : never;
+  };
+
+  /**
+   * SelectSubset
+   * @desc From `T` pick properties that exist in `U`. Simple version of Intersection.
+   * Additionally, it validates, if both select and include are present. If the case, it errors.
+   */
+  export type SelectSubset<T, U> = {
+    [key in keyof T]: key extends keyof U ? T[key] : never
+  } &
+    (T extends SelectAndInclude
+      ? 'Please either choose `select` or `include`.'
+      : T extends SelectAndOmit
+        ? 'Please either choose `select` or `omit`.'
+        : {})
+
+  /**
+   * Subset + Intersection
+   * @desc From `T` pick properties that exist in `U` and intersect `K`
+   */
+  export type SubsetIntersection<T, U, K> = {
+    [key in keyof T]: key extends keyof U ? T[key] : never
+  } &
+    K
+
+  type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
+
+  /**
+   * XOR is needed to have a real mutually exclusive union type
+   * https://stackoverflow.com/questions/42123407/does-typescript-support-mutually-exclusive-types
+   */
+  type XOR<T, U> =
+    T extends object ?
+    U extends object ?
+      (Without<T, U> & U) | (Without<U, T> & T)
+    : U : T
+
+
+  /**
+   * Is T a Record?
+   */
+  type IsObject<T extends any> = T extends Array<any>
+  ? False
+  : T extends Date
+  ? False
+  : T extends Uint8Array
+  ? False
+  : T extends BigInt
+  ? False
+  : T extends object
+  ? True
+  : False
+
+
+  /**
+   * If it's T[], return T
+   */
+  export type UnEnumerate<T extends unknown> = T extends Array<infer U> ? U : T
+
+  /**
+   * From ts-toolbelt
+   */
+
+  type __Either<O extends object, K extends Key> = Omit<O, K> &
+    {
+      // Merge all but K
+      [P in K]: Prisma__Pick<O, P & keyof O> // With K possibilities
+    }[K]
+
+  type EitherStrict<O extends object, K extends Key> = Strict<__Either<O, K>>
+
+  type EitherLoose<O extends object, K extends Key> = ComputeRaw<__Either<O, K>>
+
+  type _Either<
+    O extends object,
+    K extends Key,
+    strict extends Boolean
+  > = {
+    1: EitherStrict<O, K>
+    0: EitherLoose<O, K>
+  }[strict]
+
+  type Either<
+    O extends object,
+    K extends Key,
+    strict extends Boolean = 1
+  > = O extends unknown ? _Either<O, K, strict> : never
+
+  export type Union = any
+
+  type PatchUndefined<O extends object, O1 extends object> = {
+    [K in keyof O]: O[K] extends undefined ? At<O1, K> : O[K]
+  } & {}
+
+  /** Helper Types for "Merge" **/
+  export type IntersectOf<U extends Union> = (
+    U extends unknown ? (k: U) => void : never
+  ) extends (k: infer I) => void
+    ? I
+    : never
+
+  export type Overwrite<O extends object, O1 extends object> = {
+      [K in keyof O]: K extends keyof O1 ? O1[K] : O[K];
+  } & {};
+
+  type _Merge<U extends object> = IntersectOf<Overwrite<U, {
+      [K in keyof U]-?: At<U, K>;
+  }>>;
+
+  type Key = string | number | symbol;
+  type AtBasic<O extends object, K extends Key> = K extends keyof O ? O[K] : never;
+  type AtStrict<O extends object, K extends Key> = O[K & keyof O];
+  type AtLoose<O extends object, K extends Key> = O extends unknown ? AtStrict<O, K> : never;
+  export type At<O extends object, K extends Key, strict extends Boolean = 1> = {
+      1: AtStrict<O, K>;
+      0: AtLoose<O, K>;
+  }[strict];
+
+  export type ComputeRaw<A extends any> = A extends Function ? A : {
+    [K in keyof A]: A[K];
+  } & {};
+
+  export type OptionalFlat<O> = {
+    [K in keyof O]?: O[K];
+  } & {};
+
+  type _Record<K extends keyof any, T> = {
+    [P in K]: T;
+  };
+
+  // cause typescript not to expand types and preserve names
+  type NoExpand<T> = T extends unknown ? T : never;
+
+  // this type assumes the passed object is entirely optional
+  type AtLeast<O extends object, K extends string> = NoExpand<
+    O extends unknown
+    ? | (K extends keyof O ? { [P in K]: O[P] } & O : O)
+      | {[P in keyof O as P extends K ? P : never]-?: O[P]} & O
+    : never>;
+
+  type _Strict<U, _U = U> = U extends unknown ? U & OptionalFlat<_Record<Exclude<Keys<_U>, keyof U>, never>> : never;
+
+  export type Strict<U extends object> = ComputeRaw<_Strict<U>>;
+  /** End Helper Types for "Merge" **/
+
+  export type Merge<U extends object> = ComputeRaw<_Merge<Strict<U>>>;
+
+  /**
+  A [[Boolean]]
+  */
+  export type Boolean = True | False
+
+  // /**
+  // 1
+  // */
+  export type True = 1
+
+  /**
+  0
+  */
+  export type False = 0
+
+  export type Not<B extends Boolean> = {
+    0: 1
+    1: 0
+  }[B]
+
+  export type Extends<A1 extends any, A2 extends any> = [A1] extends [never]
+    ? 0 // anything `never` is false
+    : A1 extends A2
+    ? 1
+    : 0
+
+  export type Has<U extends Union, U1 extends Union> = Not<
+    Extends<Exclude<U1, U>, U1>
+  >
+
+  export type Or<B1 extends Boolean, B2 extends Boolean> = {
+    0: {
+      0: 0
+      1: 1
+    }
+    1: {
+      0: 1
+      1: 1
+    }
+  }[B1][B2]
+
+  export type Keys<U extends Union> = U extends unknown ? keyof U : never
+
+  type Cast<A, B> = A extends B ? A : B;
+
+  export const type: unique symbol;
+
+
+
+  /**
+   * Used by group by
+   */
+
+  export type GetScalarType<T, O> = O extends object ? {
+    [P in keyof T]: P extends keyof O
+      ? O[P]
+      : never
+  } : never
+
+  type FieldPaths<
+    T,
+    U = Omit<T, '_avg' | '_sum' | '_count' | '_min' | '_max'>
+  > = IsObject<T> extends True ? U : T
+
+  type GetHavingFields<T> = {
+    [K in keyof T]: Or<
+      Or<Extends<'OR', K>, Extends<'AND', K>>,
+      Extends<'NOT', K>
+    > extends True
+      ? // infer is only needed to not hit TS limit
+        // based on the brilliant idea of Pierre-Antoine Mills
+        // https://github.com/microsoft/TypeScript/issues/30188#issuecomment-478938437
+        T[K] extends infer TK
+        ? GetHavingFields<UnEnumerate<TK> extends object ? Merge<UnEnumerate<TK>> : never>
+        : never
+      : {} extends FieldPaths<T[K]>
+      ? never
+      : K
+  }[keyof T]
+
+  /**
+   * Convert tuple to union
+   */
+  type _TupleToUnion<T> = T extends (infer E)[] ? E : never
+  type TupleToUnion<K extends readonly any[]> = _TupleToUnion<K>
+  type MaybeTupleToUnion<T> = T extends any[] ? TupleToUnion<T> : T
+
+  /**
+   * Like `Pick`, but additionally can also accept an array of keys
+   */
+  type PickEnumerable<T, K extends Enumerable<keyof T> | keyof T> = Prisma__Pick<T, MaybeTupleToUnion<K>>
+
+  /**
+   * Exclude all keys with underscores
+   */
+  type ExcludeUnderscoreKeys<T extends string> = T extends `_${string}` ? never : T
+
+
+  export type FieldRef<Model, FieldType> = runtime.FieldRef<Model, FieldType>
+
+  type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRef<Model, FieldType>
+
+
+  export const ModelName: {
+    comments: 'comments',
+    subscriptions: 'subscriptions',
+    users: 'users',
+    categories: 'categories',
+    videos: 'videos',
+    comment_reactions: 'comment_reactions',
+    video_reactions: 'video_reactions',
+    video_views: 'video_views'
+  };
+
+  export type ModelName = (typeof ModelName)[keyof typeof ModelName]
+
+
+  export type Datasources = {
+    db?: Datasource
+  }
+
+  interface TypeMapCb<ClientOptions = {}> extends $Utils.Fn<{extArgs: $Extensions.InternalArgs }, $Utils.Record<string, any>> {
+    returns: Prisma.TypeMap<this['params']['extArgs'], ClientOptions extends { omit: infer OmitOptions } ? OmitOptions : {}>
+  }
+
+  export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> = {
+    globalOmitOptions: {
+      omit: GlobalOmitOptions
+    }
+    meta: {
+      modelProps: "comments" | "subscriptions" | "users" | "categories" | "videos" | "comment_reactions" | "video_reactions" | "video_views"
+      txIsolationLevel: Prisma.TransactionIsolationLevel
+    }
+    model: {
+      comments: {
+        payload: Prisma.$commentsPayload<ExtArgs>
+        fields: Prisma.commentsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.commentsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$commentsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.commentsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$commentsPayload>
+          }
+          findFirst: {
+            args: Prisma.commentsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$commentsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.commentsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$commentsPayload>
+          }
+          findMany: {
+            args: Prisma.commentsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$commentsPayload>[]
+          }
+          create: {
+            args: Prisma.commentsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$commentsPayload>
+          }
+          createMany: {
+            args: Prisma.commentsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.commentsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$commentsPayload>[]
+          }
+          delete: {
+            args: Prisma.commentsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$commentsPayload>
+          }
+          update: {
+            args: Prisma.commentsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$commentsPayload>
+          }
+          deleteMany: {
+            args: Prisma.commentsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.commentsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.commentsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$commentsPayload>[]
+          }
+          upsert: {
+            args: Prisma.commentsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$commentsPayload>
+          }
+          aggregate: {
+            args: Prisma.CommentsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateComments>
+          }
+          groupBy: {
+            args: Prisma.commentsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CommentsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.commentsCountArgs<ExtArgs>
+            result: $Utils.Optional<CommentsCountAggregateOutputType> | number
+          }
+        }
+      }
+      subscriptions: {
+        payload: Prisma.$subscriptionsPayload<ExtArgs>
+        fields: Prisma.subscriptionsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.subscriptionsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$subscriptionsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.subscriptionsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$subscriptionsPayload>
+          }
+          findFirst: {
+            args: Prisma.subscriptionsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$subscriptionsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.subscriptionsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$subscriptionsPayload>
+          }
+          findMany: {
+            args: Prisma.subscriptionsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$subscriptionsPayload>[]
+          }
+          create: {
+            args: Prisma.subscriptionsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$subscriptionsPayload>
+          }
+          createMany: {
+            args: Prisma.subscriptionsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.subscriptionsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$subscriptionsPayload>[]
+          }
+          delete: {
+            args: Prisma.subscriptionsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$subscriptionsPayload>
+          }
+          update: {
+            args: Prisma.subscriptionsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$subscriptionsPayload>
+          }
+          deleteMany: {
+            args: Prisma.subscriptionsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.subscriptionsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.subscriptionsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$subscriptionsPayload>[]
+          }
+          upsert: {
+            args: Prisma.subscriptionsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$subscriptionsPayload>
+          }
+          aggregate: {
+            args: Prisma.SubscriptionsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSubscriptions>
+          }
+          groupBy: {
+            args: Prisma.subscriptionsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SubscriptionsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.subscriptionsCountArgs<ExtArgs>
+            result: $Utils.Optional<SubscriptionsCountAggregateOutputType> | number
+          }
+        }
+      }
+      users: {
+        payload: Prisma.$usersPayload<ExtArgs>
+        fields: Prisma.usersFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.usersFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.usersFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersPayload>
+          }
+          findFirst: {
+            args: Prisma.usersFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.usersFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersPayload>
+          }
+          findMany: {
+            args: Prisma.usersFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersPayload>[]
+          }
+          create: {
+            args: Prisma.usersCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersPayload>
+          }
+          createMany: {
+            args: Prisma.usersCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.usersCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersPayload>[]
+          }
+          delete: {
+            args: Prisma.usersDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersPayload>
+          }
+          update: {
+            args: Prisma.usersUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersPayload>
+          }
+          deleteMany: {
+            args: Prisma.usersDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.usersUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.usersUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersPayload>[]
+          }
+          upsert: {
+            args: Prisma.usersUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersPayload>
+          }
+          aggregate: {
+            args: Prisma.UsersAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUsers>
+          }
+          groupBy: {
+            args: Prisma.usersGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UsersGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.usersCountArgs<ExtArgs>
+            result: $Utils.Optional<UsersCountAggregateOutputType> | number
+          }
+        }
+      }
+      categories: {
+        payload: Prisma.$categoriesPayload<ExtArgs>
+        fields: Prisma.categoriesFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.categoriesFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$categoriesPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.categoriesFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$categoriesPayload>
+          }
+          findFirst: {
+            args: Prisma.categoriesFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$categoriesPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.categoriesFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$categoriesPayload>
+          }
+          findMany: {
+            args: Prisma.categoriesFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$categoriesPayload>[]
+          }
+          create: {
+            args: Prisma.categoriesCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$categoriesPayload>
+          }
+          createMany: {
+            args: Prisma.categoriesCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.categoriesCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$categoriesPayload>[]
+          }
+          delete: {
+            args: Prisma.categoriesDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$categoriesPayload>
+          }
+          update: {
+            args: Prisma.categoriesUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$categoriesPayload>
+          }
+          deleteMany: {
+            args: Prisma.categoriesDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.categoriesUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.categoriesUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$categoriesPayload>[]
+          }
+          upsert: {
+            args: Prisma.categoriesUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$categoriesPayload>
+          }
+          aggregate: {
+            args: Prisma.CategoriesAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCategories>
+          }
+          groupBy: {
+            args: Prisma.categoriesGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CategoriesGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.categoriesCountArgs<ExtArgs>
+            result: $Utils.Optional<CategoriesCountAggregateOutputType> | number
+          }
+        }
+      }
+      videos: {
+        payload: Prisma.$videosPayload<ExtArgs>
+        fields: Prisma.videosFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.videosFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videosPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.videosFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videosPayload>
+          }
+          findFirst: {
+            args: Prisma.videosFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videosPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.videosFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videosPayload>
+          }
+          findMany: {
+            args: Prisma.videosFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videosPayload>[]
+          }
+          create: {
+            args: Prisma.videosCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videosPayload>
+          }
+          createMany: {
+            args: Prisma.videosCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.videosCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videosPayload>[]
+          }
+          delete: {
+            args: Prisma.videosDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videosPayload>
+          }
+          update: {
+            args: Prisma.videosUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videosPayload>
+          }
+          deleteMany: {
+            args: Prisma.videosDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.videosUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.videosUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videosPayload>[]
+          }
+          upsert: {
+            args: Prisma.videosUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videosPayload>
+          }
+          aggregate: {
+            args: Prisma.VideosAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateVideos>
+          }
+          groupBy: {
+            args: Prisma.videosGroupByArgs<ExtArgs>
+            result: $Utils.Optional<VideosGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.videosCountArgs<ExtArgs>
+            result: $Utils.Optional<VideosCountAggregateOutputType> | number
+          }
+        }
+      }
+      comment_reactions: {
+        payload: Prisma.$comment_reactionsPayload<ExtArgs>
+        fields: Prisma.comment_reactionsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.comment_reactionsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$comment_reactionsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.comment_reactionsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$comment_reactionsPayload>
+          }
+          findFirst: {
+            args: Prisma.comment_reactionsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$comment_reactionsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.comment_reactionsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$comment_reactionsPayload>
+          }
+          findMany: {
+            args: Prisma.comment_reactionsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$comment_reactionsPayload>[]
+          }
+          create: {
+            args: Prisma.comment_reactionsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$comment_reactionsPayload>
+          }
+          createMany: {
+            args: Prisma.comment_reactionsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.comment_reactionsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$comment_reactionsPayload>[]
+          }
+          delete: {
+            args: Prisma.comment_reactionsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$comment_reactionsPayload>
+          }
+          update: {
+            args: Prisma.comment_reactionsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$comment_reactionsPayload>
+          }
+          deleteMany: {
+            args: Prisma.comment_reactionsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.comment_reactionsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.comment_reactionsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$comment_reactionsPayload>[]
+          }
+          upsert: {
+            args: Prisma.comment_reactionsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$comment_reactionsPayload>
+          }
+          aggregate: {
+            args: Prisma.Comment_reactionsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateComment_reactions>
+          }
+          groupBy: {
+            args: Prisma.comment_reactionsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Comment_reactionsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.comment_reactionsCountArgs<ExtArgs>
+            result: $Utils.Optional<Comment_reactionsCountAggregateOutputType> | number
+          }
+        }
+      }
+      video_reactions: {
+        payload: Prisma.$video_reactionsPayload<ExtArgs>
+        fields: Prisma.video_reactionsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.video_reactionsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_reactionsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.video_reactionsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_reactionsPayload>
+          }
+          findFirst: {
+            args: Prisma.video_reactionsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_reactionsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.video_reactionsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_reactionsPayload>
+          }
+          findMany: {
+            args: Prisma.video_reactionsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_reactionsPayload>[]
+          }
+          create: {
+            args: Prisma.video_reactionsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_reactionsPayload>
+          }
+          createMany: {
+            args: Prisma.video_reactionsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.video_reactionsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_reactionsPayload>[]
+          }
+          delete: {
+            args: Prisma.video_reactionsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_reactionsPayload>
+          }
+          update: {
+            args: Prisma.video_reactionsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_reactionsPayload>
+          }
+          deleteMany: {
+            args: Prisma.video_reactionsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.video_reactionsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.video_reactionsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_reactionsPayload>[]
+          }
+          upsert: {
+            args: Prisma.video_reactionsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_reactionsPayload>
+          }
+          aggregate: {
+            args: Prisma.Video_reactionsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateVideo_reactions>
+          }
+          groupBy: {
+            args: Prisma.video_reactionsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Video_reactionsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.video_reactionsCountArgs<ExtArgs>
+            result: $Utils.Optional<Video_reactionsCountAggregateOutputType> | number
+          }
+        }
+      }
+      video_views: {
+        payload: Prisma.$video_viewsPayload<ExtArgs>
+        fields: Prisma.video_viewsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.video_viewsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_viewsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.video_viewsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_viewsPayload>
+          }
+          findFirst: {
+            args: Prisma.video_viewsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_viewsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.video_viewsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_viewsPayload>
+          }
+          findMany: {
+            args: Prisma.video_viewsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_viewsPayload>[]
+          }
+          create: {
+            args: Prisma.video_viewsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_viewsPayload>
+          }
+          createMany: {
+            args: Prisma.video_viewsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.video_viewsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_viewsPayload>[]
+          }
+          delete: {
+            args: Prisma.video_viewsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_viewsPayload>
+          }
+          update: {
+            args: Prisma.video_viewsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_viewsPayload>
+          }
+          deleteMany: {
+            args: Prisma.video_viewsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.video_viewsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.video_viewsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_viewsPayload>[]
+          }
+          upsert: {
+            args: Prisma.video_viewsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_viewsPayload>
+          }
+          aggregate: {
+            args: Prisma.Video_viewsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateVideo_views>
+          }
+          groupBy: {
+            args: Prisma.video_viewsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Video_viewsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.video_viewsCountArgs<ExtArgs>
+            result: $Utils.Optional<Video_viewsCountAggregateOutputType> | number
+          }
+        }
+      }
+    }
+  } & {
+    other: {
+      payload: any
+      operations: {
+        $executeRaw: {
+          args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]],
+          result: any
+        }
+        $executeRawUnsafe: {
+          args: [query: string, ...values: any[]],
+          result: any
+        }
+        $queryRaw: {
+          args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]],
+          result: any
+        }
+        $queryRawUnsafe: {
+          args: [query: string, ...values: any[]],
+          result: any
+        }
+      }
+    }
+  }
+  export const defineExtension: $Extensions.ExtendsHook<"define", Prisma.TypeMapCb, $Extensions.DefaultArgs>
+  export type DefaultPrismaClient = PrismaClient
+  export type ErrorFormat = 'pretty' | 'colorless' | 'minimal'
+  export interface PrismaClientOptions {
+    /**
+     * Overwrites the datasource url from your schema.prisma file
+     */
+    datasources?: Datasources
+    /**
+     * Overwrites the datasource url from your schema.prisma file
+     */
+    datasourceUrl?: string
+    /**
+     * @default "colorless"
+     */
+    errorFormat?: ErrorFormat
+    /**
+     * @example
+     * ```
+     * // Defaults to stdout
+     * log: ['query', 'info', 'warn', 'error']
+     * 
+     * // Emit as events
+     * log: [
+     *   { emit: 'stdout', level: 'query' },
+     *   { emit: 'stdout', level: 'info' },
+     *   { emit: 'stdout', level: 'warn' }
+     *   { emit: 'stdout', level: 'error' }
+     * ]
+     * ```
+     * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/logging#the-log-option).
+     */
+    log?: (LogLevel | LogDefinition)[]
+    /**
+     * The default values for transactionOptions
+     * maxWait ?= 2000
+     * timeout ?= 5000
+     */
+    transactionOptions?: {
+      maxWait?: number
+      timeout?: number
+      isolationLevel?: Prisma.TransactionIsolationLevel
+    }
+    /**
+     * Global configuration for omitting model fields by default.
+     * 
+     * @example
+     * ```
+     * const prisma = new PrismaClient({
+     *   omit: {
+     *     user: {
+     *       password: true
+     *     }
+     *   }
+     * })
+     * ```
+     */
+    omit?: Prisma.GlobalOmitConfig
+  }
+  export type GlobalOmitConfig = {
+    comments?: commentsOmit
+    subscriptions?: subscriptionsOmit
+    users?: usersOmit
+    categories?: categoriesOmit
+    videos?: videosOmit
+    comment_reactions?: comment_reactionsOmit
+    video_reactions?: video_reactionsOmit
+    video_views?: video_viewsOmit
+  }
+
+  /* Types for Logging */
+  export type LogLevel = 'info' | 'query' | 'warn' | 'error'
+  export type LogDefinition = {
+    level: LogLevel
+    emit: 'stdout' | 'event'
+  }
+
+  export type GetLogType<T extends LogLevel | LogDefinition> = T extends LogDefinition ? T['emit'] extends 'event' ? T['level'] : never : never
+  export type GetEvents<T extends any> = T extends Array<LogLevel | LogDefinition> ?
+    GetLogType<T[0]> | GetLogType<T[1]> | GetLogType<T[2]> | GetLogType<T[3]>
+    : never
+
+  export type QueryEvent = {
+    timestamp: Date
+    query: string
+    params: string
+    duration: number
+    target: string
+  }
+
+  export type LogEvent = {
+    timestamp: Date
+    message: string
+    target: string
+  }
+  /* End Types for Logging */
+
+
+  export type PrismaAction =
+    | 'findUnique'
+    | 'findUniqueOrThrow'
+    | 'findMany'
+    | 'findFirst'
+    | 'findFirstOrThrow'
+    | 'create'
+    | 'createMany'
+    | 'createManyAndReturn'
+    | 'update'
+    | 'updateMany'
+    | 'updateManyAndReturn'
+    | 'upsert'
+    | 'delete'
+    | 'deleteMany'
+    | 'executeRaw'
+    | 'queryRaw'
+    | 'aggregate'
+    | 'count'
+    | 'runCommandRaw'
+    | 'findRaw'
+    | 'groupBy'
+
+  /**
+   * These options are being passed into the middleware as "params"
+   */
+  export type MiddlewareParams = {
+    model?: ModelName
+    action: PrismaAction
+    args: any
+    dataPath: string[]
+    runInTransaction: boolean
+  }
+
+  /**
+   * The `T` type makes sure, that the `return proceed` is not forgotten in the middleware implementation
+   */
+  export type Middleware<T = any> = (
+    params: MiddlewareParams,
+    next: (params: MiddlewareParams) => $Utils.JsPromise<T>,
+  ) => $Utils.JsPromise<T>
+
+  // tested in getLogLevel.test.ts
+  export function getLogLevel(log: Array<LogLevel | LogDefinition>): LogLevel | undefined;
+
+  /**
+   * `PrismaClient` proxy available in interactive transactions.
+   */
+  export type TransactionClient = Omit<Prisma.DefaultPrismaClient, runtime.ITXClientDenyList>
+
+  export type Datasource = {
+    url?: string
+  }
+
+  /**
+   * Count Types
+   */
+
+
+  /**
+   * Count Type CommentsCountOutputType
+   */
+
+  export type CommentsCountOutputType = {
+    comment_reactions: number
+    other_comments: number
+  }
+
+  export type CommentsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    comment_reactions?: boolean | CommentsCountOutputTypeCountComment_reactionsArgs
+    other_comments?: boolean | CommentsCountOutputTypeCountOther_commentsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CommentsCountOutputType without action
+   */
+  export type CommentsCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CommentsCountOutputType
+     */
+    select?: CommentsCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CommentsCountOutputType without action
+   */
+  export type CommentsCountOutputTypeCountComment_reactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: comment_reactionsWhereInput
+  }
+
+  /**
+   * CommentsCountOutputType without action
+   */
+  export type CommentsCountOutputTypeCountOther_commentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: commentsWhereInput
+  }
+
+
+  /**
+   * Count Type UsersCountOutputType
+   */
+
+  export type UsersCountOutputType = {
+    comment_reactions: number
+    comments: number
+    subscriptions_subscriptions_creator_idTousers: number
+    subscriptions_subscriptions_viewer_idTousers: number
+    video_reactions: number
+    video_views: number
+    videos: number
+  }
+
+  export type UsersCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    comment_reactions?: boolean | UsersCountOutputTypeCountComment_reactionsArgs
+    comments?: boolean | UsersCountOutputTypeCountCommentsArgs
+    subscriptions_subscriptions_creator_idTousers?: boolean | UsersCountOutputTypeCountSubscriptions_subscriptions_creator_idTousersArgs
+    subscriptions_subscriptions_viewer_idTousers?: boolean | UsersCountOutputTypeCountSubscriptions_subscriptions_viewer_idTousersArgs
+    video_reactions?: boolean | UsersCountOutputTypeCountVideo_reactionsArgs
+    video_views?: boolean | UsersCountOutputTypeCountVideo_viewsArgs
+    videos?: boolean | UsersCountOutputTypeCountVideosArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * UsersCountOutputType without action
+   */
+  export type UsersCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UsersCountOutputType
+     */
+    select?: UsersCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UsersCountOutputType without action
+   */
+  export type UsersCountOutputTypeCountComment_reactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: comment_reactionsWhereInput
+  }
+
+  /**
+   * UsersCountOutputType without action
+   */
+  export type UsersCountOutputTypeCountCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: commentsWhereInput
+  }
+
+  /**
+   * UsersCountOutputType without action
+   */
+  export type UsersCountOutputTypeCountSubscriptions_subscriptions_creator_idTousersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: subscriptionsWhereInput
+  }
+
+  /**
+   * UsersCountOutputType without action
+   */
+  export type UsersCountOutputTypeCountSubscriptions_subscriptions_viewer_idTousersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: subscriptionsWhereInput
+  }
+
+  /**
+   * UsersCountOutputType without action
+   */
+  export type UsersCountOutputTypeCountVideo_reactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: video_reactionsWhereInput
+  }
+
+  /**
+   * UsersCountOutputType without action
+   */
+  export type UsersCountOutputTypeCountVideo_viewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: video_viewsWhereInput
+  }
+
+  /**
+   * UsersCountOutputType without action
+   */
+  export type UsersCountOutputTypeCountVideosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: videosWhereInput
+  }
+
+
+  /**
+   * Count Type CategoriesCountOutputType
+   */
+
+  export type CategoriesCountOutputType = {
+    videos: number
+  }
+
+  export type CategoriesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    videos?: boolean | CategoriesCountOutputTypeCountVideosArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CategoriesCountOutputType without action
+   */
+  export type CategoriesCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CategoriesCountOutputType
+     */
+    select?: CategoriesCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CategoriesCountOutputType without action
+   */
+  export type CategoriesCountOutputTypeCountVideosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: videosWhereInput
+  }
+
+
+  /**
+   * Count Type VideosCountOutputType
+   */
+
+  export type VideosCountOutputType = {
+    comments: number
+    video_reactions: number
+    video_views: number
+  }
+
+  export type VideosCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    comments?: boolean | VideosCountOutputTypeCountCommentsArgs
+    video_reactions?: boolean | VideosCountOutputTypeCountVideo_reactionsArgs
+    video_views?: boolean | VideosCountOutputTypeCountVideo_viewsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * VideosCountOutputType without action
+   */
+  export type VideosCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideosCountOutputType
+     */
+    select?: VideosCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * VideosCountOutputType without action
+   */
+  export type VideosCountOutputTypeCountCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: commentsWhereInput
+  }
+
+  /**
+   * VideosCountOutputType without action
+   */
+  export type VideosCountOutputTypeCountVideo_reactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: video_reactionsWhereInput
+  }
+
+  /**
+   * VideosCountOutputType without action
+   */
+  export type VideosCountOutputTypeCountVideo_viewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: video_viewsWhereInput
+  }
+
+
+  /**
+   * Models
+   */
+
+  /**
+   * Model comments
+   */
+
+  export type AggregateComments = {
+    _count: CommentsCountAggregateOutputType | null
+    _min: CommentsMinAggregateOutputType | null
+    _max: CommentsMaxAggregateOutputType | null
+  }
+
+  export type CommentsMinAggregateOutputType = {
+    id: string | null
+    parent_id: string | null
+    user_id: string | null
+    video_id: string | null
+    value: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type CommentsMaxAggregateOutputType = {
+    id: string | null
+    parent_id: string | null
+    user_id: string | null
+    video_id: string | null
+    value: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type CommentsCountAggregateOutputType = {
+    id: number
+    parent_id: number
+    user_id: number
+    video_id: number
+    value: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type CommentsMinAggregateInputType = {
+    id?: true
+    parent_id?: true
+    user_id?: true
+    video_id?: true
+    value?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type CommentsMaxAggregateInputType = {
+    id?: true
+    parent_id?: true
+    user_id?: true
+    video_id?: true
+    value?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type CommentsCountAggregateInputType = {
+    id?: true
+    parent_id?: true
+    user_id?: true
+    video_id?: true
+    value?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type CommentsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which comments to aggregate.
+     */
+    where?: commentsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of comments to fetch.
+     */
+    orderBy?: commentsOrderByWithRelationInput | commentsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: commentsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` comments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` comments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned comments
+    **/
+    _count?: true | CommentsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CommentsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CommentsMaxAggregateInputType
+  }
+
+  export type GetCommentsAggregateType<T extends CommentsAggregateArgs> = {
+        [P in keyof T & keyof AggregateComments]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateComments[P]>
+      : GetScalarType<T[P], AggregateComments[P]>
+  }
+
+
+
+
+  export type commentsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: commentsWhereInput
+    orderBy?: commentsOrderByWithAggregationInput | commentsOrderByWithAggregationInput[]
+    by: CommentsScalarFieldEnum[] | CommentsScalarFieldEnum
+    having?: commentsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CommentsCountAggregateInputType | true
+    _min?: CommentsMinAggregateInputType
+    _max?: CommentsMaxAggregateInputType
+  }
+
+  export type CommentsGroupByOutputType = {
+    id: string
+    parent_id: string | null
+    user_id: string
+    video_id: string
+    value: string
+    created_at: Date
+    updated_at: Date
+    _count: CommentsCountAggregateOutputType | null
+    _min: CommentsMinAggregateOutputType | null
+    _max: CommentsMaxAggregateOutputType | null
+  }
+
+  type GetCommentsGroupByPayload<T extends commentsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CommentsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CommentsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CommentsGroupByOutputType[P]>
+            : GetScalarType<T[P], CommentsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type commentsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    parent_id?: boolean
+    user_id?: boolean
+    video_id?: boolean
+    value?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    comment_reactions?: boolean | comments$comment_reactionsArgs<ExtArgs>
+    comments?: boolean | comments$commentsArgs<ExtArgs>
+    other_comments?: boolean | comments$other_commentsArgs<ExtArgs>
+    users?: boolean | usersDefaultArgs<ExtArgs>
+    videos?: boolean | videosDefaultArgs<ExtArgs>
+    _count?: boolean | CommentsCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["comments"]>
+
+  export type commentsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    parent_id?: boolean
+    user_id?: boolean
+    video_id?: boolean
+    value?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    comments?: boolean | comments$commentsArgs<ExtArgs>
+    users?: boolean | usersDefaultArgs<ExtArgs>
+    videos?: boolean | videosDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["comments"]>
+
+  export type commentsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    parent_id?: boolean
+    user_id?: boolean
+    video_id?: boolean
+    value?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    comments?: boolean | comments$commentsArgs<ExtArgs>
+    users?: boolean | usersDefaultArgs<ExtArgs>
+    videos?: boolean | videosDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["comments"]>
+
+  export type commentsSelectScalar = {
+    id?: boolean
+    parent_id?: boolean
+    user_id?: boolean
+    video_id?: boolean
+    value?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type commentsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "parent_id" | "user_id" | "video_id" | "value" | "created_at" | "updated_at", ExtArgs["result"]["comments"]>
+  export type commentsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    comment_reactions?: boolean | comments$comment_reactionsArgs<ExtArgs>
+    comments?: boolean | comments$commentsArgs<ExtArgs>
+    other_comments?: boolean | comments$other_commentsArgs<ExtArgs>
+    users?: boolean | usersDefaultArgs<ExtArgs>
+    videos?: boolean | videosDefaultArgs<ExtArgs>
+    _count?: boolean | CommentsCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type commentsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    comments?: boolean | comments$commentsArgs<ExtArgs>
+    users?: boolean | usersDefaultArgs<ExtArgs>
+    videos?: boolean | videosDefaultArgs<ExtArgs>
+  }
+  export type commentsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    comments?: boolean | comments$commentsArgs<ExtArgs>
+    users?: boolean | usersDefaultArgs<ExtArgs>
+    videos?: boolean | videosDefaultArgs<ExtArgs>
+  }
+
+  export type $commentsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "comments"
+    objects: {
+      comment_reactions: Prisma.$comment_reactionsPayload<ExtArgs>[]
+      comments: Prisma.$commentsPayload<ExtArgs> | null
+      other_comments: Prisma.$commentsPayload<ExtArgs>[]
+      users: Prisma.$usersPayload<ExtArgs>
+      videos: Prisma.$videosPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      parent_id: string | null
+      user_id: string
+      video_id: string
+      value: string
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["comments"]>
+    composites: {}
+  }
+
+  type commentsGetPayload<S extends boolean | null | undefined | commentsDefaultArgs> = $Result.GetResult<Prisma.$commentsPayload, S>
+
+  type commentsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<commentsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CommentsCountAggregateInputType | true
+    }
+
+  export interface commentsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['comments'], meta: { name: 'comments' } }
+    /**
+     * Find zero or one Comments that matches the filter.
+     * @param {commentsFindUniqueArgs} args - Arguments to find a Comments
+     * @example
+     * // Get one Comments
+     * const comments = await prisma.comments.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends commentsFindUniqueArgs>(args: SelectSubset<T, commentsFindUniqueArgs<ExtArgs>>): Prisma__commentsClient<$Result.GetResult<Prisma.$commentsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Comments that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {commentsFindUniqueOrThrowArgs} args - Arguments to find a Comments
+     * @example
+     * // Get one Comments
+     * const comments = await prisma.comments.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends commentsFindUniqueOrThrowArgs>(args: SelectSubset<T, commentsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__commentsClient<$Result.GetResult<Prisma.$commentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Comments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {commentsFindFirstArgs} args - Arguments to find a Comments
+     * @example
+     * // Get one Comments
+     * const comments = await prisma.comments.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends commentsFindFirstArgs>(args?: SelectSubset<T, commentsFindFirstArgs<ExtArgs>>): Prisma__commentsClient<$Result.GetResult<Prisma.$commentsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Comments that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {commentsFindFirstOrThrowArgs} args - Arguments to find a Comments
+     * @example
+     * // Get one Comments
+     * const comments = await prisma.comments.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends commentsFindFirstOrThrowArgs>(args?: SelectSubset<T, commentsFindFirstOrThrowArgs<ExtArgs>>): Prisma__commentsClient<$Result.GetResult<Prisma.$commentsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Comments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {commentsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Comments
+     * const comments = await prisma.comments.findMany()
+     * 
+     * // Get first 10 Comments
+     * const comments = await prisma.comments.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const commentsWithIdOnly = await prisma.comments.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends commentsFindManyArgs>(args?: SelectSubset<T, commentsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$commentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Comments.
+     * @param {commentsCreateArgs} args - Arguments to create a Comments.
+     * @example
+     * // Create one Comments
+     * const Comments = await prisma.comments.create({
+     *   data: {
+     *     // ... data to create a Comments
+     *   }
+     * })
+     * 
+     */
+    create<T extends commentsCreateArgs>(args: SelectSubset<T, commentsCreateArgs<ExtArgs>>): Prisma__commentsClient<$Result.GetResult<Prisma.$commentsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Comments.
+     * @param {commentsCreateManyArgs} args - Arguments to create many Comments.
+     * @example
+     * // Create many Comments
+     * const comments = await prisma.comments.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends commentsCreateManyArgs>(args?: SelectSubset<T, commentsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Comments and returns the data saved in the database.
+     * @param {commentsCreateManyAndReturnArgs} args - Arguments to create many Comments.
+     * @example
+     * // Create many Comments
+     * const comments = await prisma.comments.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Comments and only return the `id`
+     * const commentsWithIdOnly = await prisma.comments.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends commentsCreateManyAndReturnArgs>(args?: SelectSubset<T, commentsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$commentsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Comments.
+     * @param {commentsDeleteArgs} args - Arguments to delete one Comments.
+     * @example
+     * // Delete one Comments
+     * const Comments = await prisma.comments.delete({
+     *   where: {
+     *     // ... filter to delete one Comments
+     *   }
+     * })
+     * 
+     */
+    delete<T extends commentsDeleteArgs>(args: SelectSubset<T, commentsDeleteArgs<ExtArgs>>): Prisma__commentsClient<$Result.GetResult<Prisma.$commentsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Comments.
+     * @param {commentsUpdateArgs} args - Arguments to update one Comments.
+     * @example
+     * // Update one Comments
+     * const comments = await prisma.comments.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends commentsUpdateArgs>(args: SelectSubset<T, commentsUpdateArgs<ExtArgs>>): Prisma__commentsClient<$Result.GetResult<Prisma.$commentsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Comments.
+     * @param {commentsDeleteManyArgs} args - Arguments to filter Comments to delete.
+     * @example
+     * // Delete a few Comments
+     * const { count } = await prisma.comments.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends commentsDeleteManyArgs>(args?: SelectSubset<T, commentsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Comments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {commentsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Comments
+     * const comments = await prisma.comments.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends commentsUpdateManyArgs>(args: SelectSubset<T, commentsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Comments and returns the data updated in the database.
+     * @param {commentsUpdateManyAndReturnArgs} args - Arguments to update many Comments.
+     * @example
+     * // Update many Comments
+     * const comments = await prisma.comments.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Comments and only return the `id`
+     * const commentsWithIdOnly = await prisma.comments.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends commentsUpdateManyAndReturnArgs>(args: SelectSubset<T, commentsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$commentsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Comments.
+     * @param {commentsUpsertArgs} args - Arguments to update or create a Comments.
+     * @example
+     * // Update or create a Comments
+     * const comments = await prisma.comments.upsert({
+     *   create: {
+     *     // ... data to create a Comments
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Comments we want to update
+     *   }
+     * })
+     */
+    upsert<T extends commentsUpsertArgs>(args: SelectSubset<T, commentsUpsertArgs<ExtArgs>>): Prisma__commentsClient<$Result.GetResult<Prisma.$commentsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Comments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {commentsCountArgs} args - Arguments to filter Comments to count.
+     * @example
+     * // Count the number of Comments
+     * const count = await prisma.comments.count({
+     *   where: {
+     *     // ... the filter for the Comments we want to count
+     *   }
+     * })
+    **/
+    count<T extends commentsCountArgs>(
+      args?: Subset<T, commentsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CommentsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Comments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CommentsAggregateArgs>(args: Subset<T, CommentsAggregateArgs>): Prisma.PrismaPromise<GetCommentsAggregateType<T>>
+
+    /**
+     * Group by Comments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {commentsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends commentsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: commentsGroupByArgs['orderBy'] }
+        : { orderBy?: commentsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, commentsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCommentsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the comments model
+   */
+  readonly fields: commentsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for comments.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__commentsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    comment_reactions<T extends comments$comment_reactionsArgs<ExtArgs> = {}>(args?: Subset<T, comments$comment_reactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$comment_reactionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    comments<T extends comments$commentsArgs<ExtArgs> = {}>(args?: Subset<T, comments$commentsArgs<ExtArgs>>): Prisma__commentsClient<$Result.GetResult<Prisma.$commentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    other_comments<T extends comments$other_commentsArgs<ExtArgs> = {}>(args?: Subset<T, comments$other_commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$commentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    users<T extends usersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, usersDefaultArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    videos<T extends videosDefaultArgs<ExtArgs> = {}>(args?: Subset<T, videosDefaultArgs<ExtArgs>>): Prisma__videosClient<$Result.GetResult<Prisma.$videosPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the comments model
+   */
+  interface commentsFieldRefs {
+    readonly id: FieldRef<"comments", 'String'>
+    readonly parent_id: FieldRef<"comments", 'String'>
+    readonly user_id: FieldRef<"comments", 'String'>
+    readonly video_id: FieldRef<"comments", 'String'>
+    readonly value: FieldRef<"comments", 'String'>
+    readonly created_at: FieldRef<"comments", 'DateTime'>
+    readonly updated_at: FieldRef<"comments", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * comments findUnique
+   */
+  export type commentsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comments
+     */
+    select?: commentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the comments
+     */
+    omit?: commentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: commentsInclude<ExtArgs> | null
+    /**
+     * Filter, which comments to fetch.
+     */
+    where: commentsWhereUniqueInput
+  }
+
+  /**
+   * comments findUniqueOrThrow
+   */
+  export type commentsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comments
+     */
+    select?: commentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the comments
+     */
+    omit?: commentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: commentsInclude<ExtArgs> | null
+    /**
+     * Filter, which comments to fetch.
+     */
+    where: commentsWhereUniqueInput
+  }
+
+  /**
+   * comments findFirst
+   */
+  export type commentsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comments
+     */
+    select?: commentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the comments
+     */
+    omit?: commentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: commentsInclude<ExtArgs> | null
+    /**
+     * Filter, which comments to fetch.
+     */
+    where?: commentsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of comments to fetch.
+     */
+    orderBy?: commentsOrderByWithRelationInput | commentsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for comments.
+     */
+    cursor?: commentsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` comments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` comments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of comments.
+     */
+    distinct?: CommentsScalarFieldEnum | CommentsScalarFieldEnum[]
+  }
+
+  /**
+   * comments findFirstOrThrow
+   */
+  export type commentsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comments
+     */
+    select?: commentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the comments
+     */
+    omit?: commentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: commentsInclude<ExtArgs> | null
+    /**
+     * Filter, which comments to fetch.
+     */
+    where?: commentsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of comments to fetch.
+     */
+    orderBy?: commentsOrderByWithRelationInput | commentsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for comments.
+     */
+    cursor?: commentsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` comments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` comments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of comments.
+     */
+    distinct?: CommentsScalarFieldEnum | CommentsScalarFieldEnum[]
+  }
+
+  /**
+   * comments findMany
+   */
+  export type commentsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comments
+     */
+    select?: commentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the comments
+     */
+    omit?: commentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: commentsInclude<ExtArgs> | null
+    /**
+     * Filter, which comments to fetch.
+     */
+    where?: commentsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of comments to fetch.
+     */
+    orderBy?: commentsOrderByWithRelationInput | commentsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing comments.
+     */
+    cursor?: commentsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` comments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` comments.
+     */
+    skip?: number
+    distinct?: CommentsScalarFieldEnum | CommentsScalarFieldEnum[]
+  }
+
+  /**
+   * comments create
+   */
+  export type commentsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comments
+     */
+    select?: commentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the comments
+     */
+    omit?: commentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: commentsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a comments.
+     */
+    data: XOR<commentsCreateInput, commentsUncheckedCreateInput>
+  }
+
+  /**
+   * comments createMany
+   */
+  export type commentsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many comments.
+     */
+    data: commentsCreateManyInput | commentsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * comments createManyAndReturn
+   */
+  export type commentsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comments
+     */
+    select?: commentsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the comments
+     */
+    omit?: commentsOmit<ExtArgs> | null
+    /**
+     * The data used to create many comments.
+     */
+    data: commentsCreateManyInput | commentsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: commentsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * comments update
+   */
+  export type commentsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comments
+     */
+    select?: commentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the comments
+     */
+    omit?: commentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: commentsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a comments.
+     */
+    data: XOR<commentsUpdateInput, commentsUncheckedUpdateInput>
+    /**
+     * Choose, which comments to update.
+     */
+    where: commentsWhereUniqueInput
+  }
+
+  /**
+   * comments updateMany
+   */
+  export type commentsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update comments.
+     */
+    data: XOR<commentsUpdateManyMutationInput, commentsUncheckedUpdateManyInput>
+    /**
+     * Filter which comments to update
+     */
+    where?: commentsWhereInput
+    /**
+     * Limit how many comments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * comments updateManyAndReturn
+   */
+  export type commentsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comments
+     */
+    select?: commentsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the comments
+     */
+    omit?: commentsOmit<ExtArgs> | null
+    /**
+     * The data used to update comments.
+     */
+    data: XOR<commentsUpdateManyMutationInput, commentsUncheckedUpdateManyInput>
+    /**
+     * Filter which comments to update
+     */
+    where?: commentsWhereInput
+    /**
+     * Limit how many comments to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: commentsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * comments upsert
+   */
+  export type commentsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comments
+     */
+    select?: commentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the comments
+     */
+    omit?: commentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: commentsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the comments to update in case it exists.
+     */
+    where: commentsWhereUniqueInput
+    /**
+     * In case the comments found by the `where` argument doesn't exist, create a new comments with this data.
+     */
+    create: XOR<commentsCreateInput, commentsUncheckedCreateInput>
+    /**
+     * In case the comments was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<commentsUpdateInput, commentsUncheckedUpdateInput>
+  }
+
+  /**
+   * comments delete
+   */
+  export type commentsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comments
+     */
+    select?: commentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the comments
+     */
+    omit?: commentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: commentsInclude<ExtArgs> | null
+    /**
+     * Filter which comments to delete.
+     */
+    where: commentsWhereUniqueInput
+  }
+
+  /**
+   * comments deleteMany
+   */
+  export type commentsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which comments to delete
+     */
+    where?: commentsWhereInput
+    /**
+     * Limit how many comments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * comments.comment_reactions
+   */
+  export type comments$comment_reactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comment_reactions
+     */
+    select?: comment_reactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the comment_reactions
+     */
+    omit?: comment_reactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: comment_reactionsInclude<ExtArgs> | null
+    where?: comment_reactionsWhereInput
+    orderBy?: comment_reactionsOrderByWithRelationInput | comment_reactionsOrderByWithRelationInput[]
+    cursor?: comment_reactionsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Comment_reactionsScalarFieldEnum | Comment_reactionsScalarFieldEnum[]
+  }
+
+  /**
+   * comments.comments
+   */
+  export type comments$commentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comments
+     */
+    select?: commentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the comments
+     */
+    omit?: commentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: commentsInclude<ExtArgs> | null
+    where?: commentsWhereInput
+  }
+
+  /**
+   * comments.other_comments
+   */
+  export type comments$other_commentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comments
+     */
+    select?: commentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the comments
+     */
+    omit?: commentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: commentsInclude<ExtArgs> | null
+    where?: commentsWhereInput
+    orderBy?: commentsOrderByWithRelationInput | commentsOrderByWithRelationInput[]
+    cursor?: commentsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CommentsScalarFieldEnum | CommentsScalarFieldEnum[]
+  }
+
+  /**
+   * comments without action
+   */
+  export type commentsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comments
+     */
+    select?: commentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the comments
+     */
+    omit?: commentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: commentsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model subscriptions
+   */
+
+  export type AggregateSubscriptions = {
+    _count: SubscriptionsCountAggregateOutputType | null
+    _min: SubscriptionsMinAggregateOutputType | null
+    _max: SubscriptionsMaxAggregateOutputType | null
+  }
+
+  export type SubscriptionsMinAggregateOutputType = {
+    id: string | null
+    viewer_id: string | null
+    creator_id: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type SubscriptionsMaxAggregateOutputType = {
+    id: string | null
+    viewer_id: string | null
+    creator_id: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type SubscriptionsCountAggregateOutputType = {
+    id: number
+    viewer_id: number
+    creator_id: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type SubscriptionsMinAggregateInputType = {
+    id?: true
+    viewer_id?: true
+    creator_id?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type SubscriptionsMaxAggregateInputType = {
+    id?: true
+    viewer_id?: true
+    creator_id?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type SubscriptionsCountAggregateInputType = {
+    id?: true
+    viewer_id?: true
+    creator_id?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type SubscriptionsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which subscriptions to aggregate.
+     */
+    where?: subscriptionsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of subscriptions to fetch.
+     */
+    orderBy?: subscriptionsOrderByWithRelationInput | subscriptionsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: subscriptionsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` subscriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` subscriptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned subscriptions
+    **/
+    _count?: true | SubscriptionsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SubscriptionsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SubscriptionsMaxAggregateInputType
+  }
+
+  export type GetSubscriptionsAggregateType<T extends SubscriptionsAggregateArgs> = {
+        [P in keyof T & keyof AggregateSubscriptions]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSubscriptions[P]>
+      : GetScalarType<T[P], AggregateSubscriptions[P]>
+  }
+
+
+
+
+  export type subscriptionsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: subscriptionsWhereInput
+    orderBy?: subscriptionsOrderByWithAggregationInput | subscriptionsOrderByWithAggregationInput[]
+    by: SubscriptionsScalarFieldEnum[] | SubscriptionsScalarFieldEnum
+    having?: subscriptionsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SubscriptionsCountAggregateInputType | true
+    _min?: SubscriptionsMinAggregateInputType
+    _max?: SubscriptionsMaxAggregateInputType
+  }
+
+  export type SubscriptionsGroupByOutputType = {
+    id: string
+    viewer_id: string
+    creator_id: string
+    created_at: Date
+    updated_at: Date
+    _count: SubscriptionsCountAggregateOutputType | null
+    _min: SubscriptionsMinAggregateOutputType | null
+    _max: SubscriptionsMaxAggregateOutputType | null
+  }
+
+  type GetSubscriptionsGroupByPayload<T extends subscriptionsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SubscriptionsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SubscriptionsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SubscriptionsGroupByOutputType[P]>
+            : GetScalarType<T[P], SubscriptionsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type subscriptionsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    viewer_id?: boolean
+    creator_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    users_subscriptions_creator_idTousers?: boolean | usersDefaultArgs<ExtArgs>
+    users_subscriptions_viewer_idTousers?: boolean | usersDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["subscriptions"]>
+
+  export type subscriptionsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    viewer_id?: boolean
+    creator_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    users_subscriptions_creator_idTousers?: boolean | usersDefaultArgs<ExtArgs>
+    users_subscriptions_viewer_idTousers?: boolean | usersDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["subscriptions"]>
+
+  export type subscriptionsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    viewer_id?: boolean
+    creator_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    users_subscriptions_creator_idTousers?: boolean | usersDefaultArgs<ExtArgs>
+    users_subscriptions_viewer_idTousers?: boolean | usersDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["subscriptions"]>
+
+  export type subscriptionsSelectScalar = {
+    id?: boolean
+    viewer_id?: boolean
+    creator_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type subscriptionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "viewer_id" | "creator_id" | "created_at" | "updated_at", ExtArgs["result"]["subscriptions"]>
+  export type subscriptionsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users_subscriptions_creator_idTousers?: boolean | usersDefaultArgs<ExtArgs>
+    users_subscriptions_viewer_idTousers?: boolean | usersDefaultArgs<ExtArgs>
+  }
+  export type subscriptionsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users_subscriptions_creator_idTousers?: boolean | usersDefaultArgs<ExtArgs>
+    users_subscriptions_viewer_idTousers?: boolean | usersDefaultArgs<ExtArgs>
+  }
+  export type subscriptionsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users_subscriptions_creator_idTousers?: boolean | usersDefaultArgs<ExtArgs>
+    users_subscriptions_viewer_idTousers?: boolean | usersDefaultArgs<ExtArgs>
+  }
+
+  export type $subscriptionsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "subscriptions"
+    objects: {
+      users_subscriptions_creator_idTousers: Prisma.$usersPayload<ExtArgs>
+      users_subscriptions_viewer_idTousers: Prisma.$usersPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      viewer_id: string
+      creator_id: string
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["subscriptions"]>
+    composites: {}
+  }
+
+  type subscriptionsGetPayload<S extends boolean | null | undefined | subscriptionsDefaultArgs> = $Result.GetResult<Prisma.$subscriptionsPayload, S>
+
+  type subscriptionsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<subscriptionsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SubscriptionsCountAggregateInputType | true
+    }
+
+  export interface subscriptionsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['subscriptions'], meta: { name: 'subscriptions' } }
+    /**
+     * Find zero or one Subscriptions that matches the filter.
+     * @param {subscriptionsFindUniqueArgs} args - Arguments to find a Subscriptions
+     * @example
+     * // Get one Subscriptions
+     * const subscriptions = await prisma.subscriptions.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends subscriptionsFindUniqueArgs>(args: SelectSubset<T, subscriptionsFindUniqueArgs<ExtArgs>>): Prisma__subscriptionsClient<$Result.GetResult<Prisma.$subscriptionsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Subscriptions that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {subscriptionsFindUniqueOrThrowArgs} args - Arguments to find a Subscriptions
+     * @example
+     * // Get one Subscriptions
+     * const subscriptions = await prisma.subscriptions.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends subscriptionsFindUniqueOrThrowArgs>(args: SelectSubset<T, subscriptionsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__subscriptionsClient<$Result.GetResult<Prisma.$subscriptionsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Subscriptions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {subscriptionsFindFirstArgs} args - Arguments to find a Subscriptions
+     * @example
+     * // Get one Subscriptions
+     * const subscriptions = await prisma.subscriptions.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends subscriptionsFindFirstArgs>(args?: SelectSubset<T, subscriptionsFindFirstArgs<ExtArgs>>): Prisma__subscriptionsClient<$Result.GetResult<Prisma.$subscriptionsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Subscriptions that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {subscriptionsFindFirstOrThrowArgs} args - Arguments to find a Subscriptions
+     * @example
+     * // Get one Subscriptions
+     * const subscriptions = await prisma.subscriptions.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends subscriptionsFindFirstOrThrowArgs>(args?: SelectSubset<T, subscriptionsFindFirstOrThrowArgs<ExtArgs>>): Prisma__subscriptionsClient<$Result.GetResult<Prisma.$subscriptionsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Subscriptions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {subscriptionsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Subscriptions
+     * const subscriptions = await prisma.subscriptions.findMany()
+     * 
+     * // Get first 10 Subscriptions
+     * const subscriptions = await prisma.subscriptions.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const subscriptionsWithIdOnly = await prisma.subscriptions.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends subscriptionsFindManyArgs>(args?: SelectSubset<T, subscriptionsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$subscriptionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Subscriptions.
+     * @param {subscriptionsCreateArgs} args - Arguments to create a Subscriptions.
+     * @example
+     * // Create one Subscriptions
+     * const Subscriptions = await prisma.subscriptions.create({
+     *   data: {
+     *     // ... data to create a Subscriptions
+     *   }
+     * })
+     * 
+     */
+    create<T extends subscriptionsCreateArgs>(args: SelectSubset<T, subscriptionsCreateArgs<ExtArgs>>): Prisma__subscriptionsClient<$Result.GetResult<Prisma.$subscriptionsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Subscriptions.
+     * @param {subscriptionsCreateManyArgs} args - Arguments to create many Subscriptions.
+     * @example
+     * // Create many Subscriptions
+     * const subscriptions = await prisma.subscriptions.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends subscriptionsCreateManyArgs>(args?: SelectSubset<T, subscriptionsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Subscriptions and returns the data saved in the database.
+     * @param {subscriptionsCreateManyAndReturnArgs} args - Arguments to create many Subscriptions.
+     * @example
+     * // Create many Subscriptions
+     * const subscriptions = await prisma.subscriptions.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Subscriptions and only return the `id`
+     * const subscriptionsWithIdOnly = await prisma.subscriptions.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends subscriptionsCreateManyAndReturnArgs>(args?: SelectSubset<T, subscriptionsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$subscriptionsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Subscriptions.
+     * @param {subscriptionsDeleteArgs} args - Arguments to delete one Subscriptions.
+     * @example
+     * // Delete one Subscriptions
+     * const Subscriptions = await prisma.subscriptions.delete({
+     *   where: {
+     *     // ... filter to delete one Subscriptions
+     *   }
+     * })
+     * 
+     */
+    delete<T extends subscriptionsDeleteArgs>(args: SelectSubset<T, subscriptionsDeleteArgs<ExtArgs>>): Prisma__subscriptionsClient<$Result.GetResult<Prisma.$subscriptionsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Subscriptions.
+     * @param {subscriptionsUpdateArgs} args - Arguments to update one Subscriptions.
+     * @example
+     * // Update one Subscriptions
+     * const subscriptions = await prisma.subscriptions.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends subscriptionsUpdateArgs>(args: SelectSubset<T, subscriptionsUpdateArgs<ExtArgs>>): Prisma__subscriptionsClient<$Result.GetResult<Prisma.$subscriptionsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Subscriptions.
+     * @param {subscriptionsDeleteManyArgs} args - Arguments to filter Subscriptions to delete.
+     * @example
+     * // Delete a few Subscriptions
+     * const { count } = await prisma.subscriptions.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends subscriptionsDeleteManyArgs>(args?: SelectSubset<T, subscriptionsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Subscriptions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {subscriptionsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Subscriptions
+     * const subscriptions = await prisma.subscriptions.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends subscriptionsUpdateManyArgs>(args: SelectSubset<T, subscriptionsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Subscriptions and returns the data updated in the database.
+     * @param {subscriptionsUpdateManyAndReturnArgs} args - Arguments to update many Subscriptions.
+     * @example
+     * // Update many Subscriptions
+     * const subscriptions = await prisma.subscriptions.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Subscriptions and only return the `id`
+     * const subscriptionsWithIdOnly = await prisma.subscriptions.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends subscriptionsUpdateManyAndReturnArgs>(args: SelectSubset<T, subscriptionsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$subscriptionsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Subscriptions.
+     * @param {subscriptionsUpsertArgs} args - Arguments to update or create a Subscriptions.
+     * @example
+     * // Update or create a Subscriptions
+     * const subscriptions = await prisma.subscriptions.upsert({
+     *   create: {
+     *     // ... data to create a Subscriptions
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Subscriptions we want to update
+     *   }
+     * })
+     */
+    upsert<T extends subscriptionsUpsertArgs>(args: SelectSubset<T, subscriptionsUpsertArgs<ExtArgs>>): Prisma__subscriptionsClient<$Result.GetResult<Prisma.$subscriptionsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Subscriptions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {subscriptionsCountArgs} args - Arguments to filter Subscriptions to count.
+     * @example
+     * // Count the number of Subscriptions
+     * const count = await prisma.subscriptions.count({
+     *   where: {
+     *     // ... the filter for the Subscriptions we want to count
+     *   }
+     * })
+    **/
+    count<T extends subscriptionsCountArgs>(
+      args?: Subset<T, subscriptionsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SubscriptionsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Subscriptions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SubscriptionsAggregateArgs>(args: Subset<T, SubscriptionsAggregateArgs>): Prisma.PrismaPromise<GetSubscriptionsAggregateType<T>>
+
+    /**
+     * Group by Subscriptions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {subscriptionsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends subscriptionsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: subscriptionsGroupByArgs['orderBy'] }
+        : { orderBy?: subscriptionsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, subscriptionsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSubscriptionsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the subscriptions model
+   */
+  readonly fields: subscriptionsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for subscriptions.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__subscriptionsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    users_subscriptions_creator_idTousers<T extends usersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, usersDefaultArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    users_subscriptions_viewer_idTousers<T extends usersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, usersDefaultArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the subscriptions model
+   */
+  interface subscriptionsFieldRefs {
+    readonly id: FieldRef<"subscriptions", 'String'>
+    readonly viewer_id: FieldRef<"subscriptions", 'String'>
+    readonly creator_id: FieldRef<"subscriptions", 'String'>
+    readonly created_at: FieldRef<"subscriptions", 'DateTime'>
+    readonly updated_at: FieldRef<"subscriptions", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * subscriptions findUnique
+   */
+  export type subscriptionsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the subscriptions
+     */
+    select?: subscriptionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the subscriptions
+     */
+    omit?: subscriptionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: subscriptionsInclude<ExtArgs> | null
+    /**
+     * Filter, which subscriptions to fetch.
+     */
+    where: subscriptionsWhereUniqueInput
+  }
+
+  /**
+   * subscriptions findUniqueOrThrow
+   */
+  export type subscriptionsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the subscriptions
+     */
+    select?: subscriptionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the subscriptions
+     */
+    omit?: subscriptionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: subscriptionsInclude<ExtArgs> | null
+    /**
+     * Filter, which subscriptions to fetch.
+     */
+    where: subscriptionsWhereUniqueInput
+  }
+
+  /**
+   * subscriptions findFirst
+   */
+  export type subscriptionsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the subscriptions
+     */
+    select?: subscriptionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the subscriptions
+     */
+    omit?: subscriptionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: subscriptionsInclude<ExtArgs> | null
+    /**
+     * Filter, which subscriptions to fetch.
+     */
+    where?: subscriptionsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of subscriptions to fetch.
+     */
+    orderBy?: subscriptionsOrderByWithRelationInput | subscriptionsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for subscriptions.
+     */
+    cursor?: subscriptionsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` subscriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` subscriptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of subscriptions.
+     */
+    distinct?: SubscriptionsScalarFieldEnum | SubscriptionsScalarFieldEnum[]
+  }
+
+  /**
+   * subscriptions findFirstOrThrow
+   */
+  export type subscriptionsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the subscriptions
+     */
+    select?: subscriptionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the subscriptions
+     */
+    omit?: subscriptionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: subscriptionsInclude<ExtArgs> | null
+    /**
+     * Filter, which subscriptions to fetch.
+     */
+    where?: subscriptionsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of subscriptions to fetch.
+     */
+    orderBy?: subscriptionsOrderByWithRelationInput | subscriptionsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for subscriptions.
+     */
+    cursor?: subscriptionsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` subscriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` subscriptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of subscriptions.
+     */
+    distinct?: SubscriptionsScalarFieldEnum | SubscriptionsScalarFieldEnum[]
+  }
+
+  /**
+   * subscriptions findMany
+   */
+  export type subscriptionsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the subscriptions
+     */
+    select?: subscriptionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the subscriptions
+     */
+    omit?: subscriptionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: subscriptionsInclude<ExtArgs> | null
+    /**
+     * Filter, which subscriptions to fetch.
+     */
+    where?: subscriptionsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of subscriptions to fetch.
+     */
+    orderBy?: subscriptionsOrderByWithRelationInput | subscriptionsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing subscriptions.
+     */
+    cursor?: subscriptionsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` subscriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` subscriptions.
+     */
+    skip?: number
+    distinct?: SubscriptionsScalarFieldEnum | SubscriptionsScalarFieldEnum[]
+  }
+
+  /**
+   * subscriptions create
+   */
+  export type subscriptionsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the subscriptions
+     */
+    select?: subscriptionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the subscriptions
+     */
+    omit?: subscriptionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: subscriptionsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a subscriptions.
+     */
+    data: XOR<subscriptionsCreateInput, subscriptionsUncheckedCreateInput>
+  }
+
+  /**
+   * subscriptions createMany
+   */
+  export type subscriptionsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many subscriptions.
+     */
+    data: subscriptionsCreateManyInput | subscriptionsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * subscriptions createManyAndReturn
+   */
+  export type subscriptionsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the subscriptions
+     */
+    select?: subscriptionsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the subscriptions
+     */
+    omit?: subscriptionsOmit<ExtArgs> | null
+    /**
+     * The data used to create many subscriptions.
+     */
+    data: subscriptionsCreateManyInput | subscriptionsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: subscriptionsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * subscriptions update
+   */
+  export type subscriptionsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the subscriptions
+     */
+    select?: subscriptionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the subscriptions
+     */
+    omit?: subscriptionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: subscriptionsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a subscriptions.
+     */
+    data: XOR<subscriptionsUpdateInput, subscriptionsUncheckedUpdateInput>
+    /**
+     * Choose, which subscriptions to update.
+     */
+    where: subscriptionsWhereUniqueInput
+  }
+
+  /**
+   * subscriptions updateMany
+   */
+  export type subscriptionsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update subscriptions.
+     */
+    data: XOR<subscriptionsUpdateManyMutationInput, subscriptionsUncheckedUpdateManyInput>
+    /**
+     * Filter which subscriptions to update
+     */
+    where?: subscriptionsWhereInput
+    /**
+     * Limit how many subscriptions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * subscriptions updateManyAndReturn
+   */
+  export type subscriptionsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the subscriptions
+     */
+    select?: subscriptionsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the subscriptions
+     */
+    omit?: subscriptionsOmit<ExtArgs> | null
+    /**
+     * The data used to update subscriptions.
+     */
+    data: XOR<subscriptionsUpdateManyMutationInput, subscriptionsUncheckedUpdateManyInput>
+    /**
+     * Filter which subscriptions to update
+     */
+    where?: subscriptionsWhereInput
+    /**
+     * Limit how many subscriptions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: subscriptionsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * subscriptions upsert
+   */
+  export type subscriptionsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the subscriptions
+     */
+    select?: subscriptionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the subscriptions
+     */
+    omit?: subscriptionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: subscriptionsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the subscriptions to update in case it exists.
+     */
+    where: subscriptionsWhereUniqueInput
+    /**
+     * In case the subscriptions found by the `where` argument doesn't exist, create a new subscriptions with this data.
+     */
+    create: XOR<subscriptionsCreateInput, subscriptionsUncheckedCreateInput>
+    /**
+     * In case the subscriptions was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<subscriptionsUpdateInput, subscriptionsUncheckedUpdateInput>
+  }
+
+  /**
+   * subscriptions delete
+   */
+  export type subscriptionsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the subscriptions
+     */
+    select?: subscriptionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the subscriptions
+     */
+    omit?: subscriptionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: subscriptionsInclude<ExtArgs> | null
+    /**
+     * Filter which subscriptions to delete.
+     */
+    where: subscriptionsWhereUniqueInput
+  }
+
+  /**
+   * subscriptions deleteMany
+   */
+  export type subscriptionsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which subscriptions to delete
+     */
+    where?: subscriptionsWhereInput
+    /**
+     * Limit how many subscriptions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * subscriptions without action
+   */
+  export type subscriptionsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the subscriptions
+     */
+    select?: subscriptionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the subscriptions
+     */
+    omit?: subscriptionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: subscriptionsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model users
+   */
+
+  export type AggregateUsers = {
+    _count: UsersCountAggregateOutputType | null
+    _min: UsersMinAggregateOutputType | null
+    _max: UsersMaxAggregateOutputType | null
+  }
+
+  export type UsersMinAggregateOutputType = {
+    id: string | null
+    clerk_user_id: string | null
+    channel_name: string | null
+    avatar_url: string | null
+    bio: string | null
+    created_at: Date | null
+  }
+
+  export type UsersMaxAggregateOutputType = {
+    id: string | null
+    clerk_user_id: string | null
+    channel_name: string | null
+    avatar_url: string | null
+    bio: string | null
+    created_at: Date | null
+  }
+
+  export type UsersCountAggregateOutputType = {
+    id: number
+    clerk_user_id: number
+    channel_name: number
+    avatar_url: number
+    bio: number
+    created_at: number
+    _all: number
+  }
+
+
+  export type UsersMinAggregateInputType = {
+    id?: true
+    clerk_user_id?: true
+    channel_name?: true
+    avatar_url?: true
+    bio?: true
+    created_at?: true
+  }
+
+  export type UsersMaxAggregateInputType = {
+    id?: true
+    clerk_user_id?: true
+    channel_name?: true
+    avatar_url?: true
+    bio?: true
+    created_at?: true
+  }
+
+  export type UsersCountAggregateInputType = {
+    id?: true
+    clerk_user_id?: true
+    channel_name?: true
+    avatar_url?: true
+    bio?: true
+    created_at?: true
+    _all?: true
+  }
+
+  export type UsersAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which users to aggregate.
+     */
+    where?: usersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of users to fetch.
+     */
+    orderBy?: usersOrderByWithRelationInput | usersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: usersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned users
+    **/
+    _count?: true | UsersCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UsersMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UsersMaxAggregateInputType
+  }
+
+  export type GetUsersAggregateType<T extends UsersAggregateArgs> = {
+        [P in keyof T & keyof AggregateUsers]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUsers[P]>
+      : GetScalarType<T[P], AggregateUsers[P]>
+  }
+
+
+
+
+  export type usersGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: usersWhereInput
+    orderBy?: usersOrderByWithAggregationInput | usersOrderByWithAggregationInput[]
+    by: UsersScalarFieldEnum[] | UsersScalarFieldEnum
+    having?: usersScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UsersCountAggregateInputType | true
+    _min?: UsersMinAggregateInputType
+    _max?: UsersMaxAggregateInputType
+  }
+
+  export type UsersGroupByOutputType = {
+    id: string
+    clerk_user_id: string
+    channel_name: string
+    avatar_url: string | null
+    bio: string | null
+    created_at: Date | null
+    _count: UsersCountAggregateOutputType | null
+    _min: UsersMinAggregateOutputType | null
+    _max: UsersMaxAggregateOutputType | null
+  }
+
+  type GetUsersGroupByPayload<T extends usersGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UsersGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UsersGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UsersGroupByOutputType[P]>
+            : GetScalarType<T[P], UsersGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type usersSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clerk_user_id?: boolean
+    channel_name?: boolean
+    avatar_url?: boolean
+    bio?: boolean
+    created_at?: boolean
+    comment_reactions?: boolean | users$comment_reactionsArgs<ExtArgs>
+    comments?: boolean | users$commentsArgs<ExtArgs>
+    subscriptions_subscriptions_creator_idTousers?: boolean | users$subscriptions_subscriptions_creator_idTousersArgs<ExtArgs>
+    subscriptions_subscriptions_viewer_idTousers?: boolean | users$subscriptions_subscriptions_viewer_idTousersArgs<ExtArgs>
+    video_reactions?: boolean | users$video_reactionsArgs<ExtArgs>
+    video_views?: boolean | users$video_viewsArgs<ExtArgs>
+    videos?: boolean | users$videosArgs<ExtArgs>
+    _count?: boolean | UsersCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["users"]>
+
+  export type usersSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clerk_user_id?: boolean
+    channel_name?: boolean
+    avatar_url?: boolean
+    bio?: boolean
+    created_at?: boolean
+  }, ExtArgs["result"]["users"]>
+
+  export type usersSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clerk_user_id?: boolean
+    channel_name?: boolean
+    avatar_url?: boolean
+    bio?: boolean
+    created_at?: boolean
+  }, ExtArgs["result"]["users"]>
+
+  export type usersSelectScalar = {
+    id?: boolean
+    clerk_user_id?: boolean
+    channel_name?: boolean
+    avatar_url?: boolean
+    bio?: boolean
+    created_at?: boolean
+  }
+
+  export type usersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clerk_user_id" | "channel_name" | "avatar_url" | "bio" | "created_at", ExtArgs["result"]["users"]>
+  export type usersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    comment_reactions?: boolean | users$comment_reactionsArgs<ExtArgs>
+    comments?: boolean | users$commentsArgs<ExtArgs>
+    subscriptions_subscriptions_creator_idTousers?: boolean | users$subscriptions_subscriptions_creator_idTousersArgs<ExtArgs>
+    subscriptions_subscriptions_viewer_idTousers?: boolean | users$subscriptions_subscriptions_viewer_idTousersArgs<ExtArgs>
+    video_reactions?: boolean | users$video_reactionsArgs<ExtArgs>
+    video_views?: boolean | users$video_viewsArgs<ExtArgs>
+    videos?: boolean | users$videosArgs<ExtArgs>
+    _count?: boolean | UsersCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type usersIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type usersIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $usersPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "users"
+    objects: {
+      comment_reactions: Prisma.$comment_reactionsPayload<ExtArgs>[]
+      comments: Prisma.$commentsPayload<ExtArgs>[]
+      subscriptions_subscriptions_creator_idTousers: Prisma.$subscriptionsPayload<ExtArgs>[]
+      subscriptions_subscriptions_viewer_idTousers: Prisma.$subscriptionsPayload<ExtArgs>[]
+      video_reactions: Prisma.$video_reactionsPayload<ExtArgs>[]
+      video_views: Prisma.$video_viewsPayload<ExtArgs>[]
+      videos: Prisma.$videosPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      clerk_user_id: string
+      channel_name: string
+      avatar_url: string | null
+      bio: string | null
+      created_at: Date | null
+    }, ExtArgs["result"]["users"]>
+    composites: {}
+  }
+
+  type usersGetPayload<S extends boolean | null | undefined | usersDefaultArgs> = $Result.GetResult<Prisma.$usersPayload, S>
+
+  type usersCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<usersFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UsersCountAggregateInputType | true
+    }
+
+  export interface usersDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['users'], meta: { name: 'users' } }
+    /**
+     * Find zero or one Users that matches the filter.
+     * @param {usersFindUniqueArgs} args - Arguments to find a Users
+     * @example
+     * // Get one Users
+     * const users = await prisma.users.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends usersFindUniqueArgs>(args: SelectSubset<T, usersFindUniqueArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Users that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {usersFindUniqueOrThrowArgs} args - Arguments to find a Users
+     * @example
+     * // Get one Users
+     * const users = await prisma.users.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends usersFindUniqueOrThrowArgs>(args: SelectSubset<T, usersFindUniqueOrThrowArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Users that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {usersFindFirstArgs} args - Arguments to find a Users
+     * @example
+     * // Get one Users
+     * const users = await prisma.users.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends usersFindFirstArgs>(args?: SelectSubset<T, usersFindFirstArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Users that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {usersFindFirstOrThrowArgs} args - Arguments to find a Users
+     * @example
+     * // Get one Users
+     * const users = await prisma.users.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends usersFindFirstOrThrowArgs>(args?: SelectSubset<T, usersFindFirstOrThrowArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Users that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {usersFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Users
+     * const users = await prisma.users.findMany()
+     * 
+     * // Get first 10 Users
+     * const users = await prisma.users.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const usersWithIdOnly = await prisma.users.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends usersFindManyArgs>(args?: SelectSubset<T, usersFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Users.
+     * @param {usersCreateArgs} args - Arguments to create a Users.
+     * @example
+     * // Create one Users
+     * const Users = await prisma.users.create({
+     *   data: {
+     *     // ... data to create a Users
+     *   }
+     * })
+     * 
+     */
+    create<T extends usersCreateArgs>(args: SelectSubset<T, usersCreateArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Users.
+     * @param {usersCreateManyArgs} args - Arguments to create many Users.
+     * @example
+     * // Create many Users
+     * const users = await prisma.users.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends usersCreateManyArgs>(args?: SelectSubset<T, usersCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Users and returns the data saved in the database.
+     * @param {usersCreateManyAndReturnArgs} args - Arguments to create many Users.
+     * @example
+     * // Create many Users
+     * const users = await prisma.users.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Users and only return the `id`
+     * const usersWithIdOnly = await prisma.users.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends usersCreateManyAndReturnArgs>(args?: SelectSubset<T, usersCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Users.
+     * @param {usersDeleteArgs} args - Arguments to delete one Users.
+     * @example
+     * // Delete one Users
+     * const Users = await prisma.users.delete({
+     *   where: {
+     *     // ... filter to delete one Users
+     *   }
+     * })
+     * 
+     */
+    delete<T extends usersDeleteArgs>(args: SelectSubset<T, usersDeleteArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Users.
+     * @param {usersUpdateArgs} args - Arguments to update one Users.
+     * @example
+     * // Update one Users
+     * const users = await prisma.users.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends usersUpdateArgs>(args: SelectSubset<T, usersUpdateArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Users.
+     * @param {usersDeleteManyArgs} args - Arguments to filter Users to delete.
+     * @example
+     * // Delete a few Users
+     * const { count } = await prisma.users.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends usersDeleteManyArgs>(args?: SelectSubset<T, usersDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Users.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {usersUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Users
+     * const users = await prisma.users.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends usersUpdateManyArgs>(args: SelectSubset<T, usersUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Users and returns the data updated in the database.
+     * @param {usersUpdateManyAndReturnArgs} args - Arguments to update many Users.
+     * @example
+     * // Update many Users
+     * const users = await prisma.users.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Users and only return the `id`
+     * const usersWithIdOnly = await prisma.users.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends usersUpdateManyAndReturnArgs>(args: SelectSubset<T, usersUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Users.
+     * @param {usersUpsertArgs} args - Arguments to update or create a Users.
+     * @example
+     * // Update or create a Users
+     * const users = await prisma.users.upsert({
+     *   create: {
+     *     // ... data to create a Users
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Users we want to update
+     *   }
+     * })
+     */
+    upsert<T extends usersUpsertArgs>(args: SelectSubset<T, usersUpsertArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Users.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {usersCountArgs} args - Arguments to filter Users to count.
+     * @example
+     * // Count the number of Users
+     * const count = await prisma.users.count({
+     *   where: {
+     *     // ... the filter for the Users we want to count
+     *   }
+     * })
+    **/
+    count<T extends usersCountArgs>(
+      args?: Subset<T, usersCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UsersCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Users.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UsersAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UsersAggregateArgs>(args: Subset<T, UsersAggregateArgs>): Prisma.PrismaPromise<GetUsersAggregateType<T>>
+
+    /**
+     * Group by Users.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {usersGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends usersGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: usersGroupByArgs['orderBy'] }
+        : { orderBy?: usersGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, usersGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUsersGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the users model
+   */
+  readonly fields: usersFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for users.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__usersClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    comment_reactions<T extends users$comment_reactionsArgs<ExtArgs> = {}>(args?: Subset<T, users$comment_reactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$comment_reactionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    comments<T extends users$commentsArgs<ExtArgs> = {}>(args?: Subset<T, users$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$commentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    subscriptions_subscriptions_creator_idTousers<T extends users$subscriptions_subscriptions_creator_idTousersArgs<ExtArgs> = {}>(args?: Subset<T, users$subscriptions_subscriptions_creator_idTousersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$subscriptionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    subscriptions_subscriptions_viewer_idTousers<T extends users$subscriptions_subscriptions_viewer_idTousersArgs<ExtArgs> = {}>(args?: Subset<T, users$subscriptions_subscriptions_viewer_idTousersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$subscriptionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    video_reactions<T extends users$video_reactionsArgs<ExtArgs> = {}>(args?: Subset<T, users$video_reactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$video_reactionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    video_views<T extends users$video_viewsArgs<ExtArgs> = {}>(args?: Subset<T, users$video_viewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$video_viewsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    videos<T extends users$videosArgs<ExtArgs> = {}>(args?: Subset<T, users$videosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$videosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the users model
+   */
+  interface usersFieldRefs {
+    readonly id: FieldRef<"users", 'String'>
+    readonly clerk_user_id: FieldRef<"users", 'String'>
+    readonly channel_name: FieldRef<"users", 'String'>
+    readonly avatar_url: FieldRef<"users", 'String'>
+    readonly bio: FieldRef<"users", 'String'>
+    readonly created_at: FieldRef<"users", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * users findUnique
+   */
+  export type usersFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the users
+     */
+    select?: usersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the users
+     */
+    omit?: usersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersInclude<ExtArgs> | null
+    /**
+     * Filter, which users to fetch.
+     */
+    where: usersWhereUniqueInput
+  }
+
+  /**
+   * users findUniqueOrThrow
+   */
+  export type usersFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the users
+     */
+    select?: usersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the users
+     */
+    omit?: usersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersInclude<ExtArgs> | null
+    /**
+     * Filter, which users to fetch.
+     */
+    where: usersWhereUniqueInput
+  }
+
+  /**
+   * users findFirst
+   */
+  export type usersFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the users
+     */
+    select?: usersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the users
+     */
+    omit?: usersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersInclude<ExtArgs> | null
+    /**
+     * Filter, which users to fetch.
+     */
+    where?: usersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of users to fetch.
+     */
+    orderBy?: usersOrderByWithRelationInput | usersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for users.
+     */
+    cursor?: usersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of users.
+     */
+    distinct?: UsersScalarFieldEnum | UsersScalarFieldEnum[]
+  }
+
+  /**
+   * users findFirstOrThrow
+   */
+  export type usersFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the users
+     */
+    select?: usersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the users
+     */
+    omit?: usersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersInclude<ExtArgs> | null
+    /**
+     * Filter, which users to fetch.
+     */
+    where?: usersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of users to fetch.
+     */
+    orderBy?: usersOrderByWithRelationInput | usersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for users.
+     */
+    cursor?: usersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of users.
+     */
+    distinct?: UsersScalarFieldEnum | UsersScalarFieldEnum[]
+  }
+
+  /**
+   * users findMany
+   */
+  export type usersFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the users
+     */
+    select?: usersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the users
+     */
+    omit?: usersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersInclude<ExtArgs> | null
+    /**
+     * Filter, which users to fetch.
+     */
+    where?: usersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of users to fetch.
+     */
+    orderBy?: usersOrderByWithRelationInput | usersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing users.
+     */
+    cursor?: usersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` users.
+     */
+    skip?: number
+    distinct?: UsersScalarFieldEnum | UsersScalarFieldEnum[]
+  }
+
+  /**
+   * users create
+   */
+  export type usersCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the users
+     */
+    select?: usersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the users
+     */
+    omit?: usersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersInclude<ExtArgs> | null
+    /**
+     * The data needed to create a users.
+     */
+    data: XOR<usersCreateInput, usersUncheckedCreateInput>
+  }
+
+  /**
+   * users createMany
+   */
+  export type usersCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many users.
+     */
+    data: usersCreateManyInput | usersCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * users createManyAndReturn
+   */
+  export type usersCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the users
+     */
+    select?: usersSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the users
+     */
+    omit?: usersOmit<ExtArgs> | null
+    /**
+     * The data used to create many users.
+     */
+    data: usersCreateManyInput | usersCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * users update
+   */
+  export type usersUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the users
+     */
+    select?: usersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the users
+     */
+    omit?: usersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersInclude<ExtArgs> | null
+    /**
+     * The data needed to update a users.
+     */
+    data: XOR<usersUpdateInput, usersUncheckedUpdateInput>
+    /**
+     * Choose, which users to update.
+     */
+    where: usersWhereUniqueInput
+  }
+
+  /**
+   * users updateMany
+   */
+  export type usersUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update users.
+     */
+    data: XOR<usersUpdateManyMutationInput, usersUncheckedUpdateManyInput>
+    /**
+     * Filter which users to update
+     */
+    where?: usersWhereInput
+    /**
+     * Limit how many users to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * users updateManyAndReturn
+   */
+  export type usersUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the users
+     */
+    select?: usersSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the users
+     */
+    omit?: usersOmit<ExtArgs> | null
+    /**
+     * The data used to update users.
+     */
+    data: XOR<usersUpdateManyMutationInput, usersUncheckedUpdateManyInput>
+    /**
+     * Filter which users to update
+     */
+    where?: usersWhereInput
+    /**
+     * Limit how many users to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * users upsert
+   */
+  export type usersUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the users
+     */
+    select?: usersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the users
+     */
+    omit?: usersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersInclude<ExtArgs> | null
+    /**
+     * The filter to search for the users to update in case it exists.
+     */
+    where: usersWhereUniqueInput
+    /**
+     * In case the users found by the `where` argument doesn't exist, create a new users with this data.
+     */
+    create: XOR<usersCreateInput, usersUncheckedCreateInput>
+    /**
+     * In case the users was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<usersUpdateInput, usersUncheckedUpdateInput>
+  }
+
+  /**
+   * users delete
+   */
+  export type usersDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the users
+     */
+    select?: usersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the users
+     */
+    omit?: usersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersInclude<ExtArgs> | null
+    /**
+     * Filter which users to delete.
+     */
+    where: usersWhereUniqueInput
+  }
+
+  /**
+   * users deleteMany
+   */
+  export type usersDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which users to delete
+     */
+    where?: usersWhereInput
+    /**
+     * Limit how many users to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * users.comment_reactions
+   */
+  export type users$comment_reactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comment_reactions
+     */
+    select?: comment_reactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the comment_reactions
+     */
+    omit?: comment_reactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: comment_reactionsInclude<ExtArgs> | null
+    where?: comment_reactionsWhereInput
+    orderBy?: comment_reactionsOrderByWithRelationInput | comment_reactionsOrderByWithRelationInput[]
+    cursor?: comment_reactionsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Comment_reactionsScalarFieldEnum | Comment_reactionsScalarFieldEnum[]
+  }
+
+  /**
+   * users.comments
+   */
+  export type users$commentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comments
+     */
+    select?: commentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the comments
+     */
+    omit?: commentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: commentsInclude<ExtArgs> | null
+    where?: commentsWhereInput
+    orderBy?: commentsOrderByWithRelationInput | commentsOrderByWithRelationInput[]
+    cursor?: commentsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CommentsScalarFieldEnum | CommentsScalarFieldEnum[]
+  }
+
+  /**
+   * users.subscriptions_subscriptions_creator_idTousers
+   */
+  export type users$subscriptions_subscriptions_creator_idTousersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the subscriptions
+     */
+    select?: subscriptionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the subscriptions
+     */
+    omit?: subscriptionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: subscriptionsInclude<ExtArgs> | null
+    where?: subscriptionsWhereInput
+    orderBy?: subscriptionsOrderByWithRelationInput | subscriptionsOrderByWithRelationInput[]
+    cursor?: subscriptionsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SubscriptionsScalarFieldEnum | SubscriptionsScalarFieldEnum[]
+  }
+
+  /**
+   * users.subscriptions_subscriptions_viewer_idTousers
+   */
+  export type users$subscriptions_subscriptions_viewer_idTousersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the subscriptions
+     */
+    select?: subscriptionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the subscriptions
+     */
+    omit?: subscriptionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: subscriptionsInclude<ExtArgs> | null
+    where?: subscriptionsWhereInput
+    orderBy?: subscriptionsOrderByWithRelationInput | subscriptionsOrderByWithRelationInput[]
+    cursor?: subscriptionsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SubscriptionsScalarFieldEnum | SubscriptionsScalarFieldEnum[]
+  }
+
+  /**
+   * users.video_reactions
+   */
+  export type users$video_reactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_reactions
+     */
+    select?: video_reactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_reactions
+     */
+    omit?: video_reactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_reactionsInclude<ExtArgs> | null
+    where?: video_reactionsWhereInput
+    orderBy?: video_reactionsOrderByWithRelationInput | video_reactionsOrderByWithRelationInput[]
+    cursor?: video_reactionsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Video_reactionsScalarFieldEnum | Video_reactionsScalarFieldEnum[]
+  }
+
+  /**
+   * users.video_views
+   */
+  export type users$video_viewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_views
+     */
+    select?: video_viewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_views
+     */
+    omit?: video_viewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_viewsInclude<ExtArgs> | null
+    where?: video_viewsWhereInput
+    orderBy?: video_viewsOrderByWithRelationInput | video_viewsOrderByWithRelationInput[]
+    cursor?: video_viewsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Video_viewsScalarFieldEnum | Video_viewsScalarFieldEnum[]
+  }
+
+  /**
+   * users.videos
+   */
+  export type users$videosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos
+     */
+    select?: videosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos
+     */
+    omit?: videosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: videosInclude<ExtArgs> | null
+    where?: videosWhereInput
+    orderBy?: videosOrderByWithRelationInput | videosOrderByWithRelationInput[]
+    cursor?: videosWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VideosScalarFieldEnum | VideosScalarFieldEnum[]
+  }
+
+  /**
+   * users without action
+   */
+  export type usersDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the users
+     */
+    select?: usersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the users
+     */
+    omit?: usersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model categories
+   */
+
+  export type AggregateCategories = {
+    _count: CategoriesCountAggregateOutputType | null
+    _min: CategoriesMinAggregateOutputType | null
+    _max: CategoriesMaxAggregateOutputType | null
+  }
+
+  export type CategoriesMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    slug: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type CategoriesMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    slug: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type CategoriesCountAggregateOutputType = {
+    id: number
+    name: number
+    slug: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type CategoriesMinAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type CategoriesMaxAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type CategoriesCountAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type CategoriesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which categories to aggregate.
+     */
+    where?: categoriesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of categories to fetch.
+     */
+    orderBy?: categoriesOrderByWithRelationInput | categoriesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: categoriesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` categories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` categories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned categories
+    **/
+    _count?: true | CategoriesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CategoriesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CategoriesMaxAggregateInputType
+  }
+
+  export type GetCategoriesAggregateType<T extends CategoriesAggregateArgs> = {
+        [P in keyof T & keyof AggregateCategories]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCategories[P]>
+      : GetScalarType<T[P], AggregateCategories[P]>
+  }
+
+
+
+
+  export type categoriesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: categoriesWhereInput
+    orderBy?: categoriesOrderByWithAggregationInput | categoriesOrderByWithAggregationInput[]
+    by: CategoriesScalarFieldEnum[] | CategoriesScalarFieldEnum
+    having?: categoriesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CategoriesCountAggregateInputType | true
+    _min?: CategoriesMinAggregateInputType
+    _max?: CategoriesMaxAggregateInputType
+  }
+
+  export type CategoriesGroupByOutputType = {
+    id: string
+    name: string
+    slug: string
+    created_at: Date | null
+    updated_at: Date | null
+    _count: CategoriesCountAggregateOutputType | null
+    _min: CategoriesMinAggregateOutputType | null
+    _max: CategoriesMaxAggregateOutputType | null
+  }
+
+  type GetCategoriesGroupByPayload<T extends categoriesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CategoriesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CategoriesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CategoriesGroupByOutputType[P]>
+            : GetScalarType<T[P], CategoriesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type categoriesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    videos?: boolean | categories$videosArgs<ExtArgs>
+    _count?: boolean | CategoriesCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["categories"]>
+
+  export type categoriesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }, ExtArgs["result"]["categories"]>
+
+  export type categoriesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }, ExtArgs["result"]["categories"]>
+
+  export type categoriesSelectScalar = {
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type categoriesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "created_at" | "updated_at", ExtArgs["result"]["categories"]>
+  export type categoriesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    videos?: boolean | categories$videosArgs<ExtArgs>
+    _count?: boolean | CategoriesCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type categoriesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type categoriesIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $categoriesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "categories"
+    objects: {
+      videos: Prisma.$videosPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      slug: string
+      created_at: Date | null
+      updated_at: Date | null
+    }, ExtArgs["result"]["categories"]>
+    composites: {}
+  }
+
+  type categoriesGetPayload<S extends boolean | null | undefined | categoriesDefaultArgs> = $Result.GetResult<Prisma.$categoriesPayload, S>
+
+  type categoriesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<categoriesFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CategoriesCountAggregateInputType | true
+    }
+
+  export interface categoriesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['categories'], meta: { name: 'categories' } }
+    /**
+     * Find zero or one Categories that matches the filter.
+     * @param {categoriesFindUniqueArgs} args - Arguments to find a Categories
+     * @example
+     * // Get one Categories
+     * const categories = await prisma.categories.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends categoriesFindUniqueArgs>(args: SelectSubset<T, categoriesFindUniqueArgs<ExtArgs>>): Prisma__categoriesClient<$Result.GetResult<Prisma.$categoriesPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Categories that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {categoriesFindUniqueOrThrowArgs} args - Arguments to find a Categories
+     * @example
+     * // Get one Categories
+     * const categories = await prisma.categories.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends categoriesFindUniqueOrThrowArgs>(args: SelectSubset<T, categoriesFindUniqueOrThrowArgs<ExtArgs>>): Prisma__categoriesClient<$Result.GetResult<Prisma.$categoriesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Categories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {categoriesFindFirstArgs} args - Arguments to find a Categories
+     * @example
+     * // Get one Categories
+     * const categories = await prisma.categories.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends categoriesFindFirstArgs>(args?: SelectSubset<T, categoriesFindFirstArgs<ExtArgs>>): Prisma__categoriesClient<$Result.GetResult<Prisma.$categoriesPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Categories that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {categoriesFindFirstOrThrowArgs} args - Arguments to find a Categories
+     * @example
+     * // Get one Categories
+     * const categories = await prisma.categories.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends categoriesFindFirstOrThrowArgs>(args?: SelectSubset<T, categoriesFindFirstOrThrowArgs<ExtArgs>>): Prisma__categoriesClient<$Result.GetResult<Prisma.$categoriesPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Categories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {categoriesFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Categories
+     * const categories = await prisma.categories.findMany()
+     * 
+     * // Get first 10 Categories
+     * const categories = await prisma.categories.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const categoriesWithIdOnly = await prisma.categories.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends categoriesFindManyArgs>(args?: SelectSubset<T, categoriesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$categoriesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Categories.
+     * @param {categoriesCreateArgs} args - Arguments to create a Categories.
+     * @example
+     * // Create one Categories
+     * const Categories = await prisma.categories.create({
+     *   data: {
+     *     // ... data to create a Categories
+     *   }
+     * })
+     * 
+     */
+    create<T extends categoriesCreateArgs>(args: SelectSubset<T, categoriesCreateArgs<ExtArgs>>): Prisma__categoriesClient<$Result.GetResult<Prisma.$categoriesPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Categories.
+     * @param {categoriesCreateManyArgs} args - Arguments to create many Categories.
+     * @example
+     * // Create many Categories
+     * const categories = await prisma.categories.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends categoriesCreateManyArgs>(args?: SelectSubset<T, categoriesCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Categories and returns the data saved in the database.
+     * @param {categoriesCreateManyAndReturnArgs} args - Arguments to create many Categories.
+     * @example
+     * // Create many Categories
+     * const categories = await prisma.categories.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Categories and only return the `id`
+     * const categoriesWithIdOnly = await prisma.categories.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends categoriesCreateManyAndReturnArgs>(args?: SelectSubset<T, categoriesCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$categoriesPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Categories.
+     * @param {categoriesDeleteArgs} args - Arguments to delete one Categories.
+     * @example
+     * // Delete one Categories
+     * const Categories = await prisma.categories.delete({
+     *   where: {
+     *     // ... filter to delete one Categories
+     *   }
+     * })
+     * 
+     */
+    delete<T extends categoriesDeleteArgs>(args: SelectSubset<T, categoriesDeleteArgs<ExtArgs>>): Prisma__categoriesClient<$Result.GetResult<Prisma.$categoriesPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Categories.
+     * @param {categoriesUpdateArgs} args - Arguments to update one Categories.
+     * @example
+     * // Update one Categories
+     * const categories = await prisma.categories.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends categoriesUpdateArgs>(args: SelectSubset<T, categoriesUpdateArgs<ExtArgs>>): Prisma__categoriesClient<$Result.GetResult<Prisma.$categoriesPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Categories.
+     * @param {categoriesDeleteManyArgs} args - Arguments to filter Categories to delete.
+     * @example
+     * // Delete a few Categories
+     * const { count } = await prisma.categories.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends categoriesDeleteManyArgs>(args?: SelectSubset<T, categoriesDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Categories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {categoriesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Categories
+     * const categories = await prisma.categories.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends categoriesUpdateManyArgs>(args: SelectSubset<T, categoriesUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Categories and returns the data updated in the database.
+     * @param {categoriesUpdateManyAndReturnArgs} args - Arguments to update many Categories.
+     * @example
+     * // Update many Categories
+     * const categories = await prisma.categories.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Categories and only return the `id`
+     * const categoriesWithIdOnly = await prisma.categories.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends categoriesUpdateManyAndReturnArgs>(args: SelectSubset<T, categoriesUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$categoriesPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Categories.
+     * @param {categoriesUpsertArgs} args - Arguments to update or create a Categories.
+     * @example
+     * // Update or create a Categories
+     * const categories = await prisma.categories.upsert({
+     *   create: {
+     *     // ... data to create a Categories
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Categories we want to update
+     *   }
+     * })
+     */
+    upsert<T extends categoriesUpsertArgs>(args: SelectSubset<T, categoriesUpsertArgs<ExtArgs>>): Prisma__categoriesClient<$Result.GetResult<Prisma.$categoriesPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Categories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {categoriesCountArgs} args - Arguments to filter Categories to count.
+     * @example
+     * // Count the number of Categories
+     * const count = await prisma.categories.count({
+     *   where: {
+     *     // ... the filter for the Categories we want to count
+     *   }
+     * })
+    **/
+    count<T extends categoriesCountArgs>(
+      args?: Subset<T, categoriesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CategoriesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Categories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategoriesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CategoriesAggregateArgs>(args: Subset<T, CategoriesAggregateArgs>): Prisma.PrismaPromise<GetCategoriesAggregateType<T>>
+
+    /**
+     * Group by Categories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {categoriesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends categoriesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: categoriesGroupByArgs['orderBy'] }
+        : { orderBy?: categoriesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, categoriesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCategoriesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the categories model
+   */
+  readonly fields: categoriesFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for categories.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__categoriesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    videos<T extends categories$videosArgs<ExtArgs> = {}>(args?: Subset<T, categories$videosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$videosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the categories model
+   */
+  interface categoriesFieldRefs {
+    readonly id: FieldRef<"categories", 'String'>
+    readonly name: FieldRef<"categories", 'String'>
+    readonly slug: FieldRef<"categories", 'String'>
+    readonly created_at: FieldRef<"categories", 'DateTime'>
+    readonly updated_at: FieldRef<"categories", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * categories findUnique
+   */
+  export type categoriesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the categories
+     */
+    select?: categoriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the categories
+     */
+    omit?: categoriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: categoriesInclude<ExtArgs> | null
+    /**
+     * Filter, which categories to fetch.
+     */
+    where: categoriesWhereUniqueInput
+  }
+
+  /**
+   * categories findUniqueOrThrow
+   */
+  export type categoriesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the categories
+     */
+    select?: categoriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the categories
+     */
+    omit?: categoriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: categoriesInclude<ExtArgs> | null
+    /**
+     * Filter, which categories to fetch.
+     */
+    where: categoriesWhereUniqueInput
+  }
+
+  /**
+   * categories findFirst
+   */
+  export type categoriesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the categories
+     */
+    select?: categoriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the categories
+     */
+    omit?: categoriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: categoriesInclude<ExtArgs> | null
+    /**
+     * Filter, which categories to fetch.
+     */
+    where?: categoriesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of categories to fetch.
+     */
+    orderBy?: categoriesOrderByWithRelationInput | categoriesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for categories.
+     */
+    cursor?: categoriesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` categories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` categories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of categories.
+     */
+    distinct?: CategoriesScalarFieldEnum | CategoriesScalarFieldEnum[]
+  }
+
+  /**
+   * categories findFirstOrThrow
+   */
+  export type categoriesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the categories
+     */
+    select?: categoriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the categories
+     */
+    omit?: categoriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: categoriesInclude<ExtArgs> | null
+    /**
+     * Filter, which categories to fetch.
+     */
+    where?: categoriesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of categories to fetch.
+     */
+    orderBy?: categoriesOrderByWithRelationInput | categoriesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for categories.
+     */
+    cursor?: categoriesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` categories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` categories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of categories.
+     */
+    distinct?: CategoriesScalarFieldEnum | CategoriesScalarFieldEnum[]
+  }
+
+  /**
+   * categories findMany
+   */
+  export type categoriesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the categories
+     */
+    select?: categoriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the categories
+     */
+    omit?: categoriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: categoriesInclude<ExtArgs> | null
+    /**
+     * Filter, which categories to fetch.
+     */
+    where?: categoriesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of categories to fetch.
+     */
+    orderBy?: categoriesOrderByWithRelationInput | categoriesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing categories.
+     */
+    cursor?: categoriesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` categories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` categories.
+     */
+    skip?: number
+    distinct?: CategoriesScalarFieldEnum | CategoriesScalarFieldEnum[]
+  }
+
+  /**
+   * categories create
+   */
+  export type categoriesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the categories
+     */
+    select?: categoriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the categories
+     */
+    omit?: categoriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: categoriesInclude<ExtArgs> | null
+    /**
+     * The data needed to create a categories.
+     */
+    data: XOR<categoriesCreateInput, categoriesUncheckedCreateInput>
+  }
+
+  /**
+   * categories createMany
+   */
+  export type categoriesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many categories.
+     */
+    data: categoriesCreateManyInput | categoriesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * categories createManyAndReturn
+   */
+  export type categoriesCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the categories
+     */
+    select?: categoriesSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the categories
+     */
+    omit?: categoriesOmit<ExtArgs> | null
+    /**
+     * The data used to create many categories.
+     */
+    data: categoriesCreateManyInput | categoriesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * categories update
+   */
+  export type categoriesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the categories
+     */
+    select?: categoriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the categories
+     */
+    omit?: categoriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: categoriesInclude<ExtArgs> | null
+    /**
+     * The data needed to update a categories.
+     */
+    data: XOR<categoriesUpdateInput, categoriesUncheckedUpdateInput>
+    /**
+     * Choose, which categories to update.
+     */
+    where: categoriesWhereUniqueInput
+  }
+
+  /**
+   * categories updateMany
+   */
+  export type categoriesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update categories.
+     */
+    data: XOR<categoriesUpdateManyMutationInput, categoriesUncheckedUpdateManyInput>
+    /**
+     * Filter which categories to update
+     */
+    where?: categoriesWhereInput
+    /**
+     * Limit how many categories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * categories updateManyAndReturn
+   */
+  export type categoriesUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the categories
+     */
+    select?: categoriesSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the categories
+     */
+    omit?: categoriesOmit<ExtArgs> | null
+    /**
+     * The data used to update categories.
+     */
+    data: XOR<categoriesUpdateManyMutationInput, categoriesUncheckedUpdateManyInput>
+    /**
+     * Filter which categories to update
+     */
+    where?: categoriesWhereInput
+    /**
+     * Limit how many categories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * categories upsert
+   */
+  export type categoriesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the categories
+     */
+    select?: categoriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the categories
+     */
+    omit?: categoriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: categoriesInclude<ExtArgs> | null
+    /**
+     * The filter to search for the categories to update in case it exists.
+     */
+    where: categoriesWhereUniqueInput
+    /**
+     * In case the categories found by the `where` argument doesn't exist, create a new categories with this data.
+     */
+    create: XOR<categoriesCreateInput, categoriesUncheckedCreateInput>
+    /**
+     * In case the categories was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<categoriesUpdateInput, categoriesUncheckedUpdateInput>
+  }
+
+  /**
+   * categories delete
+   */
+  export type categoriesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the categories
+     */
+    select?: categoriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the categories
+     */
+    omit?: categoriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: categoriesInclude<ExtArgs> | null
+    /**
+     * Filter which categories to delete.
+     */
+    where: categoriesWhereUniqueInput
+  }
+
+  /**
+   * categories deleteMany
+   */
+  export type categoriesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which categories to delete
+     */
+    where?: categoriesWhereInput
+    /**
+     * Limit how many categories to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * categories.videos
+   */
+  export type categories$videosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos
+     */
+    select?: videosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos
+     */
+    omit?: videosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: videosInclude<ExtArgs> | null
+    where?: videosWhereInput
+    orderBy?: videosOrderByWithRelationInput | videosOrderByWithRelationInput[]
+    cursor?: videosWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VideosScalarFieldEnum | VideosScalarFieldEnum[]
+  }
+
+  /**
+   * categories without action
+   */
+  export type categoriesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the categories
+     */
+    select?: categoriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the categories
+     */
+    omit?: categoriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: categoriesInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model videos
+   */
+
+  export type AggregateVideos = {
+    _count: VideosCountAggregateOutputType | null
+    _min: VideosMinAggregateOutputType | null
+    _max: VideosMaxAggregateOutputType | null
+  }
+
+  export type VideosMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    mux_status: string | null
+    mux_asset_id: string | null
+    mux_upload_id: string | null
+    mux_playback_id: string | null
+    mux_track_id: string | null
+    mux_track_status: string | null
+    user_id: string | null
+    category_id: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type VideosMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    mux_status: string | null
+    mux_asset_id: string | null
+    mux_upload_id: string | null
+    mux_playback_id: string | null
+    mux_track_id: string | null
+    mux_track_status: string | null
+    user_id: string | null
+    category_id: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type VideosCountAggregateOutputType = {
+    id: number
+    title: number
+    description: number
+    mux_status: number
+    mux_asset_id: number
+    mux_upload_id: number
+    mux_playback_id: number
+    mux_track_id: number
+    mux_track_status: number
+    user_id: number
+    category_id: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type VideosMinAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    mux_status?: true
+    mux_asset_id?: true
+    mux_upload_id?: true
+    mux_playback_id?: true
+    mux_track_id?: true
+    mux_track_status?: true
+    user_id?: true
+    category_id?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type VideosMaxAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    mux_status?: true
+    mux_asset_id?: true
+    mux_upload_id?: true
+    mux_playback_id?: true
+    mux_track_id?: true
+    mux_track_status?: true
+    user_id?: true
+    category_id?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type VideosCountAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    mux_status?: true
+    mux_asset_id?: true
+    mux_upload_id?: true
+    mux_playback_id?: true
+    mux_track_id?: true
+    mux_track_status?: true
+    user_id?: true
+    category_id?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type VideosAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which videos to aggregate.
+     */
+    where?: videosWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of videos to fetch.
+     */
+    orderBy?: videosOrderByWithRelationInput | videosOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: videosWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` videos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` videos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned videos
+    **/
+    _count?: true | VideosCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: VideosMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: VideosMaxAggregateInputType
+  }
+
+  export type GetVideosAggregateType<T extends VideosAggregateArgs> = {
+        [P in keyof T & keyof AggregateVideos]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateVideos[P]>
+      : GetScalarType<T[P], AggregateVideos[P]>
+  }
+
+
+
+
+  export type videosGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: videosWhereInput
+    orderBy?: videosOrderByWithAggregationInput | videosOrderByWithAggregationInput[]
+    by: VideosScalarFieldEnum[] | VideosScalarFieldEnum
+    having?: videosScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: VideosCountAggregateInputType | true
+    _min?: VideosMinAggregateInputType
+    _max?: VideosMaxAggregateInputType
+  }
+
+  export type VideosGroupByOutputType = {
+    id: string
+    title: string
+    description: string | null
+    mux_status: string | null
+    mux_asset_id: string | null
+    mux_upload_id: string | null
+    mux_playback_id: string | null
+    mux_track_id: string | null
+    mux_track_status: string | null
+    user_id: string
+    category_id: string | null
+    created_at: Date | null
+    updated_at: Date | null
+    _count: VideosCountAggregateOutputType | null
+    _min: VideosMinAggregateOutputType | null
+    _max: VideosMaxAggregateOutputType | null
+  }
+
+  type GetVideosGroupByPayload<T extends videosGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<VideosGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof VideosGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], VideosGroupByOutputType[P]>
+            : GetScalarType<T[P], VideosGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type videosSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    mux_status?: boolean
+    mux_asset_id?: boolean
+    mux_upload_id?: boolean
+    mux_playback_id?: boolean
+    mux_track_id?: boolean
+    mux_track_status?: boolean
+    user_id?: boolean
+    category_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    comments?: boolean | videos$commentsArgs<ExtArgs>
+    video_reactions?: boolean | videos$video_reactionsArgs<ExtArgs>
+    video_views?: boolean | videos$video_viewsArgs<ExtArgs>
+    categories?: boolean | videos$categoriesArgs<ExtArgs>
+    users?: boolean | usersDefaultArgs<ExtArgs>
+    _count?: boolean | VideosCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["videos"]>
+
+  export type videosSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    mux_status?: boolean
+    mux_asset_id?: boolean
+    mux_upload_id?: boolean
+    mux_playback_id?: boolean
+    mux_track_id?: boolean
+    mux_track_status?: boolean
+    user_id?: boolean
+    category_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    categories?: boolean | videos$categoriesArgs<ExtArgs>
+    users?: boolean | usersDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["videos"]>
+
+  export type videosSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    mux_status?: boolean
+    mux_asset_id?: boolean
+    mux_upload_id?: boolean
+    mux_playback_id?: boolean
+    mux_track_id?: boolean
+    mux_track_status?: boolean
+    user_id?: boolean
+    category_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    categories?: boolean | videos$categoriesArgs<ExtArgs>
+    users?: boolean | usersDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["videos"]>
+
+  export type videosSelectScalar = {
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    mux_status?: boolean
+    mux_asset_id?: boolean
+    mux_upload_id?: boolean
+    mux_playback_id?: boolean
+    mux_track_id?: boolean
+    mux_track_status?: boolean
+    user_id?: boolean
+    category_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type videosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "mux_status" | "mux_asset_id" | "mux_upload_id" | "mux_playback_id" | "mux_track_id" | "mux_track_status" | "user_id" | "category_id" | "created_at" | "updated_at", ExtArgs["result"]["videos"]>
+  export type videosInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    comments?: boolean | videos$commentsArgs<ExtArgs>
+    video_reactions?: boolean | videos$video_reactionsArgs<ExtArgs>
+    video_views?: boolean | videos$video_viewsArgs<ExtArgs>
+    categories?: boolean | videos$categoriesArgs<ExtArgs>
+    users?: boolean | usersDefaultArgs<ExtArgs>
+    _count?: boolean | VideosCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type videosIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    categories?: boolean | videos$categoriesArgs<ExtArgs>
+    users?: boolean | usersDefaultArgs<ExtArgs>
+  }
+  export type videosIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    categories?: boolean | videos$categoriesArgs<ExtArgs>
+    users?: boolean | usersDefaultArgs<ExtArgs>
+  }
+
+  export type $videosPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "videos"
+    objects: {
+      comments: Prisma.$commentsPayload<ExtArgs>[]
+      video_reactions: Prisma.$video_reactionsPayload<ExtArgs>[]
+      video_views: Prisma.$video_viewsPayload<ExtArgs>[]
+      categories: Prisma.$categoriesPayload<ExtArgs> | null
+      users: Prisma.$usersPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      description: string | null
+      mux_status: string | null
+      mux_asset_id: string | null
+      mux_upload_id: string | null
+      mux_playback_id: string | null
+      mux_track_id: string | null
+      mux_track_status: string | null
+      user_id: string
+      category_id: string | null
+      created_at: Date | null
+      updated_at: Date | null
+    }, ExtArgs["result"]["videos"]>
+    composites: {}
+  }
+
+  type videosGetPayload<S extends boolean | null | undefined | videosDefaultArgs> = $Result.GetResult<Prisma.$videosPayload, S>
+
+  type videosCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<videosFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: VideosCountAggregateInputType | true
+    }
+
+  export interface videosDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['videos'], meta: { name: 'videos' } }
+    /**
+     * Find zero or one Videos that matches the filter.
+     * @param {videosFindUniqueArgs} args - Arguments to find a Videos
+     * @example
+     * // Get one Videos
+     * const videos = await prisma.videos.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends videosFindUniqueArgs>(args: SelectSubset<T, videosFindUniqueArgs<ExtArgs>>): Prisma__videosClient<$Result.GetResult<Prisma.$videosPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Videos that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {videosFindUniqueOrThrowArgs} args - Arguments to find a Videos
+     * @example
+     * // Get one Videos
+     * const videos = await prisma.videos.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends videosFindUniqueOrThrowArgs>(args: SelectSubset<T, videosFindUniqueOrThrowArgs<ExtArgs>>): Prisma__videosClient<$Result.GetResult<Prisma.$videosPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Videos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {videosFindFirstArgs} args - Arguments to find a Videos
+     * @example
+     * // Get one Videos
+     * const videos = await prisma.videos.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends videosFindFirstArgs>(args?: SelectSubset<T, videosFindFirstArgs<ExtArgs>>): Prisma__videosClient<$Result.GetResult<Prisma.$videosPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Videos that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {videosFindFirstOrThrowArgs} args - Arguments to find a Videos
+     * @example
+     * // Get one Videos
+     * const videos = await prisma.videos.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends videosFindFirstOrThrowArgs>(args?: SelectSubset<T, videosFindFirstOrThrowArgs<ExtArgs>>): Prisma__videosClient<$Result.GetResult<Prisma.$videosPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Videos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {videosFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Videos
+     * const videos = await prisma.videos.findMany()
+     * 
+     * // Get first 10 Videos
+     * const videos = await prisma.videos.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const videosWithIdOnly = await prisma.videos.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends videosFindManyArgs>(args?: SelectSubset<T, videosFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$videosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Videos.
+     * @param {videosCreateArgs} args - Arguments to create a Videos.
+     * @example
+     * // Create one Videos
+     * const Videos = await prisma.videos.create({
+     *   data: {
+     *     // ... data to create a Videos
+     *   }
+     * })
+     * 
+     */
+    create<T extends videosCreateArgs>(args: SelectSubset<T, videosCreateArgs<ExtArgs>>): Prisma__videosClient<$Result.GetResult<Prisma.$videosPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Videos.
+     * @param {videosCreateManyArgs} args - Arguments to create many Videos.
+     * @example
+     * // Create many Videos
+     * const videos = await prisma.videos.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends videosCreateManyArgs>(args?: SelectSubset<T, videosCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Videos and returns the data saved in the database.
+     * @param {videosCreateManyAndReturnArgs} args - Arguments to create many Videos.
+     * @example
+     * // Create many Videos
+     * const videos = await prisma.videos.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Videos and only return the `id`
+     * const videosWithIdOnly = await prisma.videos.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends videosCreateManyAndReturnArgs>(args?: SelectSubset<T, videosCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$videosPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Videos.
+     * @param {videosDeleteArgs} args - Arguments to delete one Videos.
+     * @example
+     * // Delete one Videos
+     * const Videos = await prisma.videos.delete({
+     *   where: {
+     *     // ... filter to delete one Videos
+     *   }
+     * })
+     * 
+     */
+    delete<T extends videosDeleteArgs>(args: SelectSubset<T, videosDeleteArgs<ExtArgs>>): Prisma__videosClient<$Result.GetResult<Prisma.$videosPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Videos.
+     * @param {videosUpdateArgs} args - Arguments to update one Videos.
+     * @example
+     * // Update one Videos
+     * const videos = await prisma.videos.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends videosUpdateArgs>(args: SelectSubset<T, videosUpdateArgs<ExtArgs>>): Prisma__videosClient<$Result.GetResult<Prisma.$videosPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Videos.
+     * @param {videosDeleteManyArgs} args - Arguments to filter Videos to delete.
+     * @example
+     * // Delete a few Videos
+     * const { count } = await prisma.videos.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends videosDeleteManyArgs>(args?: SelectSubset<T, videosDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Videos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {videosUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Videos
+     * const videos = await prisma.videos.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends videosUpdateManyArgs>(args: SelectSubset<T, videosUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Videos and returns the data updated in the database.
+     * @param {videosUpdateManyAndReturnArgs} args - Arguments to update many Videos.
+     * @example
+     * // Update many Videos
+     * const videos = await prisma.videos.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Videos and only return the `id`
+     * const videosWithIdOnly = await prisma.videos.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends videosUpdateManyAndReturnArgs>(args: SelectSubset<T, videosUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$videosPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Videos.
+     * @param {videosUpsertArgs} args - Arguments to update or create a Videos.
+     * @example
+     * // Update or create a Videos
+     * const videos = await prisma.videos.upsert({
+     *   create: {
+     *     // ... data to create a Videos
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Videos we want to update
+     *   }
+     * })
+     */
+    upsert<T extends videosUpsertArgs>(args: SelectSubset<T, videosUpsertArgs<ExtArgs>>): Prisma__videosClient<$Result.GetResult<Prisma.$videosPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Videos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {videosCountArgs} args - Arguments to filter Videos to count.
+     * @example
+     * // Count the number of Videos
+     * const count = await prisma.videos.count({
+     *   where: {
+     *     // ... the filter for the Videos we want to count
+     *   }
+     * })
+    **/
+    count<T extends videosCountArgs>(
+      args?: Subset<T, videosCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], VideosCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Videos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideosAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends VideosAggregateArgs>(args: Subset<T, VideosAggregateArgs>): Prisma.PrismaPromise<GetVideosAggregateType<T>>
+
+    /**
+     * Group by Videos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {videosGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends videosGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: videosGroupByArgs['orderBy'] }
+        : { orderBy?: videosGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, videosGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVideosGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the videos model
+   */
+  readonly fields: videosFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for videos.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__videosClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    comments<T extends videos$commentsArgs<ExtArgs> = {}>(args?: Subset<T, videos$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$commentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    video_reactions<T extends videos$video_reactionsArgs<ExtArgs> = {}>(args?: Subset<T, videos$video_reactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$video_reactionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    video_views<T extends videos$video_viewsArgs<ExtArgs> = {}>(args?: Subset<T, videos$video_viewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$video_viewsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    categories<T extends videos$categoriesArgs<ExtArgs> = {}>(args?: Subset<T, videos$categoriesArgs<ExtArgs>>): Prisma__categoriesClient<$Result.GetResult<Prisma.$categoriesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    users<T extends usersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, usersDefaultArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the videos model
+   */
+  interface videosFieldRefs {
+    readonly id: FieldRef<"videos", 'String'>
+    readonly title: FieldRef<"videos", 'String'>
+    readonly description: FieldRef<"videos", 'String'>
+    readonly mux_status: FieldRef<"videos", 'String'>
+    readonly mux_asset_id: FieldRef<"videos", 'String'>
+    readonly mux_upload_id: FieldRef<"videos", 'String'>
+    readonly mux_playback_id: FieldRef<"videos", 'String'>
+    readonly mux_track_id: FieldRef<"videos", 'String'>
+    readonly mux_track_status: FieldRef<"videos", 'String'>
+    readonly user_id: FieldRef<"videos", 'String'>
+    readonly category_id: FieldRef<"videos", 'String'>
+    readonly created_at: FieldRef<"videos", 'DateTime'>
+    readonly updated_at: FieldRef<"videos", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * videos findUnique
+   */
+  export type videosFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos
+     */
+    select?: videosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos
+     */
+    omit?: videosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: videosInclude<ExtArgs> | null
+    /**
+     * Filter, which videos to fetch.
+     */
+    where: videosWhereUniqueInput
+  }
+
+  /**
+   * videos findUniqueOrThrow
+   */
+  export type videosFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos
+     */
+    select?: videosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos
+     */
+    omit?: videosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: videosInclude<ExtArgs> | null
+    /**
+     * Filter, which videos to fetch.
+     */
+    where: videosWhereUniqueInput
+  }
+
+  /**
+   * videos findFirst
+   */
+  export type videosFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos
+     */
+    select?: videosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos
+     */
+    omit?: videosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: videosInclude<ExtArgs> | null
+    /**
+     * Filter, which videos to fetch.
+     */
+    where?: videosWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of videos to fetch.
+     */
+    orderBy?: videosOrderByWithRelationInput | videosOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for videos.
+     */
+    cursor?: videosWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` videos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` videos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of videos.
+     */
+    distinct?: VideosScalarFieldEnum | VideosScalarFieldEnum[]
+  }
+
+  /**
+   * videos findFirstOrThrow
+   */
+  export type videosFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos
+     */
+    select?: videosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos
+     */
+    omit?: videosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: videosInclude<ExtArgs> | null
+    /**
+     * Filter, which videos to fetch.
+     */
+    where?: videosWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of videos to fetch.
+     */
+    orderBy?: videosOrderByWithRelationInput | videosOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for videos.
+     */
+    cursor?: videosWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` videos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` videos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of videos.
+     */
+    distinct?: VideosScalarFieldEnum | VideosScalarFieldEnum[]
+  }
+
+  /**
+   * videos findMany
+   */
+  export type videosFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos
+     */
+    select?: videosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos
+     */
+    omit?: videosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: videosInclude<ExtArgs> | null
+    /**
+     * Filter, which videos to fetch.
+     */
+    where?: videosWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of videos to fetch.
+     */
+    orderBy?: videosOrderByWithRelationInput | videosOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing videos.
+     */
+    cursor?: videosWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` videos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` videos.
+     */
+    skip?: number
+    distinct?: VideosScalarFieldEnum | VideosScalarFieldEnum[]
+  }
+
+  /**
+   * videos create
+   */
+  export type videosCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos
+     */
+    select?: videosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos
+     */
+    omit?: videosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: videosInclude<ExtArgs> | null
+    /**
+     * The data needed to create a videos.
+     */
+    data: XOR<videosCreateInput, videosUncheckedCreateInput>
+  }
+
+  /**
+   * videos createMany
+   */
+  export type videosCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many videos.
+     */
+    data: videosCreateManyInput | videosCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * videos createManyAndReturn
+   */
+  export type videosCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos
+     */
+    select?: videosSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos
+     */
+    omit?: videosOmit<ExtArgs> | null
+    /**
+     * The data used to create many videos.
+     */
+    data: videosCreateManyInput | videosCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: videosIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * videos update
+   */
+  export type videosUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos
+     */
+    select?: videosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos
+     */
+    omit?: videosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: videosInclude<ExtArgs> | null
+    /**
+     * The data needed to update a videos.
+     */
+    data: XOR<videosUpdateInput, videosUncheckedUpdateInput>
+    /**
+     * Choose, which videos to update.
+     */
+    where: videosWhereUniqueInput
+  }
+
+  /**
+   * videos updateMany
+   */
+  export type videosUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update videos.
+     */
+    data: XOR<videosUpdateManyMutationInput, videosUncheckedUpdateManyInput>
+    /**
+     * Filter which videos to update
+     */
+    where?: videosWhereInput
+    /**
+     * Limit how many videos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * videos updateManyAndReturn
+   */
+  export type videosUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos
+     */
+    select?: videosSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos
+     */
+    omit?: videosOmit<ExtArgs> | null
+    /**
+     * The data used to update videos.
+     */
+    data: XOR<videosUpdateManyMutationInput, videosUncheckedUpdateManyInput>
+    /**
+     * Filter which videos to update
+     */
+    where?: videosWhereInput
+    /**
+     * Limit how many videos to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: videosIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * videos upsert
+   */
+  export type videosUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos
+     */
+    select?: videosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos
+     */
+    omit?: videosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: videosInclude<ExtArgs> | null
+    /**
+     * The filter to search for the videos to update in case it exists.
+     */
+    where: videosWhereUniqueInput
+    /**
+     * In case the videos found by the `where` argument doesn't exist, create a new videos with this data.
+     */
+    create: XOR<videosCreateInput, videosUncheckedCreateInput>
+    /**
+     * In case the videos was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<videosUpdateInput, videosUncheckedUpdateInput>
+  }
+
+  /**
+   * videos delete
+   */
+  export type videosDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos
+     */
+    select?: videosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos
+     */
+    omit?: videosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: videosInclude<ExtArgs> | null
+    /**
+     * Filter which videos to delete.
+     */
+    where: videosWhereUniqueInput
+  }
+
+  /**
+   * videos deleteMany
+   */
+  export type videosDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which videos to delete
+     */
+    where?: videosWhereInput
+    /**
+     * Limit how many videos to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * videos.comments
+   */
+  export type videos$commentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comments
+     */
+    select?: commentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the comments
+     */
+    omit?: commentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: commentsInclude<ExtArgs> | null
+    where?: commentsWhereInput
+    orderBy?: commentsOrderByWithRelationInput | commentsOrderByWithRelationInput[]
+    cursor?: commentsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CommentsScalarFieldEnum | CommentsScalarFieldEnum[]
+  }
+
+  /**
+   * videos.video_reactions
+   */
+  export type videos$video_reactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_reactions
+     */
+    select?: video_reactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_reactions
+     */
+    omit?: video_reactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_reactionsInclude<ExtArgs> | null
+    where?: video_reactionsWhereInput
+    orderBy?: video_reactionsOrderByWithRelationInput | video_reactionsOrderByWithRelationInput[]
+    cursor?: video_reactionsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Video_reactionsScalarFieldEnum | Video_reactionsScalarFieldEnum[]
+  }
+
+  /**
+   * videos.video_views
+   */
+  export type videos$video_viewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_views
+     */
+    select?: video_viewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_views
+     */
+    omit?: video_viewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_viewsInclude<ExtArgs> | null
+    where?: video_viewsWhereInput
+    orderBy?: video_viewsOrderByWithRelationInput | video_viewsOrderByWithRelationInput[]
+    cursor?: video_viewsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Video_viewsScalarFieldEnum | Video_viewsScalarFieldEnum[]
+  }
+
+  /**
+   * videos.categories
+   */
+  export type videos$categoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the categories
+     */
+    select?: categoriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the categories
+     */
+    omit?: categoriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: categoriesInclude<ExtArgs> | null
+    where?: categoriesWhereInput
+  }
+
+  /**
+   * videos without action
+   */
+  export type videosDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos
+     */
+    select?: videosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos
+     */
+    omit?: videosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: videosInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model comment_reactions
+   */
+
+  export type AggregateComment_reactions = {
+    _count: Comment_reactionsCountAggregateOutputType | null
+    _min: Comment_reactionsMinAggregateOutputType | null
+    _max: Comment_reactionsMaxAggregateOutputType | null
+  }
+
+  export type Comment_reactionsMinAggregateOutputType = {
+    id: string | null
+    user_id: string | null
+    comment_id: string | null
+    type: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type Comment_reactionsMaxAggregateOutputType = {
+    id: string | null
+    user_id: string | null
+    comment_id: string | null
+    type: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type Comment_reactionsCountAggregateOutputType = {
+    id: number
+    user_id: number
+    comment_id: number
+    type: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type Comment_reactionsMinAggregateInputType = {
+    id?: true
+    user_id?: true
+    comment_id?: true
+    type?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type Comment_reactionsMaxAggregateInputType = {
+    id?: true
+    user_id?: true
+    comment_id?: true
+    type?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type Comment_reactionsCountAggregateInputType = {
+    id?: true
+    user_id?: true
+    comment_id?: true
+    type?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type Comment_reactionsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which comment_reactions to aggregate.
+     */
+    where?: comment_reactionsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of comment_reactions to fetch.
+     */
+    orderBy?: comment_reactionsOrderByWithRelationInput | comment_reactionsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: comment_reactionsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` comment_reactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` comment_reactions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned comment_reactions
+    **/
+    _count?: true | Comment_reactionsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Comment_reactionsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Comment_reactionsMaxAggregateInputType
+  }
+
+  export type GetComment_reactionsAggregateType<T extends Comment_reactionsAggregateArgs> = {
+        [P in keyof T & keyof AggregateComment_reactions]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateComment_reactions[P]>
+      : GetScalarType<T[P], AggregateComment_reactions[P]>
+  }
+
+
+
+
+  export type comment_reactionsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: comment_reactionsWhereInput
+    orderBy?: comment_reactionsOrderByWithAggregationInput | comment_reactionsOrderByWithAggregationInput[]
+    by: Comment_reactionsScalarFieldEnum[] | Comment_reactionsScalarFieldEnum
+    having?: comment_reactionsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Comment_reactionsCountAggregateInputType | true
+    _min?: Comment_reactionsMinAggregateInputType
+    _max?: Comment_reactionsMaxAggregateInputType
+  }
+
+  export type Comment_reactionsGroupByOutputType = {
+    id: string
+    user_id: string
+    comment_id: string
+    type: string
+    created_at: Date
+    updated_at: Date
+    _count: Comment_reactionsCountAggregateOutputType | null
+    _min: Comment_reactionsMinAggregateOutputType | null
+    _max: Comment_reactionsMaxAggregateOutputType | null
+  }
+
+  type GetComment_reactionsGroupByPayload<T extends comment_reactionsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Comment_reactionsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Comment_reactionsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Comment_reactionsGroupByOutputType[P]>
+            : GetScalarType<T[P], Comment_reactionsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type comment_reactionsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    comment_id?: boolean
+    type?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    comments?: boolean | commentsDefaultArgs<ExtArgs>
+    users?: boolean | usersDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["comment_reactions"]>
+
+  export type comment_reactionsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    comment_id?: boolean
+    type?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    comments?: boolean | commentsDefaultArgs<ExtArgs>
+    users?: boolean | usersDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["comment_reactions"]>
+
+  export type comment_reactionsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    comment_id?: boolean
+    type?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    comments?: boolean | commentsDefaultArgs<ExtArgs>
+    users?: boolean | usersDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["comment_reactions"]>
+
+  export type comment_reactionsSelectScalar = {
+    id?: boolean
+    user_id?: boolean
+    comment_id?: boolean
+    type?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type comment_reactionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "comment_id" | "type" | "created_at" | "updated_at", ExtArgs["result"]["comment_reactions"]>
+  export type comment_reactionsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    comments?: boolean | commentsDefaultArgs<ExtArgs>
+    users?: boolean | usersDefaultArgs<ExtArgs>
+  }
+  export type comment_reactionsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    comments?: boolean | commentsDefaultArgs<ExtArgs>
+    users?: boolean | usersDefaultArgs<ExtArgs>
+  }
+  export type comment_reactionsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    comments?: boolean | commentsDefaultArgs<ExtArgs>
+    users?: boolean | usersDefaultArgs<ExtArgs>
+  }
+
+  export type $comment_reactionsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "comment_reactions"
+    objects: {
+      comments: Prisma.$commentsPayload<ExtArgs>
+      users: Prisma.$usersPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      user_id: string
+      comment_id: string
+      type: string
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["comment_reactions"]>
+    composites: {}
+  }
+
+  type comment_reactionsGetPayload<S extends boolean | null | undefined | comment_reactionsDefaultArgs> = $Result.GetResult<Prisma.$comment_reactionsPayload, S>
+
+  type comment_reactionsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<comment_reactionsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Comment_reactionsCountAggregateInputType | true
+    }
+
+  export interface comment_reactionsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['comment_reactions'], meta: { name: 'comment_reactions' } }
+    /**
+     * Find zero or one Comment_reactions that matches the filter.
+     * @param {comment_reactionsFindUniqueArgs} args - Arguments to find a Comment_reactions
+     * @example
+     * // Get one Comment_reactions
+     * const comment_reactions = await prisma.comment_reactions.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends comment_reactionsFindUniqueArgs>(args: SelectSubset<T, comment_reactionsFindUniqueArgs<ExtArgs>>): Prisma__comment_reactionsClient<$Result.GetResult<Prisma.$comment_reactionsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Comment_reactions that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {comment_reactionsFindUniqueOrThrowArgs} args - Arguments to find a Comment_reactions
+     * @example
+     * // Get one Comment_reactions
+     * const comment_reactions = await prisma.comment_reactions.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends comment_reactionsFindUniqueOrThrowArgs>(args: SelectSubset<T, comment_reactionsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__comment_reactionsClient<$Result.GetResult<Prisma.$comment_reactionsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Comment_reactions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {comment_reactionsFindFirstArgs} args - Arguments to find a Comment_reactions
+     * @example
+     * // Get one Comment_reactions
+     * const comment_reactions = await prisma.comment_reactions.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends comment_reactionsFindFirstArgs>(args?: SelectSubset<T, comment_reactionsFindFirstArgs<ExtArgs>>): Prisma__comment_reactionsClient<$Result.GetResult<Prisma.$comment_reactionsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Comment_reactions that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {comment_reactionsFindFirstOrThrowArgs} args - Arguments to find a Comment_reactions
+     * @example
+     * // Get one Comment_reactions
+     * const comment_reactions = await prisma.comment_reactions.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends comment_reactionsFindFirstOrThrowArgs>(args?: SelectSubset<T, comment_reactionsFindFirstOrThrowArgs<ExtArgs>>): Prisma__comment_reactionsClient<$Result.GetResult<Prisma.$comment_reactionsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Comment_reactions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {comment_reactionsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Comment_reactions
+     * const comment_reactions = await prisma.comment_reactions.findMany()
+     * 
+     * // Get first 10 Comment_reactions
+     * const comment_reactions = await prisma.comment_reactions.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const comment_reactionsWithIdOnly = await prisma.comment_reactions.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends comment_reactionsFindManyArgs>(args?: SelectSubset<T, comment_reactionsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$comment_reactionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Comment_reactions.
+     * @param {comment_reactionsCreateArgs} args - Arguments to create a Comment_reactions.
+     * @example
+     * // Create one Comment_reactions
+     * const Comment_reactions = await prisma.comment_reactions.create({
+     *   data: {
+     *     // ... data to create a Comment_reactions
+     *   }
+     * })
+     * 
+     */
+    create<T extends comment_reactionsCreateArgs>(args: SelectSubset<T, comment_reactionsCreateArgs<ExtArgs>>): Prisma__comment_reactionsClient<$Result.GetResult<Prisma.$comment_reactionsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Comment_reactions.
+     * @param {comment_reactionsCreateManyArgs} args - Arguments to create many Comment_reactions.
+     * @example
+     * // Create many Comment_reactions
+     * const comment_reactions = await prisma.comment_reactions.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends comment_reactionsCreateManyArgs>(args?: SelectSubset<T, comment_reactionsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Comment_reactions and returns the data saved in the database.
+     * @param {comment_reactionsCreateManyAndReturnArgs} args - Arguments to create many Comment_reactions.
+     * @example
+     * // Create many Comment_reactions
+     * const comment_reactions = await prisma.comment_reactions.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Comment_reactions and only return the `id`
+     * const comment_reactionsWithIdOnly = await prisma.comment_reactions.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends comment_reactionsCreateManyAndReturnArgs>(args?: SelectSubset<T, comment_reactionsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$comment_reactionsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Comment_reactions.
+     * @param {comment_reactionsDeleteArgs} args - Arguments to delete one Comment_reactions.
+     * @example
+     * // Delete one Comment_reactions
+     * const Comment_reactions = await prisma.comment_reactions.delete({
+     *   where: {
+     *     // ... filter to delete one Comment_reactions
+     *   }
+     * })
+     * 
+     */
+    delete<T extends comment_reactionsDeleteArgs>(args: SelectSubset<T, comment_reactionsDeleteArgs<ExtArgs>>): Prisma__comment_reactionsClient<$Result.GetResult<Prisma.$comment_reactionsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Comment_reactions.
+     * @param {comment_reactionsUpdateArgs} args - Arguments to update one Comment_reactions.
+     * @example
+     * // Update one Comment_reactions
+     * const comment_reactions = await prisma.comment_reactions.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends comment_reactionsUpdateArgs>(args: SelectSubset<T, comment_reactionsUpdateArgs<ExtArgs>>): Prisma__comment_reactionsClient<$Result.GetResult<Prisma.$comment_reactionsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Comment_reactions.
+     * @param {comment_reactionsDeleteManyArgs} args - Arguments to filter Comment_reactions to delete.
+     * @example
+     * // Delete a few Comment_reactions
+     * const { count } = await prisma.comment_reactions.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends comment_reactionsDeleteManyArgs>(args?: SelectSubset<T, comment_reactionsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Comment_reactions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {comment_reactionsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Comment_reactions
+     * const comment_reactions = await prisma.comment_reactions.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends comment_reactionsUpdateManyArgs>(args: SelectSubset<T, comment_reactionsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Comment_reactions and returns the data updated in the database.
+     * @param {comment_reactionsUpdateManyAndReturnArgs} args - Arguments to update many Comment_reactions.
+     * @example
+     * // Update many Comment_reactions
+     * const comment_reactions = await prisma.comment_reactions.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Comment_reactions and only return the `id`
+     * const comment_reactionsWithIdOnly = await prisma.comment_reactions.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends comment_reactionsUpdateManyAndReturnArgs>(args: SelectSubset<T, comment_reactionsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$comment_reactionsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Comment_reactions.
+     * @param {comment_reactionsUpsertArgs} args - Arguments to update or create a Comment_reactions.
+     * @example
+     * // Update or create a Comment_reactions
+     * const comment_reactions = await prisma.comment_reactions.upsert({
+     *   create: {
+     *     // ... data to create a Comment_reactions
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Comment_reactions we want to update
+     *   }
+     * })
+     */
+    upsert<T extends comment_reactionsUpsertArgs>(args: SelectSubset<T, comment_reactionsUpsertArgs<ExtArgs>>): Prisma__comment_reactionsClient<$Result.GetResult<Prisma.$comment_reactionsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Comment_reactions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {comment_reactionsCountArgs} args - Arguments to filter Comment_reactions to count.
+     * @example
+     * // Count the number of Comment_reactions
+     * const count = await prisma.comment_reactions.count({
+     *   where: {
+     *     // ... the filter for the Comment_reactions we want to count
+     *   }
+     * })
+    **/
+    count<T extends comment_reactionsCountArgs>(
+      args?: Subset<T, comment_reactionsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Comment_reactionsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Comment_reactions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Comment_reactionsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Comment_reactionsAggregateArgs>(args: Subset<T, Comment_reactionsAggregateArgs>): Prisma.PrismaPromise<GetComment_reactionsAggregateType<T>>
+
+    /**
+     * Group by Comment_reactions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {comment_reactionsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends comment_reactionsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: comment_reactionsGroupByArgs['orderBy'] }
+        : { orderBy?: comment_reactionsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, comment_reactionsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetComment_reactionsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the comment_reactions model
+   */
+  readonly fields: comment_reactionsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for comment_reactions.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__comment_reactionsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    comments<T extends commentsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, commentsDefaultArgs<ExtArgs>>): Prisma__commentsClient<$Result.GetResult<Prisma.$commentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    users<T extends usersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, usersDefaultArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the comment_reactions model
+   */
+  interface comment_reactionsFieldRefs {
+    readonly id: FieldRef<"comment_reactions", 'String'>
+    readonly user_id: FieldRef<"comment_reactions", 'String'>
+    readonly comment_id: FieldRef<"comment_reactions", 'String'>
+    readonly type: FieldRef<"comment_reactions", 'String'>
+    readonly created_at: FieldRef<"comment_reactions", 'DateTime'>
+    readonly updated_at: FieldRef<"comment_reactions", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * comment_reactions findUnique
+   */
+  export type comment_reactionsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comment_reactions
+     */
+    select?: comment_reactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the comment_reactions
+     */
+    omit?: comment_reactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: comment_reactionsInclude<ExtArgs> | null
+    /**
+     * Filter, which comment_reactions to fetch.
+     */
+    where: comment_reactionsWhereUniqueInput
+  }
+
+  /**
+   * comment_reactions findUniqueOrThrow
+   */
+  export type comment_reactionsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comment_reactions
+     */
+    select?: comment_reactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the comment_reactions
+     */
+    omit?: comment_reactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: comment_reactionsInclude<ExtArgs> | null
+    /**
+     * Filter, which comment_reactions to fetch.
+     */
+    where: comment_reactionsWhereUniqueInput
+  }
+
+  /**
+   * comment_reactions findFirst
+   */
+  export type comment_reactionsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comment_reactions
+     */
+    select?: comment_reactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the comment_reactions
+     */
+    omit?: comment_reactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: comment_reactionsInclude<ExtArgs> | null
+    /**
+     * Filter, which comment_reactions to fetch.
+     */
+    where?: comment_reactionsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of comment_reactions to fetch.
+     */
+    orderBy?: comment_reactionsOrderByWithRelationInput | comment_reactionsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for comment_reactions.
+     */
+    cursor?: comment_reactionsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` comment_reactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` comment_reactions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of comment_reactions.
+     */
+    distinct?: Comment_reactionsScalarFieldEnum | Comment_reactionsScalarFieldEnum[]
+  }
+
+  /**
+   * comment_reactions findFirstOrThrow
+   */
+  export type comment_reactionsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comment_reactions
+     */
+    select?: comment_reactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the comment_reactions
+     */
+    omit?: comment_reactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: comment_reactionsInclude<ExtArgs> | null
+    /**
+     * Filter, which comment_reactions to fetch.
+     */
+    where?: comment_reactionsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of comment_reactions to fetch.
+     */
+    orderBy?: comment_reactionsOrderByWithRelationInput | comment_reactionsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for comment_reactions.
+     */
+    cursor?: comment_reactionsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` comment_reactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` comment_reactions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of comment_reactions.
+     */
+    distinct?: Comment_reactionsScalarFieldEnum | Comment_reactionsScalarFieldEnum[]
+  }
+
+  /**
+   * comment_reactions findMany
+   */
+  export type comment_reactionsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comment_reactions
+     */
+    select?: comment_reactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the comment_reactions
+     */
+    omit?: comment_reactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: comment_reactionsInclude<ExtArgs> | null
+    /**
+     * Filter, which comment_reactions to fetch.
+     */
+    where?: comment_reactionsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of comment_reactions to fetch.
+     */
+    orderBy?: comment_reactionsOrderByWithRelationInput | comment_reactionsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing comment_reactions.
+     */
+    cursor?: comment_reactionsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` comment_reactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` comment_reactions.
+     */
+    skip?: number
+    distinct?: Comment_reactionsScalarFieldEnum | Comment_reactionsScalarFieldEnum[]
+  }
+
+  /**
+   * comment_reactions create
+   */
+  export type comment_reactionsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comment_reactions
+     */
+    select?: comment_reactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the comment_reactions
+     */
+    omit?: comment_reactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: comment_reactionsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a comment_reactions.
+     */
+    data: XOR<comment_reactionsCreateInput, comment_reactionsUncheckedCreateInput>
+  }
+
+  /**
+   * comment_reactions createMany
+   */
+  export type comment_reactionsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many comment_reactions.
+     */
+    data: comment_reactionsCreateManyInput | comment_reactionsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * comment_reactions createManyAndReturn
+   */
+  export type comment_reactionsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comment_reactions
+     */
+    select?: comment_reactionsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the comment_reactions
+     */
+    omit?: comment_reactionsOmit<ExtArgs> | null
+    /**
+     * The data used to create many comment_reactions.
+     */
+    data: comment_reactionsCreateManyInput | comment_reactionsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: comment_reactionsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * comment_reactions update
+   */
+  export type comment_reactionsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comment_reactions
+     */
+    select?: comment_reactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the comment_reactions
+     */
+    omit?: comment_reactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: comment_reactionsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a comment_reactions.
+     */
+    data: XOR<comment_reactionsUpdateInput, comment_reactionsUncheckedUpdateInput>
+    /**
+     * Choose, which comment_reactions to update.
+     */
+    where: comment_reactionsWhereUniqueInput
+  }
+
+  /**
+   * comment_reactions updateMany
+   */
+  export type comment_reactionsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update comment_reactions.
+     */
+    data: XOR<comment_reactionsUpdateManyMutationInput, comment_reactionsUncheckedUpdateManyInput>
+    /**
+     * Filter which comment_reactions to update
+     */
+    where?: comment_reactionsWhereInput
+    /**
+     * Limit how many comment_reactions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * comment_reactions updateManyAndReturn
+   */
+  export type comment_reactionsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comment_reactions
+     */
+    select?: comment_reactionsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the comment_reactions
+     */
+    omit?: comment_reactionsOmit<ExtArgs> | null
+    /**
+     * The data used to update comment_reactions.
+     */
+    data: XOR<comment_reactionsUpdateManyMutationInput, comment_reactionsUncheckedUpdateManyInput>
+    /**
+     * Filter which comment_reactions to update
+     */
+    where?: comment_reactionsWhereInput
+    /**
+     * Limit how many comment_reactions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: comment_reactionsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * comment_reactions upsert
+   */
+  export type comment_reactionsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comment_reactions
+     */
+    select?: comment_reactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the comment_reactions
+     */
+    omit?: comment_reactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: comment_reactionsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the comment_reactions to update in case it exists.
+     */
+    where: comment_reactionsWhereUniqueInput
+    /**
+     * In case the comment_reactions found by the `where` argument doesn't exist, create a new comment_reactions with this data.
+     */
+    create: XOR<comment_reactionsCreateInput, comment_reactionsUncheckedCreateInput>
+    /**
+     * In case the comment_reactions was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<comment_reactionsUpdateInput, comment_reactionsUncheckedUpdateInput>
+  }
+
+  /**
+   * comment_reactions delete
+   */
+  export type comment_reactionsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comment_reactions
+     */
+    select?: comment_reactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the comment_reactions
+     */
+    omit?: comment_reactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: comment_reactionsInclude<ExtArgs> | null
+    /**
+     * Filter which comment_reactions to delete.
+     */
+    where: comment_reactionsWhereUniqueInput
+  }
+
+  /**
+   * comment_reactions deleteMany
+   */
+  export type comment_reactionsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which comment_reactions to delete
+     */
+    where?: comment_reactionsWhereInput
+    /**
+     * Limit how many comment_reactions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * comment_reactions without action
+   */
+  export type comment_reactionsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the comment_reactions
+     */
+    select?: comment_reactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the comment_reactions
+     */
+    omit?: comment_reactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: comment_reactionsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model video_reactions
+   */
+
+  export type AggregateVideo_reactions = {
+    _count: Video_reactionsCountAggregateOutputType | null
+    _min: Video_reactionsMinAggregateOutputType | null
+    _max: Video_reactionsMaxAggregateOutputType | null
+  }
+
+  export type Video_reactionsMinAggregateOutputType = {
+    id: string | null
+    user_id: string | null
+    video_id: string | null
+    type: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type Video_reactionsMaxAggregateOutputType = {
+    id: string | null
+    user_id: string | null
+    video_id: string | null
+    type: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type Video_reactionsCountAggregateOutputType = {
+    id: number
+    user_id: number
+    video_id: number
+    type: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type Video_reactionsMinAggregateInputType = {
+    id?: true
+    user_id?: true
+    video_id?: true
+    type?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type Video_reactionsMaxAggregateInputType = {
+    id?: true
+    user_id?: true
+    video_id?: true
+    type?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type Video_reactionsCountAggregateInputType = {
+    id?: true
+    user_id?: true
+    video_id?: true
+    type?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type Video_reactionsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which video_reactions to aggregate.
+     */
+    where?: video_reactionsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of video_reactions to fetch.
+     */
+    orderBy?: video_reactionsOrderByWithRelationInput | video_reactionsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: video_reactionsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` video_reactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` video_reactions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned video_reactions
+    **/
+    _count?: true | Video_reactionsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Video_reactionsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Video_reactionsMaxAggregateInputType
+  }
+
+  export type GetVideo_reactionsAggregateType<T extends Video_reactionsAggregateArgs> = {
+        [P in keyof T & keyof AggregateVideo_reactions]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateVideo_reactions[P]>
+      : GetScalarType<T[P], AggregateVideo_reactions[P]>
+  }
+
+
+
+
+  export type video_reactionsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: video_reactionsWhereInput
+    orderBy?: video_reactionsOrderByWithAggregationInput | video_reactionsOrderByWithAggregationInput[]
+    by: Video_reactionsScalarFieldEnum[] | Video_reactionsScalarFieldEnum
+    having?: video_reactionsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Video_reactionsCountAggregateInputType | true
+    _min?: Video_reactionsMinAggregateInputType
+    _max?: Video_reactionsMaxAggregateInputType
+  }
+
+  export type Video_reactionsGroupByOutputType = {
+    id: string
+    user_id: string
+    video_id: string
+    type: string
+    created_at: Date
+    updated_at: Date
+    _count: Video_reactionsCountAggregateOutputType | null
+    _min: Video_reactionsMinAggregateOutputType | null
+    _max: Video_reactionsMaxAggregateOutputType | null
+  }
+
+  type GetVideo_reactionsGroupByPayload<T extends video_reactionsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Video_reactionsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Video_reactionsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Video_reactionsGroupByOutputType[P]>
+            : GetScalarType<T[P], Video_reactionsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type video_reactionsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    video_id?: boolean
+    type?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    users?: boolean | usersDefaultArgs<ExtArgs>
+    videos?: boolean | videosDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["video_reactions"]>
+
+  export type video_reactionsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    video_id?: boolean
+    type?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    users?: boolean | usersDefaultArgs<ExtArgs>
+    videos?: boolean | videosDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["video_reactions"]>
+
+  export type video_reactionsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    video_id?: boolean
+    type?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    users?: boolean | usersDefaultArgs<ExtArgs>
+    videos?: boolean | videosDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["video_reactions"]>
+
+  export type video_reactionsSelectScalar = {
+    id?: boolean
+    user_id?: boolean
+    video_id?: boolean
+    type?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type video_reactionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "video_id" | "type" | "created_at" | "updated_at", ExtArgs["result"]["video_reactions"]>
+  export type video_reactionsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users?: boolean | usersDefaultArgs<ExtArgs>
+    videos?: boolean | videosDefaultArgs<ExtArgs>
+  }
+  export type video_reactionsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users?: boolean | usersDefaultArgs<ExtArgs>
+    videos?: boolean | videosDefaultArgs<ExtArgs>
+  }
+  export type video_reactionsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users?: boolean | usersDefaultArgs<ExtArgs>
+    videos?: boolean | videosDefaultArgs<ExtArgs>
+  }
+
+  export type $video_reactionsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "video_reactions"
+    objects: {
+      users: Prisma.$usersPayload<ExtArgs>
+      videos: Prisma.$videosPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      user_id: string
+      video_id: string
+      type: string
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["video_reactions"]>
+    composites: {}
+  }
+
+  type video_reactionsGetPayload<S extends boolean | null | undefined | video_reactionsDefaultArgs> = $Result.GetResult<Prisma.$video_reactionsPayload, S>
+
+  type video_reactionsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<video_reactionsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Video_reactionsCountAggregateInputType | true
+    }
+
+  export interface video_reactionsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['video_reactions'], meta: { name: 'video_reactions' } }
+    /**
+     * Find zero or one Video_reactions that matches the filter.
+     * @param {video_reactionsFindUniqueArgs} args - Arguments to find a Video_reactions
+     * @example
+     * // Get one Video_reactions
+     * const video_reactions = await prisma.video_reactions.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends video_reactionsFindUniqueArgs>(args: SelectSubset<T, video_reactionsFindUniqueArgs<ExtArgs>>): Prisma__video_reactionsClient<$Result.GetResult<Prisma.$video_reactionsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Video_reactions that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {video_reactionsFindUniqueOrThrowArgs} args - Arguments to find a Video_reactions
+     * @example
+     * // Get one Video_reactions
+     * const video_reactions = await prisma.video_reactions.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends video_reactionsFindUniqueOrThrowArgs>(args: SelectSubset<T, video_reactionsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__video_reactionsClient<$Result.GetResult<Prisma.$video_reactionsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Video_reactions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {video_reactionsFindFirstArgs} args - Arguments to find a Video_reactions
+     * @example
+     * // Get one Video_reactions
+     * const video_reactions = await prisma.video_reactions.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends video_reactionsFindFirstArgs>(args?: SelectSubset<T, video_reactionsFindFirstArgs<ExtArgs>>): Prisma__video_reactionsClient<$Result.GetResult<Prisma.$video_reactionsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Video_reactions that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {video_reactionsFindFirstOrThrowArgs} args - Arguments to find a Video_reactions
+     * @example
+     * // Get one Video_reactions
+     * const video_reactions = await prisma.video_reactions.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends video_reactionsFindFirstOrThrowArgs>(args?: SelectSubset<T, video_reactionsFindFirstOrThrowArgs<ExtArgs>>): Prisma__video_reactionsClient<$Result.GetResult<Prisma.$video_reactionsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Video_reactions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {video_reactionsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Video_reactions
+     * const video_reactions = await prisma.video_reactions.findMany()
+     * 
+     * // Get first 10 Video_reactions
+     * const video_reactions = await prisma.video_reactions.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const video_reactionsWithIdOnly = await prisma.video_reactions.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends video_reactionsFindManyArgs>(args?: SelectSubset<T, video_reactionsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$video_reactionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Video_reactions.
+     * @param {video_reactionsCreateArgs} args - Arguments to create a Video_reactions.
+     * @example
+     * // Create one Video_reactions
+     * const Video_reactions = await prisma.video_reactions.create({
+     *   data: {
+     *     // ... data to create a Video_reactions
+     *   }
+     * })
+     * 
+     */
+    create<T extends video_reactionsCreateArgs>(args: SelectSubset<T, video_reactionsCreateArgs<ExtArgs>>): Prisma__video_reactionsClient<$Result.GetResult<Prisma.$video_reactionsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Video_reactions.
+     * @param {video_reactionsCreateManyArgs} args - Arguments to create many Video_reactions.
+     * @example
+     * // Create many Video_reactions
+     * const video_reactions = await prisma.video_reactions.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends video_reactionsCreateManyArgs>(args?: SelectSubset<T, video_reactionsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Video_reactions and returns the data saved in the database.
+     * @param {video_reactionsCreateManyAndReturnArgs} args - Arguments to create many Video_reactions.
+     * @example
+     * // Create many Video_reactions
+     * const video_reactions = await prisma.video_reactions.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Video_reactions and only return the `id`
+     * const video_reactionsWithIdOnly = await prisma.video_reactions.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends video_reactionsCreateManyAndReturnArgs>(args?: SelectSubset<T, video_reactionsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$video_reactionsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Video_reactions.
+     * @param {video_reactionsDeleteArgs} args - Arguments to delete one Video_reactions.
+     * @example
+     * // Delete one Video_reactions
+     * const Video_reactions = await prisma.video_reactions.delete({
+     *   where: {
+     *     // ... filter to delete one Video_reactions
+     *   }
+     * })
+     * 
+     */
+    delete<T extends video_reactionsDeleteArgs>(args: SelectSubset<T, video_reactionsDeleteArgs<ExtArgs>>): Prisma__video_reactionsClient<$Result.GetResult<Prisma.$video_reactionsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Video_reactions.
+     * @param {video_reactionsUpdateArgs} args - Arguments to update one Video_reactions.
+     * @example
+     * // Update one Video_reactions
+     * const video_reactions = await prisma.video_reactions.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends video_reactionsUpdateArgs>(args: SelectSubset<T, video_reactionsUpdateArgs<ExtArgs>>): Prisma__video_reactionsClient<$Result.GetResult<Prisma.$video_reactionsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Video_reactions.
+     * @param {video_reactionsDeleteManyArgs} args - Arguments to filter Video_reactions to delete.
+     * @example
+     * // Delete a few Video_reactions
+     * const { count } = await prisma.video_reactions.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends video_reactionsDeleteManyArgs>(args?: SelectSubset<T, video_reactionsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Video_reactions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {video_reactionsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Video_reactions
+     * const video_reactions = await prisma.video_reactions.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends video_reactionsUpdateManyArgs>(args: SelectSubset<T, video_reactionsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Video_reactions and returns the data updated in the database.
+     * @param {video_reactionsUpdateManyAndReturnArgs} args - Arguments to update many Video_reactions.
+     * @example
+     * // Update many Video_reactions
+     * const video_reactions = await prisma.video_reactions.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Video_reactions and only return the `id`
+     * const video_reactionsWithIdOnly = await prisma.video_reactions.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends video_reactionsUpdateManyAndReturnArgs>(args: SelectSubset<T, video_reactionsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$video_reactionsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Video_reactions.
+     * @param {video_reactionsUpsertArgs} args - Arguments to update or create a Video_reactions.
+     * @example
+     * // Update or create a Video_reactions
+     * const video_reactions = await prisma.video_reactions.upsert({
+     *   create: {
+     *     // ... data to create a Video_reactions
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Video_reactions we want to update
+     *   }
+     * })
+     */
+    upsert<T extends video_reactionsUpsertArgs>(args: SelectSubset<T, video_reactionsUpsertArgs<ExtArgs>>): Prisma__video_reactionsClient<$Result.GetResult<Prisma.$video_reactionsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Video_reactions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {video_reactionsCountArgs} args - Arguments to filter Video_reactions to count.
+     * @example
+     * // Count the number of Video_reactions
+     * const count = await prisma.video_reactions.count({
+     *   where: {
+     *     // ... the filter for the Video_reactions we want to count
+     *   }
+     * })
+    **/
+    count<T extends video_reactionsCountArgs>(
+      args?: Subset<T, video_reactionsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Video_reactionsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Video_reactions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Video_reactionsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Video_reactionsAggregateArgs>(args: Subset<T, Video_reactionsAggregateArgs>): Prisma.PrismaPromise<GetVideo_reactionsAggregateType<T>>
+
+    /**
+     * Group by Video_reactions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {video_reactionsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends video_reactionsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: video_reactionsGroupByArgs['orderBy'] }
+        : { orderBy?: video_reactionsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, video_reactionsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVideo_reactionsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the video_reactions model
+   */
+  readonly fields: video_reactionsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for video_reactions.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__video_reactionsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    users<T extends usersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, usersDefaultArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    videos<T extends videosDefaultArgs<ExtArgs> = {}>(args?: Subset<T, videosDefaultArgs<ExtArgs>>): Prisma__videosClient<$Result.GetResult<Prisma.$videosPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the video_reactions model
+   */
+  interface video_reactionsFieldRefs {
+    readonly id: FieldRef<"video_reactions", 'String'>
+    readonly user_id: FieldRef<"video_reactions", 'String'>
+    readonly video_id: FieldRef<"video_reactions", 'String'>
+    readonly type: FieldRef<"video_reactions", 'String'>
+    readonly created_at: FieldRef<"video_reactions", 'DateTime'>
+    readonly updated_at: FieldRef<"video_reactions", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * video_reactions findUnique
+   */
+  export type video_reactionsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_reactions
+     */
+    select?: video_reactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_reactions
+     */
+    omit?: video_reactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_reactionsInclude<ExtArgs> | null
+    /**
+     * Filter, which video_reactions to fetch.
+     */
+    where: video_reactionsWhereUniqueInput
+  }
+
+  /**
+   * video_reactions findUniqueOrThrow
+   */
+  export type video_reactionsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_reactions
+     */
+    select?: video_reactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_reactions
+     */
+    omit?: video_reactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_reactionsInclude<ExtArgs> | null
+    /**
+     * Filter, which video_reactions to fetch.
+     */
+    where: video_reactionsWhereUniqueInput
+  }
+
+  /**
+   * video_reactions findFirst
+   */
+  export type video_reactionsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_reactions
+     */
+    select?: video_reactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_reactions
+     */
+    omit?: video_reactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_reactionsInclude<ExtArgs> | null
+    /**
+     * Filter, which video_reactions to fetch.
+     */
+    where?: video_reactionsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of video_reactions to fetch.
+     */
+    orderBy?: video_reactionsOrderByWithRelationInput | video_reactionsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for video_reactions.
+     */
+    cursor?: video_reactionsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` video_reactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` video_reactions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of video_reactions.
+     */
+    distinct?: Video_reactionsScalarFieldEnum | Video_reactionsScalarFieldEnum[]
+  }
+
+  /**
+   * video_reactions findFirstOrThrow
+   */
+  export type video_reactionsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_reactions
+     */
+    select?: video_reactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_reactions
+     */
+    omit?: video_reactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_reactionsInclude<ExtArgs> | null
+    /**
+     * Filter, which video_reactions to fetch.
+     */
+    where?: video_reactionsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of video_reactions to fetch.
+     */
+    orderBy?: video_reactionsOrderByWithRelationInput | video_reactionsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for video_reactions.
+     */
+    cursor?: video_reactionsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` video_reactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` video_reactions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of video_reactions.
+     */
+    distinct?: Video_reactionsScalarFieldEnum | Video_reactionsScalarFieldEnum[]
+  }
+
+  /**
+   * video_reactions findMany
+   */
+  export type video_reactionsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_reactions
+     */
+    select?: video_reactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_reactions
+     */
+    omit?: video_reactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_reactionsInclude<ExtArgs> | null
+    /**
+     * Filter, which video_reactions to fetch.
+     */
+    where?: video_reactionsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of video_reactions to fetch.
+     */
+    orderBy?: video_reactionsOrderByWithRelationInput | video_reactionsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing video_reactions.
+     */
+    cursor?: video_reactionsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` video_reactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` video_reactions.
+     */
+    skip?: number
+    distinct?: Video_reactionsScalarFieldEnum | Video_reactionsScalarFieldEnum[]
+  }
+
+  /**
+   * video_reactions create
+   */
+  export type video_reactionsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_reactions
+     */
+    select?: video_reactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_reactions
+     */
+    omit?: video_reactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_reactionsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a video_reactions.
+     */
+    data: XOR<video_reactionsCreateInput, video_reactionsUncheckedCreateInput>
+  }
+
+  /**
+   * video_reactions createMany
+   */
+  export type video_reactionsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many video_reactions.
+     */
+    data: video_reactionsCreateManyInput | video_reactionsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * video_reactions createManyAndReturn
+   */
+  export type video_reactionsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_reactions
+     */
+    select?: video_reactionsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_reactions
+     */
+    omit?: video_reactionsOmit<ExtArgs> | null
+    /**
+     * The data used to create many video_reactions.
+     */
+    data: video_reactionsCreateManyInput | video_reactionsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_reactionsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * video_reactions update
+   */
+  export type video_reactionsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_reactions
+     */
+    select?: video_reactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_reactions
+     */
+    omit?: video_reactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_reactionsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a video_reactions.
+     */
+    data: XOR<video_reactionsUpdateInput, video_reactionsUncheckedUpdateInput>
+    /**
+     * Choose, which video_reactions to update.
+     */
+    where: video_reactionsWhereUniqueInput
+  }
+
+  /**
+   * video_reactions updateMany
+   */
+  export type video_reactionsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update video_reactions.
+     */
+    data: XOR<video_reactionsUpdateManyMutationInput, video_reactionsUncheckedUpdateManyInput>
+    /**
+     * Filter which video_reactions to update
+     */
+    where?: video_reactionsWhereInput
+    /**
+     * Limit how many video_reactions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * video_reactions updateManyAndReturn
+   */
+  export type video_reactionsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_reactions
+     */
+    select?: video_reactionsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_reactions
+     */
+    omit?: video_reactionsOmit<ExtArgs> | null
+    /**
+     * The data used to update video_reactions.
+     */
+    data: XOR<video_reactionsUpdateManyMutationInput, video_reactionsUncheckedUpdateManyInput>
+    /**
+     * Filter which video_reactions to update
+     */
+    where?: video_reactionsWhereInput
+    /**
+     * Limit how many video_reactions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_reactionsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * video_reactions upsert
+   */
+  export type video_reactionsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_reactions
+     */
+    select?: video_reactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_reactions
+     */
+    omit?: video_reactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_reactionsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the video_reactions to update in case it exists.
+     */
+    where: video_reactionsWhereUniqueInput
+    /**
+     * In case the video_reactions found by the `where` argument doesn't exist, create a new video_reactions with this data.
+     */
+    create: XOR<video_reactionsCreateInput, video_reactionsUncheckedCreateInput>
+    /**
+     * In case the video_reactions was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<video_reactionsUpdateInput, video_reactionsUncheckedUpdateInput>
+  }
+
+  /**
+   * video_reactions delete
+   */
+  export type video_reactionsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_reactions
+     */
+    select?: video_reactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_reactions
+     */
+    omit?: video_reactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_reactionsInclude<ExtArgs> | null
+    /**
+     * Filter which video_reactions to delete.
+     */
+    where: video_reactionsWhereUniqueInput
+  }
+
+  /**
+   * video_reactions deleteMany
+   */
+  export type video_reactionsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which video_reactions to delete
+     */
+    where?: video_reactionsWhereInput
+    /**
+     * Limit how many video_reactions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * video_reactions without action
+   */
+  export type video_reactionsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_reactions
+     */
+    select?: video_reactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_reactions
+     */
+    omit?: video_reactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_reactionsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model video_views
+   */
+
+  export type AggregateVideo_views = {
+    _count: Video_viewsCountAggregateOutputType | null
+    _min: Video_viewsMinAggregateOutputType | null
+    _max: Video_viewsMaxAggregateOutputType | null
+  }
+
+  export type Video_viewsMinAggregateOutputType = {
+    id: string | null
+    user_id: string | null
+    video_id: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type Video_viewsMaxAggregateOutputType = {
+    id: string | null
+    user_id: string | null
+    video_id: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type Video_viewsCountAggregateOutputType = {
+    id: number
+    user_id: number
+    video_id: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type Video_viewsMinAggregateInputType = {
+    id?: true
+    user_id?: true
+    video_id?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type Video_viewsMaxAggregateInputType = {
+    id?: true
+    user_id?: true
+    video_id?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type Video_viewsCountAggregateInputType = {
+    id?: true
+    user_id?: true
+    video_id?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type Video_viewsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which video_views to aggregate.
+     */
+    where?: video_viewsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of video_views to fetch.
+     */
+    orderBy?: video_viewsOrderByWithRelationInput | video_viewsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: video_viewsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` video_views from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` video_views.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned video_views
+    **/
+    _count?: true | Video_viewsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Video_viewsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Video_viewsMaxAggregateInputType
+  }
+
+  export type GetVideo_viewsAggregateType<T extends Video_viewsAggregateArgs> = {
+        [P in keyof T & keyof AggregateVideo_views]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateVideo_views[P]>
+      : GetScalarType<T[P], AggregateVideo_views[P]>
+  }
+
+
+
+
+  export type video_viewsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: video_viewsWhereInput
+    orderBy?: video_viewsOrderByWithAggregationInput | video_viewsOrderByWithAggregationInput[]
+    by: Video_viewsScalarFieldEnum[] | Video_viewsScalarFieldEnum
+    having?: video_viewsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Video_viewsCountAggregateInputType | true
+    _min?: Video_viewsMinAggregateInputType
+    _max?: Video_viewsMaxAggregateInputType
+  }
+
+  export type Video_viewsGroupByOutputType = {
+    id: string
+    user_id: string
+    video_id: string
+    created_at: Date
+    updated_at: Date
+    _count: Video_viewsCountAggregateOutputType | null
+    _min: Video_viewsMinAggregateOutputType | null
+    _max: Video_viewsMaxAggregateOutputType | null
+  }
+
+  type GetVideo_viewsGroupByPayload<T extends video_viewsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Video_viewsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Video_viewsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Video_viewsGroupByOutputType[P]>
+            : GetScalarType<T[P], Video_viewsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type video_viewsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    video_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    users?: boolean | usersDefaultArgs<ExtArgs>
+    videos?: boolean | videosDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["video_views"]>
+
+  export type video_viewsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    video_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    users?: boolean | usersDefaultArgs<ExtArgs>
+    videos?: boolean | videosDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["video_views"]>
+
+  export type video_viewsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    video_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    users?: boolean | usersDefaultArgs<ExtArgs>
+    videos?: boolean | videosDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["video_views"]>
+
+  export type video_viewsSelectScalar = {
+    id?: boolean
+    user_id?: boolean
+    video_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type video_viewsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "video_id" | "created_at" | "updated_at", ExtArgs["result"]["video_views"]>
+  export type video_viewsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users?: boolean | usersDefaultArgs<ExtArgs>
+    videos?: boolean | videosDefaultArgs<ExtArgs>
+  }
+  export type video_viewsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users?: boolean | usersDefaultArgs<ExtArgs>
+    videos?: boolean | videosDefaultArgs<ExtArgs>
+  }
+  export type video_viewsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users?: boolean | usersDefaultArgs<ExtArgs>
+    videos?: boolean | videosDefaultArgs<ExtArgs>
+  }
+
+  export type $video_viewsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "video_views"
+    objects: {
+      users: Prisma.$usersPayload<ExtArgs>
+      videos: Prisma.$videosPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      user_id: string
+      video_id: string
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["video_views"]>
+    composites: {}
+  }
+
+  type video_viewsGetPayload<S extends boolean | null | undefined | video_viewsDefaultArgs> = $Result.GetResult<Prisma.$video_viewsPayload, S>
+
+  type video_viewsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<video_viewsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Video_viewsCountAggregateInputType | true
+    }
+
+  export interface video_viewsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['video_views'], meta: { name: 'video_views' } }
+    /**
+     * Find zero or one Video_views that matches the filter.
+     * @param {video_viewsFindUniqueArgs} args - Arguments to find a Video_views
+     * @example
+     * // Get one Video_views
+     * const video_views = await prisma.video_views.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends video_viewsFindUniqueArgs>(args: SelectSubset<T, video_viewsFindUniqueArgs<ExtArgs>>): Prisma__video_viewsClient<$Result.GetResult<Prisma.$video_viewsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Video_views that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {video_viewsFindUniqueOrThrowArgs} args - Arguments to find a Video_views
+     * @example
+     * // Get one Video_views
+     * const video_views = await prisma.video_views.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends video_viewsFindUniqueOrThrowArgs>(args: SelectSubset<T, video_viewsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__video_viewsClient<$Result.GetResult<Prisma.$video_viewsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Video_views that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {video_viewsFindFirstArgs} args - Arguments to find a Video_views
+     * @example
+     * // Get one Video_views
+     * const video_views = await prisma.video_views.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends video_viewsFindFirstArgs>(args?: SelectSubset<T, video_viewsFindFirstArgs<ExtArgs>>): Prisma__video_viewsClient<$Result.GetResult<Prisma.$video_viewsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Video_views that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {video_viewsFindFirstOrThrowArgs} args - Arguments to find a Video_views
+     * @example
+     * // Get one Video_views
+     * const video_views = await prisma.video_views.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends video_viewsFindFirstOrThrowArgs>(args?: SelectSubset<T, video_viewsFindFirstOrThrowArgs<ExtArgs>>): Prisma__video_viewsClient<$Result.GetResult<Prisma.$video_viewsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Video_views that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {video_viewsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Video_views
+     * const video_views = await prisma.video_views.findMany()
+     * 
+     * // Get first 10 Video_views
+     * const video_views = await prisma.video_views.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const video_viewsWithIdOnly = await prisma.video_views.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends video_viewsFindManyArgs>(args?: SelectSubset<T, video_viewsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$video_viewsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Video_views.
+     * @param {video_viewsCreateArgs} args - Arguments to create a Video_views.
+     * @example
+     * // Create one Video_views
+     * const Video_views = await prisma.video_views.create({
+     *   data: {
+     *     // ... data to create a Video_views
+     *   }
+     * })
+     * 
+     */
+    create<T extends video_viewsCreateArgs>(args: SelectSubset<T, video_viewsCreateArgs<ExtArgs>>): Prisma__video_viewsClient<$Result.GetResult<Prisma.$video_viewsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Video_views.
+     * @param {video_viewsCreateManyArgs} args - Arguments to create many Video_views.
+     * @example
+     * // Create many Video_views
+     * const video_views = await prisma.video_views.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends video_viewsCreateManyArgs>(args?: SelectSubset<T, video_viewsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Video_views and returns the data saved in the database.
+     * @param {video_viewsCreateManyAndReturnArgs} args - Arguments to create many Video_views.
+     * @example
+     * // Create many Video_views
+     * const video_views = await prisma.video_views.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Video_views and only return the `id`
+     * const video_viewsWithIdOnly = await prisma.video_views.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends video_viewsCreateManyAndReturnArgs>(args?: SelectSubset<T, video_viewsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$video_viewsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Video_views.
+     * @param {video_viewsDeleteArgs} args - Arguments to delete one Video_views.
+     * @example
+     * // Delete one Video_views
+     * const Video_views = await prisma.video_views.delete({
+     *   where: {
+     *     // ... filter to delete one Video_views
+     *   }
+     * })
+     * 
+     */
+    delete<T extends video_viewsDeleteArgs>(args: SelectSubset<T, video_viewsDeleteArgs<ExtArgs>>): Prisma__video_viewsClient<$Result.GetResult<Prisma.$video_viewsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Video_views.
+     * @param {video_viewsUpdateArgs} args - Arguments to update one Video_views.
+     * @example
+     * // Update one Video_views
+     * const video_views = await prisma.video_views.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends video_viewsUpdateArgs>(args: SelectSubset<T, video_viewsUpdateArgs<ExtArgs>>): Prisma__video_viewsClient<$Result.GetResult<Prisma.$video_viewsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Video_views.
+     * @param {video_viewsDeleteManyArgs} args - Arguments to filter Video_views to delete.
+     * @example
+     * // Delete a few Video_views
+     * const { count } = await prisma.video_views.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends video_viewsDeleteManyArgs>(args?: SelectSubset<T, video_viewsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Video_views.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {video_viewsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Video_views
+     * const video_views = await prisma.video_views.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends video_viewsUpdateManyArgs>(args: SelectSubset<T, video_viewsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Video_views and returns the data updated in the database.
+     * @param {video_viewsUpdateManyAndReturnArgs} args - Arguments to update many Video_views.
+     * @example
+     * // Update many Video_views
+     * const video_views = await prisma.video_views.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Video_views and only return the `id`
+     * const video_viewsWithIdOnly = await prisma.video_views.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends video_viewsUpdateManyAndReturnArgs>(args: SelectSubset<T, video_viewsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$video_viewsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Video_views.
+     * @param {video_viewsUpsertArgs} args - Arguments to update or create a Video_views.
+     * @example
+     * // Update or create a Video_views
+     * const video_views = await prisma.video_views.upsert({
+     *   create: {
+     *     // ... data to create a Video_views
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Video_views we want to update
+     *   }
+     * })
+     */
+    upsert<T extends video_viewsUpsertArgs>(args: SelectSubset<T, video_viewsUpsertArgs<ExtArgs>>): Prisma__video_viewsClient<$Result.GetResult<Prisma.$video_viewsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Video_views.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {video_viewsCountArgs} args - Arguments to filter Video_views to count.
+     * @example
+     * // Count the number of Video_views
+     * const count = await prisma.video_views.count({
+     *   where: {
+     *     // ... the filter for the Video_views we want to count
+     *   }
+     * })
+    **/
+    count<T extends video_viewsCountArgs>(
+      args?: Subset<T, video_viewsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Video_viewsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Video_views.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Video_viewsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Video_viewsAggregateArgs>(args: Subset<T, Video_viewsAggregateArgs>): Prisma.PrismaPromise<GetVideo_viewsAggregateType<T>>
+
+    /**
+     * Group by Video_views.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {video_viewsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends video_viewsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: video_viewsGroupByArgs['orderBy'] }
+        : { orderBy?: video_viewsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, video_viewsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVideo_viewsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the video_views model
+   */
+  readonly fields: video_viewsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for video_views.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__video_viewsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    users<T extends usersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, usersDefaultArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    videos<T extends videosDefaultArgs<ExtArgs> = {}>(args?: Subset<T, videosDefaultArgs<ExtArgs>>): Prisma__videosClient<$Result.GetResult<Prisma.$videosPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the video_views model
+   */
+  interface video_viewsFieldRefs {
+    readonly id: FieldRef<"video_views", 'String'>
+    readonly user_id: FieldRef<"video_views", 'String'>
+    readonly video_id: FieldRef<"video_views", 'String'>
+    readonly created_at: FieldRef<"video_views", 'DateTime'>
+    readonly updated_at: FieldRef<"video_views", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * video_views findUnique
+   */
+  export type video_viewsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_views
+     */
+    select?: video_viewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_views
+     */
+    omit?: video_viewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_viewsInclude<ExtArgs> | null
+    /**
+     * Filter, which video_views to fetch.
+     */
+    where: video_viewsWhereUniqueInput
+  }
+
+  /**
+   * video_views findUniqueOrThrow
+   */
+  export type video_viewsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_views
+     */
+    select?: video_viewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_views
+     */
+    omit?: video_viewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_viewsInclude<ExtArgs> | null
+    /**
+     * Filter, which video_views to fetch.
+     */
+    where: video_viewsWhereUniqueInput
+  }
+
+  /**
+   * video_views findFirst
+   */
+  export type video_viewsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_views
+     */
+    select?: video_viewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_views
+     */
+    omit?: video_viewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_viewsInclude<ExtArgs> | null
+    /**
+     * Filter, which video_views to fetch.
+     */
+    where?: video_viewsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of video_views to fetch.
+     */
+    orderBy?: video_viewsOrderByWithRelationInput | video_viewsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for video_views.
+     */
+    cursor?: video_viewsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` video_views from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` video_views.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of video_views.
+     */
+    distinct?: Video_viewsScalarFieldEnum | Video_viewsScalarFieldEnum[]
+  }
+
+  /**
+   * video_views findFirstOrThrow
+   */
+  export type video_viewsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_views
+     */
+    select?: video_viewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_views
+     */
+    omit?: video_viewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_viewsInclude<ExtArgs> | null
+    /**
+     * Filter, which video_views to fetch.
+     */
+    where?: video_viewsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of video_views to fetch.
+     */
+    orderBy?: video_viewsOrderByWithRelationInput | video_viewsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for video_views.
+     */
+    cursor?: video_viewsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` video_views from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` video_views.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of video_views.
+     */
+    distinct?: Video_viewsScalarFieldEnum | Video_viewsScalarFieldEnum[]
+  }
+
+  /**
+   * video_views findMany
+   */
+  export type video_viewsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_views
+     */
+    select?: video_viewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_views
+     */
+    omit?: video_viewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_viewsInclude<ExtArgs> | null
+    /**
+     * Filter, which video_views to fetch.
+     */
+    where?: video_viewsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of video_views to fetch.
+     */
+    orderBy?: video_viewsOrderByWithRelationInput | video_viewsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing video_views.
+     */
+    cursor?: video_viewsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` video_views from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` video_views.
+     */
+    skip?: number
+    distinct?: Video_viewsScalarFieldEnum | Video_viewsScalarFieldEnum[]
+  }
+
+  /**
+   * video_views create
+   */
+  export type video_viewsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_views
+     */
+    select?: video_viewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_views
+     */
+    omit?: video_viewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_viewsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a video_views.
+     */
+    data: XOR<video_viewsCreateInput, video_viewsUncheckedCreateInput>
+  }
+
+  /**
+   * video_views createMany
+   */
+  export type video_viewsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many video_views.
+     */
+    data: video_viewsCreateManyInput | video_viewsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * video_views createManyAndReturn
+   */
+  export type video_viewsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_views
+     */
+    select?: video_viewsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_views
+     */
+    omit?: video_viewsOmit<ExtArgs> | null
+    /**
+     * The data used to create many video_views.
+     */
+    data: video_viewsCreateManyInput | video_viewsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_viewsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * video_views update
+   */
+  export type video_viewsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_views
+     */
+    select?: video_viewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_views
+     */
+    omit?: video_viewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_viewsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a video_views.
+     */
+    data: XOR<video_viewsUpdateInput, video_viewsUncheckedUpdateInput>
+    /**
+     * Choose, which video_views to update.
+     */
+    where: video_viewsWhereUniqueInput
+  }
+
+  /**
+   * video_views updateMany
+   */
+  export type video_viewsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update video_views.
+     */
+    data: XOR<video_viewsUpdateManyMutationInput, video_viewsUncheckedUpdateManyInput>
+    /**
+     * Filter which video_views to update
+     */
+    where?: video_viewsWhereInput
+    /**
+     * Limit how many video_views to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * video_views updateManyAndReturn
+   */
+  export type video_viewsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_views
+     */
+    select?: video_viewsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_views
+     */
+    omit?: video_viewsOmit<ExtArgs> | null
+    /**
+     * The data used to update video_views.
+     */
+    data: XOR<video_viewsUpdateManyMutationInput, video_viewsUncheckedUpdateManyInput>
+    /**
+     * Filter which video_views to update
+     */
+    where?: video_viewsWhereInput
+    /**
+     * Limit how many video_views to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_viewsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * video_views upsert
+   */
+  export type video_viewsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_views
+     */
+    select?: video_viewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_views
+     */
+    omit?: video_viewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_viewsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the video_views to update in case it exists.
+     */
+    where: video_viewsWhereUniqueInput
+    /**
+     * In case the video_views found by the `where` argument doesn't exist, create a new video_views with this data.
+     */
+    create: XOR<video_viewsCreateInput, video_viewsUncheckedCreateInput>
+    /**
+     * In case the video_views was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<video_viewsUpdateInput, video_viewsUncheckedUpdateInput>
+  }
+
+  /**
+   * video_views delete
+   */
+  export type video_viewsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_views
+     */
+    select?: video_viewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_views
+     */
+    omit?: video_viewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_viewsInclude<ExtArgs> | null
+    /**
+     * Filter which video_views to delete.
+     */
+    where: video_viewsWhereUniqueInput
+  }
+
+  /**
+   * video_views deleteMany
+   */
+  export type video_viewsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which video_views to delete
+     */
+    where?: video_viewsWhereInput
+    /**
+     * Limit how many video_views to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * video_views without action
+   */
+  export type video_viewsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_views
+     */
+    select?: video_viewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_views
+     */
+    omit?: video_viewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_viewsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Enums
+   */
+
+  export const TransactionIsolationLevel: {
+    ReadUncommitted: 'ReadUncommitted',
+    ReadCommitted: 'ReadCommitted',
+    RepeatableRead: 'RepeatableRead',
+    Serializable: 'Serializable'
+  };
+
+  export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+  export const CommentsScalarFieldEnum: {
+    id: 'id',
+    parent_id: 'parent_id',
+    user_id: 'user_id',
+    video_id: 'video_id',
+    value: 'value',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type CommentsScalarFieldEnum = (typeof CommentsScalarFieldEnum)[keyof typeof CommentsScalarFieldEnum]
+
+
+  export const SubscriptionsScalarFieldEnum: {
+    id: 'id',
+    viewer_id: 'viewer_id',
+    creator_id: 'creator_id',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type SubscriptionsScalarFieldEnum = (typeof SubscriptionsScalarFieldEnum)[keyof typeof SubscriptionsScalarFieldEnum]
+
+
+  export const UsersScalarFieldEnum: {
+    id: 'id',
+    clerk_user_id: 'clerk_user_id',
+    channel_name: 'channel_name',
+    avatar_url: 'avatar_url',
+    bio: 'bio',
+    created_at: 'created_at'
+  };
+
+  export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
+
+
+  export const CategoriesScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    slug: 'slug',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type CategoriesScalarFieldEnum = (typeof CategoriesScalarFieldEnum)[keyof typeof CategoriesScalarFieldEnum]
+
+
+  export const VideosScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    description: 'description',
+    mux_status: 'mux_status',
+    mux_asset_id: 'mux_asset_id',
+    mux_upload_id: 'mux_upload_id',
+    mux_playback_id: 'mux_playback_id',
+    mux_track_id: 'mux_track_id',
+    mux_track_status: 'mux_track_status',
+    user_id: 'user_id',
+    category_id: 'category_id',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type VideosScalarFieldEnum = (typeof VideosScalarFieldEnum)[keyof typeof VideosScalarFieldEnum]
+
+
+  export const Comment_reactionsScalarFieldEnum: {
+    id: 'id',
+    user_id: 'user_id',
+    comment_id: 'comment_id',
+    type: 'type',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type Comment_reactionsScalarFieldEnum = (typeof Comment_reactionsScalarFieldEnum)[keyof typeof Comment_reactionsScalarFieldEnum]
+
+
+  export const Video_reactionsScalarFieldEnum: {
+    id: 'id',
+    user_id: 'user_id',
+    video_id: 'video_id',
+    type: 'type',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type Video_reactionsScalarFieldEnum = (typeof Video_reactionsScalarFieldEnum)[keyof typeof Video_reactionsScalarFieldEnum]
+
+
+  export const Video_viewsScalarFieldEnum: {
+    id: 'id',
+    user_id: 'user_id',
+    video_id: 'video_id',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type Video_viewsScalarFieldEnum = (typeof Video_viewsScalarFieldEnum)[keyof typeof Video_viewsScalarFieldEnum]
+
+
+  export const SortOrder: {
+    asc: 'asc',
+    desc: 'desc'
+  };
+
+  export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+  export const QueryMode: {
+    default: 'default',
+    insensitive: 'insensitive'
+  };
+
+  export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  /**
+   * Field references
+   */
+
+
+  /**
+   * Reference to a field of type 'String'
+   */
+  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
+    
+
+
+  /**
+   * Reference to a field of type 'String[]'
+   */
+  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+  /**
+   * Deep Input Types
+   */
+
+
+  export type commentsWhereInput = {
+    AND?: commentsWhereInput | commentsWhereInput[]
+    OR?: commentsWhereInput[]
+    NOT?: commentsWhereInput | commentsWhereInput[]
+    id?: UuidFilter<"comments"> | string
+    parent_id?: UuidNullableFilter<"comments"> | string | null
+    user_id?: UuidFilter<"comments"> | string
+    video_id?: UuidFilter<"comments"> | string
+    value?: StringFilter<"comments"> | string
+    created_at?: DateTimeFilter<"comments"> | Date | string
+    updated_at?: DateTimeFilter<"comments"> | Date | string
+    comment_reactions?: Comment_reactionsListRelationFilter
+    comments?: XOR<CommentsNullableScalarRelationFilter, commentsWhereInput> | null
+    other_comments?: CommentsListRelationFilter
+    users?: XOR<UsersScalarRelationFilter, usersWhereInput>
+    videos?: XOR<VideosScalarRelationFilter, videosWhereInput>
+  }
+
+  export type commentsOrderByWithRelationInput = {
+    id?: SortOrder
+    parent_id?: SortOrderInput | SortOrder
+    user_id?: SortOrder
+    video_id?: SortOrder
+    value?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    comment_reactions?: comment_reactionsOrderByRelationAggregateInput
+    comments?: commentsOrderByWithRelationInput
+    other_comments?: commentsOrderByRelationAggregateInput
+    users?: usersOrderByWithRelationInput
+    videos?: videosOrderByWithRelationInput
+  }
+
+  export type commentsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: commentsWhereInput | commentsWhereInput[]
+    OR?: commentsWhereInput[]
+    NOT?: commentsWhereInput | commentsWhereInput[]
+    parent_id?: UuidNullableFilter<"comments"> | string | null
+    user_id?: UuidFilter<"comments"> | string
+    video_id?: UuidFilter<"comments"> | string
+    value?: StringFilter<"comments"> | string
+    created_at?: DateTimeFilter<"comments"> | Date | string
+    updated_at?: DateTimeFilter<"comments"> | Date | string
+    comment_reactions?: Comment_reactionsListRelationFilter
+    comments?: XOR<CommentsNullableScalarRelationFilter, commentsWhereInput> | null
+    other_comments?: CommentsListRelationFilter
+    users?: XOR<UsersScalarRelationFilter, usersWhereInput>
+    videos?: XOR<VideosScalarRelationFilter, videosWhereInput>
+  }, "id">
+
+  export type commentsOrderByWithAggregationInput = {
+    id?: SortOrder
+    parent_id?: SortOrderInput | SortOrder
+    user_id?: SortOrder
+    video_id?: SortOrder
+    value?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: commentsCountOrderByAggregateInput
+    _max?: commentsMaxOrderByAggregateInput
+    _min?: commentsMinOrderByAggregateInput
+  }
+
+  export type commentsScalarWhereWithAggregatesInput = {
+    AND?: commentsScalarWhereWithAggregatesInput | commentsScalarWhereWithAggregatesInput[]
+    OR?: commentsScalarWhereWithAggregatesInput[]
+    NOT?: commentsScalarWhereWithAggregatesInput | commentsScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"comments"> | string
+    parent_id?: UuidNullableWithAggregatesFilter<"comments"> | string | null
+    user_id?: UuidWithAggregatesFilter<"comments"> | string
+    video_id?: UuidWithAggregatesFilter<"comments"> | string
+    value?: StringWithAggregatesFilter<"comments"> | string
+    created_at?: DateTimeWithAggregatesFilter<"comments"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"comments"> | Date | string
+  }
+
+  export type subscriptionsWhereInput = {
+    AND?: subscriptionsWhereInput | subscriptionsWhereInput[]
+    OR?: subscriptionsWhereInput[]
+    NOT?: subscriptionsWhereInput | subscriptionsWhereInput[]
+    id?: UuidFilter<"subscriptions"> | string
+    viewer_id?: UuidFilter<"subscriptions"> | string
+    creator_id?: UuidFilter<"subscriptions"> | string
+    created_at?: DateTimeFilter<"subscriptions"> | Date | string
+    updated_at?: DateTimeFilter<"subscriptions"> | Date | string
+    users_subscriptions_creator_idTousers?: XOR<UsersScalarRelationFilter, usersWhereInput>
+    users_subscriptions_viewer_idTousers?: XOR<UsersScalarRelationFilter, usersWhereInput>
+  }
+
+  export type subscriptionsOrderByWithRelationInput = {
+    id?: SortOrder
+    viewer_id?: SortOrder
+    creator_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    users_subscriptions_creator_idTousers?: usersOrderByWithRelationInput
+    users_subscriptions_viewer_idTousers?: usersOrderByWithRelationInput
+  }
+
+  export type subscriptionsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    viewer_id_creator_id?: subscriptionsViewer_idCreator_idCompoundUniqueInput
+    AND?: subscriptionsWhereInput | subscriptionsWhereInput[]
+    OR?: subscriptionsWhereInput[]
+    NOT?: subscriptionsWhereInput | subscriptionsWhereInput[]
+    viewer_id?: UuidFilter<"subscriptions"> | string
+    creator_id?: UuidFilter<"subscriptions"> | string
+    created_at?: DateTimeFilter<"subscriptions"> | Date | string
+    updated_at?: DateTimeFilter<"subscriptions"> | Date | string
+    users_subscriptions_creator_idTousers?: XOR<UsersScalarRelationFilter, usersWhereInput>
+    users_subscriptions_viewer_idTousers?: XOR<UsersScalarRelationFilter, usersWhereInput>
+  }, "id" | "viewer_id_creator_id">
+
+  export type subscriptionsOrderByWithAggregationInput = {
+    id?: SortOrder
+    viewer_id?: SortOrder
+    creator_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: subscriptionsCountOrderByAggregateInput
+    _max?: subscriptionsMaxOrderByAggregateInput
+    _min?: subscriptionsMinOrderByAggregateInput
+  }
+
+  export type subscriptionsScalarWhereWithAggregatesInput = {
+    AND?: subscriptionsScalarWhereWithAggregatesInput | subscriptionsScalarWhereWithAggregatesInput[]
+    OR?: subscriptionsScalarWhereWithAggregatesInput[]
+    NOT?: subscriptionsScalarWhereWithAggregatesInput | subscriptionsScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"subscriptions"> | string
+    viewer_id?: UuidWithAggregatesFilter<"subscriptions"> | string
+    creator_id?: UuidWithAggregatesFilter<"subscriptions"> | string
+    created_at?: DateTimeWithAggregatesFilter<"subscriptions"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"subscriptions"> | Date | string
+  }
+
+  export type usersWhereInput = {
+    AND?: usersWhereInput | usersWhereInput[]
+    OR?: usersWhereInput[]
+    NOT?: usersWhereInput | usersWhereInput[]
+    id?: UuidFilter<"users"> | string
+    clerk_user_id?: StringFilter<"users"> | string
+    channel_name?: StringFilter<"users"> | string
+    avatar_url?: StringNullableFilter<"users"> | string | null
+    bio?: StringNullableFilter<"users"> | string | null
+    created_at?: DateTimeNullableFilter<"users"> | Date | string | null
+    comment_reactions?: Comment_reactionsListRelationFilter
+    comments?: CommentsListRelationFilter
+    subscriptions_subscriptions_creator_idTousers?: SubscriptionsListRelationFilter
+    subscriptions_subscriptions_viewer_idTousers?: SubscriptionsListRelationFilter
+    video_reactions?: Video_reactionsListRelationFilter
+    video_views?: Video_viewsListRelationFilter
+    videos?: VideosListRelationFilter
+  }
+
+  export type usersOrderByWithRelationInput = {
+    id?: SortOrder
+    clerk_user_id?: SortOrder
+    channel_name?: SortOrder
+    avatar_url?: SortOrderInput | SortOrder
+    bio?: SortOrderInput | SortOrder
+    created_at?: SortOrderInput | SortOrder
+    comment_reactions?: comment_reactionsOrderByRelationAggregateInput
+    comments?: commentsOrderByRelationAggregateInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsOrderByRelationAggregateInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsOrderByRelationAggregateInput
+    video_reactions?: video_reactionsOrderByRelationAggregateInput
+    video_views?: video_viewsOrderByRelationAggregateInput
+    videos?: videosOrderByRelationAggregateInput
+  }
+
+  export type usersWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    clerk_user_id?: string
+    AND?: usersWhereInput | usersWhereInput[]
+    OR?: usersWhereInput[]
+    NOT?: usersWhereInput | usersWhereInput[]
+    channel_name?: StringFilter<"users"> | string
+    avatar_url?: StringNullableFilter<"users"> | string | null
+    bio?: StringNullableFilter<"users"> | string | null
+    created_at?: DateTimeNullableFilter<"users"> | Date | string | null
+    comment_reactions?: Comment_reactionsListRelationFilter
+    comments?: CommentsListRelationFilter
+    subscriptions_subscriptions_creator_idTousers?: SubscriptionsListRelationFilter
+    subscriptions_subscriptions_viewer_idTousers?: SubscriptionsListRelationFilter
+    video_reactions?: Video_reactionsListRelationFilter
+    video_views?: Video_viewsListRelationFilter
+    videos?: VideosListRelationFilter
+  }, "id" | "clerk_user_id">
+
+  export type usersOrderByWithAggregationInput = {
+    id?: SortOrder
+    clerk_user_id?: SortOrder
+    channel_name?: SortOrder
+    avatar_url?: SortOrderInput | SortOrder
+    bio?: SortOrderInput | SortOrder
+    created_at?: SortOrderInput | SortOrder
+    _count?: usersCountOrderByAggregateInput
+    _max?: usersMaxOrderByAggregateInput
+    _min?: usersMinOrderByAggregateInput
+  }
+
+  export type usersScalarWhereWithAggregatesInput = {
+    AND?: usersScalarWhereWithAggregatesInput | usersScalarWhereWithAggregatesInput[]
+    OR?: usersScalarWhereWithAggregatesInput[]
+    NOT?: usersScalarWhereWithAggregatesInput | usersScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"users"> | string
+    clerk_user_id?: StringWithAggregatesFilter<"users"> | string
+    channel_name?: StringWithAggregatesFilter<"users"> | string
+    avatar_url?: StringNullableWithAggregatesFilter<"users"> | string | null
+    bio?: StringNullableWithAggregatesFilter<"users"> | string | null
+    created_at?: DateTimeNullableWithAggregatesFilter<"users"> | Date | string | null
+  }
+
+  export type categoriesWhereInput = {
+    AND?: categoriesWhereInput | categoriesWhereInput[]
+    OR?: categoriesWhereInput[]
+    NOT?: categoriesWhereInput | categoriesWhereInput[]
+    id?: UuidFilter<"categories"> | string
+    name?: StringFilter<"categories"> | string
+    slug?: StringFilter<"categories"> | string
+    created_at?: DateTimeNullableFilter<"categories"> | Date | string | null
+    updated_at?: DateTimeNullableFilter<"categories"> | Date | string | null
+    videos?: VideosListRelationFilter
+  }
+
+  export type categoriesOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
+    videos?: videosOrderByRelationAggregateInput
+  }
+
+  export type categoriesWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    slug?: string
+    AND?: categoriesWhereInput | categoriesWhereInput[]
+    OR?: categoriesWhereInput[]
+    NOT?: categoriesWhereInput | categoriesWhereInput[]
+    name?: StringFilter<"categories"> | string
+    created_at?: DateTimeNullableFilter<"categories"> | Date | string | null
+    updated_at?: DateTimeNullableFilter<"categories"> | Date | string | null
+    videos?: VideosListRelationFilter
+  }, "id" | "slug">
+
+  export type categoriesOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
+    _count?: categoriesCountOrderByAggregateInput
+    _max?: categoriesMaxOrderByAggregateInput
+    _min?: categoriesMinOrderByAggregateInput
+  }
+
+  export type categoriesScalarWhereWithAggregatesInput = {
+    AND?: categoriesScalarWhereWithAggregatesInput | categoriesScalarWhereWithAggregatesInput[]
+    OR?: categoriesScalarWhereWithAggregatesInput[]
+    NOT?: categoriesScalarWhereWithAggregatesInput | categoriesScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"categories"> | string
+    name?: StringWithAggregatesFilter<"categories"> | string
+    slug?: StringWithAggregatesFilter<"categories"> | string
+    created_at?: DateTimeNullableWithAggregatesFilter<"categories"> | Date | string | null
+    updated_at?: DateTimeNullableWithAggregatesFilter<"categories"> | Date | string | null
+  }
+
+  export type videosWhereInput = {
+    AND?: videosWhereInput | videosWhereInput[]
+    OR?: videosWhereInput[]
+    NOT?: videosWhereInput | videosWhereInput[]
+    id?: UuidFilter<"videos"> | string
+    title?: StringFilter<"videos"> | string
+    description?: StringNullableFilter<"videos"> | string | null
+    mux_status?: StringNullableFilter<"videos"> | string | null
+    mux_asset_id?: StringNullableFilter<"videos"> | string | null
+    mux_upload_id?: StringNullableFilter<"videos"> | string | null
+    mux_playback_id?: StringNullableFilter<"videos"> | string | null
+    mux_track_id?: StringNullableFilter<"videos"> | string | null
+    mux_track_status?: StringNullableFilter<"videos"> | string | null
+    user_id?: UuidFilter<"videos"> | string
+    category_id?: UuidNullableFilter<"videos"> | string | null
+    created_at?: DateTimeNullableFilter<"videos"> | Date | string | null
+    updated_at?: DateTimeNullableFilter<"videos"> | Date | string | null
+    comments?: CommentsListRelationFilter
+    video_reactions?: Video_reactionsListRelationFilter
+    video_views?: Video_viewsListRelationFilter
+    categories?: XOR<CategoriesNullableScalarRelationFilter, categoriesWhereInput> | null
+    users?: XOR<UsersScalarRelationFilter, usersWhereInput>
+  }
+
+  export type videosOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    mux_status?: SortOrderInput | SortOrder
+    mux_asset_id?: SortOrderInput | SortOrder
+    mux_upload_id?: SortOrderInput | SortOrder
+    mux_playback_id?: SortOrderInput | SortOrder
+    mux_track_id?: SortOrderInput | SortOrder
+    mux_track_status?: SortOrderInput | SortOrder
+    user_id?: SortOrder
+    category_id?: SortOrderInput | SortOrder
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
+    comments?: commentsOrderByRelationAggregateInput
+    video_reactions?: video_reactionsOrderByRelationAggregateInput
+    video_views?: video_viewsOrderByRelationAggregateInput
+    categories?: categoriesOrderByWithRelationInput
+    users?: usersOrderByWithRelationInput
+  }
+
+  export type videosWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    mux_asset_id?: string
+    mux_upload_id?: string
+    mux_playback_id?: string
+    mux_track_id?: string
+    AND?: videosWhereInput | videosWhereInput[]
+    OR?: videosWhereInput[]
+    NOT?: videosWhereInput | videosWhereInput[]
+    title?: StringFilter<"videos"> | string
+    description?: StringNullableFilter<"videos"> | string | null
+    mux_status?: StringNullableFilter<"videos"> | string | null
+    mux_track_status?: StringNullableFilter<"videos"> | string | null
+    user_id?: UuidFilter<"videos"> | string
+    category_id?: UuidNullableFilter<"videos"> | string | null
+    created_at?: DateTimeNullableFilter<"videos"> | Date | string | null
+    updated_at?: DateTimeNullableFilter<"videos"> | Date | string | null
+    comments?: CommentsListRelationFilter
+    video_reactions?: Video_reactionsListRelationFilter
+    video_views?: Video_viewsListRelationFilter
+    categories?: XOR<CategoriesNullableScalarRelationFilter, categoriesWhereInput> | null
+    users?: XOR<UsersScalarRelationFilter, usersWhereInput>
+  }, "id" | "mux_asset_id" | "mux_upload_id" | "mux_playback_id" | "mux_track_id">
+
+  export type videosOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    mux_status?: SortOrderInput | SortOrder
+    mux_asset_id?: SortOrderInput | SortOrder
+    mux_upload_id?: SortOrderInput | SortOrder
+    mux_playback_id?: SortOrderInput | SortOrder
+    mux_track_id?: SortOrderInput | SortOrder
+    mux_track_status?: SortOrderInput | SortOrder
+    user_id?: SortOrder
+    category_id?: SortOrderInput | SortOrder
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
+    _count?: videosCountOrderByAggregateInput
+    _max?: videosMaxOrderByAggregateInput
+    _min?: videosMinOrderByAggregateInput
+  }
+
+  export type videosScalarWhereWithAggregatesInput = {
+    AND?: videosScalarWhereWithAggregatesInput | videosScalarWhereWithAggregatesInput[]
+    OR?: videosScalarWhereWithAggregatesInput[]
+    NOT?: videosScalarWhereWithAggregatesInput | videosScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"videos"> | string
+    title?: StringWithAggregatesFilter<"videos"> | string
+    description?: StringNullableWithAggregatesFilter<"videos"> | string | null
+    mux_status?: StringNullableWithAggregatesFilter<"videos"> | string | null
+    mux_asset_id?: StringNullableWithAggregatesFilter<"videos"> | string | null
+    mux_upload_id?: StringNullableWithAggregatesFilter<"videos"> | string | null
+    mux_playback_id?: StringNullableWithAggregatesFilter<"videos"> | string | null
+    mux_track_id?: StringNullableWithAggregatesFilter<"videos"> | string | null
+    mux_track_status?: StringNullableWithAggregatesFilter<"videos"> | string | null
+    user_id?: UuidWithAggregatesFilter<"videos"> | string
+    category_id?: UuidNullableWithAggregatesFilter<"videos"> | string | null
+    created_at?: DateTimeNullableWithAggregatesFilter<"videos"> | Date | string | null
+    updated_at?: DateTimeNullableWithAggregatesFilter<"videos"> | Date | string | null
+  }
+
+  export type comment_reactionsWhereInput = {
+    AND?: comment_reactionsWhereInput | comment_reactionsWhereInput[]
+    OR?: comment_reactionsWhereInput[]
+    NOT?: comment_reactionsWhereInput | comment_reactionsWhereInput[]
+    id?: UuidFilter<"comment_reactions"> | string
+    user_id?: UuidFilter<"comment_reactions"> | string
+    comment_id?: UuidFilter<"comment_reactions"> | string
+    type?: StringFilter<"comment_reactions"> | string
+    created_at?: DateTimeFilter<"comment_reactions"> | Date | string
+    updated_at?: DateTimeFilter<"comment_reactions"> | Date | string
+    comments?: XOR<CommentsScalarRelationFilter, commentsWhereInput>
+    users?: XOR<UsersScalarRelationFilter, usersWhereInput>
+  }
+
+  export type comment_reactionsOrderByWithRelationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    comment_id?: SortOrder
+    type?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    comments?: commentsOrderByWithRelationInput
+    users?: usersOrderByWithRelationInput
+  }
+
+  export type comment_reactionsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    user_id_comment_id?: comment_reactionsUser_idComment_idCompoundUniqueInput
+    AND?: comment_reactionsWhereInput | comment_reactionsWhereInput[]
+    OR?: comment_reactionsWhereInput[]
+    NOT?: comment_reactionsWhereInput | comment_reactionsWhereInput[]
+    user_id?: UuidFilter<"comment_reactions"> | string
+    comment_id?: UuidFilter<"comment_reactions"> | string
+    type?: StringFilter<"comment_reactions"> | string
+    created_at?: DateTimeFilter<"comment_reactions"> | Date | string
+    updated_at?: DateTimeFilter<"comment_reactions"> | Date | string
+    comments?: XOR<CommentsScalarRelationFilter, commentsWhereInput>
+    users?: XOR<UsersScalarRelationFilter, usersWhereInput>
+  }, "id" | "user_id_comment_id">
+
+  export type comment_reactionsOrderByWithAggregationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    comment_id?: SortOrder
+    type?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: comment_reactionsCountOrderByAggregateInput
+    _max?: comment_reactionsMaxOrderByAggregateInput
+    _min?: comment_reactionsMinOrderByAggregateInput
+  }
+
+  export type comment_reactionsScalarWhereWithAggregatesInput = {
+    AND?: comment_reactionsScalarWhereWithAggregatesInput | comment_reactionsScalarWhereWithAggregatesInput[]
+    OR?: comment_reactionsScalarWhereWithAggregatesInput[]
+    NOT?: comment_reactionsScalarWhereWithAggregatesInput | comment_reactionsScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"comment_reactions"> | string
+    user_id?: UuidWithAggregatesFilter<"comment_reactions"> | string
+    comment_id?: UuidWithAggregatesFilter<"comment_reactions"> | string
+    type?: StringWithAggregatesFilter<"comment_reactions"> | string
+    created_at?: DateTimeWithAggregatesFilter<"comment_reactions"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"comment_reactions"> | Date | string
+  }
+
+  export type video_reactionsWhereInput = {
+    AND?: video_reactionsWhereInput | video_reactionsWhereInput[]
+    OR?: video_reactionsWhereInput[]
+    NOT?: video_reactionsWhereInput | video_reactionsWhereInput[]
+    id?: UuidFilter<"video_reactions"> | string
+    user_id?: UuidFilter<"video_reactions"> | string
+    video_id?: UuidFilter<"video_reactions"> | string
+    type?: StringFilter<"video_reactions"> | string
+    created_at?: DateTimeFilter<"video_reactions"> | Date | string
+    updated_at?: DateTimeFilter<"video_reactions"> | Date | string
+    users?: XOR<UsersScalarRelationFilter, usersWhereInput>
+    videos?: XOR<VideosScalarRelationFilter, videosWhereInput>
+  }
+
+  export type video_reactionsOrderByWithRelationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    video_id?: SortOrder
+    type?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    users?: usersOrderByWithRelationInput
+    videos?: videosOrderByWithRelationInput
+  }
+
+  export type video_reactionsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: video_reactionsWhereInput | video_reactionsWhereInput[]
+    OR?: video_reactionsWhereInput[]
+    NOT?: video_reactionsWhereInput | video_reactionsWhereInput[]
+    user_id?: UuidFilter<"video_reactions"> | string
+    video_id?: UuidFilter<"video_reactions"> | string
+    type?: StringFilter<"video_reactions"> | string
+    created_at?: DateTimeFilter<"video_reactions"> | Date | string
+    updated_at?: DateTimeFilter<"video_reactions"> | Date | string
+    users?: XOR<UsersScalarRelationFilter, usersWhereInput>
+    videos?: XOR<VideosScalarRelationFilter, videosWhereInput>
+  }, "id">
+
+  export type video_reactionsOrderByWithAggregationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    video_id?: SortOrder
+    type?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: video_reactionsCountOrderByAggregateInput
+    _max?: video_reactionsMaxOrderByAggregateInput
+    _min?: video_reactionsMinOrderByAggregateInput
+  }
+
+  export type video_reactionsScalarWhereWithAggregatesInput = {
+    AND?: video_reactionsScalarWhereWithAggregatesInput | video_reactionsScalarWhereWithAggregatesInput[]
+    OR?: video_reactionsScalarWhereWithAggregatesInput[]
+    NOT?: video_reactionsScalarWhereWithAggregatesInput | video_reactionsScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"video_reactions"> | string
+    user_id?: UuidWithAggregatesFilter<"video_reactions"> | string
+    video_id?: UuidWithAggregatesFilter<"video_reactions"> | string
+    type?: StringWithAggregatesFilter<"video_reactions"> | string
+    created_at?: DateTimeWithAggregatesFilter<"video_reactions"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"video_reactions"> | Date | string
+  }
+
+  export type video_viewsWhereInput = {
+    AND?: video_viewsWhereInput | video_viewsWhereInput[]
+    OR?: video_viewsWhereInput[]
+    NOT?: video_viewsWhereInput | video_viewsWhereInput[]
+    id?: UuidFilter<"video_views"> | string
+    user_id?: UuidFilter<"video_views"> | string
+    video_id?: UuidFilter<"video_views"> | string
+    created_at?: DateTimeFilter<"video_views"> | Date | string
+    updated_at?: DateTimeFilter<"video_views"> | Date | string
+    users?: XOR<UsersScalarRelationFilter, usersWhereInput>
+    videos?: XOR<VideosScalarRelationFilter, videosWhereInput>
+  }
+
+  export type video_viewsOrderByWithRelationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    video_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    users?: usersOrderByWithRelationInput
+    videos?: videosOrderByWithRelationInput
+  }
+
+  export type video_viewsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    user_id_video_id?: video_viewsUser_idVideo_idCompoundUniqueInput
+    AND?: video_viewsWhereInput | video_viewsWhereInput[]
+    OR?: video_viewsWhereInput[]
+    NOT?: video_viewsWhereInput | video_viewsWhereInput[]
+    user_id?: UuidFilter<"video_views"> | string
+    video_id?: UuidFilter<"video_views"> | string
+    created_at?: DateTimeFilter<"video_views"> | Date | string
+    updated_at?: DateTimeFilter<"video_views"> | Date | string
+    users?: XOR<UsersScalarRelationFilter, usersWhereInput>
+    videos?: XOR<VideosScalarRelationFilter, videosWhereInput>
+  }, "id" | "user_id_video_id">
+
+  export type video_viewsOrderByWithAggregationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    video_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: video_viewsCountOrderByAggregateInput
+    _max?: video_viewsMaxOrderByAggregateInput
+    _min?: video_viewsMinOrderByAggregateInput
+  }
+
+  export type video_viewsScalarWhereWithAggregatesInput = {
+    AND?: video_viewsScalarWhereWithAggregatesInput | video_viewsScalarWhereWithAggregatesInput[]
+    OR?: video_viewsScalarWhereWithAggregatesInput[]
+    NOT?: video_viewsScalarWhereWithAggregatesInput | video_viewsScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"video_views"> | string
+    user_id?: UuidWithAggregatesFilter<"video_views"> | string
+    video_id?: UuidWithAggregatesFilter<"video_views"> | string
+    created_at?: DateTimeWithAggregatesFilter<"video_views"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"video_views"> | Date | string
+  }
+
+  export type commentsCreateInput = {
+    id?: string
+    value: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    comment_reactions?: comment_reactionsCreateNestedManyWithoutCommentsInput
+    comments?: commentsCreateNestedOneWithoutOther_commentsInput
+    other_comments?: commentsCreateNestedManyWithoutCommentsInput
+    users: usersCreateNestedOneWithoutCommentsInput
+    videos: videosCreateNestedOneWithoutCommentsInput
+  }
+
+  export type commentsUncheckedCreateInput = {
+    id?: string
+    parent_id?: string | null
+    user_id: string
+    video_id: string
+    value: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    comment_reactions?: comment_reactionsUncheckedCreateNestedManyWithoutCommentsInput
+    other_comments?: commentsUncheckedCreateNestedManyWithoutCommentsInput
+  }
+
+  export type commentsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    comment_reactions?: comment_reactionsUpdateManyWithoutCommentsNestedInput
+    comments?: commentsUpdateOneWithoutOther_commentsNestedInput
+    other_comments?: commentsUpdateManyWithoutCommentsNestedInput
+    users?: usersUpdateOneRequiredWithoutCommentsNestedInput
+    videos?: videosUpdateOneRequiredWithoutCommentsNestedInput
+  }
+
+  export type commentsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    parent_id?: NullableStringFieldUpdateOperationsInput | string | null
+    user_id?: StringFieldUpdateOperationsInput | string
+    video_id?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    comment_reactions?: comment_reactionsUncheckedUpdateManyWithoutCommentsNestedInput
+    other_comments?: commentsUncheckedUpdateManyWithoutCommentsNestedInput
+  }
+
+  export type commentsCreateManyInput = {
+    id?: string
+    parent_id?: string | null
+    user_id: string
+    video_id: string
+    value: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type commentsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type commentsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    parent_id?: NullableStringFieldUpdateOperationsInput | string | null
+    user_id?: StringFieldUpdateOperationsInput | string
+    video_id?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type subscriptionsCreateInput = {
+    id?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    users_subscriptions_creator_idTousers: usersCreateNestedOneWithoutSubscriptions_subscriptions_creator_idTousersInput
+    users_subscriptions_viewer_idTousers: usersCreateNestedOneWithoutSubscriptions_subscriptions_viewer_idTousersInput
+  }
+
+  export type subscriptionsUncheckedCreateInput = {
+    id?: string
+    viewer_id: string
+    creator_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type subscriptionsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    users_subscriptions_creator_idTousers?: usersUpdateOneRequiredWithoutSubscriptions_subscriptions_creator_idTousersNestedInput
+    users_subscriptions_viewer_idTousers?: usersUpdateOneRequiredWithoutSubscriptions_subscriptions_viewer_idTousersNestedInput
+  }
+
+  export type subscriptionsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    viewer_id?: StringFieldUpdateOperationsInput | string
+    creator_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type subscriptionsCreateManyInput = {
+    id?: string
+    viewer_id: string
+    creator_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type subscriptionsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type subscriptionsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    viewer_id?: StringFieldUpdateOperationsInput | string
+    creator_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type usersCreateInput = {
+    id?: string
+    clerk_user_id: string
+    channel_name: string
+    avatar_url?: string | null
+    bio?: string | null
+    created_at?: Date | string | null
+    comment_reactions?: comment_reactionsCreateNestedManyWithoutUsersInput
+    comments?: commentsCreateNestedManyWithoutUsersInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_reactions?: video_reactionsCreateNestedManyWithoutUsersInput
+    video_views?: video_viewsCreateNestedManyWithoutUsersInput
+    videos?: videosCreateNestedManyWithoutUsersInput
+  }
+
+  export type usersUncheckedCreateInput = {
+    id?: string
+    clerk_user_id: string
+    channel_name: string
+    avatar_url?: string | null
+    bio?: string | null
+    created_at?: Date | string | null
+    comment_reactions?: comment_reactionsUncheckedCreateNestedManyWithoutUsersInput
+    comments?: commentsUncheckedCreateNestedManyWithoutUsersInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_reactions?: video_reactionsUncheckedCreateNestedManyWithoutUsersInput
+    video_views?: video_viewsUncheckedCreateNestedManyWithoutUsersInput
+    videos?: videosUncheckedCreateNestedManyWithoutUsersInput
+  }
+
+  export type usersUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: StringFieldUpdateOperationsInput | string
+    channel_name?: StringFieldUpdateOperationsInput | string
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    comment_reactions?: comment_reactionsUpdateManyWithoutUsersNestedInput
+    comments?: commentsUpdateManyWithoutUsersNestedInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_reactions?: video_reactionsUpdateManyWithoutUsersNestedInput
+    video_views?: video_viewsUpdateManyWithoutUsersNestedInput
+    videos?: videosUpdateManyWithoutUsersNestedInput
+  }
+
+  export type usersUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: StringFieldUpdateOperationsInput | string
+    channel_name?: StringFieldUpdateOperationsInput | string
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    comment_reactions?: comment_reactionsUncheckedUpdateManyWithoutUsersNestedInput
+    comments?: commentsUncheckedUpdateManyWithoutUsersNestedInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_reactions?: video_reactionsUncheckedUpdateManyWithoutUsersNestedInput
+    video_views?: video_viewsUncheckedUpdateManyWithoutUsersNestedInput
+    videos?: videosUncheckedUpdateManyWithoutUsersNestedInput
+  }
+
+  export type usersCreateManyInput = {
+    id?: string
+    clerk_user_id: string
+    channel_name: string
+    avatar_url?: string | null
+    bio?: string | null
+    created_at?: Date | string | null
+  }
+
+  export type usersUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: StringFieldUpdateOperationsInput | string
+    channel_name?: StringFieldUpdateOperationsInput | string
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type usersUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: StringFieldUpdateOperationsInput | string
+    channel_name?: StringFieldUpdateOperationsInput | string
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type categoriesCreateInput = {
+    id?: string
+    name: string
+    slug: string
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    videos?: videosCreateNestedManyWithoutCategoriesInput
+  }
+
+  export type categoriesUncheckedCreateInput = {
+    id?: string
+    name: string
+    slug: string
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    videos?: videosUncheckedCreateNestedManyWithoutCategoriesInput
+  }
+
+  export type categoriesUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    videos?: videosUpdateManyWithoutCategoriesNestedInput
+  }
+
+  export type categoriesUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    videos?: videosUncheckedUpdateManyWithoutCategoriesNestedInput
+  }
+
+  export type categoriesCreateManyInput = {
+    id?: string
+    name: string
+    slug: string
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+  }
+
+  export type categoriesUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type categoriesUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type videosCreateInput = {
+    id?: string
+    title: string
+    description?: string | null
+    mux_status?: string | null
+    mux_asset_id?: string | null
+    mux_upload_id?: string | null
+    mux_playback_id?: string | null
+    mux_track_id?: string | null
+    mux_track_status?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    comments?: commentsCreateNestedManyWithoutVideosInput
+    video_reactions?: video_reactionsCreateNestedManyWithoutVideosInput
+    video_views?: video_viewsCreateNestedManyWithoutVideosInput
+    categories?: categoriesCreateNestedOneWithoutVideosInput
+    users: usersCreateNestedOneWithoutVideosInput
+  }
+
+  export type videosUncheckedCreateInput = {
+    id?: string
+    title: string
+    description?: string | null
+    mux_status?: string | null
+    mux_asset_id?: string | null
+    mux_upload_id?: string | null
+    mux_playback_id?: string | null
+    mux_track_id?: string | null
+    mux_track_status?: string | null
+    user_id: string
+    category_id?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    comments?: commentsUncheckedCreateNestedManyWithoutVideosInput
+    video_reactions?: video_reactionsUncheckedCreateNestedManyWithoutVideosInput
+    video_views?: video_viewsUncheckedCreateNestedManyWithoutVideosInput
+  }
+
+  export type videosUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_status?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_asset_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_upload_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_playback_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_status?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    comments?: commentsUpdateManyWithoutVideosNestedInput
+    video_reactions?: video_reactionsUpdateManyWithoutVideosNestedInput
+    video_views?: video_viewsUpdateManyWithoutVideosNestedInput
+    categories?: categoriesUpdateOneWithoutVideosNestedInput
+    users?: usersUpdateOneRequiredWithoutVideosNestedInput
+  }
+
+  export type videosUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_status?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_asset_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_upload_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_playback_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_status?: NullableStringFieldUpdateOperationsInput | string | null
+    user_id?: StringFieldUpdateOperationsInput | string
+    category_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    comments?: commentsUncheckedUpdateManyWithoutVideosNestedInput
+    video_reactions?: video_reactionsUncheckedUpdateManyWithoutVideosNestedInput
+    video_views?: video_viewsUncheckedUpdateManyWithoutVideosNestedInput
+  }
+
+  export type videosCreateManyInput = {
+    id?: string
+    title: string
+    description?: string | null
+    mux_status?: string | null
+    mux_asset_id?: string | null
+    mux_upload_id?: string | null
+    mux_playback_id?: string | null
+    mux_track_id?: string | null
+    mux_track_status?: string | null
+    user_id: string
+    category_id?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+  }
+
+  export type videosUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_status?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_asset_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_upload_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_playback_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_status?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type videosUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_status?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_asset_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_upload_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_playback_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_status?: NullableStringFieldUpdateOperationsInput | string | null
+    user_id?: StringFieldUpdateOperationsInput | string
+    category_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type comment_reactionsCreateInput = {
+    id?: string
+    type: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    comments: commentsCreateNestedOneWithoutComment_reactionsInput
+    users: usersCreateNestedOneWithoutComment_reactionsInput
+  }
+
+  export type comment_reactionsUncheckedCreateInput = {
+    id?: string
+    user_id: string
+    comment_id: string
+    type: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type comment_reactionsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    comments?: commentsUpdateOneRequiredWithoutComment_reactionsNestedInput
+    users?: usersUpdateOneRequiredWithoutComment_reactionsNestedInput
+  }
+
+  export type comment_reactionsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    comment_id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type comment_reactionsCreateManyInput = {
+    id?: string
+    user_id: string
+    comment_id: string
+    type: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type comment_reactionsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type comment_reactionsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    comment_id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type video_reactionsCreateInput = {
+    id?: string
+    type: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    users: usersCreateNestedOneWithoutVideo_reactionsInput
+    videos: videosCreateNestedOneWithoutVideo_reactionsInput
+  }
+
+  export type video_reactionsUncheckedCreateInput = {
+    id?: string
+    user_id: string
+    video_id: string
+    type: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type video_reactionsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: usersUpdateOneRequiredWithoutVideo_reactionsNestedInput
+    videos?: videosUpdateOneRequiredWithoutVideo_reactionsNestedInput
+  }
+
+  export type video_reactionsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    video_id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type video_reactionsCreateManyInput = {
+    id?: string
+    user_id: string
+    video_id: string
+    type: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type video_reactionsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type video_reactionsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    video_id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type video_viewsCreateInput = {
+    id?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    users: usersCreateNestedOneWithoutVideo_viewsInput
+    videos: videosCreateNestedOneWithoutVideo_viewsInput
+  }
+
+  export type video_viewsUncheckedCreateInput = {
+    id?: string
+    user_id: string
+    video_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type video_viewsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: usersUpdateOneRequiredWithoutVideo_viewsNestedInput
+    videos?: videosUpdateOneRequiredWithoutVideo_viewsNestedInput
+  }
+
+  export type video_viewsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    video_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type video_viewsCreateManyInput = {
+    id?: string
+    user_id: string
+    video_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type video_viewsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type video_viewsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    video_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UuidFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedUuidFilter<$PrismaModel> | string
+  }
+
+  export type UuidNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedUuidNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type StringFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type Comment_reactionsListRelationFilter = {
+    every?: comment_reactionsWhereInput
+    some?: comment_reactionsWhereInput
+    none?: comment_reactionsWhereInput
+  }
+
+  export type CommentsNullableScalarRelationFilter = {
+    is?: commentsWhereInput | null
+    isNot?: commentsWhereInput | null
+  }
+
+  export type CommentsListRelationFilter = {
+    every?: commentsWhereInput
+    some?: commentsWhereInput
+    none?: commentsWhereInput
+  }
+
+  export type UsersScalarRelationFilter = {
+    is?: usersWhereInput
+    isNot?: usersWhereInput
+  }
+
+  export type VideosScalarRelationFilter = {
+    is?: videosWhereInput
+    isNot?: videosWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type comment_reactionsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type commentsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type commentsCountOrderByAggregateInput = {
+    id?: SortOrder
+    parent_id?: SortOrder
+    user_id?: SortOrder
+    video_id?: SortOrder
+    value?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type commentsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    parent_id?: SortOrder
+    user_id?: SortOrder
+    video_id?: SortOrder
+    value?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type commentsMinOrderByAggregateInput = {
+    id?: SortOrder
+    parent_id?: SortOrder
+    user_id?: SortOrder
+    video_id?: SortOrder
+    value?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type UuidWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedUuidWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type UuidNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedUuidNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type subscriptionsViewer_idCreator_idCompoundUniqueInput = {
+    viewer_id: string
+    creator_id: string
+  }
+
+  export type subscriptionsCountOrderByAggregateInput = {
+    id?: SortOrder
+    viewer_id?: SortOrder
+    creator_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type subscriptionsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    viewer_id?: SortOrder
+    creator_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type subscriptionsMinOrderByAggregateInput = {
+    id?: SortOrder
+    viewer_id?: SortOrder
+    creator_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type SubscriptionsListRelationFilter = {
+    every?: subscriptionsWhereInput
+    some?: subscriptionsWhereInput
+    none?: subscriptionsWhereInput
+  }
+
+  export type Video_reactionsListRelationFilter = {
+    every?: video_reactionsWhereInput
+    some?: video_reactionsWhereInput
+    none?: video_reactionsWhereInput
+  }
+
+  export type Video_viewsListRelationFilter = {
+    every?: video_viewsWhereInput
+    some?: video_viewsWhereInput
+    none?: video_viewsWhereInput
+  }
+
+  export type VideosListRelationFilter = {
+    every?: videosWhereInput
+    some?: videosWhereInput
+    none?: videosWhereInput
+  }
+
+  export type subscriptionsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type video_reactionsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type video_viewsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type videosOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type usersCountOrderByAggregateInput = {
+    id?: SortOrder
+    clerk_user_id?: SortOrder
+    channel_name?: SortOrder
+    avatar_url?: SortOrder
+    bio?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type usersMaxOrderByAggregateInput = {
+    id?: SortOrder
+    clerk_user_id?: SortOrder
+    channel_name?: SortOrder
+    avatar_url?: SortOrder
+    bio?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type usersMinOrderByAggregateInput = {
+    id?: SortOrder
+    clerk_user_id?: SortOrder
+    channel_name?: SortOrder
+    avatar_url?: SortOrder
+    bio?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type categoriesCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type categoriesMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type categoriesMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type CategoriesNullableScalarRelationFilter = {
+    is?: categoriesWhereInput | null
+    isNot?: categoriesWhereInput | null
+  }
+
+  export type videosCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    mux_status?: SortOrder
+    mux_asset_id?: SortOrder
+    mux_upload_id?: SortOrder
+    mux_playback_id?: SortOrder
+    mux_track_id?: SortOrder
+    mux_track_status?: SortOrder
+    user_id?: SortOrder
+    category_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type videosMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    mux_status?: SortOrder
+    mux_asset_id?: SortOrder
+    mux_upload_id?: SortOrder
+    mux_playback_id?: SortOrder
+    mux_track_id?: SortOrder
+    mux_track_status?: SortOrder
+    user_id?: SortOrder
+    category_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type videosMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    mux_status?: SortOrder
+    mux_asset_id?: SortOrder
+    mux_upload_id?: SortOrder
+    mux_playback_id?: SortOrder
+    mux_track_id?: SortOrder
+    mux_track_status?: SortOrder
+    user_id?: SortOrder
+    category_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type CommentsScalarRelationFilter = {
+    is?: commentsWhereInput
+    isNot?: commentsWhereInput
+  }
+
+  export type comment_reactionsUser_idComment_idCompoundUniqueInput = {
+    user_id: string
+    comment_id: string
+  }
+
+  export type comment_reactionsCountOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    comment_id?: SortOrder
+    type?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type comment_reactionsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    comment_id?: SortOrder
+    type?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type comment_reactionsMinOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    comment_id?: SortOrder
+    type?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type video_reactionsCountOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    video_id?: SortOrder
+    type?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type video_reactionsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    video_id?: SortOrder
+    type?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type video_reactionsMinOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    video_id?: SortOrder
+    type?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type video_viewsUser_idVideo_idCompoundUniqueInput = {
+    user_id: string
+    video_id: string
+  }
+
+  export type video_viewsCountOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    video_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type video_viewsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    video_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type video_viewsMinOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    video_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type comment_reactionsCreateNestedManyWithoutCommentsInput = {
+    create?: XOR<comment_reactionsCreateWithoutCommentsInput, comment_reactionsUncheckedCreateWithoutCommentsInput> | comment_reactionsCreateWithoutCommentsInput[] | comment_reactionsUncheckedCreateWithoutCommentsInput[]
+    connectOrCreate?: comment_reactionsCreateOrConnectWithoutCommentsInput | comment_reactionsCreateOrConnectWithoutCommentsInput[]
+    createMany?: comment_reactionsCreateManyCommentsInputEnvelope
+    connect?: comment_reactionsWhereUniqueInput | comment_reactionsWhereUniqueInput[]
+  }
+
+  export type commentsCreateNestedOneWithoutOther_commentsInput = {
+    create?: XOR<commentsCreateWithoutOther_commentsInput, commentsUncheckedCreateWithoutOther_commentsInput>
+    connectOrCreate?: commentsCreateOrConnectWithoutOther_commentsInput
+    connect?: commentsWhereUniqueInput
+  }
+
+  export type commentsCreateNestedManyWithoutCommentsInput = {
+    create?: XOR<commentsCreateWithoutCommentsInput, commentsUncheckedCreateWithoutCommentsInput> | commentsCreateWithoutCommentsInput[] | commentsUncheckedCreateWithoutCommentsInput[]
+    connectOrCreate?: commentsCreateOrConnectWithoutCommentsInput | commentsCreateOrConnectWithoutCommentsInput[]
+    createMany?: commentsCreateManyCommentsInputEnvelope
+    connect?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+  }
+
+  export type usersCreateNestedOneWithoutCommentsInput = {
+    create?: XOR<usersCreateWithoutCommentsInput, usersUncheckedCreateWithoutCommentsInput>
+    connectOrCreate?: usersCreateOrConnectWithoutCommentsInput
+    connect?: usersWhereUniqueInput
+  }
+
+  export type videosCreateNestedOneWithoutCommentsInput = {
+    create?: XOR<videosCreateWithoutCommentsInput, videosUncheckedCreateWithoutCommentsInput>
+    connectOrCreate?: videosCreateOrConnectWithoutCommentsInput
+    connect?: videosWhereUniqueInput
+  }
+
+  export type comment_reactionsUncheckedCreateNestedManyWithoutCommentsInput = {
+    create?: XOR<comment_reactionsCreateWithoutCommentsInput, comment_reactionsUncheckedCreateWithoutCommentsInput> | comment_reactionsCreateWithoutCommentsInput[] | comment_reactionsUncheckedCreateWithoutCommentsInput[]
+    connectOrCreate?: comment_reactionsCreateOrConnectWithoutCommentsInput | comment_reactionsCreateOrConnectWithoutCommentsInput[]
+    createMany?: comment_reactionsCreateManyCommentsInputEnvelope
+    connect?: comment_reactionsWhereUniqueInput | comment_reactionsWhereUniqueInput[]
+  }
+
+  export type commentsUncheckedCreateNestedManyWithoutCommentsInput = {
+    create?: XOR<commentsCreateWithoutCommentsInput, commentsUncheckedCreateWithoutCommentsInput> | commentsCreateWithoutCommentsInput[] | commentsUncheckedCreateWithoutCommentsInput[]
+    connectOrCreate?: commentsCreateOrConnectWithoutCommentsInput | commentsCreateOrConnectWithoutCommentsInput[]
+    createMany?: commentsCreateManyCommentsInputEnvelope
+    connect?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+  }
+
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type comment_reactionsUpdateManyWithoutCommentsNestedInput = {
+    create?: XOR<comment_reactionsCreateWithoutCommentsInput, comment_reactionsUncheckedCreateWithoutCommentsInput> | comment_reactionsCreateWithoutCommentsInput[] | comment_reactionsUncheckedCreateWithoutCommentsInput[]
+    connectOrCreate?: comment_reactionsCreateOrConnectWithoutCommentsInput | comment_reactionsCreateOrConnectWithoutCommentsInput[]
+    upsert?: comment_reactionsUpsertWithWhereUniqueWithoutCommentsInput | comment_reactionsUpsertWithWhereUniqueWithoutCommentsInput[]
+    createMany?: comment_reactionsCreateManyCommentsInputEnvelope
+    set?: comment_reactionsWhereUniqueInput | comment_reactionsWhereUniqueInput[]
+    disconnect?: comment_reactionsWhereUniqueInput | comment_reactionsWhereUniqueInput[]
+    delete?: comment_reactionsWhereUniqueInput | comment_reactionsWhereUniqueInput[]
+    connect?: comment_reactionsWhereUniqueInput | comment_reactionsWhereUniqueInput[]
+    update?: comment_reactionsUpdateWithWhereUniqueWithoutCommentsInput | comment_reactionsUpdateWithWhereUniqueWithoutCommentsInput[]
+    updateMany?: comment_reactionsUpdateManyWithWhereWithoutCommentsInput | comment_reactionsUpdateManyWithWhereWithoutCommentsInput[]
+    deleteMany?: comment_reactionsScalarWhereInput | comment_reactionsScalarWhereInput[]
+  }
+
+  export type commentsUpdateOneWithoutOther_commentsNestedInput = {
+    create?: XOR<commentsCreateWithoutOther_commentsInput, commentsUncheckedCreateWithoutOther_commentsInput>
+    connectOrCreate?: commentsCreateOrConnectWithoutOther_commentsInput
+    upsert?: commentsUpsertWithoutOther_commentsInput
+    disconnect?: commentsWhereInput | boolean
+    delete?: commentsWhereInput | boolean
+    connect?: commentsWhereUniqueInput
+    update?: XOR<XOR<commentsUpdateToOneWithWhereWithoutOther_commentsInput, commentsUpdateWithoutOther_commentsInput>, commentsUncheckedUpdateWithoutOther_commentsInput>
+  }
+
+  export type commentsUpdateManyWithoutCommentsNestedInput = {
+    create?: XOR<commentsCreateWithoutCommentsInput, commentsUncheckedCreateWithoutCommentsInput> | commentsCreateWithoutCommentsInput[] | commentsUncheckedCreateWithoutCommentsInput[]
+    connectOrCreate?: commentsCreateOrConnectWithoutCommentsInput | commentsCreateOrConnectWithoutCommentsInput[]
+    upsert?: commentsUpsertWithWhereUniqueWithoutCommentsInput | commentsUpsertWithWhereUniqueWithoutCommentsInput[]
+    createMany?: commentsCreateManyCommentsInputEnvelope
+    set?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+    disconnect?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+    delete?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+    connect?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+    update?: commentsUpdateWithWhereUniqueWithoutCommentsInput | commentsUpdateWithWhereUniqueWithoutCommentsInput[]
+    updateMany?: commentsUpdateManyWithWhereWithoutCommentsInput | commentsUpdateManyWithWhereWithoutCommentsInput[]
+    deleteMany?: commentsScalarWhereInput | commentsScalarWhereInput[]
+  }
+
+  export type usersUpdateOneRequiredWithoutCommentsNestedInput = {
+    create?: XOR<usersCreateWithoutCommentsInput, usersUncheckedCreateWithoutCommentsInput>
+    connectOrCreate?: usersCreateOrConnectWithoutCommentsInput
+    upsert?: usersUpsertWithoutCommentsInput
+    connect?: usersWhereUniqueInput
+    update?: XOR<XOR<usersUpdateToOneWithWhereWithoutCommentsInput, usersUpdateWithoutCommentsInput>, usersUncheckedUpdateWithoutCommentsInput>
+  }
+
+  export type videosUpdateOneRequiredWithoutCommentsNestedInput = {
+    create?: XOR<videosCreateWithoutCommentsInput, videosUncheckedCreateWithoutCommentsInput>
+    connectOrCreate?: videosCreateOrConnectWithoutCommentsInput
+    upsert?: videosUpsertWithoutCommentsInput
+    connect?: videosWhereUniqueInput
+    update?: XOR<XOR<videosUpdateToOneWithWhereWithoutCommentsInput, videosUpdateWithoutCommentsInput>, videosUncheckedUpdateWithoutCommentsInput>
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type comment_reactionsUncheckedUpdateManyWithoutCommentsNestedInput = {
+    create?: XOR<comment_reactionsCreateWithoutCommentsInput, comment_reactionsUncheckedCreateWithoutCommentsInput> | comment_reactionsCreateWithoutCommentsInput[] | comment_reactionsUncheckedCreateWithoutCommentsInput[]
+    connectOrCreate?: comment_reactionsCreateOrConnectWithoutCommentsInput | comment_reactionsCreateOrConnectWithoutCommentsInput[]
+    upsert?: comment_reactionsUpsertWithWhereUniqueWithoutCommentsInput | comment_reactionsUpsertWithWhereUniqueWithoutCommentsInput[]
+    createMany?: comment_reactionsCreateManyCommentsInputEnvelope
+    set?: comment_reactionsWhereUniqueInput | comment_reactionsWhereUniqueInput[]
+    disconnect?: comment_reactionsWhereUniqueInput | comment_reactionsWhereUniqueInput[]
+    delete?: comment_reactionsWhereUniqueInput | comment_reactionsWhereUniqueInput[]
+    connect?: comment_reactionsWhereUniqueInput | comment_reactionsWhereUniqueInput[]
+    update?: comment_reactionsUpdateWithWhereUniqueWithoutCommentsInput | comment_reactionsUpdateWithWhereUniqueWithoutCommentsInput[]
+    updateMany?: comment_reactionsUpdateManyWithWhereWithoutCommentsInput | comment_reactionsUpdateManyWithWhereWithoutCommentsInput[]
+    deleteMany?: comment_reactionsScalarWhereInput | comment_reactionsScalarWhereInput[]
+  }
+
+  export type commentsUncheckedUpdateManyWithoutCommentsNestedInput = {
+    create?: XOR<commentsCreateWithoutCommentsInput, commentsUncheckedCreateWithoutCommentsInput> | commentsCreateWithoutCommentsInput[] | commentsUncheckedCreateWithoutCommentsInput[]
+    connectOrCreate?: commentsCreateOrConnectWithoutCommentsInput | commentsCreateOrConnectWithoutCommentsInput[]
+    upsert?: commentsUpsertWithWhereUniqueWithoutCommentsInput | commentsUpsertWithWhereUniqueWithoutCommentsInput[]
+    createMany?: commentsCreateManyCommentsInputEnvelope
+    set?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+    disconnect?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+    delete?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+    connect?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+    update?: commentsUpdateWithWhereUniqueWithoutCommentsInput | commentsUpdateWithWhereUniqueWithoutCommentsInput[]
+    updateMany?: commentsUpdateManyWithWhereWithoutCommentsInput | commentsUpdateManyWithWhereWithoutCommentsInput[]
+    deleteMany?: commentsScalarWhereInput | commentsScalarWhereInput[]
+  }
+
+  export type usersCreateNestedOneWithoutSubscriptions_subscriptions_creator_idTousersInput = {
+    create?: XOR<usersCreateWithoutSubscriptions_subscriptions_creator_idTousersInput, usersUncheckedCreateWithoutSubscriptions_subscriptions_creator_idTousersInput>
+    connectOrCreate?: usersCreateOrConnectWithoutSubscriptions_subscriptions_creator_idTousersInput
+    connect?: usersWhereUniqueInput
+  }
+
+  export type usersCreateNestedOneWithoutSubscriptions_subscriptions_viewer_idTousersInput = {
+    create?: XOR<usersCreateWithoutSubscriptions_subscriptions_viewer_idTousersInput, usersUncheckedCreateWithoutSubscriptions_subscriptions_viewer_idTousersInput>
+    connectOrCreate?: usersCreateOrConnectWithoutSubscriptions_subscriptions_viewer_idTousersInput
+    connect?: usersWhereUniqueInput
+  }
+
+  export type usersUpdateOneRequiredWithoutSubscriptions_subscriptions_creator_idTousersNestedInput = {
+    create?: XOR<usersCreateWithoutSubscriptions_subscriptions_creator_idTousersInput, usersUncheckedCreateWithoutSubscriptions_subscriptions_creator_idTousersInput>
+    connectOrCreate?: usersCreateOrConnectWithoutSubscriptions_subscriptions_creator_idTousersInput
+    upsert?: usersUpsertWithoutSubscriptions_subscriptions_creator_idTousersInput
+    connect?: usersWhereUniqueInput
+    update?: XOR<XOR<usersUpdateToOneWithWhereWithoutSubscriptions_subscriptions_creator_idTousersInput, usersUpdateWithoutSubscriptions_subscriptions_creator_idTousersInput>, usersUncheckedUpdateWithoutSubscriptions_subscriptions_creator_idTousersInput>
+  }
+
+  export type usersUpdateOneRequiredWithoutSubscriptions_subscriptions_viewer_idTousersNestedInput = {
+    create?: XOR<usersCreateWithoutSubscriptions_subscriptions_viewer_idTousersInput, usersUncheckedCreateWithoutSubscriptions_subscriptions_viewer_idTousersInput>
+    connectOrCreate?: usersCreateOrConnectWithoutSubscriptions_subscriptions_viewer_idTousersInput
+    upsert?: usersUpsertWithoutSubscriptions_subscriptions_viewer_idTousersInput
+    connect?: usersWhereUniqueInput
+    update?: XOR<XOR<usersUpdateToOneWithWhereWithoutSubscriptions_subscriptions_viewer_idTousersInput, usersUpdateWithoutSubscriptions_subscriptions_viewer_idTousersInput>, usersUncheckedUpdateWithoutSubscriptions_subscriptions_viewer_idTousersInput>
+  }
+
+  export type comment_reactionsCreateNestedManyWithoutUsersInput = {
+    create?: XOR<comment_reactionsCreateWithoutUsersInput, comment_reactionsUncheckedCreateWithoutUsersInput> | comment_reactionsCreateWithoutUsersInput[] | comment_reactionsUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: comment_reactionsCreateOrConnectWithoutUsersInput | comment_reactionsCreateOrConnectWithoutUsersInput[]
+    createMany?: comment_reactionsCreateManyUsersInputEnvelope
+    connect?: comment_reactionsWhereUniqueInput | comment_reactionsWhereUniqueInput[]
+  }
+
+  export type commentsCreateNestedManyWithoutUsersInput = {
+    create?: XOR<commentsCreateWithoutUsersInput, commentsUncheckedCreateWithoutUsersInput> | commentsCreateWithoutUsersInput[] | commentsUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: commentsCreateOrConnectWithoutUsersInput | commentsCreateOrConnectWithoutUsersInput[]
+    createMany?: commentsCreateManyUsersInputEnvelope
+    connect?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+  }
+
+  export type subscriptionsCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput = {
+    create?: XOR<subscriptionsCreateWithoutUsers_subscriptions_creator_idTousersInput, subscriptionsUncheckedCreateWithoutUsers_subscriptions_creator_idTousersInput> | subscriptionsCreateWithoutUsers_subscriptions_creator_idTousersInput[] | subscriptionsUncheckedCreateWithoutUsers_subscriptions_creator_idTousersInput[]
+    connectOrCreate?: subscriptionsCreateOrConnectWithoutUsers_subscriptions_creator_idTousersInput | subscriptionsCreateOrConnectWithoutUsers_subscriptions_creator_idTousersInput[]
+    createMany?: subscriptionsCreateManyUsers_subscriptions_creator_idTousersInputEnvelope
+    connect?: subscriptionsWhereUniqueInput | subscriptionsWhereUniqueInput[]
+  }
+
+  export type subscriptionsCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput = {
+    create?: XOR<subscriptionsCreateWithoutUsers_subscriptions_viewer_idTousersInput, subscriptionsUncheckedCreateWithoutUsers_subscriptions_viewer_idTousersInput> | subscriptionsCreateWithoutUsers_subscriptions_viewer_idTousersInput[] | subscriptionsUncheckedCreateWithoutUsers_subscriptions_viewer_idTousersInput[]
+    connectOrCreate?: subscriptionsCreateOrConnectWithoutUsers_subscriptions_viewer_idTousersInput | subscriptionsCreateOrConnectWithoutUsers_subscriptions_viewer_idTousersInput[]
+    createMany?: subscriptionsCreateManyUsers_subscriptions_viewer_idTousersInputEnvelope
+    connect?: subscriptionsWhereUniqueInput | subscriptionsWhereUniqueInput[]
+  }
+
+  export type video_reactionsCreateNestedManyWithoutUsersInput = {
+    create?: XOR<video_reactionsCreateWithoutUsersInput, video_reactionsUncheckedCreateWithoutUsersInput> | video_reactionsCreateWithoutUsersInput[] | video_reactionsUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: video_reactionsCreateOrConnectWithoutUsersInput | video_reactionsCreateOrConnectWithoutUsersInput[]
+    createMany?: video_reactionsCreateManyUsersInputEnvelope
+    connect?: video_reactionsWhereUniqueInput | video_reactionsWhereUniqueInput[]
+  }
+
+  export type video_viewsCreateNestedManyWithoutUsersInput = {
+    create?: XOR<video_viewsCreateWithoutUsersInput, video_viewsUncheckedCreateWithoutUsersInput> | video_viewsCreateWithoutUsersInput[] | video_viewsUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: video_viewsCreateOrConnectWithoutUsersInput | video_viewsCreateOrConnectWithoutUsersInput[]
+    createMany?: video_viewsCreateManyUsersInputEnvelope
+    connect?: video_viewsWhereUniqueInput | video_viewsWhereUniqueInput[]
+  }
+
+  export type videosCreateNestedManyWithoutUsersInput = {
+    create?: XOR<videosCreateWithoutUsersInput, videosUncheckedCreateWithoutUsersInput> | videosCreateWithoutUsersInput[] | videosUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: videosCreateOrConnectWithoutUsersInput | videosCreateOrConnectWithoutUsersInput[]
+    createMany?: videosCreateManyUsersInputEnvelope
+    connect?: videosWhereUniqueInput | videosWhereUniqueInput[]
+  }
+
+  export type comment_reactionsUncheckedCreateNestedManyWithoutUsersInput = {
+    create?: XOR<comment_reactionsCreateWithoutUsersInput, comment_reactionsUncheckedCreateWithoutUsersInput> | comment_reactionsCreateWithoutUsersInput[] | comment_reactionsUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: comment_reactionsCreateOrConnectWithoutUsersInput | comment_reactionsCreateOrConnectWithoutUsersInput[]
+    createMany?: comment_reactionsCreateManyUsersInputEnvelope
+    connect?: comment_reactionsWhereUniqueInput | comment_reactionsWhereUniqueInput[]
+  }
+
+  export type commentsUncheckedCreateNestedManyWithoutUsersInput = {
+    create?: XOR<commentsCreateWithoutUsersInput, commentsUncheckedCreateWithoutUsersInput> | commentsCreateWithoutUsersInput[] | commentsUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: commentsCreateOrConnectWithoutUsersInput | commentsCreateOrConnectWithoutUsersInput[]
+    createMany?: commentsCreateManyUsersInputEnvelope
+    connect?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+  }
+
+  export type subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput = {
+    create?: XOR<subscriptionsCreateWithoutUsers_subscriptions_creator_idTousersInput, subscriptionsUncheckedCreateWithoutUsers_subscriptions_creator_idTousersInput> | subscriptionsCreateWithoutUsers_subscriptions_creator_idTousersInput[] | subscriptionsUncheckedCreateWithoutUsers_subscriptions_creator_idTousersInput[]
+    connectOrCreate?: subscriptionsCreateOrConnectWithoutUsers_subscriptions_creator_idTousersInput | subscriptionsCreateOrConnectWithoutUsers_subscriptions_creator_idTousersInput[]
+    createMany?: subscriptionsCreateManyUsers_subscriptions_creator_idTousersInputEnvelope
+    connect?: subscriptionsWhereUniqueInput | subscriptionsWhereUniqueInput[]
+  }
+
+  export type subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput = {
+    create?: XOR<subscriptionsCreateWithoutUsers_subscriptions_viewer_idTousersInput, subscriptionsUncheckedCreateWithoutUsers_subscriptions_viewer_idTousersInput> | subscriptionsCreateWithoutUsers_subscriptions_viewer_idTousersInput[] | subscriptionsUncheckedCreateWithoutUsers_subscriptions_viewer_idTousersInput[]
+    connectOrCreate?: subscriptionsCreateOrConnectWithoutUsers_subscriptions_viewer_idTousersInput | subscriptionsCreateOrConnectWithoutUsers_subscriptions_viewer_idTousersInput[]
+    createMany?: subscriptionsCreateManyUsers_subscriptions_viewer_idTousersInputEnvelope
+    connect?: subscriptionsWhereUniqueInput | subscriptionsWhereUniqueInput[]
+  }
+
+  export type video_reactionsUncheckedCreateNestedManyWithoutUsersInput = {
+    create?: XOR<video_reactionsCreateWithoutUsersInput, video_reactionsUncheckedCreateWithoutUsersInput> | video_reactionsCreateWithoutUsersInput[] | video_reactionsUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: video_reactionsCreateOrConnectWithoutUsersInput | video_reactionsCreateOrConnectWithoutUsersInput[]
+    createMany?: video_reactionsCreateManyUsersInputEnvelope
+    connect?: video_reactionsWhereUniqueInput | video_reactionsWhereUniqueInput[]
+  }
+
+  export type video_viewsUncheckedCreateNestedManyWithoutUsersInput = {
+    create?: XOR<video_viewsCreateWithoutUsersInput, video_viewsUncheckedCreateWithoutUsersInput> | video_viewsCreateWithoutUsersInput[] | video_viewsUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: video_viewsCreateOrConnectWithoutUsersInput | video_viewsCreateOrConnectWithoutUsersInput[]
+    createMany?: video_viewsCreateManyUsersInputEnvelope
+    connect?: video_viewsWhereUniqueInput | video_viewsWhereUniqueInput[]
+  }
+
+  export type videosUncheckedCreateNestedManyWithoutUsersInput = {
+    create?: XOR<videosCreateWithoutUsersInput, videosUncheckedCreateWithoutUsersInput> | videosCreateWithoutUsersInput[] | videosUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: videosCreateOrConnectWithoutUsersInput | videosCreateOrConnectWithoutUsersInput[]
+    createMany?: videosCreateManyUsersInputEnvelope
+    connect?: videosWhereUniqueInput | videosWhereUniqueInput[]
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type comment_reactionsUpdateManyWithoutUsersNestedInput = {
+    create?: XOR<comment_reactionsCreateWithoutUsersInput, comment_reactionsUncheckedCreateWithoutUsersInput> | comment_reactionsCreateWithoutUsersInput[] | comment_reactionsUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: comment_reactionsCreateOrConnectWithoutUsersInput | comment_reactionsCreateOrConnectWithoutUsersInput[]
+    upsert?: comment_reactionsUpsertWithWhereUniqueWithoutUsersInput | comment_reactionsUpsertWithWhereUniqueWithoutUsersInput[]
+    createMany?: comment_reactionsCreateManyUsersInputEnvelope
+    set?: comment_reactionsWhereUniqueInput | comment_reactionsWhereUniqueInput[]
+    disconnect?: comment_reactionsWhereUniqueInput | comment_reactionsWhereUniqueInput[]
+    delete?: comment_reactionsWhereUniqueInput | comment_reactionsWhereUniqueInput[]
+    connect?: comment_reactionsWhereUniqueInput | comment_reactionsWhereUniqueInput[]
+    update?: comment_reactionsUpdateWithWhereUniqueWithoutUsersInput | comment_reactionsUpdateWithWhereUniqueWithoutUsersInput[]
+    updateMany?: comment_reactionsUpdateManyWithWhereWithoutUsersInput | comment_reactionsUpdateManyWithWhereWithoutUsersInput[]
+    deleteMany?: comment_reactionsScalarWhereInput | comment_reactionsScalarWhereInput[]
+  }
+
+  export type commentsUpdateManyWithoutUsersNestedInput = {
+    create?: XOR<commentsCreateWithoutUsersInput, commentsUncheckedCreateWithoutUsersInput> | commentsCreateWithoutUsersInput[] | commentsUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: commentsCreateOrConnectWithoutUsersInput | commentsCreateOrConnectWithoutUsersInput[]
+    upsert?: commentsUpsertWithWhereUniqueWithoutUsersInput | commentsUpsertWithWhereUniqueWithoutUsersInput[]
+    createMany?: commentsCreateManyUsersInputEnvelope
+    set?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+    disconnect?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+    delete?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+    connect?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+    update?: commentsUpdateWithWhereUniqueWithoutUsersInput | commentsUpdateWithWhereUniqueWithoutUsersInput[]
+    updateMany?: commentsUpdateManyWithWhereWithoutUsersInput | commentsUpdateManyWithWhereWithoutUsersInput[]
+    deleteMany?: commentsScalarWhereInput | commentsScalarWhereInput[]
+  }
+
+  export type subscriptionsUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput = {
+    create?: XOR<subscriptionsCreateWithoutUsers_subscriptions_creator_idTousersInput, subscriptionsUncheckedCreateWithoutUsers_subscriptions_creator_idTousersInput> | subscriptionsCreateWithoutUsers_subscriptions_creator_idTousersInput[] | subscriptionsUncheckedCreateWithoutUsers_subscriptions_creator_idTousersInput[]
+    connectOrCreate?: subscriptionsCreateOrConnectWithoutUsers_subscriptions_creator_idTousersInput | subscriptionsCreateOrConnectWithoutUsers_subscriptions_creator_idTousersInput[]
+    upsert?: subscriptionsUpsertWithWhereUniqueWithoutUsers_subscriptions_creator_idTousersInput | subscriptionsUpsertWithWhereUniqueWithoutUsers_subscriptions_creator_idTousersInput[]
+    createMany?: subscriptionsCreateManyUsers_subscriptions_creator_idTousersInputEnvelope
+    set?: subscriptionsWhereUniqueInput | subscriptionsWhereUniqueInput[]
+    disconnect?: subscriptionsWhereUniqueInput | subscriptionsWhereUniqueInput[]
+    delete?: subscriptionsWhereUniqueInput | subscriptionsWhereUniqueInput[]
+    connect?: subscriptionsWhereUniqueInput | subscriptionsWhereUniqueInput[]
+    update?: subscriptionsUpdateWithWhereUniqueWithoutUsers_subscriptions_creator_idTousersInput | subscriptionsUpdateWithWhereUniqueWithoutUsers_subscriptions_creator_idTousersInput[]
+    updateMany?: subscriptionsUpdateManyWithWhereWithoutUsers_subscriptions_creator_idTousersInput | subscriptionsUpdateManyWithWhereWithoutUsers_subscriptions_creator_idTousersInput[]
+    deleteMany?: subscriptionsScalarWhereInput | subscriptionsScalarWhereInput[]
+  }
+
+  export type subscriptionsUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput = {
+    create?: XOR<subscriptionsCreateWithoutUsers_subscriptions_viewer_idTousersInput, subscriptionsUncheckedCreateWithoutUsers_subscriptions_viewer_idTousersInput> | subscriptionsCreateWithoutUsers_subscriptions_viewer_idTousersInput[] | subscriptionsUncheckedCreateWithoutUsers_subscriptions_viewer_idTousersInput[]
+    connectOrCreate?: subscriptionsCreateOrConnectWithoutUsers_subscriptions_viewer_idTousersInput | subscriptionsCreateOrConnectWithoutUsers_subscriptions_viewer_idTousersInput[]
+    upsert?: subscriptionsUpsertWithWhereUniqueWithoutUsers_subscriptions_viewer_idTousersInput | subscriptionsUpsertWithWhereUniqueWithoutUsers_subscriptions_viewer_idTousersInput[]
+    createMany?: subscriptionsCreateManyUsers_subscriptions_viewer_idTousersInputEnvelope
+    set?: subscriptionsWhereUniqueInput | subscriptionsWhereUniqueInput[]
+    disconnect?: subscriptionsWhereUniqueInput | subscriptionsWhereUniqueInput[]
+    delete?: subscriptionsWhereUniqueInput | subscriptionsWhereUniqueInput[]
+    connect?: subscriptionsWhereUniqueInput | subscriptionsWhereUniqueInput[]
+    update?: subscriptionsUpdateWithWhereUniqueWithoutUsers_subscriptions_viewer_idTousersInput | subscriptionsUpdateWithWhereUniqueWithoutUsers_subscriptions_viewer_idTousersInput[]
+    updateMany?: subscriptionsUpdateManyWithWhereWithoutUsers_subscriptions_viewer_idTousersInput | subscriptionsUpdateManyWithWhereWithoutUsers_subscriptions_viewer_idTousersInput[]
+    deleteMany?: subscriptionsScalarWhereInput | subscriptionsScalarWhereInput[]
+  }
+
+  export type video_reactionsUpdateManyWithoutUsersNestedInput = {
+    create?: XOR<video_reactionsCreateWithoutUsersInput, video_reactionsUncheckedCreateWithoutUsersInput> | video_reactionsCreateWithoutUsersInput[] | video_reactionsUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: video_reactionsCreateOrConnectWithoutUsersInput | video_reactionsCreateOrConnectWithoutUsersInput[]
+    upsert?: video_reactionsUpsertWithWhereUniqueWithoutUsersInput | video_reactionsUpsertWithWhereUniqueWithoutUsersInput[]
+    createMany?: video_reactionsCreateManyUsersInputEnvelope
+    set?: video_reactionsWhereUniqueInput | video_reactionsWhereUniqueInput[]
+    disconnect?: video_reactionsWhereUniqueInput | video_reactionsWhereUniqueInput[]
+    delete?: video_reactionsWhereUniqueInput | video_reactionsWhereUniqueInput[]
+    connect?: video_reactionsWhereUniqueInput | video_reactionsWhereUniqueInput[]
+    update?: video_reactionsUpdateWithWhereUniqueWithoutUsersInput | video_reactionsUpdateWithWhereUniqueWithoutUsersInput[]
+    updateMany?: video_reactionsUpdateManyWithWhereWithoutUsersInput | video_reactionsUpdateManyWithWhereWithoutUsersInput[]
+    deleteMany?: video_reactionsScalarWhereInput | video_reactionsScalarWhereInput[]
+  }
+
+  export type video_viewsUpdateManyWithoutUsersNestedInput = {
+    create?: XOR<video_viewsCreateWithoutUsersInput, video_viewsUncheckedCreateWithoutUsersInput> | video_viewsCreateWithoutUsersInput[] | video_viewsUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: video_viewsCreateOrConnectWithoutUsersInput | video_viewsCreateOrConnectWithoutUsersInput[]
+    upsert?: video_viewsUpsertWithWhereUniqueWithoutUsersInput | video_viewsUpsertWithWhereUniqueWithoutUsersInput[]
+    createMany?: video_viewsCreateManyUsersInputEnvelope
+    set?: video_viewsWhereUniqueInput | video_viewsWhereUniqueInput[]
+    disconnect?: video_viewsWhereUniqueInput | video_viewsWhereUniqueInput[]
+    delete?: video_viewsWhereUniqueInput | video_viewsWhereUniqueInput[]
+    connect?: video_viewsWhereUniqueInput | video_viewsWhereUniqueInput[]
+    update?: video_viewsUpdateWithWhereUniqueWithoutUsersInput | video_viewsUpdateWithWhereUniqueWithoutUsersInput[]
+    updateMany?: video_viewsUpdateManyWithWhereWithoutUsersInput | video_viewsUpdateManyWithWhereWithoutUsersInput[]
+    deleteMany?: video_viewsScalarWhereInput | video_viewsScalarWhereInput[]
+  }
+
+  export type videosUpdateManyWithoutUsersNestedInput = {
+    create?: XOR<videosCreateWithoutUsersInput, videosUncheckedCreateWithoutUsersInput> | videosCreateWithoutUsersInput[] | videosUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: videosCreateOrConnectWithoutUsersInput | videosCreateOrConnectWithoutUsersInput[]
+    upsert?: videosUpsertWithWhereUniqueWithoutUsersInput | videosUpsertWithWhereUniqueWithoutUsersInput[]
+    createMany?: videosCreateManyUsersInputEnvelope
+    set?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    disconnect?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    delete?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    connect?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    update?: videosUpdateWithWhereUniqueWithoutUsersInput | videosUpdateWithWhereUniqueWithoutUsersInput[]
+    updateMany?: videosUpdateManyWithWhereWithoutUsersInput | videosUpdateManyWithWhereWithoutUsersInput[]
+    deleteMany?: videosScalarWhereInput | videosScalarWhereInput[]
+  }
+
+  export type comment_reactionsUncheckedUpdateManyWithoutUsersNestedInput = {
+    create?: XOR<comment_reactionsCreateWithoutUsersInput, comment_reactionsUncheckedCreateWithoutUsersInput> | comment_reactionsCreateWithoutUsersInput[] | comment_reactionsUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: comment_reactionsCreateOrConnectWithoutUsersInput | comment_reactionsCreateOrConnectWithoutUsersInput[]
+    upsert?: comment_reactionsUpsertWithWhereUniqueWithoutUsersInput | comment_reactionsUpsertWithWhereUniqueWithoutUsersInput[]
+    createMany?: comment_reactionsCreateManyUsersInputEnvelope
+    set?: comment_reactionsWhereUniqueInput | comment_reactionsWhereUniqueInput[]
+    disconnect?: comment_reactionsWhereUniqueInput | comment_reactionsWhereUniqueInput[]
+    delete?: comment_reactionsWhereUniqueInput | comment_reactionsWhereUniqueInput[]
+    connect?: comment_reactionsWhereUniqueInput | comment_reactionsWhereUniqueInput[]
+    update?: comment_reactionsUpdateWithWhereUniqueWithoutUsersInput | comment_reactionsUpdateWithWhereUniqueWithoutUsersInput[]
+    updateMany?: comment_reactionsUpdateManyWithWhereWithoutUsersInput | comment_reactionsUpdateManyWithWhereWithoutUsersInput[]
+    deleteMany?: comment_reactionsScalarWhereInput | comment_reactionsScalarWhereInput[]
+  }
+
+  export type commentsUncheckedUpdateManyWithoutUsersNestedInput = {
+    create?: XOR<commentsCreateWithoutUsersInput, commentsUncheckedCreateWithoutUsersInput> | commentsCreateWithoutUsersInput[] | commentsUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: commentsCreateOrConnectWithoutUsersInput | commentsCreateOrConnectWithoutUsersInput[]
+    upsert?: commentsUpsertWithWhereUniqueWithoutUsersInput | commentsUpsertWithWhereUniqueWithoutUsersInput[]
+    createMany?: commentsCreateManyUsersInputEnvelope
+    set?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+    disconnect?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+    delete?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+    connect?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+    update?: commentsUpdateWithWhereUniqueWithoutUsersInput | commentsUpdateWithWhereUniqueWithoutUsersInput[]
+    updateMany?: commentsUpdateManyWithWhereWithoutUsersInput | commentsUpdateManyWithWhereWithoutUsersInput[]
+    deleteMany?: commentsScalarWhereInput | commentsScalarWhereInput[]
+  }
+
+  export type subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput = {
+    create?: XOR<subscriptionsCreateWithoutUsers_subscriptions_creator_idTousersInput, subscriptionsUncheckedCreateWithoutUsers_subscriptions_creator_idTousersInput> | subscriptionsCreateWithoutUsers_subscriptions_creator_idTousersInput[] | subscriptionsUncheckedCreateWithoutUsers_subscriptions_creator_idTousersInput[]
+    connectOrCreate?: subscriptionsCreateOrConnectWithoutUsers_subscriptions_creator_idTousersInput | subscriptionsCreateOrConnectWithoutUsers_subscriptions_creator_idTousersInput[]
+    upsert?: subscriptionsUpsertWithWhereUniqueWithoutUsers_subscriptions_creator_idTousersInput | subscriptionsUpsertWithWhereUniqueWithoutUsers_subscriptions_creator_idTousersInput[]
+    createMany?: subscriptionsCreateManyUsers_subscriptions_creator_idTousersInputEnvelope
+    set?: subscriptionsWhereUniqueInput | subscriptionsWhereUniqueInput[]
+    disconnect?: subscriptionsWhereUniqueInput | subscriptionsWhereUniqueInput[]
+    delete?: subscriptionsWhereUniqueInput | subscriptionsWhereUniqueInput[]
+    connect?: subscriptionsWhereUniqueInput | subscriptionsWhereUniqueInput[]
+    update?: subscriptionsUpdateWithWhereUniqueWithoutUsers_subscriptions_creator_idTousersInput | subscriptionsUpdateWithWhereUniqueWithoutUsers_subscriptions_creator_idTousersInput[]
+    updateMany?: subscriptionsUpdateManyWithWhereWithoutUsers_subscriptions_creator_idTousersInput | subscriptionsUpdateManyWithWhereWithoutUsers_subscriptions_creator_idTousersInput[]
+    deleteMany?: subscriptionsScalarWhereInput | subscriptionsScalarWhereInput[]
+  }
+
+  export type subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput = {
+    create?: XOR<subscriptionsCreateWithoutUsers_subscriptions_viewer_idTousersInput, subscriptionsUncheckedCreateWithoutUsers_subscriptions_viewer_idTousersInput> | subscriptionsCreateWithoutUsers_subscriptions_viewer_idTousersInput[] | subscriptionsUncheckedCreateWithoutUsers_subscriptions_viewer_idTousersInput[]
+    connectOrCreate?: subscriptionsCreateOrConnectWithoutUsers_subscriptions_viewer_idTousersInput | subscriptionsCreateOrConnectWithoutUsers_subscriptions_viewer_idTousersInput[]
+    upsert?: subscriptionsUpsertWithWhereUniqueWithoutUsers_subscriptions_viewer_idTousersInput | subscriptionsUpsertWithWhereUniqueWithoutUsers_subscriptions_viewer_idTousersInput[]
+    createMany?: subscriptionsCreateManyUsers_subscriptions_viewer_idTousersInputEnvelope
+    set?: subscriptionsWhereUniqueInput | subscriptionsWhereUniqueInput[]
+    disconnect?: subscriptionsWhereUniqueInput | subscriptionsWhereUniqueInput[]
+    delete?: subscriptionsWhereUniqueInput | subscriptionsWhereUniqueInput[]
+    connect?: subscriptionsWhereUniqueInput | subscriptionsWhereUniqueInput[]
+    update?: subscriptionsUpdateWithWhereUniqueWithoutUsers_subscriptions_viewer_idTousersInput | subscriptionsUpdateWithWhereUniqueWithoutUsers_subscriptions_viewer_idTousersInput[]
+    updateMany?: subscriptionsUpdateManyWithWhereWithoutUsers_subscriptions_viewer_idTousersInput | subscriptionsUpdateManyWithWhereWithoutUsers_subscriptions_viewer_idTousersInput[]
+    deleteMany?: subscriptionsScalarWhereInput | subscriptionsScalarWhereInput[]
+  }
+
+  export type video_reactionsUncheckedUpdateManyWithoutUsersNestedInput = {
+    create?: XOR<video_reactionsCreateWithoutUsersInput, video_reactionsUncheckedCreateWithoutUsersInput> | video_reactionsCreateWithoutUsersInput[] | video_reactionsUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: video_reactionsCreateOrConnectWithoutUsersInput | video_reactionsCreateOrConnectWithoutUsersInput[]
+    upsert?: video_reactionsUpsertWithWhereUniqueWithoutUsersInput | video_reactionsUpsertWithWhereUniqueWithoutUsersInput[]
+    createMany?: video_reactionsCreateManyUsersInputEnvelope
+    set?: video_reactionsWhereUniqueInput | video_reactionsWhereUniqueInput[]
+    disconnect?: video_reactionsWhereUniqueInput | video_reactionsWhereUniqueInput[]
+    delete?: video_reactionsWhereUniqueInput | video_reactionsWhereUniqueInput[]
+    connect?: video_reactionsWhereUniqueInput | video_reactionsWhereUniqueInput[]
+    update?: video_reactionsUpdateWithWhereUniqueWithoutUsersInput | video_reactionsUpdateWithWhereUniqueWithoutUsersInput[]
+    updateMany?: video_reactionsUpdateManyWithWhereWithoutUsersInput | video_reactionsUpdateManyWithWhereWithoutUsersInput[]
+    deleteMany?: video_reactionsScalarWhereInput | video_reactionsScalarWhereInput[]
+  }
+
+  export type video_viewsUncheckedUpdateManyWithoutUsersNestedInput = {
+    create?: XOR<video_viewsCreateWithoutUsersInput, video_viewsUncheckedCreateWithoutUsersInput> | video_viewsCreateWithoutUsersInput[] | video_viewsUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: video_viewsCreateOrConnectWithoutUsersInput | video_viewsCreateOrConnectWithoutUsersInput[]
+    upsert?: video_viewsUpsertWithWhereUniqueWithoutUsersInput | video_viewsUpsertWithWhereUniqueWithoutUsersInput[]
+    createMany?: video_viewsCreateManyUsersInputEnvelope
+    set?: video_viewsWhereUniqueInput | video_viewsWhereUniqueInput[]
+    disconnect?: video_viewsWhereUniqueInput | video_viewsWhereUniqueInput[]
+    delete?: video_viewsWhereUniqueInput | video_viewsWhereUniqueInput[]
+    connect?: video_viewsWhereUniqueInput | video_viewsWhereUniqueInput[]
+    update?: video_viewsUpdateWithWhereUniqueWithoutUsersInput | video_viewsUpdateWithWhereUniqueWithoutUsersInput[]
+    updateMany?: video_viewsUpdateManyWithWhereWithoutUsersInput | video_viewsUpdateManyWithWhereWithoutUsersInput[]
+    deleteMany?: video_viewsScalarWhereInput | video_viewsScalarWhereInput[]
+  }
+
+  export type videosUncheckedUpdateManyWithoutUsersNestedInput = {
+    create?: XOR<videosCreateWithoutUsersInput, videosUncheckedCreateWithoutUsersInput> | videosCreateWithoutUsersInput[] | videosUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: videosCreateOrConnectWithoutUsersInput | videosCreateOrConnectWithoutUsersInput[]
+    upsert?: videosUpsertWithWhereUniqueWithoutUsersInput | videosUpsertWithWhereUniqueWithoutUsersInput[]
+    createMany?: videosCreateManyUsersInputEnvelope
+    set?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    disconnect?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    delete?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    connect?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    update?: videosUpdateWithWhereUniqueWithoutUsersInput | videosUpdateWithWhereUniqueWithoutUsersInput[]
+    updateMany?: videosUpdateManyWithWhereWithoutUsersInput | videosUpdateManyWithWhereWithoutUsersInput[]
+    deleteMany?: videosScalarWhereInput | videosScalarWhereInput[]
+  }
+
+  export type videosCreateNestedManyWithoutCategoriesInput = {
+    create?: XOR<videosCreateWithoutCategoriesInput, videosUncheckedCreateWithoutCategoriesInput> | videosCreateWithoutCategoriesInput[] | videosUncheckedCreateWithoutCategoriesInput[]
+    connectOrCreate?: videosCreateOrConnectWithoutCategoriesInput | videosCreateOrConnectWithoutCategoriesInput[]
+    createMany?: videosCreateManyCategoriesInputEnvelope
+    connect?: videosWhereUniqueInput | videosWhereUniqueInput[]
+  }
+
+  export type videosUncheckedCreateNestedManyWithoutCategoriesInput = {
+    create?: XOR<videosCreateWithoutCategoriesInput, videosUncheckedCreateWithoutCategoriesInput> | videosCreateWithoutCategoriesInput[] | videosUncheckedCreateWithoutCategoriesInput[]
+    connectOrCreate?: videosCreateOrConnectWithoutCategoriesInput | videosCreateOrConnectWithoutCategoriesInput[]
+    createMany?: videosCreateManyCategoriesInputEnvelope
+    connect?: videosWhereUniqueInput | videosWhereUniqueInput[]
+  }
+
+  export type videosUpdateManyWithoutCategoriesNestedInput = {
+    create?: XOR<videosCreateWithoutCategoriesInput, videosUncheckedCreateWithoutCategoriesInput> | videosCreateWithoutCategoriesInput[] | videosUncheckedCreateWithoutCategoriesInput[]
+    connectOrCreate?: videosCreateOrConnectWithoutCategoriesInput | videosCreateOrConnectWithoutCategoriesInput[]
+    upsert?: videosUpsertWithWhereUniqueWithoutCategoriesInput | videosUpsertWithWhereUniqueWithoutCategoriesInput[]
+    createMany?: videosCreateManyCategoriesInputEnvelope
+    set?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    disconnect?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    delete?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    connect?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    update?: videosUpdateWithWhereUniqueWithoutCategoriesInput | videosUpdateWithWhereUniqueWithoutCategoriesInput[]
+    updateMany?: videosUpdateManyWithWhereWithoutCategoriesInput | videosUpdateManyWithWhereWithoutCategoriesInput[]
+    deleteMany?: videosScalarWhereInput | videosScalarWhereInput[]
+  }
+
+  export type videosUncheckedUpdateManyWithoutCategoriesNestedInput = {
+    create?: XOR<videosCreateWithoutCategoriesInput, videosUncheckedCreateWithoutCategoriesInput> | videosCreateWithoutCategoriesInput[] | videosUncheckedCreateWithoutCategoriesInput[]
+    connectOrCreate?: videosCreateOrConnectWithoutCategoriesInput | videosCreateOrConnectWithoutCategoriesInput[]
+    upsert?: videosUpsertWithWhereUniqueWithoutCategoriesInput | videosUpsertWithWhereUniqueWithoutCategoriesInput[]
+    createMany?: videosCreateManyCategoriesInputEnvelope
+    set?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    disconnect?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    delete?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    connect?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    update?: videosUpdateWithWhereUniqueWithoutCategoriesInput | videosUpdateWithWhereUniqueWithoutCategoriesInput[]
+    updateMany?: videosUpdateManyWithWhereWithoutCategoriesInput | videosUpdateManyWithWhereWithoutCategoriesInput[]
+    deleteMany?: videosScalarWhereInput | videosScalarWhereInput[]
+  }
+
+  export type commentsCreateNestedManyWithoutVideosInput = {
+    create?: XOR<commentsCreateWithoutVideosInput, commentsUncheckedCreateWithoutVideosInput> | commentsCreateWithoutVideosInput[] | commentsUncheckedCreateWithoutVideosInput[]
+    connectOrCreate?: commentsCreateOrConnectWithoutVideosInput | commentsCreateOrConnectWithoutVideosInput[]
+    createMany?: commentsCreateManyVideosInputEnvelope
+    connect?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+  }
+
+  export type video_reactionsCreateNestedManyWithoutVideosInput = {
+    create?: XOR<video_reactionsCreateWithoutVideosInput, video_reactionsUncheckedCreateWithoutVideosInput> | video_reactionsCreateWithoutVideosInput[] | video_reactionsUncheckedCreateWithoutVideosInput[]
+    connectOrCreate?: video_reactionsCreateOrConnectWithoutVideosInput | video_reactionsCreateOrConnectWithoutVideosInput[]
+    createMany?: video_reactionsCreateManyVideosInputEnvelope
+    connect?: video_reactionsWhereUniqueInput | video_reactionsWhereUniqueInput[]
+  }
+
+  export type video_viewsCreateNestedManyWithoutVideosInput = {
+    create?: XOR<video_viewsCreateWithoutVideosInput, video_viewsUncheckedCreateWithoutVideosInput> | video_viewsCreateWithoutVideosInput[] | video_viewsUncheckedCreateWithoutVideosInput[]
+    connectOrCreate?: video_viewsCreateOrConnectWithoutVideosInput | video_viewsCreateOrConnectWithoutVideosInput[]
+    createMany?: video_viewsCreateManyVideosInputEnvelope
+    connect?: video_viewsWhereUniqueInput | video_viewsWhereUniqueInput[]
+  }
+
+  export type categoriesCreateNestedOneWithoutVideosInput = {
+    create?: XOR<categoriesCreateWithoutVideosInput, categoriesUncheckedCreateWithoutVideosInput>
+    connectOrCreate?: categoriesCreateOrConnectWithoutVideosInput
+    connect?: categoriesWhereUniqueInput
+  }
+
+  export type usersCreateNestedOneWithoutVideosInput = {
+    create?: XOR<usersCreateWithoutVideosInput, usersUncheckedCreateWithoutVideosInput>
+    connectOrCreate?: usersCreateOrConnectWithoutVideosInput
+    connect?: usersWhereUniqueInput
+  }
+
+  export type commentsUncheckedCreateNestedManyWithoutVideosInput = {
+    create?: XOR<commentsCreateWithoutVideosInput, commentsUncheckedCreateWithoutVideosInput> | commentsCreateWithoutVideosInput[] | commentsUncheckedCreateWithoutVideosInput[]
+    connectOrCreate?: commentsCreateOrConnectWithoutVideosInput | commentsCreateOrConnectWithoutVideosInput[]
+    createMany?: commentsCreateManyVideosInputEnvelope
+    connect?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+  }
+
+  export type video_reactionsUncheckedCreateNestedManyWithoutVideosInput = {
+    create?: XOR<video_reactionsCreateWithoutVideosInput, video_reactionsUncheckedCreateWithoutVideosInput> | video_reactionsCreateWithoutVideosInput[] | video_reactionsUncheckedCreateWithoutVideosInput[]
+    connectOrCreate?: video_reactionsCreateOrConnectWithoutVideosInput | video_reactionsCreateOrConnectWithoutVideosInput[]
+    createMany?: video_reactionsCreateManyVideosInputEnvelope
+    connect?: video_reactionsWhereUniqueInput | video_reactionsWhereUniqueInput[]
+  }
+
+  export type video_viewsUncheckedCreateNestedManyWithoutVideosInput = {
+    create?: XOR<video_viewsCreateWithoutVideosInput, video_viewsUncheckedCreateWithoutVideosInput> | video_viewsCreateWithoutVideosInput[] | video_viewsUncheckedCreateWithoutVideosInput[]
+    connectOrCreate?: video_viewsCreateOrConnectWithoutVideosInput | video_viewsCreateOrConnectWithoutVideosInput[]
+    createMany?: video_viewsCreateManyVideosInputEnvelope
+    connect?: video_viewsWhereUniqueInput | video_viewsWhereUniqueInput[]
+  }
+
+  export type commentsUpdateManyWithoutVideosNestedInput = {
+    create?: XOR<commentsCreateWithoutVideosInput, commentsUncheckedCreateWithoutVideosInput> | commentsCreateWithoutVideosInput[] | commentsUncheckedCreateWithoutVideosInput[]
+    connectOrCreate?: commentsCreateOrConnectWithoutVideosInput | commentsCreateOrConnectWithoutVideosInput[]
+    upsert?: commentsUpsertWithWhereUniqueWithoutVideosInput | commentsUpsertWithWhereUniqueWithoutVideosInput[]
+    createMany?: commentsCreateManyVideosInputEnvelope
+    set?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+    disconnect?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+    delete?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+    connect?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+    update?: commentsUpdateWithWhereUniqueWithoutVideosInput | commentsUpdateWithWhereUniqueWithoutVideosInput[]
+    updateMany?: commentsUpdateManyWithWhereWithoutVideosInput | commentsUpdateManyWithWhereWithoutVideosInput[]
+    deleteMany?: commentsScalarWhereInput | commentsScalarWhereInput[]
+  }
+
+  export type video_reactionsUpdateManyWithoutVideosNestedInput = {
+    create?: XOR<video_reactionsCreateWithoutVideosInput, video_reactionsUncheckedCreateWithoutVideosInput> | video_reactionsCreateWithoutVideosInput[] | video_reactionsUncheckedCreateWithoutVideosInput[]
+    connectOrCreate?: video_reactionsCreateOrConnectWithoutVideosInput | video_reactionsCreateOrConnectWithoutVideosInput[]
+    upsert?: video_reactionsUpsertWithWhereUniqueWithoutVideosInput | video_reactionsUpsertWithWhereUniqueWithoutVideosInput[]
+    createMany?: video_reactionsCreateManyVideosInputEnvelope
+    set?: video_reactionsWhereUniqueInput | video_reactionsWhereUniqueInput[]
+    disconnect?: video_reactionsWhereUniqueInput | video_reactionsWhereUniqueInput[]
+    delete?: video_reactionsWhereUniqueInput | video_reactionsWhereUniqueInput[]
+    connect?: video_reactionsWhereUniqueInput | video_reactionsWhereUniqueInput[]
+    update?: video_reactionsUpdateWithWhereUniqueWithoutVideosInput | video_reactionsUpdateWithWhereUniqueWithoutVideosInput[]
+    updateMany?: video_reactionsUpdateManyWithWhereWithoutVideosInput | video_reactionsUpdateManyWithWhereWithoutVideosInput[]
+    deleteMany?: video_reactionsScalarWhereInput | video_reactionsScalarWhereInput[]
+  }
+
+  export type video_viewsUpdateManyWithoutVideosNestedInput = {
+    create?: XOR<video_viewsCreateWithoutVideosInput, video_viewsUncheckedCreateWithoutVideosInput> | video_viewsCreateWithoutVideosInput[] | video_viewsUncheckedCreateWithoutVideosInput[]
+    connectOrCreate?: video_viewsCreateOrConnectWithoutVideosInput | video_viewsCreateOrConnectWithoutVideosInput[]
+    upsert?: video_viewsUpsertWithWhereUniqueWithoutVideosInput | video_viewsUpsertWithWhereUniqueWithoutVideosInput[]
+    createMany?: video_viewsCreateManyVideosInputEnvelope
+    set?: video_viewsWhereUniqueInput | video_viewsWhereUniqueInput[]
+    disconnect?: video_viewsWhereUniqueInput | video_viewsWhereUniqueInput[]
+    delete?: video_viewsWhereUniqueInput | video_viewsWhereUniqueInput[]
+    connect?: video_viewsWhereUniqueInput | video_viewsWhereUniqueInput[]
+    update?: video_viewsUpdateWithWhereUniqueWithoutVideosInput | video_viewsUpdateWithWhereUniqueWithoutVideosInput[]
+    updateMany?: video_viewsUpdateManyWithWhereWithoutVideosInput | video_viewsUpdateManyWithWhereWithoutVideosInput[]
+    deleteMany?: video_viewsScalarWhereInput | video_viewsScalarWhereInput[]
+  }
+
+  export type categoriesUpdateOneWithoutVideosNestedInput = {
+    create?: XOR<categoriesCreateWithoutVideosInput, categoriesUncheckedCreateWithoutVideosInput>
+    connectOrCreate?: categoriesCreateOrConnectWithoutVideosInput
+    upsert?: categoriesUpsertWithoutVideosInput
+    disconnect?: categoriesWhereInput | boolean
+    delete?: categoriesWhereInput | boolean
+    connect?: categoriesWhereUniqueInput
+    update?: XOR<XOR<categoriesUpdateToOneWithWhereWithoutVideosInput, categoriesUpdateWithoutVideosInput>, categoriesUncheckedUpdateWithoutVideosInput>
+  }
+
+  export type usersUpdateOneRequiredWithoutVideosNestedInput = {
+    create?: XOR<usersCreateWithoutVideosInput, usersUncheckedCreateWithoutVideosInput>
+    connectOrCreate?: usersCreateOrConnectWithoutVideosInput
+    upsert?: usersUpsertWithoutVideosInput
+    connect?: usersWhereUniqueInput
+    update?: XOR<XOR<usersUpdateToOneWithWhereWithoutVideosInput, usersUpdateWithoutVideosInput>, usersUncheckedUpdateWithoutVideosInput>
+  }
+
+  export type commentsUncheckedUpdateManyWithoutVideosNestedInput = {
+    create?: XOR<commentsCreateWithoutVideosInput, commentsUncheckedCreateWithoutVideosInput> | commentsCreateWithoutVideosInput[] | commentsUncheckedCreateWithoutVideosInput[]
+    connectOrCreate?: commentsCreateOrConnectWithoutVideosInput | commentsCreateOrConnectWithoutVideosInput[]
+    upsert?: commentsUpsertWithWhereUniqueWithoutVideosInput | commentsUpsertWithWhereUniqueWithoutVideosInput[]
+    createMany?: commentsCreateManyVideosInputEnvelope
+    set?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+    disconnect?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+    delete?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+    connect?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
+    update?: commentsUpdateWithWhereUniqueWithoutVideosInput | commentsUpdateWithWhereUniqueWithoutVideosInput[]
+    updateMany?: commentsUpdateManyWithWhereWithoutVideosInput | commentsUpdateManyWithWhereWithoutVideosInput[]
+    deleteMany?: commentsScalarWhereInput | commentsScalarWhereInput[]
+  }
+
+  export type video_reactionsUncheckedUpdateManyWithoutVideosNestedInput = {
+    create?: XOR<video_reactionsCreateWithoutVideosInput, video_reactionsUncheckedCreateWithoutVideosInput> | video_reactionsCreateWithoutVideosInput[] | video_reactionsUncheckedCreateWithoutVideosInput[]
+    connectOrCreate?: video_reactionsCreateOrConnectWithoutVideosInput | video_reactionsCreateOrConnectWithoutVideosInput[]
+    upsert?: video_reactionsUpsertWithWhereUniqueWithoutVideosInput | video_reactionsUpsertWithWhereUniqueWithoutVideosInput[]
+    createMany?: video_reactionsCreateManyVideosInputEnvelope
+    set?: video_reactionsWhereUniqueInput | video_reactionsWhereUniqueInput[]
+    disconnect?: video_reactionsWhereUniqueInput | video_reactionsWhereUniqueInput[]
+    delete?: video_reactionsWhereUniqueInput | video_reactionsWhereUniqueInput[]
+    connect?: video_reactionsWhereUniqueInput | video_reactionsWhereUniqueInput[]
+    update?: video_reactionsUpdateWithWhereUniqueWithoutVideosInput | video_reactionsUpdateWithWhereUniqueWithoutVideosInput[]
+    updateMany?: video_reactionsUpdateManyWithWhereWithoutVideosInput | video_reactionsUpdateManyWithWhereWithoutVideosInput[]
+    deleteMany?: video_reactionsScalarWhereInput | video_reactionsScalarWhereInput[]
+  }
+
+  export type video_viewsUncheckedUpdateManyWithoutVideosNestedInput = {
+    create?: XOR<video_viewsCreateWithoutVideosInput, video_viewsUncheckedCreateWithoutVideosInput> | video_viewsCreateWithoutVideosInput[] | video_viewsUncheckedCreateWithoutVideosInput[]
+    connectOrCreate?: video_viewsCreateOrConnectWithoutVideosInput | video_viewsCreateOrConnectWithoutVideosInput[]
+    upsert?: video_viewsUpsertWithWhereUniqueWithoutVideosInput | video_viewsUpsertWithWhereUniqueWithoutVideosInput[]
+    createMany?: video_viewsCreateManyVideosInputEnvelope
+    set?: video_viewsWhereUniqueInput | video_viewsWhereUniqueInput[]
+    disconnect?: video_viewsWhereUniqueInput | video_viewsWhereUniqueInput[]
+    delete?: video_viewsWhereUniqueInput | video_viewsWhereUniqueInput[]
+    connect?: video_viewsWhereUniqueInput | video_viewsWhereUniqueInput[]
+    update?: video_viewsUpdateWithWhereUniqueWithoutVideosInput | video_viewsUpdateWithWhereUniqueWithoutVideosInput[]
+    updateMany?: video_viewsUpdateManyWithWhereWithoutVideosInput | video_viewsUpdateManyWithWhereWithoutVideosInput[]
+    deleteMany?: video_viewsScalarWhereInput | video_viewsScalarWhereInput[]
+  }
+
+  export type commentsCreateNestedOneWithoutComment_reactionsInput = {
+    create?: XOR<commentsCreateWithoutComment_reactionsInput, commentsUncheckedCreateWithoutComment_reactionsInput>
+    connectOrCreate?: commentsCreateOrConnectWithoutComment_reactionsInput
+    connect?: commentsWhereUniqueInput
+  }
+
+  export type usersCreateNestedOneWithoutComment_reactionsInput = {
+    create?: XOR<usersCreateWithoutComment_reactionsInput, usersUncheckedCreateWithoutComment_reactionsInput>
+    connectOrCreate?: usersCreateOrConnectWithoutComment_reactionsInput
+    connect?: usersWhereUniqueInput
+  }
+
+  export type commentsUpdateOneRequiredWithoutComment_reactionsNestedInput = {
+    create?: XOR<commentsCreateWithoutComment_reactionsInput, commentsUncheckedCreateWithoutComment_reactionsInput>
+    connectOrCreate?: commentsCreateOrConnectWithoutComment_reactionsInput
+    upsert?: commentsUpsertWithoutComment_reactionsInput
+    connect?: commentsWhereUniqueInput
+    update?: XOR<XOR<commentsUpdateToOneWithWhereWithoutComment_reactionsInput, commentsUpdateWithoutComment_reactionsInput>, commentsUncheckedUpdateWithoutComment_reactionsInput>
+  }
+
+  export type usersUpdateOneRequiredWithoutComment_reactionsNestedInput = {
+    create?: XOR<usersCreateWithoutComment_reactionsInput, usersUncheckedCreateWithoutComment_reactionsInput>
+    connectOrCreate?: usersCreateOrConnectWithoutComment_reactionsInput
+    upsert?: usersUpsertWithoutComment_reactionsInput
+    connect?: usersWhereUniqueInput
+    update?: XOR<XOR<usersUpdateToOneWithWhereWithoutComment_reactionsInput, usersUpdateWithoutComment_reactionsInput>, usersUncheckedUpdateWithoutComment_reactionsInput>
+  }
+
+  export type usersCreateNestedOneWithoutVideo_reactionsInput = {
+    create?: XOR<usersCreateWithoutVideo_reactionsInput, usersUncheckedCreateWithoutVideo_reactionsInput>
+    connectOrCreate?: usersCreateOrConnectWithoutVideo_reactionsInput
+    connect?: usersWhereUniqueInput
+  }
+
+  export type videosCreateNestedOneWithoutVideo_reactionsInput = {
+    create?: XOR<videosCreateWithoutVideo_reactionsInput, videosUncheckedCreateWithoutVideo_reactionsInput>
+    connectOrCreate?: videosCreateOrConnectWithoutVideo_reactionsInput
+    connect?: videosWhereUniqueInput
+  }
+
+  export type usersUpdateOneRequiredWithoutVideo_reactionsNestedInput = {
+    create?: XOR<usersCreateWithoutVideo_reactionsInput, usersUncheckedCreateWithoutVideo_reactionsInput>
+    connectOrCreate?: usersCreateOrConnectWithoutVideo_reactionsInput
+    upsert?: usersUpsertWithoutVideo_reactionsInput
+    connect?: usersWhereUniqueInput
+    update?: XOR<XOR<usersUpdateToOneWithWhereWithoutVideo_reactionsInput, usersUpdateWithoutVideo_reactionsInput>, usersUncheckedUpdateWithoutVideo_reactionsInput>
+  }
+
+  export type videosUpdateOneRequiredWithoutVideo_reactionsNestedInput = {
+    create?: XOR<videosCreateWithoutVideo_reactionsInput, videosUncheckedCreateWithoutVideo_reactionsInput>
+    connectOrCreate?: videosCreateOrConnectWithoutVideo_reactionsInput
+    upsert?: videosUpsertWithoutVideo_reactionsInput
+    connect?: videosWhereUniqueInput
+    update?: XOR<XOR<videosUpdateToOneWithWhereWithoutVideo_reactionsInput, videosUpdateWithoutVideo_reactionsInput>, videosUncheckedUpdateWithoutVideo_reactionsInput>
+  }
+
+  export type usersCreateNestedOneWithoutVideo_viewsInput = {
+    create?: XOR<usersCreateWithoutVideo_viewsInput, usersUncheckedCreateWithoutVideo_viewsInput>
+    connectOrCreate?: usersCreateOrConnectWithoutVideo_viewsInput
+    connect?: usersWhereUniqueInput
+  }
+
+  export type videosCreateNestedOneWithoutVideo_viewsInput = {
+    create?: XOR<videosCreateWithoutVideo_viewsInput, videosUncheckedCreateWithoutVideo_viewsInput>
+    connectOrCreate?: videosCreateOrConnectWithoutVideo_viewsInput
+    connect?: videosWhereUniqueInput
+  }
+
+  export type usersUpdateOneRequiredWithoutVideo_viewsNestedInput = {
+    create?: XOR<usersCreateWithoutVideo_viewsInput, usersUncheckedCreateWithoutVideo_viewsInput>
+    connectOrCreate?: usersCreateOrConnectWithoutVideo_viewsInput
+    upsert?: usersUpsertWithoutVideo_viewsInput
+    connect?: usersWhereUniqueInput
+    update?: XOR<XOR<usersUpdateToOneWithWhereWithoutVideo_viewsInput, usersUpdateWithoutVideo_viewsInput>, usersUncheckedUpdateWithoutVideo_viewsInput>
+  }
+
+  export type videosUpdateOneRequiredWithoutVideo_viewsNestedInput = {
+    create?: XOR<videosCreateWithoutVideo_viewsInput, videosUncheckedCreateWithoutVideo_viewsInput>
+    connectOrCreate?: videosCreateOrConnectWithoutVideo_viewsInput
+    upsert?: videosUpsertWithoutVideo_viewsInput
+    connect?: videosWhereUniqueInput
+    update?: XOR<XOR<videosUpdateToOneWithWhereWithoutVideo_viewsInput, videosUpdateWithoutVideo_viewsInput>, videosUncheckedUpdateWithoutVideo_viewsInput>
+  }
+
+  export type NestedUuidFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedUuidFilter<$PrismaModel> | string
+  }
+
+  export type NestedUuidNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedUuidNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedStringFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedUuidWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedUuidWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type NestedUuidNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedUuidNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type comment_reactionsCreateWithoutCommentsInput = {
+    id?: string
+    type: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    users: usersCreateNestedOneWithoutComment_reactionsInput
+  }
+
+  export type comment_reactionsUncheckedCreateWithoutCommentsInput = {
+    id?: string
+    user_id: string
+    type: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type comment_reactionsCreateOrConnectWithoutCommentsInput = {
+    where: comment_reactionsWhereUniqueInput
+    create: XOR<comment_reactionsCreateWithoutCommentsInput, comment_reactionsUncheckedCreateWithoutCommentsInput>
+  }
+
+  export type comment_reactionsCreateManyCommentsInputEnvelope = {
+    data: comment_reactionsCreateManyCommentsInput | comment_reactionsCreateManyCommentsInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type commentsCreateWithoutOther_commentsInput = {
+    id?: string
+    value: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    comment_reactions?: comment_reactionsCreateNestedManyWithoutCommentsInput
+    comments?: commentsCreateNestedOneWithoutOther_commentsInput
+    users: usersCreateNestedOneWithoutCommentsInput
+    videos: videosCreateNestedOneWithoutCommentsInput
+  }
+
+  export type commentsUncheckedCreateWithoutOther_commentsInput = {
+    id?: string
+    parent_id?: string | null
+    user_id: string
+    video_id: string
+    value: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    comment_reactions?: comment_reactionsUncheckedCreateNestedManyWithoutCommentsInput
+  }
+
+  export type commentsCreateOrConnectWithoutOther_commentsInput = {
+    where: commentsWhereUniqueInput
+    create: XOR<commentsCreateWithoutOther_commentsInput, commentsUncheckedCreateWithoutOther_commentsInput>
+  }
+
+  export type commentsCreateWithoutCommentsInput = {
+    id?: string
+    value: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    comment_reactions?: comment_reactionsCreateNestedManyWithoutCommentsInput
+    other_comments?: commentsCreateNestedManyWithoutCommentsInput
+    users: usersCreateNestedOneWithoutCommentsInput
+    videos: videosCreateNestedOneWithoutCommentsInput
+  }
+
+  export type commentsUncheckedCreateWithoutCommentsInput = {
+    id?: string
+    user_id: string
+    video_id: string
+    value: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    comment_reactions?: comment_reactionsUncheckedCreateNestedManyWithoutCommentsInput
+    other_comments?: commentsUncheckedCreateNestedManyWithoutCommentsInput
+  }
+
+  export type commentsCreateOrConnectWithoutCommentsInput = {
+    where: commentsWhereUniqueInput
+    create: XOR<commentsCreateWithoutCommentsInput, commentsUncheckedCreateWithoutCommentsInput>
+  }
+
+  export type commentsCreateManyCommentsInputEnvelope = {
+    data: commentsCreateManyCommentsInput | commentsCreateManyCommentsInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type usersCreateWithoutCommentsInput = {
+    id?: string
+    clerk_user_id: string
+    channel_name: string
+    avatar_url?: string | null
+    bio?: string | null
+    created_at?: Date | string | null
+    comment_reactions?: comment_reactionsCreateNestedManyWithoutUsersInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_reactions?: video_reactionsCreateNestedManyWithoutUsersInput
+    video_views?: video_viewsCreateNestedManyWithoutUsersInput
+    videos?: videosCreateNestedManyWithoutUsersInput
+  }
+
+  export type usersUncheckedCreateWithoutCommentsInput = {
+    id?: string
+    clerk_user_id: string
+    channel_name: string
+    avatar_url?: string | null
+    bio?: string | null
+    created_at?: Date | string | null
+    comment_reactions?: comment_reactionsUncheckedCreateNestedManyWithoutUsersInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_reactions?: video_reactionsUncheckedCreateNestedManyWithoutUsersInput
+    video_views?: video_viewsUncheckedCreateNestedManyWithoutUsersInput
+    videos?: videosUncheckedCreateNestedManyWithoutUsersInput
+  }
+
+  export type usersCreateOrConnectWithoutCommentsInput = {
+    where: usersWhereUniqueInput
+    create: XOR<usersCreateWithoutCommentsInput, usersUncheckedCreateWithoutCommentsInput>
+  }
+
+  export type videosCreateWithoutCommentsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    mux_status?: string | null
+    mux_asset_id?: string | null
+    mux_upload_id?: string | null
+    mux_playback_id?: string | null
+    mux_track_id?: string | null
+    mux_track_status?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    video_reactions?: video_reactionsCreateNestedManyWithoutVideosInput
+    video_views?: video_viewsCreateNestedManyWithoutVideosInput
+    categories?: categoriesCreateNestedOneWithoutVideosInput
+    users: usersCreateNestedOneWithoutVideosInput
+  }
+
+  export type videosUncheckedCreateWithoutCommentsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    mux_status?: string | null
+    mux_asset_id?: string | null
+    mux_upload_id?: string | null
+    mux_playback_id?: string | null
+    mux_track_id?: string | null
+    mux_track_status?: string | null
+    user_id: string
+    category_id?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    video_reactions?: video_reactionsUncheckedCreateNestedManyWithoutVideosInput
+    video_views?: video_viewsUncheckedCreateNestedManyWithoutVideosInput
+  }
+
+  export type videosCreateOrConnectWithoutCommentsInput = {
+    where: videosWhereUniqueInput
+    create: XOR<videosCreateWithoutCommentsInput, videosUncheckedCreateWithoutCommentsInput>
+  }
+
+  export type comment_reactionsUpsertWithWhereUniqueWithoutCommentsInput = {
+    where: comment_reactionsWhereUniqueInput
+    update: XOR<comment_reactionsUpdateWithoutCommentsInput, comment_reactionsUncheckedUpdateWithoutCommentsInput>
+    create: XOR<comment_reactionsCreateWithoutCommentsInput, comment_reactionsUncheckedCreateWithoutCommentsInput>
+  }
+
+  export type comment_reactionsUpdateWithWhereUniqueWithoutCommentsInput = {
+    where: comment_reactionsWhereUniqueInput
+    data: XOR<comment_reactionsUpdateWithoutCommentsInput, comment_reactionsUncheckedUpdateWithoutCommentsInput>
+  }
+
+  export type comment_reactionsUpdateManyWithWhereWithoutCommentsInput = {
+    where: comment_reactionsScalarWhereInput
+    data: XOR<comment_reactionsUpdateManyMutationInput, comment_reactionsUncheckedUpdateManyWithoutCommentsInput>
+  }
+
+  export type comment_reactionsScalarWhereInput = {
+    AND?: comment_reactionsScalarWhereInput | comment_reactionsScalarWhereInput[]
+    OR?: comment_reactionsScalarWhereInput[]
+    NOT?: comment_reactionsScalarWhereInput | comment_reactionsScalarWhereInput[]
+    id?: UuidFilter<"comment_reactions"> | string
+    user_id?: UuidFilter<"comment_reactions"> | string
+    comment_id?: UuidFilter<"comment_reactions"> | string
+    type?: StringFilter<"comment_reactions"> | string
+    created_at?: DateTimeFilter<"comment_reactions"> | Date | string
+    updated_at?: DateTimeFilter<"comment_reactions"> | Date | string
+  }
+
+  export type commentsUpsertWithoutOther_commentsInput = {
+    update: XOR<commentsUpdateWithoutOther_commentsInput, commentsUncheckedUpdateWithoutOther_commentsInput>
+    create: XOR<commentsCreateWithoutOther_commentsInput, commentsUncheckedCreateWithoutOther_commentsInput>
+    where?: commentsWhereInput
+  }
+
+  export type commentsUpdateToOneWithWhereWithoutOther_commentsInput = {
+    where?: commentsWhereInput
+    data: XOR<commentsUpdateWithoutOther_commentsInput, commentsUncheckedUpdateWithoutOther_commentsInput>
+  }
+
+  export type commentsUpdateWithoutOther_commentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    comment_reactions?: comment_reactionsUpdateManyWithoutCommentsNestedInput
+    comments?: commentsUpdateOneWithoutOther_commentsNestedInput
+    users?: usersUpdateOneRequiredWithoutCommentsNestedInput
+    videos?: videosUpdateOneRequiredWithoutCommentsNestedInput
+  }
+
+  export type commentsUncheckedUpdateWithoutOther_commentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    parent_id?: NullableStringFieldUpdateOperationsInput | string | null
+    user_id?: StringFieldUpdateOperationsInput | string
+    video_id?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    comment_reactions?: comment_reactionsUncheckedUpdateManyWithoutCommentsNestedInput
+  }
+
+  export type commentsUpsertWithWhereUniqueWithoutCommentsInput = {
+    where: commentsWhereUniqueInput
+    update: XOR<commentsUpdateWithoutCommentsInput, commentsUncheckedUpdateWithoutCommentsInput>
+    create: XOR<commentsCreateWithoutCommentsInput, commentsUncheckedCreateWithoutCommentsInput>
+  }
+
+  export type commentsUpdateWithWhereUniqueWithoutCommentsInput = {
+    where: commentsWhereUniqueInput
+    data: XOR<commentsUpdateWithoutCommentsInput, commentsUncheckedUpdateWithoutCommentsInput>
+  }
+
+  export type commentsUpdateManyWithWhereWithoutCommentsInput = {
+    where: commentsScalarWhereInput
+    data: XOR<commentsUpdateManyMutationInput, commentsUncheckedUpdateManyWithoutCommentsInput>
+  }
+
+  export type commentsScalarWhereInput = {
+    AND?: commentsScalarWhereInput | commentsScalarWhereInput[]
+    OR?: commentsScalarWhereInput[]
+    NOT?: commentsScalarWhereInput | commentsScalarWhereInput[]
+    id?: UuidFilter<"comments"> | string
+    parent_id?: UuidNullableFilter<"comments"> | string | null
+    user_id?: UuidFilter<"comments"> | string
+    video_id?: UuidFilter<"comments"> | string
+    value?: StringFilter<"comments"> | string
+    created_at?: DateTimeFilter<"comments"> | Date | string
+    updated_at?: DateTimeFilter<"comments"> | Date | string
+  }
+
+  export type usersUpsertWithoutCommentsInput = {
+    update: XOR<usersUpdateWithoutCommentsInput, usersUncheckedUpdateWithoutCommentsInput>
+    create: XOR<usersCreateWithoutCommentsInput, usersUncheckedCreateWithoutCommentsInput>
+    where?: usersWhereInput
+  }
+
+  export type usersUpdateToOneWithWhereWithoutCommentsInput = {
+    where?: usersWhereInput
+    data: XOR<usersUpdateWithoutCommentsInput, usersUncheckedUpdateWithoutCommentsInput>
+  }
+
+  export type usersUpdateWithoutCommentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: StringFieldUpdateOperationsInput | string
+    channel_name?: StringFieldUpdateOperationsInput | string
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    comment_reactions?: comment_reactionsUpdateManyWithoutUsersNestedInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_reactions?: video_reactionsUpdateManyWithoutUsersNestedInput
+    video_views?: video_viewsUpdateManyWithoutUsersNestedInput
+    videos?: videosUpdateManyWithoutUsersNestedInput
+  }
+
+  export type usersUncheckedUpdateWithoutCommentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: StringFieldUpdateOperationsInput | string
+    channel_name?: StringFieldUpdateOperationsInput | string
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    comment_reactions?: comment_reactionsUncheckedUpdateManyWithoutUsersNestedInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_reactions?: video_reactionsUncheckedUpdateManyWithoutUsersNestedInput
+    video_views?: video_viewsUncheckedUpdateManyWithoutUsersNestedInput
+    videos?: videosUncheckedUpdateManyWithoutUsersNestedInput
+  }
+
+  export type videosUpsertWithoutCommentsInput = {
+    update: XOR<videosUpdateWithoutCommentsInput, videosUncheckedUpdateWithoutCommentsInput>
+    create: XOR<videosCreateWithoutCommentsInput, videosUncheckedCreateWithoutCommentsInput>
+    where?: videosWhereInput
+  }
+
+  export type videosUpdateToOneWithWhereWithoutCommentsInput = {
+    where?: videosWhereInput
+    data: XOR<videosUpdateWithoutCommentsInput, videosUncheckedUpdateWithoutCommentsInput>
+  }
+
+  export type videosUpdateWithoutCommentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_status?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_asset_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_upload_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_playback_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_status?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    video_reactions?: video_reactionsUpdateManyWithoutVideosNestedInput
+    video_views?: video_viewsUpdateManyWithoutVideosNestedInput
+    categories?: categoriesUpdateOneWithoutVideosNestedInput
+    users?: usersUpdateOneRequiredWithoutVideosNestedInput
+  }
+
+  export type videosUncheckedUpdateWithoutCommentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_status?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_asset_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_upload_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_playback_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_status?: NullableStringFieldUpdateOperationsInput | string | null
+    user_id?: StringFieldUpdateOperationsInput | string
+    category_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    video_reactions?: video_reactionsUncheckedUpdateManyWithoutVideosNestedInput
+    video_views?: video_viewsUncheckedUpdateManyWithoutVideosNestedInput
+  }
+
+  export type usersCreateWithoutSubscriptions_subscriptions_creator_idTousersInput = {
+    id?: string
+    clerk_user_id: string
+    channel_name: string
+    avatar_url?: string | null
+    bio?: string | null
+    created_at?: Date | string | null
+    comment_reactions?: comment_reactionsCreateNestedManyWithoutUsersInput
+    comments?: commentsCreateNestedManyWithoutUsersInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_reactions?: video_reactionsCreateNestedManyWithoutUsersInput
+    video_views?: video_viewsCreateNestedManyWithoutUsersInput
+    videos?: videosCreateNestedManyWithoutUsersInput
+  }
+
+  export type usersUncheckedCreateWithoutSubscriptions_subscriptions_creator_idTousersInput = {
+    id?: string
+    clerk_user_id: string
+    channel_name: string
+    avatar_url?: string | null
+    bio?: string | null
+    created_at?: Date | string | null
+    comment_reactions?: comment_reactionsUncheckedCreateNestedManyWithoutUsersInput
+    comments?: commentsUncheckedCreateNestedManyWithoutUsersInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_reactions?: video_reactionsUncheckedCreateNestedManyWithoutUsersInput
+    video_views?: video_viewsUncheckedCreateNestedManyWithoutUsersInput
+    videos?: videosUncheckedCreateNestedManyWithoutUsersInput
+  }
+
+  export type usersCreateOrConnectWithoutSubscriptions_subscriptions_creator_idTousersInput = {
+    where: usersWhereUniqueInput
+    create: XOR<usersCreateWithoutSubscriptions_subscriptions_creator_idTousersInput, usersUncheckedCreateWithoutSubscriptions_subscriptions_creator_idTousersInput>
+  }
+
+  export type usersCreateWithoutSubscriptions_subscriptions_viewer_idTousersInput = {
+    id?: string
+    clerk_user_id: string
+    channel_name: string
+    avatar_url?: string | null
+    bio?: string | null
+    created_at?: Date | string | null
+    comment_reactions?: comment_reactionsCreateNestedManyWithoutUsersInput
+    comments?: commentsCreateNestedManyWithoutUsersInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
+    video_reactions?: video_reactionsCreateNestedManyWithoutUsersInput
+    video_views?: video_viewsCreateNestedManyWithoutUsersInput
+    videos?: videosCreateNestedManyWithoutUsersInput
+  }
+
+  export type usersUncheckedCreateWithoutSubscriptions_subscriptions_viewer_idTousersInput = {
+    id?: string
+    clerk_user_id: string
+    channel_name: string
+    avatar_url?: string | null
+    bio?: string | null
+    created_at?: Date | string | null
+    comment_reactions?: comment_reactionsUncheckedCreateNestedManyWithoutUsersInput
+    comments?: commentsUncheckedCreateNestedManyWithoutUsersInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
+    video_reactions?: video_reactionsUncheckedCreateNestedManyWithoutUsersInput
+    video_views?: video_viewsUncheckedCreateNestedManyWithoutUsersInput
+    videos?: videosUncheckedCreateNestedManyWithoutUsersInput
+  }
+
+  export type usersCreateOrConnectWithoutSubscriptions_subscriptions_viewer_idTousersInput = {
+    where: usersWhereUniqueInput
+    create: XOR<usersCreateWithoutSubscriptions_subscriptions_viewer_idTousersInput, usersUncheckedCreateWithoutSubscriptions_subscriptions_viewer_idTousersInput>
+  }
+
+  export type usersUpsertWithoutSubscriptions_subscriptions_creator_idTousersInput = {
+    update: XOR<usersUpdateWithoutSubscriptions_subscriptions_creator_idTousersInput, usersUncheckedUpdateWithoutSubscriptions_subscriptions_creator_idTousersInput>
+    create: XOR<usersCreateWithoutSubscriptions_subscriptions_creator_idTousersInput, usersUncheckedCreateWithoutSubscriptions_subscriptions_creator_idTousersInput>
+    where?: usersWhereInput
+  }
+
+  export type usersUpdateToOneWithWhereWithoutSubscriptions_subscriptions_creator_idTousersInput = {
+    where?: usersWhereInput
+    data: XOR<usersUpdateWithoutSubscriptions_subscriptions_creator_idTousersInput, usersUncheckedUpdateWithoutSubscriptions_subscriptions_creator_idTousersInput>
+  }
+
+  export type usersUpdateWithoutSubscriptions_subscriptions_creator_idTousersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: StringFieldUpdateOperationsInput | string
+    channel_name?: StringFieldUpdateOperationsInput | string
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    comment_reactions?: comment_reactionsUpdateManyWithoutUsersNestedInput
+    comments?: commentsUpdateManyWithoutUsersNestedInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_reactions?: video_reactionsUpdateManyWithoutUsersNestedInput
+    video_views?: video_viewsUpdateManyWithoutUsersNestedInput
+    videos?: videosUpdateManyWithoutUsersNestedInput
+  }
+
+  export type usersUncheckedUpdateWithoutSubscriptions_subscriptions_creator_idTousersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: StringFieldUpdateOperationsInput | string
+    channel_name?: StringFieldUpdateOperationsInput | string
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    comment_reactions?: comment_reactionsUncheckedUpdateManyWithoutUsersNestedInput
+    comments?: commentsUncheckedUpdateManyWithoutUsersNestedInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_reactions?: video_reactionsUncheckedUpdateManyWithoutUsersNestedInput
+    video_views?: video_viewsUncheckedUpdateManyWithoutUsersNestedInput
+    videos?: videosUncheckedUpdateManyWithoutUsersNestedInput
+  }
+
+  export type usersUpsertWithoutSubscriptions_subscriptions_viewer_idTousersInput = {
+    update: XOR<usersUpdateWithoutSubscriptions_subscriptions_viewer_idTousersInput, usersUncheckedUpdateWithoutSubscriptions_subscriptions_viewer_idTousersInput>
+    create: XOR<usersCreateWithoutSubscriptions_subscriptions_viewer_idTousersInput, usersUncheckedCreateWithoutSubscriptions_subscriptions_viewer_idTousersInput>
+    where?: usersWhereInput
+  }
+
+  export type usersUpdateToOneWithWhereWithoutSubscriptions_subscriptions_viewer_idTousersInput = {
+    where?: usersWhereInput
+    data: XOR<usersUpdateWithoutSubscriptions_subscriptions_viewer_idTousersInput, usersUncheckedUpdateWithoutSubscriptions_subscriptions_viewer_idTousersInput>
+  }
+
+  export type usersUpdateWithoutSubscriptions_subscriptions_viewer_idTousersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: StringFieldUpdateOperationsInput | string
+    channel_name?: StringFieldUpdateOperationsInput | string
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    comment_reactions?: comment_reactionsUpdateManyWithoutUsersNestedInput
+    comments?: commentsUpdateManyWithoutUsersNestedInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
+    video_reactions?: video_reactionsUpdateManyWithoutUsersNestedInput
+    video_views?: video_viewsUpdateManyWithoutUsersNestedInput
+    videos?: videosUpdateManyWithoutUsersNestedInput
+  }
+
+  export type usersUncheckedUpdateWithoutSubscriptions_subscriptions_viewer_idTousersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: StringFieldUpdateOperationsInput | string
+    channel_name?: StringFieldUpdateOperationsInput | string
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    comment_reactions?: comment_reactionsUncheckedUpdateManyWithoutUsersNestedInput
+    comments?: commentsUncheckedUpdateManyWithoutUsersNestedInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
+    video_reactions?: video_reactionsUncheckedUpdateManyWithoutUsersNestedInput
+    video_views?: video_viewsUncheckedUpdateManyWithoutUsersNestedInput
+    videos?: videosUncheckedUpdateManyWithoutUsersNestedInput
+  }
+
+  export type comment_reactionsCreateWithoutUsersInput = {
+    id?: string
+    type: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    comments: commentsCreateNestedOneWithoutComment_reactionsInput
+  }
+
+  export type comment_reactionsUncheckedCreateWithoutUsersInput = {
+    id?: string
+    comment_id: string
+    type: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type comment_reactionsCreateOrConnectWithoutUsersInput = {
+    where: comment_reactionsWhereUniqueInput
+    create: XOR<comment_reactionsCreateWithoutUsersInput, comment_reactionsUncheckedCreateWithoutUsersInput>
+  }
+
+  export type comment_reactionsCreateManyUsersInputEnvelope = {
+    data: comment_reactionsCreateManyUsersInput | comment_reactionsCreateManyUsersInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type commentsCreateWithoutUsersInput = {
+    id?: string
+    value: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    comment_reactions?: comment_reactionsCreateNestedManyWithoutCommentsInput
+    comments?: commentsCreateNestedOneWithoutOther_commentsInput
+    other_comments?: commentsCreateNestedManyWithoutCommentsInput
+    videos: videosCreateNestedOneWithoutCommentsInput
+  }
+
+  export type commentsUncheckedCreateWithoutUsersInput = {
+    id?: string
+    parent_id?: string | null
+    video_id: string
+    value: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    comment_reactions?: comment_reactionsUncheckedCreateNestedManyWithoutCommentsInput
+    other_comments?: commentsUncheckedCreateNestedManyWithoutCommentsInput
+  }
+
+  export type commentsCreateOrConnectWithoutUsersInput = {
+    where: commentsWhereUniqueInput
+    create: XOR<commentsCreateWithoutUsersInput, commentsUncheckedCreateWithoutUsersInput>
+  }
+
+  export type commentsCreateManyUsersInputEnvelope = {
+    data: commentsCreateManyUsersInput | commentsCreateManyUsersInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type subscriptionsCreateWithoutUsers_subscriptions_creator_idTousersInput = {
+    id?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    users_subscriptions_viewer_idTousers: usersCreateNestedOneWithoutSubscriptions_subscriptions_viewer_idTousersInput
+  }
+
+  export type subscriptionsUncheckedCreateWithoutUsers_subscriptions_creator_idTousersInput = {
+    id?: string
+    viewer_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type subscriptionsCreateOrConnectWithoutUsers_subscriptions_creator_idTousersInput = {
+    where: subscriptionsWhereUniqueInput
+    create: XOR<subscriptionsCreateWithoutUsers_subscriptions_creator_idTousersInput, subscriptionsUncheckedCreateWithoutUsers_subscriptions_creator_idTousersInput>
+  }
+
+  export type subscriptionsCreateManyUsers_subscriptions_creator_idTousersInputEnvelope = {
+    data: subscriptionsCreateManyUsers_subscriptions_creator_idTousersInput | subscriptionsCreateManyUsers_subscriptions_creator_idTousersInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type subscriptionsCreateWithoutUsers_subscriptions_viewer_idTousersInput = {
+    id?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    users_subscriptions_creator_idTousers: usersCreateNestedOneWithoutSubscriptions_subscriptions_creator_idTousersInput
+  }
+
+  export type subscriptionsUncheckedCreateWithoutUsers_subscriptions_viewer_idTousersInput = {
+    id?: string
+    creator_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type subscriptionsCreateOrConnectWithoutUsers_subscriptions_viewer_idTousersInput = {
+    where: subscriptionsWhereUniqueInput
+    create: XOR<subscriptionsCreateWithoutUsers_subscriptions_viewer_idTousersInput, subscriptionsUncheckedCreateWithoutUsers_subscriptions_viewer_idTousersInput>
+  }
+
+  export type subscriptionsCreateManyUsers_subscriptions_viewer_idTousersInputEnvelope = {
+    data: subscriptionsCreateManyUsers_subscriptions_viewer_idTousersInput | subscriptionsCreateManyUsers_subscriptions_viewer_idTousersInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type video_reactionsCreateWithoutUsersInput = {
+    id?: string
+    type: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    videos: videosCreateNestedOneWithoutVideo_reactionsInput
+  }
+
+  export type video_reactionsUncheckedCreateWithoutUsersInput = {
+    id?: string
+    video_id: string
+    type: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type video_reactionsCreateOrConnectWithoutUsersInput = {
+    where: video_reactionsWhereUniqueInput
+    create: XOR<video_reactionsCreateWithoutUsersInput, video_reactionsUncheckedCreateWithoutUsersInput>
+  }
+
+  export type video_reactionsCreateManyUsersInputEnvelope = {
+    data: video_reactionsCreateManyUsersInput | video_reactionsCreateManyUsersInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type video_viewsCreateWithoutUsersInput = {
+    id?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    videos: videosCreateNestedOneWithoutVideo_viewsInput
+  }
+
+  export type video_viewsUncheckedCreateWithoutUsersInput = {
+    id?: string
+    video_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type video_viewsCreateOrConnectWithoutUsersInput = {
+    where: video_viewsWhereUniqueInput
+    create: XOR<video_viewsCreateWithoutUsersInput, video_viewsUncheckedCreateWithoutUsersInput>
+  }
+
+  export type video_viewsCreateManyUsersInputEnvelope = {
+    data: video_viewsCreateManyUsersInput | video_viewsCreateManyUsersInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type videosCreateWithoutUsersInput = {
+    id?: string
+    title: string
+    description?: string | null
+    mux_status?: string | null
+    mux_asset_id?: string | null
+    mux_upload_id?: string | null
+    mux_playback_id?: string | null
+    mux_track_id?: string | null
+    mux_track_status?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    comments?: commentsCreateNestedManyWithoutVideosInput
+    video_reactions?: video_reactionsCreateNestedManyWithoutVideosInput
+    video_views?: video_viewsCreateNestedManyWithoutVideosInput
+    categories?: categoriesCreateNestedOneWithoutVideosInput
+  }
+
+  export type videosUncheckedCreateWithoutUsersInput = {
+    id?: string
+    title: string
+    description?: string | null
+    mux_status?: string | null
+    mux_asset_id?: string | null
+    mux_upload_id?: string | null
+    mux_playback_id?: string | null
+    mux_track_id?: string | null
+    mux_track_status?: string | null
+    category_id?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    comments?: commentsUncheckedCreateNestedManyWithoutVideosInput
+    video_reactions?: video_reactionsUncheckedCreateNestedManyWithoutVideosInput
+    video_views?: video_viewsUncheckedCreateNestedManyWithoutVideosInput
+  }
+
+  export type videosCreateOrConnectWithoutUsersInput = {
+    where: videosWhereUniqueInput
+    create: XOR<videosCreateWithoutUsersInput, videosUncheckedCreateWithoutUsersInput>
+  }
+
+  export type videosCreateManyUsersInputEnvelope = {
+    data: videosCreateManyUsersInput | videosCreateManyUsersInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type comment_reactionsUpsertWithWhereUniqueWithoutUsersInput = {
+    where: comment_reactionsWhereUniqueInput
+    update: XOR<comment_reactionsUpdateWithoutUsersInput, comment_reactionsUncheckedUpdateWithoutUsersInput>
+    create: XOR<comment_reactionsCreateWithoutUsersInput, comment_reactionsUncheckedCreateWithoutUsersInput>
+  }
+
+  export type comment_reactionsUpdateWithWhereUniqueWithoutUsersInput = {
+    where: comment_reactionsWhereUniqueInput
+    data: XOR<comment_reactionsUpdateWithoutUsersInput, comment_reactionsUncheckedUpdateWithoutUsersInput>
+  }
+
+  export type comment_reactionsUpdateManyWithWhereWithoutUsersInput = {
+    where: comment_reactionsScalarWhereInput
+    data: XOR<comment_reactionsUpdateManyMutationInput, comment_reactionsUncheckedUpdateManyWithoutUsersInput>
+  }
+
+  export type commentsUpsertWithWhereUniqueWithoutUsersInput = {
+    where: commentsWhereUniqueInput
+    update: XOR<commentsUpdateWithoutUsersInput, commentsUncheckedUpdateWithoutUsersInput>
+    create: XOR<commentsCreateWithoutUsersInput, commentsUncheckedCreateWithoutUsersInput>
+  }
+
+  export type commentsUpdateWithWhereUniqueWithoutUsersInput = {
+    where: commentsWhereUniqueInput
+    data: XOR<commentsUpdateWithoutUsersInput, commentsUncheckedUpdateWithoutUsersInput>
+  }
+
+  export type commentsUpdateManyWithWhereWithoutUsersInput = {
+    where: commentsScalarWhereInput
+    data: XOR<commentsUpdateManyMutationInput, commentsUncheckedUpdateManyWithoutUsersInput>
+  }
+
+  export type subscriptionsUpsertWithWhereUniqueWithoutUsers_subscriptions_creator_idTousersInput = {
+    where: subscriptionsWhereUniqueInput
+    update: XOR<subscriptionsUpdateWithoutUsers_subscriptions_creator_idTousersInput, subscriptionsUncheckedUpdateWithoutUsers_subscriptions_creator_idTousersInput>
+    create: XOR<subscriptionsCreateWithoutUsers_subscriptions_creator_idTousersInput, subscriptionsUncheckedCreateWithoutUsers_subscriptions_creator_idTousersInput>
+  }
+
+  export type subscriptionsUpdateWithWhereUniqueWithoutUsers_subscriptions_creator_idTousersInput = {
+    where: subscriptionsWhereUniqueInput
+    data: XOR<subscriptionsUpdateWithoutUsers_subscriptions_creator_idTousersInput, subscriptionsUncheckedUpdateWithoutUsers_subscriptions_creator_idTousersInput>
+  }
+
+  export type subscriptionsUpdateManyWithWhereWithoutUsers_subscriptions_creator_idTousersInput = {
+    where: subscriptionsScalarWhereInput
+    data: XOR<subscriptionsUpdateManyMutationInput, subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_creator_idTousersInput>
+  }
+
+  export type subscriptionsScalarWhereInput = {
+    AND?: subscriptionsScalarWhereInput | subscriptionsScalarWhereInput[]
+    OR?: subscriptionsScalarWhereInput[]
+    NOT?: subscriptionsScalarWhereInput | subscriptionsScalarWhereInput[]
+    id?: UuidFilter<"subscriptions"> | string
+    viewer_id?: UuidFilter<"subscriptions"> | string
+    creator_id?: UuidFilter<"subscriptions"> | string
+    created_at?: DateTimeFilter<"subscriptions"> | Date | string
+    updated_at?: DateTimeFilter<"subscriptions"> | Date | string
+  }
+
+  export type subscriptionsUpsertWithWhereUniqueWithoutUsers_subscriptions_viewer_idTousersInput = {
+    where: subscriptionsWhereUniqueInput
+    update: XOR<subscriptionsUpdateWithoutUsers_subscriptions_viewer_idTousersInput, subscriptionsUncheckedUpdateWithoutUsers_subscriptions_viewer_idTousersInput>
+    create: XOR<subscriptionsCreateWithoutUsers_subscriptions_viewer_idTousersInput, subscriptionsUncheckedCreateWithoutUsers_subscriptions_viewer_idTousersInput>
+  }
+
+  export type subscriptionsUpdateWithWhereUniqueWithoutUsers_subscriptions_viewer_idTousersInput = {
+    where: subscriptionsWhereUniqueInput
+    data: XOR<subscriptionsUpdateWithoutUsers_subscriptions_viewer_idTousersInput, subscriptionsUncheckedUpdateWithoutUsers_subscriptions_viewer_idTousersInput>
+  }
+
+  export type subscriptionsUpdateManyWithWhereWithoutUsers_subscriptions_viewer_idTousersInput = {
+    where: subscriptionsScalarWhereInput
+    data: XOR<subscriptionsUpdateManyMutationInput, subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_viewer_idTousersInput>
+  }
+
+  export type video_reactionsUpsertWithWhereUniqueWithoutUsersInput = {
+    where: video_reactionsWhereUniqueInput
+    update: XOR<video_reactionsUpdateWithoutUsersInput, video_reactionsUncheckedUpdateWithoutUsersInput>
+    create: XOR<video_reactionsCreateWithoutUsersInput, video_reactionsUncheckedCreateWithoutUsersInput>
+  }
+
+  export type video_reactionsUpdateWithWhereUniqueWithoutUsersInput = {
+    where: video_reactionsWhereUniqueInput
+    data: XOR<video_reactionsUpdateWithoutUsersInput, video_reactionsUncheckedUpdateWithoutUsersInput>
+  }
+
+  export type video_reactionsUpdateManyWithWhereWithoutUsersInput = {
+    where: video_reactionsScalarWhereInput
+    data: XOR<video_reactionsUpdateManyMutationInput, video_reactionsUncheckedUpdateManyWithoutUsersInput>
+  }
+
+  export type video_reactionsScalarWhereInput = {
+    AND?: video_reactionsScalarWhereInput | video_reactionsScalarWhereInput[]
+    OR?: video_reactionsScalarWhereInput[]
+    NOT?: video_reactionsScalarWhereInput | video_reactionsScalarWhereInput[]
+    id?: UuidFilter<"video_reactions"> | string
+    user_id?: UuidFilter<"video_reactions"> | string
+    video_id?: UuidFilter<"video_reactions"> | string
+    type?: StringFilter<"video_reactions"> | string
+    created_at?: DateTimeFilter<"video_reactions"> | Date | string
+    updated_at?: DateTimeFilter<"video_reactions"> | Date | string
+  }
+
+  export type video_viewsUpsertWithWhereUniqueWithoutUsersInput = {
+    where: video_viewsWhereUniqueInput
+    update: XOR<video_viewsUpdateWithoutUsersInput, video_viewsUncheckedUpdateWithoutUsersInput>
+    create: XOR<video_viewsCreateWithoutUsersInput, video_viewsUncheckedCreateWithoutUsersInput>
+  }
+
+  export type video_viewsUpdateWithWhereUniqueWithoutUsersInput = {
+    where: video_viewsWhereUniqueInput
+    data: XOR<video_viewsUpdateWithoutUsersInput, video_viewsUncheckedUpdateWithoutUsersInput>
+  }
+
+  export type video_viewsUpdateManyWithWhereWithoutUsersInput = {
+    where: video_viewsScalarWhereInput
+    data: XOR<video_viewsUpdateManyMutationInput, video_viewsUncheckedUpdateManyWithoutUsersInput>
+  }
+
+  export type video_viewsScalarWhereInput = {
+    AND?: video_viewsScalarWhereInput | video_viewsScalarWhereInput[]
+    OR?: video_viewsScalarWhereInput[]
+    NOT?: video_viewsScalarWhereInput | video_viewsScalarWhereInput[]
+    id?: UuidFilter<"video_views"> | string
+    user_id?: UuidFilter<"video_views"> | string
+    video_id?: UuidFilter<"video_views"> | string
+    created_at?: DateTimeFilter<"video_views"> | Date | string
+    updated_at?: DateTimeFilter<"video_views"> | Date | string
+  }
+
+  export type videosUpsertWithWhereUniqueWithoutUsersInput = {
+    where: videosWhereUniqueInput
+    update: XOR<videosUpdateWithoutUsersInput, videosUncheckedUpdateWithoutUsersInput>
+    create: XOR<videosCreateWithoutUsersInput, videosUncheckedCreateWithoutUsersInput>
+  }
+
+  export type videosUpdateWithWhereUniqueWithoutUsersInput = {
+    where: videosWhereUniqueInput
+    data: XOR<videosUpdateWithoutUsersInput, videosUncheckedUpdateWithoutUsersInput>
+  }
+
+  export type videosUpdateManyWithWhereWithoutUsersInput = {
+    where: videosScalarWhereInput
+    data: XOR<videosUpdateManyMutationInput, videosUncheckedUpdateManyWithoutUsersInput>
+  }
+
+  export type videosScalarWhereInput = {
+    AND?: videosScalarWhereInput | videosScalarWhereInput[]
+    OR?: videosScalarWhereInput[]
+    NOT?: videosScalarWhereInput | videosScalarWhereInput[]
+    id?: UuidFilter<"videos"> | string
+    title?: StringFilter<"videos"> | string
+    description?: StringNullableFilter<"videos"> | string | null
+    mux_status?: StringNullableFilter<"videos"> | string | null
+    mux_asset_id?: StringNullableFilter<"videos"> | string | null
+    mux_upload_id?: StringNullableFilter<"videos"> | string | null
+    mux_playback_id?: StringNullableFilter<"videos"> | string | null
+    mux_track_id?: StringNullableFilter<"videos"> | string | null
+    mux_track_status?: StringNullableFilter<"videos"> | string | null
+    user_id?: UuidFilter<"videos"> | string
+    category_id?: UuidNullableFilter<"videos"> | string | null
+    created_at?: DateTimeNullableFilter<"videos"> | Date | string | null
+    updated_at?: DateTimeNullableFilter<"videos"> | Date | string | null
+  }
+
+  export type videosCreateWithoutCategoriesInput = {
+    id?: string
+    title: string
+    description?: string | null
+    mux_status?: string | null
+    mux_asset_id?: string | null
+    mux_upload_id?: string | null
+    mux_playback_id?: string | null
+    mux_track_id?: string | null
+    mux_track_status?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    comments?: commentsCreateNestedManyWithoutVideosInput
+    video_reactions?: video_reactionsCreateNestedManyWithoutVideosInput
+    video_views?: video_viewsCreateNestedManyWithoutVideosInput
+    users: usersCreateNestedOneWithoutVideosInput
+  }
+
+  export type videosUncheckedCreateWithoutCategoriesInput = {
+    id?: string
+    title: string
+    description?: string | null
+    mux_status?: string | null
+    mux_asset_id?: string | null
+    mux_upload_id?: string | null
+    mux_playback_id?: string | null
+    mux_track_id?: string | null
+    mux_track_status?: string | null
+    user_id: string
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    comments?: commentsUncheckedCreateNestedManyWithoutVideosInput
+    video_reactions?: video_reactionsUncheckedCreateNestedManyWithoutVideosInput
+    video_views?: video_viewsUncheckedCreateNestedManyWithoutVideosInput
+  }
+
+  export type videosCreateOrConnectWithoutCategoriesInput = {
+    where: videosWhereUniqueInput
+    create: XOR<videosCreateWithoutCategoriesInput, videosUncheckedCreateWithoutCategoriesInput>
+  }
+
+  export type videosCreateManyCategoriesInputEnvelope = {
+    data: videosCreateManyCategoriesInput | videosCreateManyCategoriesInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type videosUpsertWithWhereUniqueWithoutCategoriesInput = {
+    where: videosWhereUniqueInput
+    update: XOR<videosUpdateWithoutCategoriesInput, videosUncheckedUpdateWithoutCategoriesInput>
+    create: XOR<videosCreateWithoutCategoriesInput, videosUncheckedCreateWithoutCategoriesInput>
+  }
+
+  export type videosUpdateWithWhereUniqueWithoutCategoriesInput = {
+    where: videosWhereUniqueInput
+    data: XOR<videosUpdateWithoutCategoriesInput, videosUncheckedUpdateWithoutCategoriesInput>
+  }
+
+  export type videosUpdateManyWithWhereWithoutCategoriesInput = {
+    where: videosScalarWhereInput
+    data: XOR<videosUpdateManyMutationInput, videosUncheckedUpdateManyWithoutCategoriesInput>
+  }
+
+  export type commentsCreateWithoutVideosInput = {
+    id?: string
+    value: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    comment_reactions?: comment_reactionsCreateNestedManyWithoutCommentsInput
+    comments?: commentsCreateNestedOneWithoutOther_commentsInput
+    other_comments?: commentsCreateNestedManyWithoutCommentsInput
+    users: usersCreateNestedOneWithoutCommentsInput
+  }
+
+  export type commentsUncheckedCreateWithoutVideosInput = {
+    id?: string
+    parent_id?: string | null
+    user_id: string
+    value: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    comment_reactions?: comment_reactionsUncheckedCreateNestedManyWithoutCommentsInput
+    other_comments?: commentsUncheckedCreateNestedManyWithoutCommentsInput
+  }
+
+  export type commentsCreateOrConnectWithoutVideosInput = {
+    where: commentsWhereUniqueInput
+    create: XOR<commentsCreateWithoutVideosInput, commentsUncheckedCreateWithoutVideosInput>
+  }
+
+  export type commentsCreateManyVideosInputEnvelope = {
+    data: commentsCreateManyVideosInput | commentsCreateManyVideosInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type video_reactionsCreateWithoutVideosInput = {
+    id?: string
+    type: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    users: usersCreateNestedOneWithoutVideo_reactionsInput
+  }
+
+  export type video_reactionsUncheckedCreateWithoutVideosInput = {
+    id?: string
+    user_id: string
+    type: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type video_reactionsCreateOrConnectWithoutVideosInput = {
+    where: video_reactionsWhereUniqueInput
+    create: XOR<video_reactionsCreateWithoutVideosInput, video_reactionsUncheckedCreateWithoutVideosInput>
+  }
+
+  export type video_reactionsCreateManyVideosInputEnvelope = {
+    data: video_reactionsCreateManyVideosInput | video_reactionsCreateManyVideosInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type video_viewsCreateWithoutVideosInput = {
+    id?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    users: usersCreateNestedOneWithoutVideo_viewsInput
+  }
+
+  export type video_viewsUncheckedCreateWithoutVideosInput = {
+    id?: string
+    user_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type video_viewsCreateOrConnectWithoutVideosInput = {
+    where: video_viewsWhereUniqueInput
+    create: XOR<video_viewsCreateWithoutVideosInput, video_viewsUncheckedCreateWithoutVideosInput>
+  }
+
+  export type video_viewsCreateManyVideosInputEnvelope = {
+    data: video_viewsCreateManyVideosInput | video_viewsCreateManyVideosInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type categoriesCreateWithoutVideosInput = {
+    id?: string
+    name: string
+    slug: string
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+  }
+
+  export type categoriesUncheckedCreateWithoutVideosInput = {
+    id?: string
+    name: string
+    slug: string
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+  }
+
+  export type categoriesCreateOrConnectWithoutVideosInput = {
+    where: categoriesWhereUniqueInput
+    create: XOR<categoriesCreateWithoutVideosInput, categoriesUncheckedCreateWithoutVideosInput>
+  }
+
+  export type usersCreateWithoutVideosInput = {
+    id?: string
+    clerk_user_id: string
+    channel_name: string
+    avatar_url?: string | null
+    bio?: string | null
+    created_at?: Date | string | null
+    comment_reactions?: comment_reactionsCreateNestedManyWithoutUsersInput
+    comments?: commentsCreateNestedManyWithoutUsersInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_reactions?: video_reactionsCreateNestedManyWithoutUsersInput
+    video_views?: video_viewsCreateNestedManyWithoutUsersInput
+  }
+
+  export type usersUncheckedCreateWithoutVideosInput = {
+    id?: string
+    clerk_user_id: string
+    channel_name: string
+    avatar_url?: string | null
+    bio?: string | null
+    created_at?: Date | string | null
+    comment_reactions?: comment_reactionsUncheckedCreateNestedManyWithoutUsersInput
+    comments?: commentsUncheckedCreateNestedManyWithoutUsersInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_reactions?: video_reactionsUncheckedCreateNestedManyWithoutUsersInput
+    video_views?: video_viewsUncheckedCreateNestedManyWithoutUsersInput
+  }
+
+  export type usersCreateOrConnectWithoutVideosInput = {
+    where: usersWhereUniqueInput
+    create: XOR<usersCreateWithoutVideosInput, usersUncheckedCreateWithoutVideosInput>
+  }
+
+  export type commentsUpsertWithWhereUniqueWithoutVideosInput = {
+    where: commentsWhereUniqueInput
+    update: XOR<commentsUpdateWithoutVideosInput, commentsUncheckedUpdateWithoutVideosInput>
+    create: XOR<commentsCreateWithoutVideosInput, commentsUncheckedCreateWithoutVideosInput>
+  }
+
+  export type commentsUpdateWithWhereUniqueWithoutVideosInput = {
+    where: commentsWhereUniqueInput
+    data: XOR<commentsUpdateWithoutVideosInput, commentsUncheckedUpdateWithoutVideosInput>
+  }
+
+  export type commentsUpdateManyWithWhereWithoutVideosInput = {
+    where: commentsScalarWhereInput
+    data: XOR<commentsUpdateManyMutationInput, commentsUncheckedUpdateManyWithoutVideosInput>
+  }
+
+  export type video_reactionsUpsertWithWhereUniqueWithoutVideosInput = {
+    where: video_reactionsWhereUniqueInput
+    update: XOR<video_reactionsUpdateWithoutVideosInput, video_reactionsUncheckedUpdateWithoutVideosInput>
+    create: XOR<video_reactionsCreateWithoutVideosInput, video_reactionsUncheckedCreateWithoutVideosInput>
+  }
+
+  export type video_reactionsUpdateWithWhereUniqueWithoutVideosInput = {
+    where: video_reactionsWhereUniqueInput
+    data: XOR<video_reactionsUpdateWithoutVideosInput, video_reactionsUncheckedUpdateWithoutVideosInput>
+  }
+
+  export type video_reactionsUpdateManyWithWhereWithoutVideosInput = {
+    where: video_reactionsScalarWhereInput
+    data: XOR<video_reactionsUpdateManyMutationInput, video_reactionsUncheckedUpdateManyWithoutVideosInput>
+  }
+
+  export type video_viewsUpsertWithWhereUniqueWithoutVideosInput = {
+    where: video_viewsWhereUniqueInput
+    update: XOR<video_viewsUpdateWithoutVideosInput, video_viewsUncheckedUpdateWithoutVideosInput>
+    create: XOR<video_viewsCreateWithoutVideosInput, video_viewsUncheckedCreateWithoutVideosInput>
+  }
+
+  export type video_viewsUpdateWithWhereUniqueWithoutVideosInput = {
+    where: video_viewsWhereUniqueInput
+    data: XOR<video_viewsUpdateWithoutVideosInput, video_viewsUncheckedUpdateWithoutVideosInput>
+  }
+
+  export type video_viewsUpdateManyWithWhereWithoutVideosInput = {
+    where: video_viewsScalarWhereInput
+    data: XOR<video_viewsUpdateManyMutationInput, video_viewsUncheckedUpdateManyWithoutVideosInput>
+  }
+
+  export type categoriesUpsertWithoutVideosInput = {
+    update: XOR<categoriesUpdateWithoutVideosInput, categoriesUncheckedUpdateWithoutVideosInput>
+    create: XOR<categoriesCreateWithoutVideosInput, categoriesUncheckedCreateWithoutVideosInput>
+    where?: categoriesWhereInput
+  }
+
+  export type categoriesUpdateToOneWithWhereWithoutVideosInput = {
+    where?: categoriesWhereInput
+    data: XOR<categoriesUpdateWithoutVideosInput, categoriesUncheckedUpdateWithoutVideosInput>
+  }
+
+  export type categoriesUpdateWithoutVideosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type categoriesUncheckedUpdateWithoutVideosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type usersUpsertWithoutVideosInput = {
+    update: XOR<usersUpdateWithoutVideosInput, usersUncheckedUpdateWithoutVideosInput>
+    create: XOR<usersCreateWithoutVideosInput, usersUncheckedCreateWithoutVideosInput>
+    where?: usersWhereInput
+  }
+
+  export type usersUpdateToOneWithWhereWithoutVideosInput = {
+    where?: usersWhereInput
+    data: XOR<usersUpdateWithoutVideosInput, usersUncheckedUpdateWithoutVideosInput>
+  }
+
+  export type usersUpdateWithoutVideosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: StringFieldUpdateOperationsInput | string
+    channel_name?: StringFieldUpdateOperationsInput | string
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    comment_reactions?: comment_reactionsUpdateManyWithoutUsersNestedInput
+    comments?: commentsUpdateManyWithoutUsersNestedInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_reactions?: video_reactionsUpdateManyWithoutUsersNestedInput
+    video_views?: video_viewsUpdateManyWithoutUsersNestedInput
+  }
+
+  export type usersUncheckedUpdateWithoutVideosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: StringFieldUpdateOperationsInput | string
+    channel_name?: StringFieldUpdateOperationsInput | string
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    comment_reactions?: comment_reactionsUncheckedUpdateManyWithoutUsersNestedInput
+    comments?: commentsUncheckedUpdateManyWithoutUsersNestedInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_reactions?: video_reactionsUncheckedUpdateManyWithoutUsersNestedInput
+    video_views?: video_viewsUncheckedUpdateManyWithoutUsersNestedInput
+  }
+
+  export type commentsCreateWithoutComment_reactionsInput = {
+    id?: string
+    value: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    comments?: commentsCreateNestedOneWithoutOther_commentsInput
+    other_comments?: commentsCreateNestedManyWithoutCommentsInput
+    users: usersCreateNestedOneWithoutCommentsInput
+    videos: videosCreateNestedOneWithoutCommentsInput
+  }
+
+  export type commentsUncheckedCreateWithoutComment_reactionsInput = {
+    id?: string
+    parent_id?: string | null
+    user_id: string
+    video_id: string
+    value: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    other_comments?: commentsUncheckedCreateNestedManyWithoutCommentsInput
+  }
+
+  export type commentsCreateOrConnectWithoutComment_reactionsInput = {
+    where: commentsWhereUniqueInput
+    create: XOR<commentsCreateWithoutComment_reactionsInput, commentsUncheckedCreateWithoutComment_reactionsInput>
+  }
+
+  export type usersCreateWithoutComment_reactionsInput = {
+    id?: string
+    clerk_user_id: string
+    channel_name: string
+    avatar_url?: string | null
+    bio?: string | null
+    created_at?: Date | string | null
+    comments?: commentsCreateNestedManyWithoutUsersInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_reactions?: video_reactionsCreateNestedManyWithoutUsersInput
+    video_views?: video_viewsCreateNestedManyWithoutUsersInput
+    videos?: videosCreateNestedManyWithoutUsersInput
+  }
+
+  export type usersUncheckedCreateWithoutComment_reactionsInput = {
+    id?: string
+    clerk_user_id: string
+    channel_name: string
+    avatar_url?: string | null
+    bio?: string | null
+    created_at?: Date | string | null
+    comments?: commentsUncheckedCreateNestedManyWithoutUsersInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_reactions?: video_reactionsUncheckedCreateNestedManyWithoutUsersInput
+    video_views?: video_viewsUncheckedCreateNestedManyWithoutUsersInput
+    videos?: videosUncheckedCreateNestedManyWithoutUsersInput
+  }
+
+  export type usersCreateOrConnectWithoutComment_reactionsInput = {
+    where: usersWhereUniqueInput
+    create: XOR<usersCreateWithoutComment_reactionsInput, usersUncheckedCreateWithoutComment_reactionsInput>
+  }
+
+  export type commentsUpsertWithoutComment_reactionsInput = {
+    update: XOR<commentsUpdateWithoutComment_reactionsInput, commentsUncheckedUpdateWithoutComment_reactionsInput>
+    create: XOR<commentsCreateWithoutComment_reactionsInput, commentsUncheckedCreateWithoutComment_reactionsInput>
+    where?: commentsWhereInput
+  }
+
+  export type commentsUpdateToOneWithWhereWithoutComment_reactionsInput = {
+    where?: commentsWhereInput
+    data: XOR<commentsUpdateWithoutComment_reactionsInput, commentsUncheckedUpdateWithoutComment_reactionsInput>
+  }
+
+  export type commentsUpdateWithoutComment_reactionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    comments?: commentsUpdateOneWithoutOther_commentsNestedInput
+    other_comments?: commentsUpdateManyWithoutCommentsNestedInput
+    users?: usersUpdateOneRequiredWithoutCommentsNestedInput
+    videos?: videosUpdateOneRequiredWithoutCommentsNestedInput
+  }
+
+  export type commentsUncheckedUpdateWithoutComment_reactionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    parent_id?: NullableStringFieldUpdateOperationsInput | string | null
+    user_id?: StringFieldUpdateOperationsInput | string
+    video_id?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    other_comments?: commentsUncheckedUpdateManyWithoutCommentsNestedInput
+  }
+
+  export type usersUpsertWithoutComment_reactionsInput = {
+    update: XOR<usersUpdateWithoutComment_reactionsInput, usersUncheckedUpdateWithoutComment_reactionsInput>
+    create: XOR<usersCreateWithoutComment_reactionsInput, usersUncheckedCreateWithoutComment_reactionsInput>
+    where?: usersWhereInput
+  }
+
+  export type usersUpdateToOneWithWhereWithoutComment_reactionsInput = {
+    where?: usersWhereInput
+    data: XOR<usersUpdateWithoutComment_reactionsInput, usersUncheckedUpdateWithoutComment_reactionsInput>
+  }
+
+  export type usersUpdateWithoutComment_reactionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: StringFieldUpdateOperationsInput | string
+    channel_name?: StringFieldUpdateOperationsInput | string
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    comments?: commentsUpdateManyWithoutUsersNestedInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_reactions?: video_reactionsUpdateManyWithoutUsersNestedInput
+    video_views?: video_viewsUpdateManyWithoutUsersNestedInput
+    videos?: videosUpdateManyWithoutUsersNestedInput
+  }
+
+  export type usersUncheckedUpdateWithoutComment_reactionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: StringFieldUpdateOperationsInput | string
+    channel_name?: StringFieldUpdateOperationsInput | string
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    comments?: commentsUncheckedUpdateManyWithoutUsersNestedInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_reactions?: video_reactionsUncheckedUpdateManyWithoutUsersNestedInput
+    video_views?: video_viewsUncheckedUpdateManyWithoutUsersNestedInput
+    videos?: videosUncheckedUpdateManyWithoutUsersNestedInput
+  }
+
+  export type usersCreateWithoutVideo_reactionsInput = {
+    id?: string
+    clerk_user_id: string
+    channel_name: string
+    avatar_url?: string | null
+    bio?: string | null
+    created_at?: Date | string | null
+    comment_reactions?: comment_reactionsCreateNestedManyWithoutUsersInput
+    comments?: commentsCreateNestedManyWithoutUsersInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_views?: video_viewsCreateNestedManyWithoutUsersInput
+    videos?: videosCreateNestedManyWithoutUsersInput
+  }
+
+  export type usersUncheckedCreateWithoutVideo_reactionsInput = {
+    id?: string
+    clerk_user_id: string
+    channel_name: string
+    avatar_url?: string | null
+    bio?: string | null
+    created_at?: Date | string | null
+    comment_reactions?: comment_reactionsUncheckedCreateNestedManyWithoutUsersInput
+    comments?: commentsUncheckedCreateNestedManyWithoutUsersInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_views?: video_viewsUncheckedCreateNestedManyWithoutUsersInput
+    videos?: videosUncheckedCreateNestedManyWithoutUsersInput
+  }
+
+  export type usersCreateOrConnectWithoutVideo_reactionsInput = {
+    where: usersWhereUniqueInput
+    create: XOR<usersCreateWithoutVideo_reactionsInput, usersUncheckedCreateWithoutVideo_reactionsInput>
+  }
+
+  export type videosCreateWithoutVideo_reactionsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    mux_status?: string | null
+    mux_asset_id?: string | null
+    mux_upload_id?: string | null
+    mux_playback_id?: string | null
+    mux_track_id?: string | null
+    mux_track_status?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    comments?: commentsCreateNestedManyWithoutVideosInput
+    video_views?: video_viewsCreateNestedManyWithoutVideosInput
+    categories?: categoriesCreateNestedOneWithoutVideosInput
+    users: usersCreateNestedOneWithoutVideosInput
+  }
+
+  export type videosUncheckedCreateWithoutVideo_reactionsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    mux_status?: string | null
+    mux_asset_id?: string | null
+    mux_upload_id?: string | null
+    mux_playback_id?: string | null
+    mux_track_id?: string | null
+    mux_track_status?: string | null
+    user_id: string
+    category_id?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    comments?: commentsUncheckedCreateNestedManyWithoutVideosInput
+    video_views?: video_viewsUncheckedCreateNestedManyWithoutVideosInput
+  }
+
+  export type videosCreateOrConnectWithoutVideo_reactionsInput = {
+    where: videosWhereUniqueInput
+    create: XOR<videosCreateWithoutVideo_reactionsInput, videosUncheckedCreateWithoutVideo_reactionsInput>
+  }
+
+  export type usersUpsertWithoutVideo_reactionsInput = {
+    update: XOR<usersUpdateWithoutVideo_reactionsInput, usersUncheckedUpdateWithoutVideo_reactionsInput>
+    create: XOR<usersCreateWithoutVideo_reactionsInput, usersUncheckedCreateWithoutVideo_reactionsInput>
+    where?: usersWhereInput
+  }
+
+  export type usersUpdateToOneWithWhereWithoutVideo_reactionsInput = {
+    where?: usersWhereInput
+    data: XOR<usersUpdateWithoutVideo_reactionsInput, usersUncheckedUpdateWithoutVideo_reactionsInput>
+  }
+
+  export type usersUpdateWithoutVideo_reactionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: StringFieldUpdateOperationsInput | string
+    channel_name?: StringFieldUpdateOperationsInput | string
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    comment_reactions?: comment_reactionsUpdateManyWithoutUsersNestedInput
+    comments?: commentsUpdateManyWithoutUsersNestedInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_views?: video_viewsUpdateManyWithoutUsersNestedInput
+    videos?: videosUpdateManyWithoutUsersNestedInput
+  }
+
+  export type usersUncheckedUpdateWithoutVideo_reactionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: StringFieldUpdateOperationsInput | string
+    channel_name?: StringFieldUpdateOperationsInput | string
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    comment_reactions?: comment_reactionsUncheckedUpdateManyWithoutUsersNestedInput
+    comments?: commentsUncheckedUpdateManyWithoutUsersNestedInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_views?: video_viewsUncheckedUpdateManyWithoutUsersNestedInput
+    videos?: videosUncheckedUpdateManyWithoutUsersNestedInput
+  }
+
+  export type videosUpsertWithoutVideo_reactionsInput = {
+    update: XOR<videosUpdateWithoutVideo_reactionsInput, videosUncheckedUpdateWithoutVideo_reactionsInput>
+    create: XOR<videosCreateWithoutVideo_reactionsInput, videosUncheckedCreateWithoutVideo_reactionsInput>
+    where?: videosWhereInput
+  }
+
+  export type videosUpdateToOneWithWhereWithoutVideo_reactionsInput = {
+    where?: videosWhereInput
+    data: XOR<videosUpdateWithoutVideo_reactionsInput, videosUncheckedUpdateWithoutVideo_reactionsInput>
+  }
+
+  export type videosUpdateWithoutVideo_reactionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_status?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_asset_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_upload_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_playback_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_status?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    comments?: commentsUpdateManyWithoutVideosNestedInput
+    video_views?: video_viewsUpdateManyWithoutVideosNestedInput
+    categories?: categoriesUpdateOneWithoutVideosNestedInput
+    users?: usersUpdateOneRequiredWithoutVideosNestedInput
+  }
+
+  export type videosUncheckedUpdateWithoutVideo_reactionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_status?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_asset_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_upload_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_playback_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_status?: NullableStringFieldUpdateOperationsInput | string | null
+    user_id?: StringFieldUpdateOperationsInput | string
+    category_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    comments?: commentsUncheckedUpdateManyWithoutVideosNestedInput
+    video_views?: video_viewsUncheckedUpdateManyWithoutVideosNestedInput
+  }
+
+  export type usersCreateWithoutVideo_viewsInput = {
+    id?: string
+    clerk_user_id: string
+    channel_name: string
+    avatar_url?: string | null
+    bio?: string | null
+    created_at?: Date | string | null
+    comment_reactions?: comment_reactionsCreateNestedManyWithoutUsersInput
+    comments?: commentsCreateNestedManyWithoutUsersInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_reactions?: video_reactionsCreateNestedManyWithoutUsersInput
+    videos?: videosCreateNestedManyWithoutUsersInput
+  }
+
+  export type usersUncheckedCreateWithoutVideo_viewsInput = {
+    id?: string
+    clerk_user_id: string
+    channel_name: string
+    avatar_url?: string | null
+    bio?: string | null
+    created_at?: Date | string | null
+    comment_reactions?: comment_reactionsUncheckedCreateNestedManyWithoutUsersInput
+    comments?: commentsUncheckedCreateNestedManyWithoutUsersInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_reactions?: video_reactionsUncheckedCreateNestedManyWithoutUsersInput
+    videos?: videosUncheckedCreateNestedManyWithoutUsersInput
+  }
+
+  export type usersCreateOrConnectWithoutVideo_viewsInput = {
+    where: usersWhereUniqueInput
+    create: XOR<usersCreateWithoutVideo_viewsInput, usersUncheckedCreateWithoutVideo_viewsInput>
+  }
+
+  export type videosCreateWithoutVideo_viewsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    mux_status?: string | null
+    mux_asset_id?: string | null
+    mux_upload_id?: string | null
+    mux_playback_id?: string | null
+    mux_track_id?: string | null
+    mux_track_status?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    comments?: commentsCreateNestedManyWithoutVideosInput
+    video_reactions?: video_reactionsCreateNestedManyWithoutVideosInput
+    categories?: categoriesCreateNestedOneWithoutVideosInput
+    users: usersCreateNestedOneWithoutVideosInput
+  }
+
+  export type videosUncheckedCreateWithoutVideo_viewsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    mux_status?: string | null
+    mux_asset_id?: string | null
+    mux_upload_id?: string | null
+    mux_playback_id?: string | null
+    mux_track_id?: string | null
+    mux_track_status?: string | null
+    user_id: string
+    category_id?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    comments?: commentsUncheckedCreateNestedManyWithoutVideosInput
+    video_reactions?: video_reactionsUncheckedCreateNestedManyWithoutVideosInput
+  }
+
+  export type videosCreateOrConnectWithoutVideo_viewsInput = {
+    where: videosWhereUniqueInput
+    create: XOR<videosCreateWithoutVideo_viewsInput, videosUncheckedCreateWithoutVideo_viewsInput>
+  }
+
+  export type usersUpsertWithoutVideo_viewsInput = {
+    update: XOR<usersUpdateWithoutVideo_viewsInput, usersUncheckedUpdateWithoutVideo_viewsInput>
+    create: XOR<usersCreateWithoutVideo_viewsInput, usersUncheckedCreateWithoutVideo_viewsInput>
+    where?: usersWhereInput
+  }
+
+  export type usersUpdateToOneWithWhereWithoutVideo_viewsInput = {
+    where?: usersWhereInput
+    data: XOR<usersUpdateWithoutVideo_viewsInput, usersUncheckedUpdateWithoutVideo_viewsInput>
+  }
+
+  export type usersUpdateWithoutVideo_viewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: StringFieldUpdateOperationsInput | string
+    channel_name?: StringFieldUpdateOperationsInput | string
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    comment_reactions?: comment_reactionsUpdateManyWithoutUsersNestedInput
+    comments?: commentsUpdateManyWithoutUsersNestedInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_reactions?: video_reactionsUpdateManyWithoutUsersNestedInput
+    videos?: videosUpdateManyWithoutUsersNestedInput
+  }
+
+  export type usersUncheckedUpdateWithoutVideo_viewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: StringFieldUpdateOperationsInput | string
+    channel_name?: StringFieldUpdateOperationsInput | string
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    comment_reactions?: comment_reactionsUncheckedUpdateManyWithoutUsersNestedInput
+    comments?: commentsUncheckedUpdateManyWithoutUsersNestedInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_reactions?: video_reactionsUncheckedUpdateManyWithoutUsersNestedInput
+    videos?: videosUncheckedUpdateManyWithoutUsersNestedInput
+  }
+
+  export type videosUpsertWithoutVideo_viewsInput = {
+    update: XOR<videosUpdateWithoutVideo_viewsInput, videosUncheckedUpdateWithoutVideo_viewsInput>
+    create: XOR<videosCreateWithoutVideo_viewsInput, videosUncheckedCreateWithoutVideo_viewsInput>
+    where?: videosWhereInput
+  }
+
+  export type videosUpdateToOneWithWhereWithoutVideo_viewsInput = {
+    where?: videosWhereInput
+    data: XOR<videosUpdateWithoutVideo_viewsInput, videosUncheckedUpdateWithoutVideo_viewsInput>
+  }
+
+  export type videosUpdateWithoutVideo_viewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_status?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_asset_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_upload_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_playback_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_status?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    comments?: commentsUpdateManyWithoutVideosNestedInput
+    video_reactions?: video_reactionsUpdateManyWithoutVideosNestedInput
+    categories?: categoriesUpdateOneWithoutVideosNestedInput
+    users?: usersUpdateOneRequiredWithoutVideosNestedInput
+  }
+
+  export type videosUncheckedUpdateWithoutVideo_viewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_status?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_asset_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_upload_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_playback_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_status?: NullableStringFieldUpdateOperationsInput | string | null
+    user_id?: StringFieldUpdateOperationsInput | string
+    category_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    comments?: commentsUncheckedUpdateManyWithoutVideosNestedInput
+    video_reactions?: video_reactionsUncheckedUpdateManyWithoutVideosNestedInput
+  }
+
+  export type comment_reactionsCreateManyCommentsInput = {
+    id?: string
+    user_id: string
+    type: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type commentsCreateManyCommentsInput = {
+    id?: string
+    user_id: string
+    video_id: string
+    value: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type comment_reactionsUpdateWithoutCommentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: usersUpdateOneRequiredWithoutComment_reactionsNestedInput
+  }
+
+  export type comment_reactionsUncheckedUpdateWithoutCommentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type comment_reactionsUncheckedUpdateManyWithoutCommentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type commentsUpdateWithoutCommentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    comment_reactions?: comment_reactionsUpdateManyWithoutCommentsNestedInput
+    other_comments?: commentsUpdateManyWithoutCommentsNestedInput
+    users?: usersUpdateOneRequiredWithoutCommentsNestedInput
+    videos?: videosUpdateOneRequiredWithoutCommentsNestedInput
+  }
+
+  export type commentsUncheckedUpdateWithoutCommentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    video_id?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    comment_reactions?: comment_reactionsUncheckedUpdateManyWithoutCommentsNestedInput
+    other_comments?: commentsUncheckedUpdateManyWithoutCommentsNestedInput
+  }
+
+  export type commentsUncheckedUpdateManyWithoutCommentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    video_id?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type comment_reactionsCreateManyUsersInput = {
+    id?: string
+    comment_id: string
+    type: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type commentsCreateManyUsersInput = {
+    id?: string
+    parent_id?: string | null
+    video_id: string
+    value: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type subscriptionsCreateManyUsers_subscriptions_creator_idTousersInput = {
+    id?: string
+    viewer_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type subscriptionsCreateManyUsers_subscriptions_viewer_idTousersInput = {
+    id?: string
+    creator_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type video_reactionsCreateManyUsersInput = {
+    id?: string
+    video_id: string
+    type: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type video_viewsCreateManyUsersInput = {
+    id?: string
+    video_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type videosCreateManyUsersInput = {
+    id?: string
+    title: string
+    description?: string | null
+    mux_status?: string | null
+    mux_asset_id?: string | null
+    mux_upload_id?: string | null
+    mux_playback_id?: string | null
+    mux_track_id?: string | null
+    mux_track_status?: string | null
+    category_id?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+  }
+
+  export type comment_reactionsUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    comments?: commentsUpdateOneRequiredWithoutComment_reactionsNestedInput
+  }
+
+  export type comment_reactionsUncheckedUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    comment_id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type comment_reactionsUncheckedUpdateManyWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    comment_id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type commentsUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    comment_reactions?: comment_reactionsUpdateManyWithoutCommentsNestedInput
+    comments?: commentsUpdateOneWithoutOther_commentsNestedInput
+    other_comments?: commentsUpdateManyWithoutCommentsNestedInput
+    videos?: videosUpdateOneRequiredWithoutCommentsNestedInput
+  }
+
+  export type commentsUncheckedUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    parent_id?: NullableStringFieldUpdateOperationsInput | string | null
+    video_id?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    comment_reactions?: comment_reactionsUncheckedUpdateManyWithoutCommentsNestedInput
+    other_comments?: commentsUncheckedUpdateManyWithoutCommentsNestedInput
+  }
+
+  export type commentsUncheckedUpdateManyWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    parent_id?: NullableStringFieldUpdateOperationsInput | string | null
+    video_id?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type subscriptionsUpdateWithoutUsers_subscriptions_creator_idTousersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    users_subscriptions_viewer_idTousers?: usersUpdateOneRequiredWithoutSubscriptions_subscriptions_viewer_idTousersNestedInput
+  }
+
+  export type subscriptionsUncheckedUpdateWithoutUsers_subscriptions_creator_idTousersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    viewer_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_creator_idTousersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    viewer_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type subscriptionsUpdateWithoutUsers_subscriptions_viewer_idTousersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    users_subscriptions_creator_idTousers?: usersUpdateOneRequiredWithoutSubscriptions_subscriptions_creator_idTousersNestedInput
+  }
+
+  export type subscriptionsUncheckedUpdateWithoutUsers_subscriptions_viewer_idTousersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    creator_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_viewer_idTousersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    creator_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type video_reactionsUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    videos?: videosUpdateOneRequiredWithoutVideo_reactionsNestedInput
+  }
+
+  export type video_reactionsUncheckedUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    video_id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type video_reactionsUncheckedUpdateManyWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    video_id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type video_viewsUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    videos?: videosUpdateOneRequiredWithoutVideo_viewsNestedInput
+  }
+
+  export type video_viewsUncheckedUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    video_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type video_viewsUncheckedUpdateManyWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    video_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type videosUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_status?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_asset_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_upload_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_playback_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_status?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    comments?: commentsUpdateManyWithoutVideosNestedInput
+    video_reactions?: video_reactionsUpdateManyWithoutVideosNestedInput
+    video_views?: video_viewsUpdateManyWithoutVideosNestedInput
+    categories?: categoriesUpdateOneWithoutVideosNestedInput
+  }
+
+  export type videosUncheckedUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_status?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_asset_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_upload_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_playback_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_status?: NullableStringFieldUpdateOperationsInput | string | null
+    category_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    comments?: commentsUncheckedUpdateManyWithoutVideosNestedInput
+    video_reactions?: video_reactionsUncheckedUpdateManyWithoutVideosNestedInput
+    video_views?: video_viewsUncheckedUpdateManyWithoutVideosNestedInput
+  }
+
+  export type videosUncheckedUpdateManyWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_status?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_asset_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_upload_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_playback_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_status?: NullableStringFieldUpdateOperationsInput | string | null
+    category_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type videosCreateManyCategoriesInput = {
+    id?: string
+    title: string
+    description?: string | null
+    mux_status?: string | null
+    mux_asset_id?: string | null
+    mux_upload_id?: string | null
+    mux_playback_id?: string | null
+    mux_track_id?: string | null
+    mux_track_status?: string | null
+    user_id: string
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+  }
+
+  export type videosUpdateWithoutCategoriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_status?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_asset_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_upload_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_playback_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_status?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    comments?: commentsUpdateManyWithoutVideosNestedInput
+    video_reactions?: video_reactionsUpdateManyWithoutVideosNestedInput
+    video_views?: video_viewsUpdateManyWithoutVideosNestedInput
+    users?: usersUpdateOneRequiredWithoutVideosNestedInput
+  }
+
+  export type videosUncheckedUpdateWithoutCategoriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_status?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_asset_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_upload_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_playback_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_status?: NullableStringFieldUpdateOperationsInput | string | null
+    user_id?: StringFieldUpdateOperationsInput | string
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    comments?: commentsUncheckedUpdateManyWithoutVideosNestedInput
+    video_reactions?: video_reactionsUncheckedUpdateManyWithoutVideosNestedInput
+    video_views?: video_viewsUncheckedUpdateManyWithoutVideosNestedInput
+  }
+
+  export type videosUncheckedUpdateManyWithoutCategoriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_status?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_asset_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_upload_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_playback_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_status?: NullableStringFieldUpdateOperationsInput | string | null
+    user_id?: StringFieldUpdateOperationsInput | string
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type commentsCreateManyVideosInput = {
+    id?: string
+    parent_id?: string | null
+    user_id: string
+    value: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type video_reactionsCreateManyVideosInput = {
+    id?: string
+    user_id: string
+    type: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type video_viewsCreateManyVideosInput = {
+    id?: string
+    user_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type commentsUpdateWithoutVideosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    comment_reactions?: comment_reactionsUpdateManyWithoutCommentsNestedInput
+    comments?: commentsUpdateOneWithoutOther_commentsNestedInput
+    other_comments?: commentsUpdateManyWithoutCommentsNestedInput
+    users?: usersUpdateOneRequiredWithoutCommentsNestedInput
+  }
+
+  export type commentsUncheckedUpdateWithoutVideosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    parent_id?: NullableStringFieldUpdateOperationsInput | string | null
+    user_id?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    comment_reactions?: comment_reactionsUncheckedUpdateManyWithoutCommentsNestedInput
+    other_comments?: commentsUncheckedUpdateManyWithoutCommentsNestedInput
+  }
+
+  export type commentsUncheckedUpdateManyWithoutVideosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    parent_id?: NullableStringFieldUpdateOperationsInput | string | null
+    user_id?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type video_reactionsUpdateWithoutVideosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: usersUpdateOneRequiredWithoutVideo_reactionsNestedInput
+  }
+
+  export type video_reactionsUncheckedUpdateWithoutVideosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type video_reactionsUncheckedUpdateManyWithoutVideosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type video_viewsUpdateWithoutVideosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: usersUpdateOneRequiredWithoutVideo_viewsNestedInput
+  }
+
+  export type video_viewsUncheckedUpdateWithoutVideosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type video_viewsUncheckedUpdateManyWithoutVideosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+
+
+  /**
+   * Batch Payload for updateMany & deleteMany & createMany
+   */
+
+  export type BatchPayload = {
+    count: number
+  }
+
+  /**
+   * DMMF
+   */
+  export const dmmf: runtime.BaseDMMF
+}

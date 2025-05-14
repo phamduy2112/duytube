@@ -13,11 +13,11 @@ import { UpdateMediaDto } from './dto/update-media.dto';
 // }
 @Controller('media')
 export class MediaController {
-  constructor(private readonly mediaService: MediaService) {}
-  create(createMediaDto){
-    this.mediaService.createAndSaveVideo(createMediaDto)
-  }
-  delete(id:number){
-    this.mediaService.deleteVideo(id)
-  }
+  // constructor(private readonly mediaService: MediaService) {}
+  // create(createMediaDto){
+  //   this.mediaService.createAndSaveVideo(createMediaDto)
+  // }
+  // delete(id:string){
+  //   this.mediaService.deleteVideo(id)
+  // }
 }

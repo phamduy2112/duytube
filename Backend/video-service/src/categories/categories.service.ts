@@ -2,10 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { ResponseService } from 'src/model/response';
+import { PrismaClient } from '@prisma/client';
+
 
 @Injectable()
 export class CategoriesService {
-  constructor(private readonly prismaService,
+  private prismaService = new PrismaClient(); // Khởi tạo Prisma Client
+  constructor(
     private readonly response:ResponseService
   ){}
  async findAll(){

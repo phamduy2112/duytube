@@ -2,10 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
 import { ResponseService } from 'src/model/response';
+import { PrismaClient } from '@prisma/client';
+
 
 @Injectable()
 export class VideoService {
-  constructor(private readonly prismaService,
+    private prismaService = new PrismaClient(); // Khởi tạo Prisma Client
+  
+  constructor(
       private readonly response:ResponseService
     ){}
   create(createVideoDto: CreateVideoDto) {

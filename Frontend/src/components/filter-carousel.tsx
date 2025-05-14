@@ -21,6 +21,7 @@ export const FilterCarousel = ({
     data,
     isLoading,
 }: FilterCarouselProps) => {
+    console.log(value)
     console.log(data);
 
     return (
@@ -39,8 +40,10 @@ export const FilterCarousel = ({
                         <Badge
                             onClick={() => onSelect?.(null)}
                             variant={!value ? "default" : "secondary"}
-                            className="rounded-lg px-3 py-1 cursor-pointer whitespace-nowrap text-sm"
-                        >
+                            className={cn(
+                                "rounded-lg px-3 py-1 cursor-pointer whitespace-nowrap text-sm",
+                                !value && "border border-blue-500 shadow-md"
+                              )}                        >
                             All
                         </Badge>
                     </CarouselItem>
@@ -51,8 +54,10 @@ export const FilterCarousel = ({
                             <Badge
                                 onClick={() => onSelect?.(item.value)}
                                 variant={value === item.value ? "default" : "secondary"}
-                                className="rounded-lg px-3 py-1 cursor-pointer whitespace-nowrap text-sm"
-                            >
+                                className={cn(
+                                    "rounded-lg px-3 py-1 cursor-pointer whitespace-nowrap text-sm",
+                                    value === item.value && "border border-blue-500 shadow-md"
+                                  )}                            >
                                 {item.label}
                             </Badge>
                         </CarouselItem>

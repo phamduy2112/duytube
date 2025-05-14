@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { CreateLikeDto } from './dto/create-like.dto';
 import { UpdateLikeDto } from './dto/update-like.dto';
+import { PrismaClient } from '@prisma/client';
+
 
 @Injectable()
 export class LikesService {
+    private prisma = new PrismaClient(); // Khởi tạo Prisma Client
   
+  constructor(){}
   async toggleLike(userId: number, dto: any) {
     const existing=await this.prisma.like.findUnique({
       where: {
@@ -21,7 +25,7 @@ export class LikesService {
         })
         return `Delete ${dto.type} Commented`
       }
-      return this.prima.like.update({
+      return this.prisma.like.update({
         where: { id: existing.id },
         data: { type: dto.type },
       })

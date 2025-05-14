@@ -1,25 +1,42 @@
-import { Suspense } from "react";
-import { CategoriesSection } from "../sections/category-section";
-import { HomeVideoSection } from "@/modules/home/ui/sections/home-videos-sections";
+"use client";
+
+import { useState } from "react";
 import { TrendingVideosSection } from "@/modules/home/ui/sections/trending-videos-section";
+import { CarouselItem } from "@/components/ui/carousel";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
-interface HomeViewProps{
-    categoryId?:string;
-}
+const MocksTrending = [
+  { id: 1, value: "Mới nhất" },
+  { id: 2, value: "Trò chơi" },
+];
 
-export const TrendingView=()=>{
-    return (
-        <div className="max-w-[1650px] mx-auto mb-10 px-4 pt-2.5 flex flex-col gap-y-6">
-                {/*  */}
-               
-             <div>
-                <h1 className="text-2xl font-bold">Trending</h1>
-                <p className="text-xs text-muted-foreground">
-                    Most popular at the moment
-                </p>
-             </div>
-        <TrendingVideosSection/>
-              
+export const TrendingView = () => {
+  const [selected, setSelected] = useState<string | null>(null);
+
+  return (
+    <div className="max-w-[1650px]  m-auto mb-10 px-4 pt-17 flex flex-col gap-y-6">
+      <div>
+        <h1 className="text-2xl font-bold">Trending</h1>
+        <div className="flex gap-2 mt-2">
+          {MocksTrending.map((item) => (
+            <div className="basis-auto z-10" key={item.id}>
+              <Badge
+                onClick={() => setSelected(item.value)}
+                variant={selected === item.value ? "default" : "secondary"}
+                className={cn(
+                  "rounded-lg px-3 py-1 cursor-pointer whitespace-nowrap text-sm",
+                  selected === item.value && "border border-blue-500 shadow-md"
+                )}
+              >
+                {item.value}
+              </Badge>
+            </div>
+          ))}
         </div>
-    )
-}
+      </div>
+
+      <TrendingVideosSection />
+    </div>
+  );
+};

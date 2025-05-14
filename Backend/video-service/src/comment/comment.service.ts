@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaClient } from '@prisma/client';
 
 @Injectable()
 export class CommentService {
-  constructor(private prisma: PrismaService) {}
+    private prisma = new PrismaClient(); // Khởi tạo Prisma Client
+  
+  constructor() {}
 
   // Thêm comment hoặc reply
   async create(data: {
