@@ -1,21 +1,29 @@
-import { Suspense } from "react";
+"use client";
+
+import { useState, useMemo } from "react";
 import { CategoriesSection } from "../sections/category-section";
 import { HomeVideoSection } from "@/modules/home/ui/sections/home-videos-sections";
-import { TrendingView } from "./trending-view";
+import { categoryNames } from "@/scripts/seed-catelogries";
 
-interface HomeViewProps{
-    categoryId?:string;
-}
+export const HomeView = () => {
+  const [categoryId, setCategoryId] = useState<string | null>(null);
 
-export const HomeView=({categoryId}:HomeViewProps)=>{
-    return (
-        <div className="max-w-[full] mx-auto mb-10 px-4 pt-2.5 flex flex-col gap-y-6">
-                {/*  */}
-               
-                <CategoriesSection categoryId={categoryId}></CategoriesSection>
-                <HomeVideoSection categoryId={categoryId}/>
-          
-              
-        </div>
-    )
-}
+  const data = useMemo(
+    () =>
+      categoryNames.map((category) => ({
+        value: category.id,
+        label: category.name,
+      })),
+    []
+  );
+
+  return (
+    <div className="w-[1600px] mb-10 px-4 pt-2.5 flex flex-col gap-y-6">
+      {/* Danh mục */}
+      <CategoriesSection data={data} categoryId={categoryId} onChange={setCategoryId} />
+
+      {/* Video theo danh mục */}
+      <HomeVideoSection categoryId={categoryId} />
+    </div>
+  );
+};

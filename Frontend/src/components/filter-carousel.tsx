@@ -21,8 +21,7 @@ export const FilterCarousel = ({
     data,
     isLoading,
 }: FilterCarouselProps) => {
-    console.log(value)
-    console.log(data);
+
 
     return (
         <div className="relative w-full py-4">

@@ -23,7 +23,6 @@ const Page = async ({ params }: PageProps) => {
       if (!videoDetail) {
         return <div>Không tìm thấy video.</div>;
       }
-      console.log(videoDetail)
     
     return(
         <div className="pt-16">

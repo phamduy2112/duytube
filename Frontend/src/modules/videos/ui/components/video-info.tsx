@@ -26,7 +26,7 @@ export const VideoInfoSkeleton=()=>{
 }
 
 export const VideoInfo=({data,onRemove}:VideoInfoProps)=>{
-    console.log(data)
+    // console.log(data)
   const compactViews=useMemo(()=>{
         return Intl.NumberFormat("en",{
             notation:"compact"
@@ -41,7 +41,7 @@ return (
      <div className="flex gap-3">
      <div>
             <UserAvatar
-            imageUrl="./placeholder.svg"
+            imageUrl="https://scontent.fsgn8-4.fna.fbcdn.net/v/t39.30808-6/496150454_3799684950248327_219587134787243704_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=JoJycapiivkQ7kNvwETfRna&_nc_oc=AdnI0UiR2vtsakP9xxDf8G3C9uGBZ4mwWjPkMnw3sLrj0J3HMUbfzdnw8hcTspUvCm8&_nc_zt=23&_nc_ht=scontent.fsgn8-4.fna&_nc_gid=U8qqeT_PN-i4Vfk50HrefA&oh=00_AfLs63s0rAOVzFrL4nSFP4M9YdjB9J81abRDTMdfCp8bKw&oe=682A3C9B"
             name="duy"
             />
         </div>

@@ -10,15 +10,7 @@ export const categoryNames = [
     { id: "9", name: "Lifestyle" },
     { id: "10", name: "Science" },
     { id: "11", name: "Health" },
-    { id: "12", name: "Business" },
-    { id: "13", name: "Art" },
-    { id: "14", name: "History" },
-    { id: "15", name: "Nature" },
-    { id: "16", name: "Fashion" },
-    { id: "17", name: "Food" },
-    { id: "18", name: "DIY" },
-    { id: "19", name: "Animation" },
-    { id: "20", name: "Spirituality" },
+  
   ];
 export const mockComments = [
   {
@@ -71,7 +63,23 @@ export const mockComments = [
     replies: []
   }
 ];
-
+export const  mockUser=[
+   {
+    id: "1",
+      name: "Nguyễn Văn A",
+      imageUrl: "https://randomuser.me/api/portraits/men/1.jpg"
+    },
+   {
+     id: "2",
+      name: "Trần Thị B",
+      imageUrl: "https://randomuser.me/api/portraits/women/2.jpg"
+    },
+   {
+     id: "3",
+      name: "Phạm Văn C",
+      imageUrl: "https://randomuser.me/api/portraits/men/3.jpg"
+    },
+]
 
 export const subscriptions = [
   {
@@ -102,6 +110,33 @@ export const subscriptions = [
     }
   }
 ];
+export const mockPlaylists = [
+  {
+    title: "React Tutorial Series",
+    videoCount: 12,
+    imageUrl: "/images/react-series.jpg"
+  },
+  {
+    title: "Next.js Crash Course",
+    videoCount: 8,
+    imageUrl: "/images/nextjs-course.jpg"
+  },
+  {
+    title: "TypeScript for Beginners",
+    videoCount: 15,
+    imageUrl: "/images/typescript-beginner.jpg"
+  },
+  {
+    title: "Tailwind CSS Design",
+    videoCount: 10,
+    imageUrl: "/images/tailwind-design.jpg"
+  },
+  {
+    title: "Fullstack Project Build",
+    videoCount: 20,
+    imageUrl: "/images/fullstack-project.jpg"
+  },
+];
 
   export const mockVideos = [
     {
@@ -113,7 +148,7 @@ export const subscriptions = [
       duration: 600,
       createAt: "2024-05-01T10:00:00Z",
       viewCount: 1250,
-      category: "Lập trình",
+      categoryId:1,
       visibility: "public",
       user: {
         id: "u1",
@@ -130,7 +165,7 @@ export const subscriptions = [
       duration: 720,
       createAt: "2024-04-15T14:30:00Z",
       viewCount: 980,
-      category: "Lập trình",
+     categoryId:2,
       visibility: "unlisted",
       user: {
         id: "u2",
@@ -147,7 +182,7 @@ export const subscriptions = [
       duration: 300,
       createAt: "2024-04-28T08:45:00Z",
       viewCount: 21500,
-      category: "Giải trí",
+      categoryId:1,
       visibility: "public",
       user: {
         id: "u3",
@@ -164,7 +199,7 @@ export const subscriptions = [
       duration: 480,
       createAt: "2025-01-01T09:00:00Z",
       viewCount: 4200,
-      category: "Tin tức",
+      categoryId: 4,
       visibility: "private",
       user: {
         id: "u4",
@@ -181,7 +216,7 @@ export const subscriptions = [
       duration: 480,
       createAt: "2025-01-01T09:00:00Z",
       viewCount: 4200,
-      category: "Tin tức",
+      categoryId: 3,
       visibility: "private",
       user: {
         id: "u4",
@@ -198,7 +233,7 @@ export const subscriptions = [
       duration: 480,
       createAt: "2025-01-01T09:00:00Z",
       viewCount: 4200,
-      category: "Tin tức",
+      categoryId: 4,
       visibility: "private",
       user: {
         id: "u4",

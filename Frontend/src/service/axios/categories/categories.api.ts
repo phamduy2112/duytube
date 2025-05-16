@@ -1,12 +1,13 @@
 import { ICategories, ICreateCategories, IUpdateCategory } from "@/service/type/categories.type";
 import { axiosWithAuth } from "../axios.config";
 import axios, { AxiosResponse } from "axios";
+import { apiLinkBackend } from "@/service/api-link";
 
 class CategoriesService{
     async createCategory({name,slug}:ICreateCategories):Promise<any>{
         try {
 
-            const response=await axiosWithAuth.post("category",{name,slug});
+            const response=await axiosWithAuth.post(apiLinkBackend('category'),{name,slug});
             return response.data
 
 

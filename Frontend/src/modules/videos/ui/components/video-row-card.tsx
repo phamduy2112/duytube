@@ -89,7 +89,7 @@ export const VideoRowCard=({
     },[data.likeCount])
     return (
 <div className={videoRowCardVariants({ size })}>
-  <Link href={`/videos/1`} className={"w-[38%]"}>
+  <Link href={`/videos/1`} className={"w-[150px] md:w-[38%]"}>
     <VideoThumbnail
       imageUrl={data.thumbnailUrl}
       previewUrl={data.previewUrl}
@@ -102,7 +102,7 @@ export const VideoRowCard=({
     <div className="flex justify-between gap-x-2">
       <div className="flex-1 min-w-0">
         <Link href={`/videos/1`}>
-          <h3 className={cn("font-medium line-clamp-2", size === "compact" ? "text-sm" : "text-base")}>
+          <h3 className={cn("font-medium line-clamp-1", size === "compact" ? "text-sm" : "text-base")}>
             {data.title}
           </h3>
           {size === "default" && (
@@ -129,7 +129,7 @@ export const VideoRowCard=({
 
             <Tooltip>
               <TooltipTrigger asChild>
-                <p className="text-xs text-muted-foreground w-fit line-clamp-2">
+                <p className="text-xs text-muted-foreground w-fit line-clamp-1">
                   {data.description ?? "No description"}
                 </p>
               </TooltipTrigger>

@@ -4,6 +4,7 @@ import { HomeVideoSection } from "@/modules/home/ui/sections/home-videos-section
 import { TrendingVideosSection } from "@/modules/home/ui/sections/trending-videos-section";
 import { Button } from "@/components/ui/button";
 import { PlusIcon } from "lucide-react";
+import { PlayListsSection } from "../sections/playlist-section";
 
 interface HomeViewProps{
     categoryId?:string;
@@ -29,6 +30,8 @@ export const PlayListsView=()=>{
                 <PlusIcon/>
              </Button>
            </div>
+           <PlayListsSection/>
+           
   
               
         </div>

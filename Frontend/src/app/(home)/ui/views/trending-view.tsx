@@ -12,10 +12,10 @@ const MocksTrending = [
 ];
 
 export const TrendingView = () => {
-  const [selected, setSelected] = useState<string | null>(null);
+  const [selected, setSelected] = useState<string | null>("Mới nhất");
 
   return (
-    <div className="max-w-[1650px]  m-auto mb-10 px-4 pt-17 flex flex-col gap-y-6">
+    <div className="max-w-[1650px]  m-auto mb-10 px-4 flex flex-col gap-y-6">
       <div>
         <h1 className="text-2xl font-bold">Trending</h1>
         <div className="flex gap-2 mt-2">
@@ -36,7 +36,10 @@ export const TrendingView = () => {
         </div>
       </div>
 
-      <TrendingVideosSection />
+<div className="lg:w-[50rem]">
+    <TrendingVideosSection />
+</div>
+    
     </div>
   );
 };

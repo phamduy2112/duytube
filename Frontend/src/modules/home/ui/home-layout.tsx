@@ -17,7 +17,7 @@ export const HomeLayout=({children}:HomeLayoutProps)=>{
         <div className="flex min-h-screen">
           {/* HomeSidebar */}
           <HomeSidebar></HomeSidebar>
-          <main className="flex-1 overflow-y-auto">
+          <main className="flex-1 overflow-y-auto mt-20">
           {children}  
           </main>
         </div>

@@ -4,7 +4,9 @@ import React from 'react'
 
 function Page() {
   return (
-    <HistorygView/>
+    <div className=" flex justify-center items-center">
+ <HistorygView/>
+   </div>
   )
 }
 

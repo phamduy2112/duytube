@@ -12,7 +12,7 @@ export const TrendingVideosSection=()=>{
         <div>
             <div className="flex flex-col gap-y-5">
   {mockVideos.map((video)=>(
-                <VideoRowCard key={video.id} data={video}/>
+                <VideoRowCard key={video.id} data={video} size="default"/>
             ))}
             </div>
           

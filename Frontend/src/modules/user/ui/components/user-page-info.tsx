@@ -4,6 +4,7 @@ import { UserAvatar } from "@/components/user-avatar"
 import { cn } from "@/lib/utils"
 import { SubscriptionButton } from "@/modules/subscriptions/ui/components/subscription-button"
 import Link from "next/link"
+import UserNavBar from "./user-navbar"
 export const UserPageInfoSkeleton=()=>{
     return (
         <div className="py-6">
@@ -44,9 +45,9 @@ export const UserPageInfo=({user})=>{
                 <div className="flex items-center gap-3">
                     <UserAvatar 
                     size="lg"
-                    imageUrl={user.bannerUrl}
-                        name={user.name}
-                        className="h-[60px] w-[60px]"
+                    imageUrl={user.imageUrl}
+                    name={user.name}
+                    className="h-[60px] w-[60px]"
                         // onClick={()=>{
                         //     if(user.clerkId==userId){
                         //         clerk.openUserProfile()
@@ -83,7 +84,7 @@ export const UserPageInfo=({user})=>{
                 <div className="flex items-center gap-3">
                     <UserAvatar 
                     size="lg"
-                    imageUrl={user.bannerUrl}
+                    imageUrl={user.imageUrl}
                         name={user.name}
                         className={cn(userId===user.clerkId && "cursor-pointer hover:opacity-80 transition-opacity","w-[100px] h-[100px]")}
                         // onClick={()=>{
@@ -94,14 +95,27 @@ export const UserPageInfo=({user})=>{
                     />
                     <div className="flex-1 min-w-0">
                         <h1 className="text-3xl font-bold">{user.name}</h1>
-                        <div className="flex items-center gap-1 text-sm text-muted-foreground mt-3">
-                            <span>{user.subscriberCount} subscribers</span>
+                        <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                            <span>2 subscribers</span>
                             <span>|</span>
-                            <span>{user.videoCount} videos</span>
+                            <span>1 videos</span>
                         </div>
+                        <div>
+                            • This channel is to share beautiful lyrics video and promote good melody songs
+                        </div>
+                         <div>
+                  <SubscriptionButton
+                disabled={isPending||!isLoaded}
+                isSuscribed={false}
+                // onClick={onclick}
+                className="flex-none"
+                />
+                
+            </div>
                     </div>
+                    
                 </div>
-                {userId===user.clerkId?(
+                {/* {userId===user.clerkId?(
 <Button
                 variant="secondary"
                 asChild
@@ -119,8 +133,10 @@ export const UserPageInfo=({user})=>{
                 />
 
                 )}
-               
-              
+                */}
+           
+            
+         
             </div>
         </div>
     )
