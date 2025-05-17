@@ -8,9 +8,10 @@ import { VideoModule } from './video/video.module';
 import { MediaModule } from './media/media.module';
 import { CommentModule } from './comment/comment.module';
 import { ReactionsModule } from './reactions/reactions.module';
+import { WebhookModule } from './webhook/webhook.module';
 
 @Module({
-  imports: [PrismaModule, ResponseModule,CategoryModule, VideoModule, MediaModule, CommentModule, ReactionsModule],
+  imports: [PrismaModule, ResponseModule,CategoryModule, VideoModule, MediaModule, CommentModule, ReactionsModule, WebhookModule],
   controllers: [AppController],
   providers: [AppService],
 })

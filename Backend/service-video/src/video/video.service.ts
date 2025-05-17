@@ -64,20 +64,48 @@ export class VideoService {
   async findAll() {
     const videos = await this.prismaService.videos.findMany({
       orderBy: { created_at: 'desc' },
+      include:{
+        users:{
+          
+        }
+      }
     });
+
 
     return this.response.responseSend(videos, 'Videos fetched successfully', 200);
   }
   
-
+  // 
+  async findVideosTrending(){
+    const viewCounts=await this.prismaService.video_views.groupBy({
+      by:['video_id'],
+      _count:{
+        video_id:true,
+      },
+      orderBy:{
+        _count:{
+          video_id:"desc"
+        },
+      },
+      take:10
+    })
+    const videos=await this.prismaService.videos.findMany({
+      where:{
+        id:{
+          in:viewCounts.map((v)=>v.video_id)
+        }
+      }
+    })
+    return videos
+  }
   
   // Lấy một video theo id
   async findOne(id: string) {
-    // const video = await this.prismaService.videos.findFirst({ where: { id } });
+    const video = await this.prismaService.videos.findFirst({ where: { id } });
 
-    // if (!video) {
-    //   throw new NotFoundException('Video not found');
-    // }
+    if (!video) {
+      throw new NotFoundException('Video not found');
+    }
 
     return this.response.responseSend(id, 'Video fetched successfully', 200);
   }
