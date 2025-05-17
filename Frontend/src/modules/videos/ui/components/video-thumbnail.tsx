@@ -31,8 +31,8 @@ export const VideoThumbnail=(
                 <Image src="./placeholder.svg" alt={title} fill className="w-full h-full object-cover group-hover:opacity-0"></Image>
                 <Image src={previewUrl??THUMBNAIL_FALLBACK} alt={title} fill className="w-full h-full object-cover group-hover:opacity-100"></Image>
             </div>
-            <div className="absolute bottom-2 right-2 px-1 py-.5 rouded bg-black/80 text-while text-xs font-medium">
-                {formatDuration(60)}
+            <div className="absolute bottom-2 right-2 px-1 py-0.5 rounded bg-black/80 text-white text-xs font-medium">              
+            {formatDuration(1234)}
             </div>
 
        

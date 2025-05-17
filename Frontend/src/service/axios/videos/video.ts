@@ -1,7 +1,8 @@
 import { axiosWithAuth } from "../axios.config";
 
-class VideoService{
-    async getVideo(){
+export class VideoService{
+   
+    static async getVideo(){
         const response=await axiosWithAuth.get("videos")
         return response.data
     }

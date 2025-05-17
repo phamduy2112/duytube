@@ -27,14 +27,14 @@ export const VideoInfoSkeleton=()=>{
 
 export const VideoInfo=({data,onRemove}:VideoInfoProps)=>{
     // console.log(data)
-  const compactViews=useMemo(()=>{
-        return Intl.NumberFormat("en",{
-            notation:"compact"
-        }).format(data.viewCount);
-    },[data.viewCount])
-  const compactDate=useMemo(()=>{
-        return formatDistanceToNow(data.createAt,{addSuffix:true})
-    },[data.createAt])
+//   const compactViews=useMemo(()=>{
+//         return Intl.NumberFormat("en",{
+//             notation:"compact"
+//         }).format(data.viewCount);
+//     },[data.viewCount])
+//   const compactDate=useMemo(()=>{
+//         return formatDistanceToNow(data.created_at,{addSuffix:true})
+//     },[data.created_at])
 return (
     <div className="flex gap-3 justify-between">
 
@@ -46,28 +46,23 @@ return (
             />
         </div>
    <div>
-   <Link href={`/users/${data.id}`}>
-        <h3 className="font-medium line-clamp-1 lg:line-clamp-2 text-base break-words">
-            {data.title}
+   <h3 className="font-medium line-clamp-1 lg:line-clamp-2 text-base break-words">
+            {data?.title}
             </h3>
-            
-            </Link>
        <div className="min-w-0 flex-1">
-       <Link href={`/users/${data.user.id}`}>
-        <UserInfo name={data.user.name}/>
-        
-            </Link>
-    <Link href={`/videos/${data.id}`}>
+    
+<UserInfo name={data?.user?.name}/>
     <p className="text-sm text-gray-600 line-clamp-1">
-        {compactViews} views * {compactDate}
-        </p></Link>
+        {0} views * {0}
+        </p>
+
        </div>
    </div>
      </div>
        <div className="flex-shrink-0">
-        <VideoMenu videoId={data.id}
+        {/* <VideoMenu videoId={data.id}
         //  onRemove={onRemove}
-         />
+         /> */}
        </div>
     </div>
  

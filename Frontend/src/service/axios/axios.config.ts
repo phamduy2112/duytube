@@ -8,6 +8,6 @@ import axios, { AxiosInstance } from 'axios'
 // }
 
 export const axiosWithAuth = axios.create({
-    baseURL: `localhost:3000/`,
-    timeout: 180_000,
+    baseURL: "http://localhost:8080/",
+        timeout: 180_000,
 });

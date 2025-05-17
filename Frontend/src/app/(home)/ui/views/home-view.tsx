@@ -4,26 +4,28 @@ import { useState, useMemo } from "react";
 import { CategoriesSection } from "../sections/category-section";
 import { HomeVideoSection } from "@/modules/home/ui/sections/home-videos-sections";
 import { categoryNames } from "@/scripts/seed-catelogries";
-
+import { useQuery } from "@tanstack/react-query";
+import categoriesApi from "@/service/axios/categories/categories.api";
 export const HomeView = () => {
   const [categoryId, setCategoryId] = useState<string | null>(null);
-
-  const data = useMemo(
-    () =>
-      categoryNames.map((category) => ({
+    const {data}=useQuery({
+        queryKey:['category'],
+        queryFn: ()=> categoriesApi.getCategory()
+    })
+    const dataCategories = useMemo(() => {
+      return data?.content?.map((category) => ({
         value: category.id,
         label: category.name,
-      })),
-    []
-  );
-
+      })) || [];
+    }, [data]);
+    console.log(dataCategories)
   return (
-    <div className="w-[1600px] mb-10 px-4 pt-2.5 flex flex-col gap-y-6">
+    <div className="sm:w-[100%] 2xl:w-[1600px] mb-10 px-4 pt-2.5 flex flex-col gap-y-6">
       {/* Danh mục */}
-      <CategoriesSection data={data} categoryId={categoryId} onChange={setCategoryId} />
+      <CategoriesSection data={dataCategories} categoryId={categoryId} onChange={setCategoryId} />
 
       {/* Video theo danh mục */}
-      <HomeVideoSection categoryId={categoryId} />
+      <HomeVideoSection categoryId={categoryId} /> 
     </div>
   );
 };
