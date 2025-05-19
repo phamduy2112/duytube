@@ -1,5 +1,5 @@
 import {  SignUp } from "@clerk/nextjs";
 
 export default function Page(){
-    return <SignUp redirectUrl="/create-user"></SginUp>
+    return <SignUp></SginUp>
 }

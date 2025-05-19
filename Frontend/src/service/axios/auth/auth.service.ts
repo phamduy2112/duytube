@@ -1,8 +1,13 @@
 import { axiosWithAuth } from "../axios.config"
 
 export class AuthService{
-    async createUser(data:any){
-        const response=await axiosWithAuth("videos/user",data)
+  
+    static async createUser(data:any){
+        const response=await axiosWithAuth.post("webhook",data)
+        return response.data
+    }
+    static async getUser(data:any){
+        const response=await axiosWithAuth.get("webhook",data)
         return response.data
     }
 }

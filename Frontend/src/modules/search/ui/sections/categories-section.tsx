@@ -8,10 +8,10 @@ interface categorySectionProps{
     categoryId?:string;
 }
 
-export const CategoriesSection=({data}:any)=>{
+export const CategoriesSection=({data,onChange,categoryId}:any)=>{
     return (
         <Suspense fallback="<p>Loading...</p>">
-            <CategoriesSectionSuspense data={data}/>
+            <CategoriesSectionSuspense data={data} onChange={onChange} categoryId={categoryId}/>
         </Suspense>
     )
 }
@@ -19,23 +19,22 @@ const CategoriesSkeleton=()=>{
     return <FilterCarousel isLoading data={[]} onSelect={()=>{}}/>
     
 }
-export const CategoriesSectionSuspense=({data}:any)=>{
-      const [selectedId, setSelectedId] = useState<string | null>(null);
+export const CategoriesSectionSuspense=({data,onChange,categoryId}:any)=>{
 
     return (
         <div>
            <FilterCarousel
-           value={selectedId}
+           value={categoryId}
            data={data}
             onSelect={(id) => {
           console.log("Selected ID:", id); // lấy ra ID tại đây
-          setSelectedId(id);
+          onChange(id);
         }}
            >
 
            </FilterCarousel>
            <div className="mt-4">
-        ID được chọn: {selectedId ?? "Tất cả"}
+        ID được chọn: {categoryId ?? "Tất cả"}
       </div>
         </div>
     )

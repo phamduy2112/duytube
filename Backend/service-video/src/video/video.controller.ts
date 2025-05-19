@@ -10,7 +10,10 @@ export class VideoController {
   async create(@Body() body: { title: string; user_id: string; description?: string;category_id:string }) {
     return await this.videoService.create(body);
   }
-
+  @Get("search")
+  async search(@Query('keyword') keyword: string) {  
+      return await this.videoService.searchVideos(keyword)
+  }
   // Lấy toàn bộ video
   @Get()
   async findAll() {
@@ -19,9 +22,9 @@ export class VideoController {
 
   // Lấy video theo id
   @Get(':id')
-  async findOne(@Param('id') id: string) {
-    return await this.videoService.findOne(id);
-  }
+async findOne(@Param('id') id: string, @Body() body?: any) {
+  return await this.videoService.findOne(id, body?.userId);
+}
 
   // Lấy video theo category
   @Get('/category/:id')
@@ -59,8 +62,5 @@ export class VideoController {
     return { videoId, views: count };
   }
   // 
-  @Get("a")
-  async searchVideo(){
-    return await this.videoService.findAll()
-  }
+  
 }

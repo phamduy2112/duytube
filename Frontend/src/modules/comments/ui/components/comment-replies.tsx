@@ -12,6 +12,7 @@ export const CommentReplies=({
     parentId,
     videoId,
     fetchNextPage,
+    comments,
     hasNextPage,
     isFetchingNextPage
 }:CommentRepliesProps)=>{
@@ -28,7 +29,7 @@ export const CommentReplies=({
                     }
 
                 {!isLoading && 
-  mockComments.map((comment) => {
+  comments.map((comment) => {
     return (
       <CommentItem
         key={comment.id}

@@ -7,18 +7,44 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class WebhookService {
   constructor(private prisma:PrismaService){}
   // user.service.ts
-async createFromClerk(data: {
-  clerkId: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-}) {
-  return this.prisma.users.create({
-    data: {
-      clerk_user_id: data.clerkId,
-      channel_name: data.firstName+""+data.lastName,
-    },
-  });
-}
+  async createFromClerk(data: {
+    clerkId: string;
+    urlImage: string;
+    fullName: string;
+  }) {
+    const existingUser = await this.prisma.users.findFirst({
+      where: {
+        clerk_user_id: data.clerkId,
+      },
+    });
+  
+    if (!!existingUser) {
+      return null; // hoặc return null nếu bạn muốn báo là đã tồn tại
+    }
+  
+    const response = await this.prisma.users.create({
+      data: {
+        clerk_user_id: data.clerkId,
+        channel_name: data.fullName,
+        avatar_url: data.urlImage,
+        has_created: true,
+      },
+    });
+  
+    return existingUser;
+  }
+  async getUserClerk(data){
+    
+    const existingUser = await this.prisma.users.findFirst({
+      where: {
+        clerk_user_id: data.clerkId,
+      },
+    });
+  console.log(!!existingUser)
+  console.log('data.clerkId:', data.clerkId);    
+
+    return existingUser
+  }
+  
 
 }

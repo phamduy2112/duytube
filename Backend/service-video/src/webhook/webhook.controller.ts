@@ -5,17 +5,17 @@ import { WebhookService } from './webhook.service';
 @Controller('webhook')
 export class WebhookController {
   constructor(private readonly userService: WebhookService) {}
-  @Get()
-  handleGet(@Body() payload: any) {
-    console.log('Get webhook:', payload);
-    return { received: true };
+  @Post("/get")
+  async handleGet(@Body() payload: any) {
+    return await this.userService.getUserClerk(payload);
   }
   
 
   @Post()
-  handleWebhook(@Body() payload: any) {
-    console.log('Received webhook:', payload);
-    return { received: true };
+  async handleWebhook(@Body() payload: any) {
+    
+    return await this.userService.createFromClerk(payload);
   }
+  
   
 }

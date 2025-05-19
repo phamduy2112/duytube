@@ -11,6 +11,9 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { UserAvatar } from "@/components/user-avatar";
 import { useUser } from "@clerk/nextjs";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import commentService from "@/service/axios/comments/comment.service";
+import { toast } from "sonner";
 
 interface CommentFormProps {
   videoId: string;
@@ -38,16 +41,38 @@ export const CommentForm = ({
       value: "",
     },
   });
+  const queryClient = useQueryClient();
 
+  const {mutate}=useMutation({
+     mutationFn: commentService.createComment,
+        onSuccess: (data) => {
+          queryClient.invalidateQueries({ queryKey: ["commentDetail", videoId] });
+
+          form.reset();
+          onSuccess?.();
+
+        },
+        onError: (error) => {
+          console.error("❌ Lỗi:", error);
+        },
+  })
   const handleCancel = () => {
     form.reset();
     onCancel?.();
   };
 
   const onSubmit = (data: FormValues) => {
-    console.log("Submit:", data);
-    form.reset();
-    onSuccess?.();
+
+    const response={
+      content:data.value,
+      videoId,
+      userId:user?.id,
+      ...(variant === "reply" && { parentId }),
+    }
+
+    console.log(response)
+    mutate(response);
+    toast.success("Thanh cong")
   };
 
   return (

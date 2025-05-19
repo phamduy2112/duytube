@@ -51,7 +51,7 @@ return (
             </h3>
        <div className="min-w-0 flex-1">
     
-<UserInfo name={data?.user?.name}/>
+<UserInfo name={data?.users?.name}/>
     <p className="text-sm text-gray-600 line-clamp-1">
         {0} views * {0}
         </p>

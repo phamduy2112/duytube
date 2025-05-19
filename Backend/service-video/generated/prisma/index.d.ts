@@ -53,6 +53,11 @@ export type video_reactions = $Result.DefaultSelection<Prisma.$video_reactionsPa
  * 
  */
 export type video_views = $Result.DefaultSelection<Prisma.$video_viewsPayload>
+/**
+ * Model video_history
+ * 
+ */
+export type video_history = $Result.DefaultSelection<Prisma.$video_historyPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -258,6 +263,16 @@ export class PrismaClient<
     * ```
     */
   get video_views(): Prisma.video_viewsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.video_history`: Exposes CRUD operations for the **video_history** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Video_histories
+    * const video_histories = await prisma.video_history.findMany()
+    * ```
+    */
+  get video_history(): Prisma.video_historyDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -705,7 +720,8 @@ export namespace Prisma {
     videos: 'videos',
     comment_reactions: 'comment_reactions',
     video_reactions: 'video_reactions',
-    video_views: 'video_views'
+    video_views: 'video_views',
+    video_history: 'video_history'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -724,7 +740,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "comments" | "subscriptions" | "users" | "categories" | "videos" | "comment_reactions" | "video_reactions" | "video_views"
+      modelProps: "comments" | "subscriptions" | "users" | "categories" | "videos" | "comment_reactions" | "video_reactions" | "video_views" | "video_history"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1320,6 +1336,80 @@ export namespace Prisma {
           }
         }
       }
+      video_history: {
+        payload: Prisma.$video_historyPayload<ExtArgs>
+        fields: Prisma.video_historyFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.video_historyFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_historyPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.video_historyFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_historyPayload>
+          }
+          findFirst: {
+            args: Prisma.video_historyFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_historyPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.video_historyFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_historyPayload>
+          }
+          findMany: {
+            args: Prisma.video_historyFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_historyPayload>[]
+          }
+          create: {
+            args: Prisma.video_historyCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_historyPayload>
+          }
+          createMany: {
+            args: Prisma.video_historyCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.video_historyCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_historyPayload>[]
+          }
+          delete: {
+            args: Prisma.video_historyDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_historyPayload>
+          }
+          update: {
+            args: Prisma.video_historyUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_historyPayload>
+          }
+          deleteMany: {
+            args: Prisma.video_historyDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.video_historyUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.video_historyUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_historyPayload>[]
+          }
+          upsert: {
+            args: Prisma.video_historyUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$video_historyPayload>
+          }
+          aggregate: {
+            args: Prisma.Video_historyAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateVideo_history>
+          }
+          groupBy: {
+            args: Prisma.video_historyGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Video_historyGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.video_historyCountArgs<ExtArgs>
+            result: $Utils.Optional<Video_historyCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1412,6 +1502,7 @@ export namespace Prisma {
     comment_reactions?: comment_reactionsOmit
     video_reactions?: video_reactionsOmit
     video_views?: video_viewsOmit
+    video_history?: video_historyOmit
   }
 
   /* Types for Logging */
@@ -1550,6 +1641,7 @@ export namespace Prisma {
     comments: number
     subscriptions_subscriptions_creator_idTousers: number
     subscriptions_subscriptions_viewer_idTousers: number
+    video_history: number
     video_reactions: number
     video_views: number
     videos: number
@@ -1560,6 +1652,7 @@ export namespace Prisma {
     comments?: boolean | UsersCountOutputTypeCountCommentsArgs
     subscriptions_subscriptions_creator_idTousers?: boolean | UsersCountOutputTypeCountSubscriptions_subscriptions_creator_idTousersArgs
     subscriptions_subscriptions_viewer_idTousers?: boolean | UsersCountOutputTypeCountSubscriptions_subscriptions_viewer_idTousersArgs
+    video_history?: boolean | UsersCountOutputTypeCountVideo_historyArgs
     video_reactions?: boolean | UsersCountOutputTypeCountVideo_reactionsArgs
     video_views?: boolean | UsersCountOutputTypeCountVideo_viewsArgs
     videos?: boolean | UsersCountOutputTypeCountVideosArgs
@@ -1602,6 +1695,13 @@ export namespace Prisma {
    */
   export type UsersCountOutputTypeCountSubscriptions_subscriptions_viewer_idTousersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: subscriptionsWhereInput
+  }
+
+  /**
+   * UsersCountOutputType without action
+   */
+  export type UsersCountOutputTypeCountVideo_historyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: video_historyWhereInput
   }
 
   /**
@@ -1663,12 +1763,14 @@ export namespace Prisma {
 
   export type VideosCountOutputType = {
     comments: number
+    video_history: number
     video_reactions: number
     video_views: number
   }
 
   export type VideosCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     comments?: boolean | VideosCountOutputTypeCountCommentsArgs
+    video_history?: boolean | VideosCountOutputTypeCountVideo_historyArgs
     video_reactions?: boolean | VideosCountOutputTypeCountVideo_reactionsArgs
     video_views?: boolean | VideosCountOutputTypeCountVideo_viewsArgs
   }
@@ -1689,6 +1791,13 @@ export namespace Prisma {
    */
   export type VideosCountOutputTypeCountCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: commentsWhereInput
+  }
+
+  /**
+   * VideosCountOutputType without action
+   */
+  export type VideosCountOutputTypeCountVideo_historyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: video_historyWhereInput
   }
 
   /**
@@ -3970,6 +4079,7 @@ export namespace Prisma {
     avatar_url: string | null
     bio: string | null
     created_at: Date | null
+    has_created: boolean | null
   }
 
   export type UsersMaxAggregateOutputType = {
@@ -3979,6 +4089,7 @@ export namespace Prisma {
     avatar_url: string | null
     bio: string | null
     created_at: Date | null
+    has_created: boolean | null
   }
 
   export type UsersCountAggregateOutputType = {
@@ -3988,6 +4099,7 @@ export namespace Prisma {
     avatar_url: number
     bio: number
     created_at: number
+    has_created: number
     _all: number
   }
 
@@ -3999,6 +4111,7 @@ export namespace Prisma {
     avatar_url?: true
     bio?: true
     created_at?: true
+    has_created?: true
   }
 
   export type UsersMaxAggregateInputType = {
@@ -4008,6 +4121,7 @@ export namespace Prisma {
     avatar_url?: true
     bio?: true
     created_at?: true
+    has_created?: true
   }
 
   export type UsersCountAggregateInputType = {
@@ -4017,6 +4131,7 @@ export namespace Prisma {
     avatar_url?: true
     bio?: true
     created_at?: true
+    has_created?: true
     _all?: true
   }
 
@@ -4099,6 +4214,7 @@ export namespace Prisma {
     avatar_url: string | null
     bio: string | null
     created_at: Date | null
+    has_created: boolean | null
     _count: UsersCountAggregateOutputType | null
     _min: UsersMinAggregateOutputType | null
     _max: UsersMaxAggregateOutputType | null
@@ -4125,10 +4241,12 @@ export namespace Prisma {
     avatar_url?: boolean
     bio?: boolean
     created_at?: boolean
+    has_created?: boolean
     comment_reactions?: boolean | users$comment_reactionsArgs<ExtArgs>
     comments?: boolean | users$commentsArgs<ExtArgs>
     subscriptions_subscriptions_creator_idTousers?: boolean | users$subscriptions_subscriptions_creator_idTousersArgs<ExtArgs>
     subscriptions_subscriptions_viewer_idTousers?: boolean | users$subscriptions_subscriptions_viewer_idTousersArgs<ExtArgs>
+    video_history?: boolean | users$video_historyArgs<ExtArgs>
     video_reactions?: boolean | users$video_reactionsArgs<ExtArgs>
     video_views?: boolean | users$video_viewsArgs<ExtArgs>
     videos?: boolean | users$videosArgs<ExtArgs>
@@ -4142,6 +4260,7 @@ export namespace Prisma {
     avatar_url?: boolean
     bio?: boolean
     created_at?: boolean
+    has_created?: boolean
   }, ExtArgs["result"]["users"]>
 
   export type usersSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4151,6 +4270,7 @@ export namespace Prisma {
     avatar_url?: boolean
     bio?: boolean
     created_at?: boolean
+    has_created?: boolean
   }, ExtArgs["result"]["users"]>
 
   export type usersSelectScalar = {
@@ -4160,14 +4280,16 @@ export namespace Prisma {
     avatar_url?: boolean
     bio?: boolean
     created_at?: boolean
+    has_created?: boolean
   }
 
-  export type usersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clerk_user_id" | "channel_name" | "avatar_url" | "bio" | "created_at", ExtArgs["result"]["users"]>
+  export type usersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clerk_user_id" | "channel_name" | "avatar_url" | "bio" | "created_at" | "has_created", ExtArgs["result"]["users"]>
   export type usersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     comment_reactions?: boolean | users$comment_reactionsArgs<ExtArgs>
     comments?: boolean | users$commentsArgs<ExtArgs>
     subscriptions_subscriptions_creator_idTousers?: boolean | users$subscriptions_subscriptions_creator_idTousersArgs<ExtArgs>
     subscriptions_subscriptions_viewer_idTousers?: boolean | users$subscriptions_subscriptions_viewer_idTousersArgs<ExtArgs>
+    video_history?: boolean | users$video_historyArgs<ExtArgs>
     video_reactions?: boolean | users$video_reactionsArgs<ExtArgs>
     video_views?: boolean | users$video_viewsArgs<ExtArgs>
     videos?: boolean | users$videosArgs<ExtArgs>
@@ -4183,6 +4305,7 @@ export namespace Prisma {
       comments: Prisma.$commentsPayload<ExtArgs>[]
       subscriptions_subscriptions_creator_idTousers: Prisma.$subscriptionsPayload<ExtArgs>[]
       subscriptions_subscriptions_viewer_idTousers: Prisma.$subscriptionsPayload<ExtArgs>[]
+      video_history: Prisma.$video_historyPayload<ExtArgs>[]
       video_reactions: Prisma.$video_reactionsPayload<ExtArgs>[]
       video_views: Prisma.$video_viewsPayload<ExtArgs>[]
       videos: Prisma.$videosPayload<ExtArgs>[]
@@ -4194,6 +4317,7 @@ export namespace Prisma {
       avatar_url: string | null
       bio: string | null
       created_at: Date | null
+      has_created: boolean | null
     }, ExtArgs["result"]["users"]>
     composites: {}
   }
@@ -4592,6 +4716,7 @@ export namespace Prisma {
     comments<T extends users$commentsArgs<ExtArgs> = {}>(args?: Subset<T, users$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$commentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     subscriptions_subscriptions_creator_idTousers<T extends users$subscriptions_subscriptions_creator_idTousersArgs<ExtArgs> = {}>(args?: Subset<T, users$subscriptions_subscriptions_creator_idTousersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$subscriptionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     subscriptions_subscriptions_viewer_idTousers<T extends users$subscriptions_subscriptions_viewer_idTousersArgs<ExtArgs> = {}>(args?: Subset<T, users$subscriptions_subscriptions_viewer_idTousersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$subscriptionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    video_history<T extends users$video_historyArgs<ExtArgs> = {}>(args?: Subset<T, users$video_historyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$video_historyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     video_reactions<T extends users$video_reactionsArgs<ExtArgs> = {}>(args?: Subset<T, users$video_reactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$video_reactionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     video_views<T extends users$video_viewsArgs<ExtArgs> = {}>(args?: Subset<T, users$video_viewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$video_viewsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     videos<T extends users$videosArgs<ExtArgs> = {}>(args?: Subset<T, users$videosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$videosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -4630,6 +4755,7 @@ export namespace Prisma {
     readonly avatar_url: FieldRef<"users", 'String'>
     readonly bio: FieldRef<"users", 'String'>
     readonly created_at: FieldRef<"users", 'DateTime'>
+    readonly has_created: FieldRef<"users", 'Boolean'>
   }
     
 
@@ -5111,6 +5237,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: SubscriptionsScalarFieldEnum | SubscriptionsScalarFieldEnum[]
+  }
+
+  /**
+   * users.video_history
+   */
+  export type users$video_historyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_history
+     */
+    select?: video_historySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_history
+     */
+    omit?: video_historyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_historyInclude<ExtArgs> | null
+    where?: video_historyWhereInput
+    orderBy?: video_historyOrderByWithRelationInput | video_historyOrderByWithRelationInput[]
+    cursor?: video_historyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Video_historyScalarFieldEnum | Video_historyScalarFieldEnum[]
   }
 
   /**
@@ -6503,6 +6653,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     comments?: boolean | videos$commentsArgs<ExtArgs>
+    video_history?: boolean | videos$video_historyArgs<ExtArgs>
     video_reactions?: boolean | videos$video_reactionsArgs<ExtArgs>
     video_views?: boolean | videos$video_viewsArgs<ExtArgs>
     categories?: boolean | videos$categoriesArgs<ExtArgs>
@@ -6565,6 +6716,7 @@ export namespace Prisma {
   export type videosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "mux_status" | "mux_asset_id" | "mux_upload_id" | "mux_playback_id" | "mux_track_id" | "mux_track_status" | "user_id" | "category_id" | "created_at" | "updated_at", ExtArgs["result"]["videos"]>
   export type videosInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     comments?: boolean | videos$commentsArgs<ExtArgs>
+    video_history?: boolean | videos$video_historyArgs<ExtArgs>
     video_reactions?: boolean | videos$video_reactionsArgs<ExtArgs>
     video_views?: boolean | videos$video_viewsArgs<ExtArgs>
     categories?: boolean | videos$categoriesArgs<ExtArgs>
@@ -6584,6 +6736,7 @@ export namespace Prisma {
     name: "videos"
     objects: {
       comments: Prisma.$commentsPayload<ExtArgs>[]
+      video_history: Prisma.$video_historyPayload<ExtArgs>[]
       video_reactions: Prisma.$video_reactionsPayload<ExtArgs>[]
       video_views: Prisma.$video_viewsPayload<ExtArgs>[]
       categories: Prisma.$categoriesPayload<ExtArgs> | null
@@ -6998,6 +7151,7 @@ export namespace Prisma {
   export interface Prisma__videosClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     comments<T extends videos$commentsArgs<ExtArgs> = {}>(args?: Subset<T, videos$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$commentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    video_history<T extends videos$video_historyArgs<ExtArgs> = {}>(args?: Subset<T, videos$video_historyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$video_historyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     video_reactions<T extends videos$video_reactionsArgs<ExtArgs> = {}>(args?: Subset<T, videos$video_reactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$video_reactionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     video_views<T extends videos$video_viewsArgs<ExtArgs> = {}>(args?: Subset<T, videos$video_viewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$video_viewsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     categories<T extends videos$categoriesArgs<ExtArgs> = {}>(args?: Subset<T, videos$categoriesArgs<ExtArgs>>): Prisma__categoriesClient<$Result.GetResult<Prisma.$categoriesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -7461,6 +7615,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: CommentsScalarFieldEnum | CommentsScalarFieldEnum[]
+  }
+
+  /**
+   * videos.video_history
+   */
+  export type videos$video_historyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_history
+     */
+    select?: video_historySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_history
+     */
+    omit?: video_historyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_historyInclude<ExtArgs> | null
+    where?: video_historyWhereInput
+    orderBy?: video_historyOrderByWithRelationInput | video_historyOrderByWithRelationInput[]
+    cursor?: video_historyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Video_historyScalarFieldEnum | Video_historyScalarFieldEnum[]
   }
 
   /**
@@ -10774,6 +10952,1072 @@ export namespace Prisma {
 
 
   /**
+   * Model video_history
+   */
+
+  export type AggregateVideo_history = {
+    _count: Video_historyCountAggregateOutputType | null
+    _min: Video_historyMinAggregateOutputType | null
+    _max: Video_historyMaxAggregateOutputType | null
+  }
+
+  export type Video_historyMinAggregateOutputType = {
+    id: string | null
+    user_id: string | null
+    video_id: string | null
+    last_viewed_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type Video_historyMaxAggregateOutputType = {
+    id: string | null
+    user_id: string | null
+    video_id: string | null
+    last_viewed_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type Video_historyCountAggregateOutputType = {
+    id: number
+    user_id: number
+    video_id: number
+    last_viewed_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type Video_historyMinAggregateInputType = {
+    id?: true
+    user_id?: true
+    video_id?: true
+    last_viewed_at?: true
+    updated_at?: true
+  }
+
+  export type Video_historyMaxAggregateInputType = {
+    id?: true
+    user_id?: true
+    video_id?: true
+    last_viewed_at?: true
+    updated_at?: true
+  }
+
+  export type Video_historyCountAggregateInputType = {
+    id?: true
+    user_id?: true
+    video_id?: true
+    last_viewed_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type Video_historyAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which video_history to aggregate.
+     */
+    where?: video_historyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of video_histories to fetch.
+     */
+    orderBy?: video_historyOrderByWithRelationInput | video_historyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: video_historyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` video_histories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` video_histories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned video_histories
+    **/
+    _count?: true | Video_historyCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Video_historyMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Video_historyMaxAggregateInputType
+  }
+
+  export type GetVideo_historyAggregateType<T extends Video_historyAggregateArgs> = {
+        [P in keyof T & keyof AggregateVideo_history]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateVideo_history[P]>
+      : GetScalarType<T[P], AggregateVideo_history[P]>
+  }
+
+
+
+
+  export type video_historyGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: video_historyWhereInput
+    orderBy?: video_historyOrderByWithAggregationInput | video_historyOrderByWithAggregationInput[]
+    by: Video_historyScalarFieldEnum[] | Video_historyScalarFieldEnum
+    having?: video_historyScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Video_historyCountAggregateInputType | true
+    _min?: Video_historyMinAggregateInputType
+    _max?: Video_historyMaxAggregateInputType
+  }
+
+  export type Video_historyGroupByOutputType = {
+    id: string
+    user_id: string
+    video_id: string
+    last_viewed_at: Date
+    updated_at: Date
+    _count: Video_historyCountAggregateOutputType | null
+    _min: Video_historyMinAggregateOutputType | null
+    _max: Video_historyMaxAggregateOutputType | null
+  }
+
+  type GetVideo_historyGroupByPayload<T extends video_historyGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Video_historyGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Video_historyGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Video_historyGroupByOutputType[P]>
+            : GetScalarType<T[P], Video_historyGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type video_historySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    video_id?: boolean
+    last_viewed_at?: boolean
+    updated_at?: boolean
+    users?: boolean | usersDefaultArgs<ExtArgs>
+    videos?: boolean | videosDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["video_history"]>
+
+  export type video_historySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    video_id?: boolean
+    last_viewed_at?: boolean
+    updated_at?: boolean
+    users?: boolean | usersDefaultArgs<ExtArgs>
+    videos?: boolean | videosDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["video_history"]>
+
+  export type video_historySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    video_id?: boolean
+    last_viewed_at?: boolean
+    updated_at?: boolean
+    users?: boolean | usersDefaultArgs<ExtArgs>
+    videos?: boolean | videosDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["video_history"]>
+
+  export type video_historySelectScalar = {
+    id?: boolean
+    user_id?: boolean
+    video_id?: boolean
+    last_viewed_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type video_historyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "video_id" | "last_viewed_at" | "updated_at", ExtArgs["result"]["video_history"]>
+  export type video_historyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users?: boolean | usersDefaultArgs<ExtArgs>
+    videos?: boolean | videosDefaultArgs<ExtArgs>
+  }
+  export type video_historyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users?: boolean | usersDefaultArgs<ExtArgs>
+    videos?: boolean | videosDefaultArgs<ExtArgs>
+  }
+  export type video_historyIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users?: boolean | usersDefaultArgs<ExtArgs>
+    videos?: boolean | videosDefaultArgs<ExtArgs>
+  }
+
+  export type $video_historyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "video_history"
+    objects: {
+      users: Prisma.$usersPayload<ExtArgs>
+      videos: Prisma.$videosPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      user_id: string
+      video_id: string
+      last_viewed_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["video_history"]>
+    composites: {}
+  }
+
+  type video_historyGetPayload<S extends boolean | null | undefined | video_historyDefaultArgs> = $Result.GetResult<Prisma.$video_historyPayload, S>
+
+  type video_historyCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<video_historyFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Video_historyCountAggregateInputType | true
+    }
+
+  export interface video_historyDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['video_history'], meta: { name: 'video_history' } }
+    /**
+     * Find zero or one Video_history that matches the filter.
+     * @param {video_historyFindUniqueArgs} args - Arguments to find a Video_history
+     * @example
+     * // Get one Video_history
+     * const video_history = await prisma.video_history.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends video_historyFindUniqueArgs>(args: SelectSubset<T, video_historyFindUniqueArgs<ExtArgs>>): Prisma__video_historyClient<$Result.GetResult<Prisma.$video_historyPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Video_history that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {video_historyFindUniqueOrThrowArgs} args - Arguments to find a Video_history
+     * @example
+     * // Get one Video_history
+     * const video_history = await prisma.video_history.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends video_historyFindUniqueOrThrowArgs>(args: SelectSubset<T, video_historyFindUniqueOrThrowArgs<ExtArgs>>): Prisma__video_historyClient<$Result.GetResult<Prisma.$video_historyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Video_history that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {video_historyFindFirstArgs} args - Arguments to find a Video_history
+     * @example
+     * // Get one Video_history
+     * const video_history = await prisma.video_history.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends video_historyFindFirstArgs>(args?: SelectSubset<T, video_historyFindFirstArgs<ExtArgs>>): Prisma__video_historyClient<$Result.GetResult<Prisma.$video_historyPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Video_history that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {video_historyFindFirstOrThrowArgs} args - Arguments to find a Video_history
+     * @example
+     * // Get one Video_history
+     * const video_history = await prisma.video_history.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends video_historyFindFirstOrThrowArgs>(args?: SelectSubset<T, video_historyFindFirstOrThrowArgs<ExtArgs>>): Prisma__video_historyClient<$Result.GetResult<Prisma.$video_historyPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Video_histories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {video_historyFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Video_histories
+     * const video_histories = await prisma.video_history.findMany()
+     * 
+     * // Get first 10 Video_histories
+     * const video_histories = await prisma.video_history.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const video_historyWithIdOnly = await prisma.video_history.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends video_historyFindManyArgs>(args?: SelectSubset<T, video_historyFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$video_historyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Video_history.
+     * @param {video_historyCreateArgs} args - Arguments to create a Video_history.
+     * @example
+     * // Create one Video_history
+     * const Video_history = await prisma.video_history.create({
+     *   data: {
+     *     // ... data to create a Video_history
+     *   }
+     * })
+     * 
+     */
+    create<T extends video_historyCreateArgs>(args: SelectSubset<T, video_historyCreateArgs<ExtArgs>>): Prisma__video_historyClient<$Result.GetResult<Prisma.$video_historyPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Video_histories.
+     * @param {video_historyCreateManyArgs} args - Arguments to create many Video_histories.
+     * @example
+     * // Create many Video_histories
+     * const video_history = await prisma.video_history.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends video_historyCreateManyArgs>(args?: SelectSubset<T, video_historyCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Video_histories and returns the data saved in the database.
+     * @param {video_historyCreateManyAndReturnArgs} args - Arguments to create many Video_histories.
+     * @example
+     * // Create many Video_histories
+     * const video_history = await prisma.video_history.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Video_histories and only return the `id`
+     * const video_historyWithIdOnly = await prisma.video_history.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends video_historyCreateManyAndReturnArgs>(args?: SelectSubset<T, video_historyCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$video_historyPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Video_history.
+     * @param {video_historyDeleteArgs} args - Arguments to delete one Video_history.
+     * @example
+     * // Delete one Video_history
+     * const Video_history = await prisma.video_history.delete({
+     *   where: {
+     *     // ... filter to delete one Video_history
+     *   }
+     * })
+     * 
+     */
+    delete<T extends video_historyDeleteArgs>(args: SelectSubset<T, video_historyDeleteArgs<ExtArgs>>): Prisma__video_historyClient<$Result.GetResult<Prisma.$video_historyPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Video_history.
+     * @param {video_historyUpdateArgs} args - Arguments to update one Video_history.
+     * @example
+     * // Update one Video_history
+     * const video_history = await prisma.video_history.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends video_historyUpdateArgs>(args: SelectSubset<T, video_historyUpdateArgs<ExtArgs>>): Prisma__video_historyClient<$Result.GetResult<Prisma.$video_historyPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Video_histories.
+     * @param {video_historyDeleteManyArgs} args - Arguments to filter Video_histories to delete.
+     * @example
+     * // Delete a few Video_histories
+     * const { count } = await prisma.video_history.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends video_historyDeleteManyArgs>(args?: SelectSubset<T, video_historyDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Video_histories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {video_historyUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Video_histories
+     * const video_history = await prisma.video_history.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends video_historyUpdateManyArgs>(args: SelectSubset<T, video_historyUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Video_histories and returns the data updated in the database.
+     * @param {video_historyUpdateManyAndReturnArgs} args - Arguments to update many Video_histories.
+     * @example
+     * // Update many Video_histories
+     * const video_history = await prisma.video_history.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Video_histories and only return the `id`
+     * const video_historyWithIdOnly = await prisma.video_history.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends video_historyUpdateManyAndReturnArgs>(args: SelectSubset<T, video_historyUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$video_historyPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Video_history.
+     * @param {video_historyUpsertArgs} args - Arguments to update or create a Video_history.
+     * @example
+     * // Update or create a Video_history
+     * const video_history = await prisma.video_history.upsert({
+     *   create: {
+     *     // ... data to create a Video_history
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Video_history we want to update
+     *   }
+     * })
+     */
+    upsert<T extends video_historyUpsertArgs>(args: SelectSubset<T, video_historyUpsertArgs<ExtArgs>>): Prisma__video_historyClient<$Result.GetResult<Prisma.$video_historyPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Video_histories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {video_historyCountArgs} args - Arguments to filter Video_histories to count.
+     * @example
+     * // Count the number of Video_histories
+     * const count = await prisma.video_history.count({
+     *   where: {
+     *     // ... the filter for the Video_histories we want to count
+     *   }
+     * })
+    **/
+    count<T extends video_historyCountArgs>(
+      args?: Subset<T, video_historyCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Video_historyCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Video_history.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Video_historyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Video_historyAggregateArgs>(args: Subset<T, Video_historyAggregateArgs>): Prisma.PrismaPromise<GetVideo_historyAggregateType<T>>
+
+    /**
+     * Group by Video_history.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {video_historyGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends video_historyGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: video_historyGroupByArgs['orderBy'] }
+        : { orderBy?: video_historyGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, video_historyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVideo_historyGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the video_history model
+   */
+  readonly fields: video_historyFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for video_history.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__video_historyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    users<T extends usersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, usersDefaultArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    videos<T extends videosDefaultArgs<ExtArgs> = {}>(args?: Subset<T, videosDefaultArgs<ExtArgs>>): Prisma__videosClient<$Result.GetResult<Prisma.$videosPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the video_history model
+   */
+  interface video_historyFieldRefs {
+    readonly id: FieldRef<"video_history", 'String'>
+    readonly user_id: FieldRef<"video_history", 'String'>
+    readonly video_id: FieldRef<"video_history", 'String'>
+    readonly last_viewed_at: FieldRef<"video_history", 'DateTime'>
+    readonly updated_at: FieldRef<"video_history", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * video_history findUnique
+   */
+  export type video_historyFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_history
+     */
+    select?: video_historySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_history
+     */
+    omit?: video_historyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_historyInclude<ExtArgs> | null
+    /**
+     * Filter, which video_history to fetch.
+     */
+    where: video_historyWhereUniqueInput
+  }
+
+  /**
+   * video_history findUniqueOrThrow
+   */
+  export type video_historyFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_history
+     */
+    select?: video_historySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_history
+     */
+    omit?: video_historyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_historyInclude<ExtArgs> | null
+    /**
+     * Filter, which video_history to fetch.
+     */
+    where: video_historyWhereUniqueInput
+  }
+
+  /**
+   * video_history findFirst
+   */
+  export type video_historyFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_history
+     */
+    select?: video_historySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_history
+     */
+    omit?: video_historyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_historyInclude<ExtArgs> | null
+    /**
+     * Filter, which video_history to fetch.
+     */
+    where?: video_historyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of video_histories to fetch.
+     */
+    orderBy?: video_historyOrderByWithRelationInput | video_historyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for video_histories.
+     */
+    cursor?: video_historyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` video_histories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` video_histories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of video_histories.
+     */
+    distinct?: Video_historyScalarFieldEnum | Video_historyScalarFieldEnum[]
+  }
+
+  /**
+   * video_history findFirstOrThrow
+   */
+  export type video_historyFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_history
+     */
+    select?: video_historySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_history
+     */
+    omit?: video_historyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_historyInclude<ExtArgs> | null
+    /**
+     * Filter, which video_history to fetch.
+     */
+    where?: video_historyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of video_histories to fetch.
+     */
+    orderBy?: video_historyOrderByWithRelationInput | video_historyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for video_histories.
+     */
+    cursor?: video_historyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` video_histories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` video_histories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of video_histories.
+     */
+    distinct?: Video_historyScalarFieldEnum | Video_historyScalarFieldEnum[]
+  }
+
+  /**
+   * video_history findMany
+   */
+  export type video_historyFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_history
+     */
+    select?: video_historySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_history
+     */
+    omit?: video_historyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_historyInclude<ExtArgs> | null
+    /**
+     * Filter, which video_histories to fetch.
+     */
+    where?: video_historyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of video_histories to fetch.
+     */
+    orderBy?: video_historyOrderByWithRelationInput | video_historyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing video_histories.
+     */
+    cursor?: video_historyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` video_histories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` video_histories.
+     */
+    skip?: number
+    distinct?: Video_historyScalarFieldEnum | Video_historyScalarFieldEnum[]
+  }
+
+  /**
+   * video_history create
+   */
+  export type video_historyCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_history
+     */
+    select?: video_historySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_history
+     */
+    omit?: video_historyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_historyInclude<ExtArgs> | null
+    /**
+     * The data needed to create a video_history.
+     */
+    data: XOR<video_historyCreateInput, video_historyUncheckedCreateInput>
+  }
+
+  /**
+   * video_history createMany
+   */
+  export type video_historyCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many video_histories.
+     */
+    data: video_historyCreateManyInput | video_historyCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * video_history createManyAndReturn
+   */
+  export type video_historyCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_history
+     */
+    select?: video_historySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_history
+     */
+    omit?: video_historyOmit<ExtArgs> | null
+    /**
+     * The data used to create many video_histories.
+     */
+    data: video_historyCreateManyInput | video_historyCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_historyIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * video_history update
+   */
+  export type video_historyUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_history
+     */
+    select?: video_historySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_history
+     */
+    omit?: video_historyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_historyInclude<ExtArgs> | null
+    /**
+     * The data needed to update a video_history.
+     */
+    data: XOR<video_historyUpdateInput, video_historyUncheckedUpdateInput>
+    /**
+     * Choose, which video_history to update.
+     */
+    where: video_historyWhereUniqueInput
+  }
+
+  /**
+   * video_history updateMany
+   */
+  export type video_historyUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update video_histories.
+     */
+    data: XOR<video_historyUpdateManyMutationInput, video_historyUncheckedUpdateManyInput>
+    /**
+     * Filter which video_histories to update
+     */
+    where?: video_historyWhereInput
+    /**
+     * Limit how many video_histories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * video_history updateManyAndReturn
+   */
+  export type video_historyUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_history
+     */
+    select?: video_historySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_history
+     */
+    omit?: video_historyOmit<ExtArgs> | null
+    /**
+     * The data used to update video_histories.
+     */
+    data: XOR<video_historyUpdateManyMutationInput, video_historyUncheckedUpdateManyInput>
+    /**
+     * Filter which video_histories to update
+     */
+    where?: video_historyWhereInput
+    /**
+     * Limit how many video_histories to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_historyIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * video_history upsert
+   */
+  export type video_historyUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_history
+     */
+    select?: video_historySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_history
+     */
+    omit?: video_historyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_historyInclude<ExtArgs> | null
+    /**
+     * The filter to search for the video_history to update in case it exists.
+     */
+    where: video_historyWhereUniqueInput
+    /**
+     * In case the video_history found by the `where` argument doesn't exist, create a new video_history with this data.
+     */
+    create: XOR<video_historyCreateInput, video_historyUncheckedCreateInput>
+    /**
+     * In case the video_history was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<video_historyUpdateInput, video_historyUncheckedUpdateInput>
+  }
+
+  /**
+   * video_history delete
+   */
+  export type video_historyDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_history
+     */
+    select?: video_historySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_history
+     */
+    omit?: video_historyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_historyInclude<ExtArgs> | null
+    /**
+     * Filter which video_history to delete.
+     */
+    where: video_historyWhereUniqueInput
+  }
+
+  /**
+   * video_history deleteMany
+   */
+  export type video_historyDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which video_histories to delete
+     */
+    where?: video_historyWhereInput
+    /**
+     * Limit how many video_histories to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * video_history without action
+   */
+  export type video_historyDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the video_history
+     */
+    select?: video_historySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the video_history
+     */
+    omit?: video_historyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: video_historyInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -10817,7 +12061,8 @@ export namespace Prisma {
     channel_name: 'channel_name',
     avatar_url: 'avatar_url',
     bio: 'bio',
-    created_at: 'created_at'
+    created_at: 'created_at',
+    has_created: 'has_created'
   };
 
   export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
@@ -10888,6 +12133,17 @@ export namespace Prisma {
   export type Video_viewsScalarFieldEnum = (typeof Video_viewsScalarFieldEnum)[keyof typeof Video_viewsScalarFieldEnum]
 
 
+  export const Video_historyScalarFieldEnum: {
+    id: 'id',
+    user_id: 'user_id',
+    video_id: 'video_id',
+    last_viewed_at: 'last_viewed_at',
+    updated_at: 'updated_at'
+  };
+
+  export type Video_historyScalarFieldEnum = (typeof Video_historyScalarFieldEnum)[keyof typeof Video_historyScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -10942,6 +12198,13 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -11108,10 +12371,12 @@ export namespace Prisma {
     avatar_url?: StringNullableFilter<"users"> | string | null
     bio?: StringNullableFilter<"users"> | string | null
     created_at?: DateTimeNullableFilter<"users"> | Date | string | null
+    has_created?: BoolNullableFilter<"users"> | boolean | null
     comment_reactions?: Comment_reactionsListRelationFilter
     comments?: CommentsListRelationFilter
     subscriptions_subscriptions_creator_idTousers?: SubscriptionsListRelationFilter
     subscriptions_subscriptions_viewer_idTousers?: SubscriptionsListRelationFilter
+    video_history?: Video_historyListRelationFilter
     video_reactions?: Video_reactionsListRelationFilter
     video_views?: Video_viewsListRelationFilter
     videos?: VideosListRelationFilter
@@ -11124,10 +12389,12 @@ export namespace Prisma {
     avatar_url?: SortOrderInput | SortOrder
     bio?: SortOrderInput | SortOrder
     created_at?: SortOrderInput | SortOrder
+    has_created?: SortOrderInput | SortOrder
     comment_reactions?: comment_reactionsOrderByRelationAggregateInput
     comments?: commentsOrderByRelationAggregateInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsOrderByRelationAggregateInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsOrderByRelationAggregateInput
+    video_history?: video_historyOrderByRelationAggregateInput
     video_reactions?: video_reactionsOrderByRelationAggregateInput
     video_views?: video_viewsOrderByRelationAggregateInput
     videos?: videosOrderByRelationAggregateInput
@@ -11143,10 +12410,12 @@ export namespace Prisma {
     avatar_url?: StringNullableFilter<"users"> | string | null
     bio?: StringNullableFilter<"users"> | string | null
     created_at?: DateTimeNullableFilter<"users"> | Date | string | null
+    has_created?: BoolNullableFilter<"users"> | boolean | null
     comment_reactions?: Comment_reactionsListRelationFilter
     comments?: CommentsListRelationFilter
     subscriptions_subscriptions_creator_idTousers?: SubscriptionsListRelationFilter
     subscriptions_subscriptions_viewer_idTousers?: SubscriptionsListRelationFilter
+    video_history?: Video_historyListRelationFilter
     video_reactions?: Video_reactionsListRelationFilter
     video_views?: Video_viewsListRelationFilter
     videos?: VideosListRelationFilter
@@ -11159,6 +12428,7 @@ export namespace Prisma {
     avatar_url?: SortOrderInput | SortOrder
     bio?: SortOrderInput | SortOrder
     created_at?: SortOrderInput | SortOrder
+    has_created?: SortOrderInput | SortOrder
     _count?: usersCountOrderByAggregateInput
     _max?: usersMaxOrderByAggregateInput
     _min?: usersMinOrderByAggregateInput
@@ -11174,6 +12444,7 @@ export namespace Prisma {
     avatar_url?: StringNullableWithAggregatesFilter<"users"> | string | null
     bio?: StringNullableWithAggregatesFilter<"users"> | string | null
     created_at?: DateTimeNullableWithAggregatesFilter<"users"> | Date | string | null
+    has_created?: BoolNullableWithAggregatesFilter<"users"> | boolean | null
   }
 
   export type categoriesWhereInput = {
@@ -11249,6 +12520,7 @@ export namespace Prisma {
     created_at?: DateTimeNullableFilter<"videos"> | Date | string | null
     updated_at?: DateTimeNullableFilter<"videos"> | Date | string | null
     comments?: CommentsListRelationFilter
+    video_history?: Video_historyListRelationFilter
     video_reactions?: Video_reactionsListRelationFilter
     video_views?: Video_viewsListRelationFilter
     categories?: XOR<CategoriesNullableScalarRelationFilter, categoriesWhereInput> | null
@@ -11270,6 +12542,7 @@ export namespace Prisma {
     created_at?: SortOrderInput | SortOrder
     updated_at?: SortOrderInput | SortOrder
     comments?: commentsOrderByRelationAggregateInput
+    video_history?: video_historyOrderByRelationAggregateInput
     video_reactions?: video_reactionsOrderByRelationAggregateInput
     video_views?: video_viewsOrderByRelationAggregateInput
     categories?: categoriesOrderByWithRelationInput
@@ -11294,6 +12567,7 @@ export namespace Prisma {
     created_at?: DateTimeNullableFilter<"videos"> | Date | string | null
     updated_at?: DateTimeNullableFilter<"videos"> | Date | string | null
     comments?: CommentsListRelationFilter
+    video_history?: Video_historyListRelationFilter
     video_reactions?: Video_reactionsListRelationFilter
     video_views?: Video_viewsListRelationFilter
     categories?: XOR<CategoriesNullableScalarRelationFilter, categoriesWhereInput> | null
@@ -11524,6 +12798,65 @@ export namespace Prisma {
     updated_at?: DateTimeWithAggregatesFilter<"video_views"> | Date | string
   }
 
+  export type video_historyWhereInput = {
+    AND?: video_historyWhereInput | video_historyWhereInput[]
+    OR?: video_historyWhereInput[]
+    NOT?: video_historyWhereInput | video_historyWhereInput[]
+    id?: UuidFilter<"video_history"> | string
+    user_id?: UuidFilter<"video_history"> | string
+    video_id?: UuidFilter<"video_history"> | string
+    last_viewed_at?: DateTimeFilter<"video_history"> | Date | string
+    updated_at?: DateTimeFilter<"video_history"> | Date | string
+    users?: XOR<UsersScalarRelationFilter, usersWhereInput>
+    videos?: XOR<VideosScalarRelationFilter, videosWhereInput>
+  }
+
+  export type video_historyOrderByWithRelationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    video_id?: SortOrder
+    last_viewed_at?: SortOrder
+    updated_at?: SortOrder
+    users?: usersOrderByWithRelationInput
+    videos?: videosOrderByWithRelationInput
+  }
+
+  export type video_historyWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    user_id_video_id?: video_historyUser_idVideo_idCompoundUniqueInput
+    AND?: video_historyWhereInput | video_historyWhereInput[]
+    OR?: video_historyWhereInput[]
+    NOT?: video_historyWhereInput | video_historyWhereInput[]
+    user_id?: UuidFilter<"video_history"> | string
+    video_id?: UuidFilter<"video_history"> | string
+    last_viewed_at?: DateTimeFilter<"video_history"> | Date | string
+    updated_at?: DateTimeFilter<"video_history"> | Date | string
+    users?: XOR<UsersScalarRelationFilter, usersWhereInput>
+    videos?: XOR<VideosScalarRelationFilter, videosWhereInput>
+  }, "id" | "user_id_video_id">
+
+  export type video_historyOrderByWithAggregationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    video_id?: SortOrder
+    last_viewed_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: video_historyCountOrderByAggregateInput
+    _max?: video_historyMaxOrderByAggregateInput
+    _min?: video_historyMinOrderByAggregateInput
+  }
+
+  export type video_historyScalarWhereWithAggregatesInput = {
+    AND?: video_historyScalarWhereWithAggregatesInput | video_historyScalarWhereWithAggregatesInput[]
+    OR?: video_historyScalarWhereWithAggregatesInput[]
+    NOT?: video_historyScalarWhereWithAggregatesInput | video_historyScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"video_history"> | string
+    user_id?: UuidWithAggregatesFilter<"video_history"> | string
+    video_id?: UuidWithAggregatesFilter<"video_history"> | string
+    last_viewed_at?: DateTimeWithAggregatesFilter<"video_history"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"video_history"> | Date | string
+  }
+
   export type commentsCreateInput = {
     id?: string
     value: string
@@ -11660,10 +12993,12 @@ export namespace Prisma {
     avatar_url?: string | null
     bio?: string | null
     created_at?: Date | string | null
+    has_created?: boolean | null
     comment_reactions?: comment_reactionsCreateNestedManyWithoutUsersInput
     comments?: commentsCreateNestedManyWithoutUsersInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_history?: video_historyCreateNestedManyWithoutUsersInput
     video_reactions?: video_reactionsCreateNestedManyWithoutUsersInput
     video_views?: video_viewsCreateNestedManyWithoutUsersInput
     videos?: videosCreateNestedManyWithoutUsersInput
@@ -11676,10 +13011,12 @@ export namespace Prisma {
     avatar_url?: string | null
     bio?: string | null
     created_at?: Date | string | null
+    has_created?: boolean | null
     comment_reactions?: comment_reactionsUncheckedCreateNestedManyWithoutUsersInput
     comments?: commentsUncheckedCreateNestedManyWithoutUsersInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_history?: video_historyUncheckedCreateNestedManyWithoutUsersInput
     video_reactions?: video_reactionsUncheckedCreateNestedManyWithoutUsersInput
     video_views?: video_viewsUncheckedCreateNestedManyWithoutUsersInput
     videos?: videosUncheckedCreateNestedManyWithoutUsersInput
@@ -11692,10 +13029,12 @@ export namespace Prisma {
     avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    has_created?: NullableBoolFieldUpdateOperationsInput | boolean | null
     comment_reactions?: comment_reactionsUpdateManyWithoutUsersNestedInput
     comments?: commentsUpdateManyWithoutUsersNestedInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_history?: video_historyUpdateManyWithoutUsersNestedInput
     video_reactions?: video_reactionsUpdateManyWithoutUsersNestedInput
     video_views?: video_viewsUpdateManyWithoutUsersNestedInput
     videos?: videosUpdateManyWithoutUsersNestedInput
@@ -11708,10 +13047,12 @@ export namespace Prisma {
     avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    has_created?: NullableBoolFieldUpdateOperationsInput | boolean | null
     comment_reactions?: comment_reactionsUncheckedUpdateManyWithoutUsersNestedInput
     comments?: commentsUncheckedUpdateManyWithoutUsersNestedInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_history?: video_historyUncheckedUpdateManyWithoutUsersNestedInput
     video_reactions?: video_reactionsUncheckedUpdateManyWithoutUsersNestedInput
     video_views?: video_viewsUncheckedUpdateManyWithoutUsersNestedInput
     videos?: videosUncheckedUpdateManyWithoutUsersNestedInput
@@ -11724,6 +13065,7 @@ export namespace Prisma {
     avatar_url?: string | null
     bio?: string | null
     created_at?: Date | string | null
+    has_created?: boolean | null
   }
 
   export type usersUpdateManyMutationInput = {
@@ -11733,6 +13075,7 @@ export namespace Prisma {
     avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    has_created?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type usersUncheckedUpdateManyInput = {
@@ -11742,6 +13085,7 @@ export namespace Prisma {
     avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    has_created?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type categoriesCreateInput = {
@@ -11817,6 +13161,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     comments?: commentsCreateNestedManyWithoutVideosInput
+    video_history?: video_historyCreateNestedManyWithoutVideosInput
     video_reactions?: video_reactionsCreateNestedManyWithoutVideosInput
     video_views?: video_viewsCreateNestedManyWithoutVideosInput
     categories?: categoriesCreateNestedOneWithoutVideosInput
@@ -11838,6 +13183,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     comments?: commentsUncheckedCreateNestedManyWithoutVideosInput
+    video_history?: video_historyUncheckedCreateNestedManyWithoutVideosInput
     video_reactions?: video_reactionsUncheckedCreateNestedManyWithoutVideosInput
     video_views?: video_viewsUncheckedCreateNestedManyWithoutVideosInput
   }
@@ -11855,6 +13201,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     comments?: commentsUpdateManyWithoutVideosNestedInput
+    video_history?: video_historyUpdateManyWithoutVideosNestedInput
     video_reactions?: video_reactionsUpdateManyWithoutVideosNestedInput
     video_views?: video_viewsUpdateManyWithoutVideosNestedInput
     categories?: categoriesUpdateOneWithoutVideosNestedInput
@@ -11876,6 +13223,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     comments?: commentsUncheckedUpdateManyWithoutVideosNestedInput
+    video_history?: video_historyUncheckedUpdateManyWithoutVideosNestedInput
     video_reactions?: video_reactionsUncheckedUpdateManyWithoutVideosNestedInput
     video_views?: video_viewsUncheckedUpdateManyWithoutVideosNestedInput
   }
@@ -12099,6 +13447,60 @@ export namespace Prisma {
     user_id?: StringFieldUpdateOperationsInput | string
     video_id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type video_historyCreateInput = {
+    id?: string
+    last_viewed_at?: Date | string
+    updated_at?: Date | string
+    users: usersCreateNestedOneWithoutVideo_historyInput
+    videos: videosCreateNestedOneWithoutVideo_historyInput
+  }
+
+  export type video_historyUncheckedCreateInput = {
+    id?: string
+    user_id: string
+    video_id: string
+    last_viewed_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type video_historyUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    last_viewed_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: usersUpdateOneRequiredWithoutVideo_historyNestedInput
+    videos?: videosUpdateOneRequiredWithoutVideo_historyNestedInput
+  }
+
+  export type video_historyUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    video_id?: StringFieldUpdateOperationsInput | string
+    last_viewed_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type video_historyCreateManyInput = {
+    id?: string
+    user_id: string
+    video_id: string
+    last_viewed_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type video_historyUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    last_viewed_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type video_historyUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    video_id?: StringFieldUpdateOperationsInput | string
+    last_viewed_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -12339,10 +13741,21 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
   export type SubscriptionsListRelationFilter = {
     every?: subscriptionsWhereInput
     some?: subscriptionsWhereInput
     none?: subscriptionsWhereInput
+  }
+
+  export type Video_historyListRelationFilter = {
+    every?: video_historyWhereInput
+    some?: video_historyWhereInput
+    none?: video_historyWhereInput
   }
 
   export type Video_reactionsListRelationFilter = {
@@ -12367,6 +13780,10 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type video_historyOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type video_reactionsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -12386,6 +13803,7 @@ export namespace Prisma {
     avatar_url?: SortOrder
     bio?: SortOrder
     created_at?: SortOrder
+    has_created?: SortOrder
   }
 
   export type usersMaxOrderByAggregateInput = {
@@ -12395,6 +13813,7 @@ export namespace Prisma {
     avatar_url?: SortOrder
     bio?: SortOrder
     created_at?: SortOrder
+    has_created?: SortOrder
   }
 
   export type usersMinOrderByAggregateInput = {
@@ -12404,6 +13823,7 @@ export namespace Prisma {
     avatar_url?: SortOrder
     bio?: SortOrder
     created_at?: SortOrder
+    has_created?: SortOrder
   }
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -12436,6 +13856,14 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type categoriesCountOrderByAggregateInput = {
@@ -12605,6 +14033,35 @@ export namespace Prisma {
     user_id?: SortOrder
     video_id?: SortOrder
     created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type video_historyUser_idVideo_idCompoundUniqueInput = {
+    user_id: string
+    video_id: string
+  }
+
+  export type video_historyCountOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    video_id?: SortOrder
+    last_viewed_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type video_historyMaxOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    video_id?: SortOrder
+    last_viewed_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type video_historyMinOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    video_id?: SortOrder
+    last_viewed_at?: SortOrder
     updated_at?: SortOrder
   }
 
@@ -12804,6 +14261,13 @@ export namespace Prisma {
     connect?: subscriptionsWhereUniqueInput | subscriptionsWhereUniqueInput[]
   }
 
+  export type video_historyCreateNestedManyWithoutUsersInput = {
+    create?: XOR<video_historyCreateWithoutUsersInput, video_historyUncheckedCreateWithoutUsersInput> | video_historyCreateWithoutUsersInput[] | video_historyUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: video_historyCreateOrConnectWithoutUsersInput | video_historyCreateOrConnectWithoutUsersInput[]
+    createMany?: video_historyCreateManyUsersInputEnvelope
+    connect?: video_historyWhereUniqueInput | video_historyWhereUniqueInput[]
+  }
+
   export type video_reactionsCreateNestedManyWithoutUsersInput = {
     create?: XOR<video_reactionsCreateWithoutUsersInput, video_reactionsUncheckedCreateWithoutUsersInput> | video_reactionsCreateWithoutUsersInput[] | video_reactionsUncheckedCreateWithoutUsersInput[]
     connectOrCreate?: video_reactionsCreateOrConnectWithoutUsersInput | video_reactionsCreateOrConnectWithoutUsersInput[]
@@ -12853,6 +14317,13 @@ export namespace Prisma {
     connect?: subscriptionsWhereUniqueInput | subscriptionsWhereUniqueInput[]
   }
 
+  export type video_historyUncheckedCreateNestedManyWithoutUsersInput = {
+    create?: XOR<video_historyCreateWithoutUsersInput, video_historyUncheckedCreateWithoutUsersInput> | video_historyCreateWithoutUsersInput[] | video_historyUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: video_historyCreateOrConnectWithoutUsersInput | video_historyCreateOrConnectWithoutUsersInput[]
+    createMany?: video_historyCreateManyUsersInputEnvelope
+    connect?: video_historyWhereUniqueInput | video_historyWhereUniqueInput[]
+  }
+
   export type video_reactionsUncheckedCreateNestedManyWithoutUsersInput = {
     create?: XOR<video_reactionsCreateWithoutUsersInput, video_reactionsUncheckedCreateWithoutUsersInput> | video_reactionsCreateWithoutUsersInput[] | video_reactionsUncheckedCreateWithoutUsersInput[]
     connectOrCreate?: video_reactionsCreateOrConnectWithoutUsersInput | video_reactionsCreateOrConnectWithoutUsersInput[]
@@ -12876,6 +14347,10 @@ export namespace Prisma {
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
+  }
+
+  export type NullableBoolFieldUpdateOperationsInput = {
+    set?: boolean | null
   }
 
   export type comment_reactionsUpdateManyWithoutUsersNestedInput = {
@@ -12932,6 +14407,20 @@ export namespace Prisma {
     update?: subscriptionsUpdateWithWhereUniqueWithoutUsers_subscriptions_viewer_idTousersInput | subscriptionsUpdateWithWhereUniqueWithoutUsers_subscriptions_viewer_idTousersInput[]
     updateMany?: subscriptionsUpdateManyWithWhereWithoutUsers_subscriptions_viewer_idTousersInput | subscriptionsUpdateManyWithWhereWithoutUsers_subscriptions_viewer_idTousersInput[]
     deleteMany?: subscriptionsScalarWhereInput | subscriptionsScalarWhereInput[]
+  }
+
+  export type video_historyUpdateManyWithoutUsersNestedInput = {
+    create?: XOR<video_historyCreateWithoutUsersInput, video_historyUncheckedCreateWithoutUsersInput> | video_historyCreateWithoutUsersInput[] | video_historyUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: video_historyCreateOrConnectWithoutUsersInput | video_historyCreateOrConnectWithoutUsersInput[]
+    upsert?: video_historyUpsertWithWhereUniqueWithoutUsersInput | video_historyUpsertWithWhereUniqueWithoutUsersInput[]
+    createMany?: video_historyCreateManyUsersInputEnvelope
+    set?: video_historyWhereUniqueInput | video_historyWhereUniqueInput[]
+    disconnect?: video_historyWhereUniqueInput | video_historyWhereUniqueInput[]
+    delete?: video_historyWhereUniqueInput | video_historyWhereUniqueInput[]
+    connect?: video_historyWhereUniqueInput | video_historyWhereUniqueInput[]
+    update?: video_historyUpdateWithWhereUniqueWithoutUsersInput | video_historyUpdateWithWhereUniqueWithoutUsersInput[]
+    updateMany?: video_historyUpdateManyWithWhereWithoutUsersInput | video_historyUpdateManyWithWhereWithoutUsersInput[]
+    deleteMany?: video_historyScalarWhereInput | video_historyScalarWhereInput[]
   }
 
   export type video_reactionsUpdateManyWithoutUsersNestedInput = {
@@ -13032,6 +14521,20 @@ export namespace Prisma {
     deleteMany?: subscriptionsScalarWhereInput | subscriptionsScalarWhereInput[]
   }
 
+  export type video_historyUncheckedUpdateManyWithoutUsersNestedInput = {
+    create?: XOR<video_historyCreateWithoutUsersInput, video_historyUncheckedCreateWithoutUsersInput> | video_historyCreateWithoutUsersInput[] | video_historyUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: video_historyCreateOrConnectWithoutUsersInput | video_historyCreateOrConnectWithoutUsersInput[]
+    upsert?: video_historyUpsertWithWhereUniqueWithoutUsersInput | video_historyUpsertWithWhereUniqueWithoutUsersInput[]
+    createMany?: video_historyCreateManyUsersInputEnvelope
+    set?: video_historyWhereUniqueInput | video_historyWhereUniqueInput[]
+    disconnect?: video_historyWhereUniqueInput | video_historyWhereUniqueInput[]
+    delete?: video_historyWhereUniqueInput | video_historyWhereUniqueInput[]
+    connect?: video_historyWhereUniqueInput | video_historyWhereUniqueInput[]
+    update?: video_historyUpdateWithWhereUniqueWithoutUsersInput | video_historyUpdateWithWhereUniqueWithoutUsersInput[]
+    updateMany?: video_historyUpdateManyWithWhereWithoutUsersInput | video_historyUpdateManyWithWhereWithoutUsersInput[]
+    deleteMany?: video_historyScalarWhereInput | video_historyScalarWhereInput[]
+  }
+
   export type video_reactionsUncheckedUpdateManyWithoutUsersNestedInput = {
     create?: XOR<video_reactionsCreateWithoutUsersInput, video_reactionsUncheckedCreateWithoutUsersInput> | video_reactionsCreateWithoutUsersInput[] | video_reactionsUncheckedCreateWithoutUsersInput[]
     connectOrCreate?: video_reactionsCreateOrConnectWithoutUsersInput | video_reactionsCreateOrConnectWithoutUsersInput[]
@@ -13123,6 +14626,13 @@ export namespace Prisma {
     connect?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
   }
 
+  export type video_historyCreateNestedManyWithoutVideosInput = {
+    create?: XOR<video_historyCreateWithoutVideosInput, video_historyUncheckedCreateWithoutVideosInput> | video_historyCreateWithoutVideosInput[] | video_historyUncheckedCreateWithoutVideosInput[]
+    connectOrCreate?: video_historyCreateOrConnectWithoutVideosInput | video_historyCreateOrConnectWithoutVideosInput[]
+    createMany?: video_historyCreateManyVideosInputEnvelope
+    connect?: video_historyWhereUniqueInput | video_historyWhereUniqueInput[]
+  }
+
   export type video_reactionsCreateNestedManyWithoutVideosInput = {
     create?: XOR<video_reactionsCreateWithoutVideosInput, video_reactionsUncheckedCreateWithoutVideosInput> | video_reactionsCreateWithoutVideosInput[] | video_reactionsUncheckedCreateWithoutVideosInput[]
     connectOrCreate?: video_reactionsCreateOrConnectWithoutVideosInput | video_reactionsCreateOrConnectWithoutVideosInput[]
@@ -13156,6 +14666,13 @@ export namespace Prisma {
     connect?: commentsWhereUniqueInput | commentsWhereUniqueInput[]
   }
 
+  export type video_historyUncheckedCreateNestedManyWithoutVideosInput = {
+    create?: XOR<video_historyCreateWithoutVideosInput, video_historyUncheckedCreateWithoutVideosInput> | video_historyCreateWithoutVideosInput[] | video_historyUncheckedCreateWithoutVideosInput[]
+    connectOrCreate?: video_historyCreateOrConnectWithoutVideosInput | video_historyCreateOrConnectWithoutVideosInput[]
+    createMany?: video_historyCreateManyVideosInputEnvelope
+    connect?: video_historyWhereUniqueInput | video_historyWhereUniqueInput[]
+  }
+
   export type video_reactionsUncheckedCreateNestedManyWithoutVideosInput = {
     create?: XOR<video_reactionsCreateWithoutVideosInput, video_reactionsUncheckedCreateWithoutVideosInput> | video_reactionsCreateWithoutVideosInput[] | video_reactionsUncheckedCreateWithoutVideosInput[]
     connectOrCreate?: video_reactionsCreateOrConnectWithoutVideosInput | video_reactionsCreateOrConnectWithoutVideosInput[]
@@ -13182,6 +14699,20 @@ export namespace Prisma {
     update?: commentsUpdateWithWhereUniqueWithoutVideosInput | commentsUpdateWithWhereUniqueWithoutVideosInput[]
     updateMany?: commentsUpdateManyWithWhereWithoutVideosInput | commentsUpdateManyWithWhereWithoutVideosInput[]
     deleteMany?: commentsScalarWhereInput | commentsScalarWhereInput[]
+  }
+
+  export type video_historyUpdateManyWithoutVideosNestedInput = {
+    create?: XOR<video_historyCreateWithoutVideosInput, video_historyUncheckedCreateWithoutVideosInput> | video_historyCreateWithoutVideosInput[] | video_historyUncheckedCreateWithoutVideosInput[]
+    connectOrCreate?: video_historyCreateOrConnectWithoutVideosInput | video_historyCreateOrConnectWithoutVideosInput[]
+    upsert?: video_historyUpsertWithWhereUniqueWithoutVideosInput | video_historyUpsertWithWhereUniqueWithoutVideosInput[]
+    createMany?: video_historyCreateManyVideosInputEnvelope
+    set?: video_historyWhereUniqueInput | video_historyWhereUniqueInput[]
+    disconnect?: video_historyWhereUniqueInput | video_historyWhereUniqueInput[]
+    delete?: video_historyWhereUniqueInput | video_historyWhereUniqueInput[]
+    connect?: video_historyWhereUniqueInput | video_historyWhereUniqueInput[]
+    update?: video_historyUpdateWithWhereUniqueWithoutVideosInput | video_historyUpdateWithWhereUniqueWithoutVideosInput[]
+    updateMany?: video_historyUpdateManyWithWhereWithoutVideosInput | video_historyUpdateManyWithWhereWithoutVideosInput[]
+    deleteMany?: video_historyScalarWhereInput | video_historyScalarWhereInput[]
   }
 
   export type video_reactionsUpdateManyWithoutVideosNestedInput = {
@@ -13242,6 +14773,20 @@ export namespace Prisma {
     update?: commentsUpdateWithWhereUniqueWithoutVideosInput | commentsUpdateWithWhereUniqueWithoutVideosInput[]
     updateMany?: commentsUpdateManyWithWhereWithoutVideosInput | commentsUpdateManyWithWhereWithoutVideosInput[]
     deleteMany?: commentsScalarWhereInput | commentsScalarWhereInput[]
+  }
+
+  export type video_historyUncheckedUpdateManyWithoutVideosNestedInput = {
+    create?: XOR<video_historyCreateWithoutVideosInput, video_historyUncheckedCreateWithoutVideosInput> | video_historyCreateWithoutVideosInput[] | video_historyUncheckedCreateWithoutVideosInput[]
+    connectOrCreate?: video_historyCreateOrConnectWithoutVideosInput | video_historyCreateOrConnectWithoutVideosInput[]
+    upsert?: video_historyUpsertWithWhereUniqueWithoutVideosInput | video_historyUpsertWithWhereUniqueWithoutVideosInput[]
+    createMany?: video_historyCreateManyVideosInputEnvelope
+    set?: video_historyWhereUniqueInput | video_historyWhereUniqueInput[]
+    disconnect?: video_historyWhereUniqueInput | video_historyWhereUniqueInput[]
+    delete?: video_historyWhereUniqueInput | video_historyWhereUniqueInput[]
+    connect?: video_historyWhereUniqueInput | video_historyWhereUniqueInput[]
+    update?: video_historyUpdateWithWhereUniqueWithoutVideosInput | video_historyUpdateWithWhereUniqueWithoutVideosInput[]
+    updateMany?: video_historyUpdateManyWithWhereWithoutVideosInput | video_historyUpdateManyWithWhereWithoutVideosInput[]
+    deleteMany?: video_historyScalarWhereInput | video_historyScalarWhereInput[]
   }
 
   export type video_reactionsUncheckedUpdateManyWithoutVideosNestedInput = {
@@ -13354,6 +14899,34 @@ export namespace Prisma {
     upsert?: videosUpsertWithoutVideo_viewsInput
     connect?: videosWhereUniqueInput
     update?: XOR<XOR<videosUpdateToOneWithWhereWithoutVideo_viewsInput, videosUpdateWithoutVideo_viewsInput>, videosUncheckedUpdateWithoutVideo_viewsInput>
+  }
+
+  export type usersCreateNestedOneWithoutVideo_historyInput = {
+    create?: XOR<usersCreateWithoutVideo_historyInput, usersUncheckedCreateWithoutVideo_historyInput>
+    connectOrCreate?: usersCreateOrConnectWithoutVideo_historyInput
+    connect?: usersWhereUniqueInput
+  }
+
+  export type videosCreateNestedOneWithoutVideo_historyInput = {
+    create?: XOR<videosCreateWithoutVideo_historyInput, videosUncheckedCreateWithoutVideo_historyInput>
+    connectOrCreate?: videosCreateOrConnectWithoutVideo_historyInput
+    connect?: videosWhereUniqueInput
+  }
+
+  export type usersUpdateOneRequiredWithoutVideo_historyNestedInput = {
+    create?: XOR<usersCreateWithoutVideo_historyInput, usersUncheckedCreateWithoutVideo_historyInput>
+    connectOrCreate?: usersCreateOrConnectWithoutVideo_historyInput
+    upsert?: usersUpsertWithoutVideo_historyInput
+    connect?: usersWhereUniqueInput
+    update?: XOR<XOR<usersUpdateToOneWithWhereWithoutVideo_historyInput, usersUpdateWithoutVideo_historyInput>, usersUncheckedUpdateWithoutVideo_historyInput>
+  }
+
+  export type videosUpdateOneRequiredWithoutVideo_historyNestedInput = {
+    create?: XOR<videosCreateWithoutVideo_historyInput, videosUncheckedCreateWithoutVideo_historyInput>
+    connectOrCreate?: videosCreateOrConnectWithoutVideo_historyInput
+    upsert?: videosUpsertWithoutVideo_historyInput
+    connect?: videosWhereUniqueInput
+    update?: XOR<XOR<videosUpdateToOneWithWhereWithoutVideo_historyInput, videosUpdateWithoutVideo_historyInput>, videosUncheckedUpdateWithoutVideo_historyInput>
   }
 
   export type NestedUuidFilter<$PrismaModel = never> = {
@@ -13509,6 +15082,11 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -13538,6 +15116,14 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type comment_reactionsCreateWithoutCommentsInput = {
@@ -13632,9 +15218,11 @@ export namespace Prisma {
     avatar_url?: string | null
     bio?: string | null
     created_at?: Date | string | null
+    has_created?: boolean | null
     comment_reactions?: comment_reactionsCreateNestedManyWithoutUsersInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_history?: video_historyCreateNestedManyWithoutUsersInput
     video_reactions?: video_reactionsCreateNestedManyWithoutUsersInput
     video_views?: video_viewsCreateNestedManyWithoutUsersInput
     videos?: videosCreateNestedManyWithoutUsersInput
@@ -13647,9 +15235,11 @@ export namespace Prisma {
     avatar_url?: string | null
     bio?: string | null
     created_at?: Date | string | null
+    has_created?: boolean | null
     comment_reactions?: comment_reactionsUncheckedCreateNestedManyWithoutUsersInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_history?: video_historyUncheckedCreateNestedManyWithoutUsersInput
     video_reactions?: video_reactionsUncheckedCreateNestedManyWithoutUsersInput
     video_views?: video_viewsUncheckedCreateNestedManyWithoutUsersInput
     videos?: videosUncheckedCreateNestedManyWithoutUsersInput
@@ -13672,6 +15262,7 @@ export namespace Prisma {
     mux_track_status?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
+    video_history?: video_historyCreateNestedManyWithoutVideosInput
     video_reactions?: video_reactionsCreateNestedManyWithoutVideosInput
     video_views?: video_viewsCreateNestedManyWithoutVideosInput
     categories?: categoriesCreateNestedOneWithoutVideosInput
@@ -13692,6 +15283,7 @@ export namespace Prisma {
     category_id?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
+    video_history?: video_historyUncheckedCreateNestedManyWithoutVideosInput
     video_reactions?: video_reactionsUncheckedCreateNestedManyWithoutVideosInput
     video_views?: video_viewsUncheckedCreateNestedManyWithoutVideosInput
   }
@@ -13809,9 +15401,11 @@ export namespace Prisma {
     avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    has_created?: NullableBoolFieldUpdateOperationsInput | boolean | null
     comment_reactions?: comment_reactionsUpdateManyWithoutUsersNestedInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_history?: video_historyUpdateManyWithoutUsersNestedInput
     video_reactions?: video_reactionsUpdateManyWithoutUsersNestedInput
     video_views?: video_viewsUpdateManyWithoutUsersNestedInput
     videos?: videosUpdateManyWithoutUsersNestedInput
@@ -13824,9 +15418,11 @@ export namespace Prisma {
     avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    has_created?: NullableBoolFieldUpdateOperationsInput | boolean | null
     comment_reactions?: comment_reactionsUncheckedUpdateManyWithoutUsersNestedInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_history?: video_historyUncheckedUpdateManyWithoutUsersNestedInput
     video_reactions?: video_reactionsUncheckedUpdateManyWithoutUsersNestedInput
     video_views?: video_viewsUncheckedUpdateManyWithoutUsersNestedInput
     videos?: videosUncheckedUpdateManyWithoutUsersNestedInput
@@ -13855,6 +15451,7 @@ export namespace Prisma {
     mux_track_status?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    video_history?: video_historyUpdateManyWithoutVideosNestedInput
     video_reactions?: video_reactionsUpdateManyWithoutVideosNestedInput
     video_views?: video_viewsUpdateManyWithoutVideosNestedInput
     categories?: categoriesUpdateOneWithoutVideosNestedInput
@@ -13875,6 +15472,7 @@ export namespace Prisma {
     category_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    video_history?: video_historyUncheckedUpdateManyWithoutVideosNestedInput
     video_reactions?: video_reactionsUncheckedUpdateManyWithoutVideosNestedInput
     video_views?: video_viewsUncheckedUpdateManyWithoutVideosNestedInput
   }
@@ -13886,9 +15484,11 @@ export namespace Prisma {
     avatar_url?: string | null
     bio?: string | null
     created_at?: Date | string | null
+    has_created?: boolean | null
     comment_reactions?: comment_reactionsCreateNestedManyWithoutUsersInput
     comments?: commentsCreateNestedManyWithoutUsersInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_history?: video_historyCreateNestedManyWithoutUsersInput
     video_reactions?: video_reactionsCreateNestedManyWithoutUsersInput
     video_views?: video_viewsCreateNestedManyWithoutUsersInput
     videos?: videosCreateNestedManyWithoutUsersInput
@@ -13901,9 +15501,11 @@ export namespace Prisma {
     avatar_url?: string | null
     bio?: string | null
     created_at?: Date | string | null
+    has_created?: boolean | null
     comment_reactions?: comment_reactionsUncheckedCreateNestedManyWithoutUsersInput
     comments?: commentsUncheckedCreateNestedManyWithoutUsersInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_history?: video_historyUncheckedCreateNestedManyWithoutUsersInput
     video_reactions?: video_reactionsUncheckedCreateNestedManyWithoutUsersInput
     video_views?: video_viewsUncheckedCreateNestedManyWithoutUsersInput
     videos?: videosUncheckedCreateNestedManyWithoutUsersInput
@@ -13921,9 +15523,11 @@ export namespace Prisma {
     avatar_url?: string | null
     bio?: string | null
     created_at?: Date | string | null
+    has_created?: boolean | null
     comment_reactions?: comment_reactionsCreateNestedManyWithoutUsersInput
     comments?: commentsCreateNestedManyWithoutUsersInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
+    video_history?: video_historyCreateNestedManyWithoutUsersInput
     video_reactions?: video_reactionsCreateNestedManyWithoutUsersInput
     video_views?: video_viewsCreateNestedManyWithoutUsersInput
     videos?: videosCreateNestedManyWithoutUsersInput
@@ -13936,9 +15540,11 @@ export namespace Prisma {
     avatar_url?: string | null
     bio?: string | null
     created_at?: Date | string | null
+    has_created?: boolean | null
     comment_reactions?: comment_reactionsUncheckedCreateNestedManyWithoutUsersInput
     comments?: commentsUncheckedCreateNestedManyWithoutUsersInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
+    video_history?: video_historyUncheckedCreateNestedManyWithoutUsersInput
     video_reactions?: video_reactionsUncheckedCreateNestedManyWithoutUsersInput
     video_views?: video_viewsUncheckedCreateNestedManyWithoutUsersInput
     videos?: videosUncheckedCreateNestedManyWithoutUsersInput
@@ -13967,9 +15573,11 @@ export namespace Prisma {
     avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    has_created?: NullableBoolFieldUpdateOperationsInput | boolean | null
     comment_reactions?: comment_reactionsUpdateManyWithoutUsersNestedInput
     comments?: commentsUpdateManyWithoutUsersNestedInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_history?: video_historyUpdateManyWithoutUsersNestedInput
     video_reactions?: video_reactionsUpdateManyWithoutUsersNestedInput
     video_views?: video_viewsUpdateManyWithoutUsersNestedInput
     videos?: videosUpdateManyWithoutUsersNestedInput
@@ -13982,9 +15590,11 @@ export namespace Prisma {
     avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    has_created?: NullableBoolFieldUpdateOperationsInput | boolean | null
     comment_reactions?: comment_reactionsUncheckedUpdateManyWithoutUsersNestedInput
     comments?: commentsUncheckedUpdateManyWithoutUsersNestedInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_history?: video_historyUncheckedUpdateManyWithoutUsersNestedInput
     video_reactions?: video_reactionsUncheckedUpdateManyWithoutUsersNestedInput
     video_views?: video_viewsUncheckedUpdateManyWithoutUsersNestedInput
     videos?: videosUncheckedUpdateManyWithoutUsersNestedInput
@@ -14008,9 +15618,11 @@ export namespace Prisma {
     avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    has_created?: NullableBoolFieldUpdateOperationsInput | boolean | null
     comment_reactions?: comment_reactionsUpdateManyWithoutUsersNestedInput
     comments?: commentsUpdateManyWithoutUsersNestedInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
+    video_history?: video_historyUpdateManyWithoutUsersNestedInput
     video_reactions?: video_reactionsUpdateManyWithoutUsersNestedInput
     video_views?: video_viewsUpdateManyWithoutUsersNestedInput
     videos?: videosUpdateManyWithoutUsersNestedInput
@@ -14023,9 +15635,11 @@ export namespace Prisma {
     avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    has_created?: NullableBoolFieldUpdateOperationsInput | boolean | null
     comment_reactions?: comment_reactionsUncheckedUpdateManyWithoutUsersNestedInput
     comments?: commentsUncheckedUpdateManyWithoutUsersNestedInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
+    video_history?: video_historyUncheckedUpdateManyWithoutUsersNestedInput
     video_reactions?: video_reactionsUncheckedUpdateManyWithoutUsersNestedInput
     video_views?: video_viewsUncheckedUpdateManyWithoutUsersNestedInput
     videos?: videosUncheckedUpdateManyWithoutUsersNestedInput
@@ -14137,6 +15751,30 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type video_historyCreateWithoutUsersInput = {
+    id?: string
+    last_viewed_at?: Date | string
+    updated_at?: Date | string
+    videos: videosCreateNestedOneWithoutVideo_historyInput
+  }
+
+  export type video_historyUncheckedCreateWithoutUsersInput = {
+    id?: string
+    video_id: string
+    last_viewed_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type video_historyCreateOrConnectWithoutUsersInput = {
+    where: video_historyWhereUniqueInput
+    create: XOR<video_historyCreateWithoutUsersInput, video_historyUncheckedCreateWithoutUsersInput>
+  }
+
+  export type video_historyCreateManyUsersInputEnvelope = {
+    data: video_historyCreateManyUsersInput | video_historyCreateManyUsersInput[]
+    skipDuplicates?: boolean
+  }
+
   export type video_reactionsCreateWithoutUsersInput = {
     id?: string
     type: string
@@ -14200,6 +15838,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     comments?: commentsCreateNestedManyWithoutVideosInput
+    video_history?: video_historyCreateNestedManyWithoutVideosInput
     video_reactions?: video_reactionsCreateNestedManyWithoutVideosInput
     video_views?: video_viewsCreateNestedManyWithoutVideosInput
     categories?: categoriesCreateNestedOneWithoutVideosInput
@@ -14219,6 +15858,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     comments?: commentsUncheckedCreateNestedManyWithoutVideosInput
+    video_history?: video_historyUncheckedCreateNestedManyWithoutVideosInput
     video_reactions?: video_reactionsUncheckedCreateNestedManyWithoutVideosInput
     video_views?: video_viewsUncheckedCreateNestedManyWithoutVideosInput
   }
@@ -14306,6 +15946,33 @@ export namespace Prisma {
   export type subscriptionsUpdateManyWithWhereWithoutUsers_subscriptions_viewer_idTousersInput = {
     where: subscriptionsScalarWhereInput
     data: XOR<subscriptionsUpdateManyMutationInput, subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_viewer_idTousersInput>
+  }
+
+  export type video_historyUpsertWithWhereUniqueWithoutUsersInput = {
+    where: video_historyWhereUniqueInput
+    update: XOR<video_historyUpdateWithoutUsersInput, video_historyUncheckedUpdateWithoutUsersInput>
+    create: XOR<video_historyCreateWithoutUsersInput, video_historyUncheckedCreateWithoutUsersInput>
+  }
+
+  export type video_historyUpdateWithWhereUniqueWithoutUsersInput = {
+    where: video_historyWhereUniqueInput
+    data: XOR<video_historyUpdateWithoutUsersInput, video_historyUncheckedUpdateWithoutUsersInput>
+  }
+
+  export type video_historyUpdateManyWithWhereWithoutUsersInput = {
+    where: video_historyScalarWhereInput
+    data: XOR<video_historyUpdateManyMutationInput, video_historyUncheckedUpdateManyWithoutUsersInput>
+  }
+
+  export type video_historyScalarWhereInput = {
+    AND?: video_historyScalarWhereInput | video_historyScalarWhereInput[]
+    OR?: video_historyScalarWhereInput[]
+    NOT?: video_historyScalarWhereInput | video_historyScalarWhereInput[]
+    id?: UuidFilter<"video_history"> | string
+    user_id?: UuidFilter<"video_history"> | string
+    video_id?: UuidFilter<"video_history"> | string
+    last_viewed_at?: DateTimeFilter<"video_history"> | Date | string
+    updated_at?: DateTimeFilter<"video_history"> | Date | string
   }
 
   export type video_reactionsUpsertWithWhereUniqueWithoutUsersInput = {
@@ -14411,6 +16078,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     comments?: commentsCreateNestedManyWithoutVideosInput
+    video_history?: video_historyCreateNestedManyWithoutVideosInput
     video_reactions?: video_reactionsCreateNestedManyWithoutVideosInput
     video_views?: video_viewsCreateNestedManyWithoutVideosInput
     users: usersCreateNestedOneWithoutVideosInput
@@ -14430,6 +16098,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     comments?: commentsUncheckedCreateNestedManyWithoutVideosInput
+    video_history?: video_historyUncheckedCreateNestedManyWithoutVideosInput
     video_reactions?: video_reactionsUncheckedCreateNestedManyWithoutVideosInput
     video_views?: video_viewsUncheckedCreateNestedManyWithoutVideosInput
   }
@@ -14489,6 +16158,30 @@ export namespace Prisma {
 
   export type commentsCreateManyVideosInputEnvelope = {
     data: commentsCreateManyVideosInput | commentsCreateManyVideosInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type video_historyCreateWithoutVideosInput = {
+    id?: string
+    last_viewed_at?: Date | string
+    updated_at?: Date | string
+    users: usersCreateNestedOneWithoutVideo_historyInput
+  }
+
+  export type video_historyUncheckedCreateWithoutVideosInput = {
+    id?: string
+    user_id: string
+    last_viewed_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type video_historyCreateOrConnectWithoutVideosInput = {
+    where: video_historyWhereUniqueInput
+    create: XOR<video_historyCreateWithoutVideosInput, video_historyUncheckedCreateWithoutVideosInput>
+  }
+
+  export type video_historyCreateManyVideosInputEnvelope = {
+    data: video_historyCreateManyVideosInput | video_historyCreateManyVideosInput[]
     skipDuplicates?: boolean
   }
 
@@ -14570,10 +16263,12 @@ export namespace Prisma {
     avatar_url?: string | null
     bio?: string | null
     created_at?: Date | string | null
+    has_created?: boolean | null
     comment_reactions?: comment_reactionsCreateNestedManyWithoutUsersInput
     comments?: commentsCreateNestedManyWithoutUsersInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_history?: video_historyCreateNestedManyWithoutUsersInput
     video_reactions?: video_reactionsCreateNestedManyWithoutUsersInput
     video_views?: video_viewsCreateNestedManyWithoutUsersInput
   }
@@ -14585,10 +16280,12 @@ export namespace Prisma {
     avatar_url?: string | null
     bio?: string | null
     created_at?: Date | string | null
+    has_created?: boolean | null
     comment_reactions?: comment_reactionsUncheckedCreateNestedManyWithoutUsersInput
     comments?: commentsUncheckedCreateNestedManyWithoutUsersInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_history?: video_historyUncheckedCreateNestedManyWithoutUsersInput
     video_reactions?: video_reactionsUncheckedCreateNestedManyWithoutUsersInput
     video_views?: video_viewsUncheckedCreateNestedManyWithoutUsersInput
   }
@@ -14612,6 +16309,22 @@ export namespace Prisma {
   export type commentsUpdateManyWithWhereWithoutVideosInput = {
     where: commentsScalarWhereInput
     data: XOR<commentsUpdateManyMutationInput, commentsUncheckedUpdateManyWithoutVideosInput>
+  }
+
+  export type video_historyUpsertWithWhereUniqueWithoutVideosInput = {
+    where: video_historyWhereUniqueInput
+    update: XOR<video_historyUpdateWithoutVideosInput, video_historyUncheckedUpdateWithoutVideosInput>
+    create: XOR<video_historyCreateWithoutVideosInput, video_historyUncheckedCreateWithoutVideosInput>
+  }
+
+  export type video_historyUpdateWithWhereUniqueWithoutVideosInput = {
+    where: video_historyWhereUniqueInput
+    data: XOR<video_historyUpdateWithoutVideosInput, video_historyUncheckedUpdateWithoutVideosInput>
+  }
+
+  export type video_historyUpdateManyWithWhereWithoutVideosInput = {
+    where: video_historyScalarWhereInput
+    data: XOR<video_historyUpdateManyMutationInput, video_historyUncheckedUpdateManyWithoutVideosInput>
   }
 
   export type video_reactionsUpsertWithWhereUniqueWithoutVideosInput = {
@@ -14691,10 +16404,12 @@ export namespace Prisma {
     avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    has_created?: NullableBoolFieldUpdateOperationsInput | boolean | null
     comment_reactions?: comment_reactionsUpdateManyWithoutUsersNestedInput
     comments?: commentsUpdateManyWithoutUsersNestedInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_history?: video_historyUpdateManyWithoutUsersNestedInput
     video_reactions?: video_reactionsUpdateManyWithoutUsersNestedInput
     video_views?: video_viewsUpdateManyWithoutUsersNestedInput
   }
@@ -14706,10 +16421,12 @@ export namespace Prisma {
     avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    has_created?: NullableBoolFieldUpdateOperationsInput | boolean | null
     comment_reactions?: comment_reactionsUncheckedUpdateManyWithoutUsersNestedInput
     comments?: commentsUncheckedUpdateManyWithoutUsersNestedInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_history?: video_historyUncheckedUpdateManyWithoutUsersNestedInput
     video_reactions?: video_reactionsUncheckedUpdateManyWithoutUsersNestedInput
     video_views?: video_viewsUncheckedUpdateManyWithoutUsersNestedInput
   }
@@ -14748,9 +16465,11 @@ export namespace Prisma {
     avatar_url?: string | null
     bio?: string | null
     created_at?: Date | string | null
+    has_created?: boolean | null
     comments?: commentsCreateNestedManyWithoutUsersInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_history?: video_historyCreateNestedManyWithoutUsersInput
     video_reactions?: video_reactionsCreateNestedManyWithoutUsersInput
     video_views?: video_viewsCreateNestedManyWithoutUsersInput
     videos?: videosCreateNestedManyWithoutUsersInput
@@ -14763,9 +16482,11 @@ export namespace Prisma {
     avatar_url?: string | null
     bio?: string | null
     created_at?: Date | string | null
+    has_created?: boolean | null
     comments?: commentsUncheckedCreateNestedManyWithoutUsersInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_history?: video_historyUncheckedCreateNestedManyWithoutUsersInput
     video_reactions?: video_reactionsUncheckedCreateNestedManyWithoutUsersInput
     video_views?: video_viewsUncheckedCreateNestedManyWithoutUsersInput
     videos?: videosUncheckedCreateNestedManyWithoutUsersInput
@@ -14827,9 +16548,11 @@ export namespace Prisma {
     avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    has_created?: NullableBoolFieldUpdateOperationsInput | boolean | null
     comments?: commentsUpdateManyWithoutUsersNestedInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_history?: video_historyUpdateManyWithoutUsersNestedInput
     video_reactions?: video_reactionsUpdateManyWithoutUsersNestedInput
     video_views?: video_viewsUpdateManyWithoutUsersNestedInput
     videos?: videosUpdateManyWithoutUsersNestedInput
@@ -14842,9 +16565,11 @@ export namespace Prisma {
     avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    has_created?: NullableBoolFieldUpdateOperationsInput | boolean | null
     comments?: commentsUncheckedUpdateManyWithoutUsersNestedInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_history?: video_historyUncheckedUpdateManyWithoutUsersNestedInput
     video_reactions?: video_reactionsUncheckedUpdateManyWithoutUsersNestedInput
     video_views?: video_viewsUncheckedUpdateManyWithoutUsersNestedInput
     videos?: videosUncheckedUpdateManyWithoutUsersNestedInput
@@ -14857,10 +16582,12 @@ export namespace Prisma {
     avatar_url?: string | null
     bio?: string | null
     created_at?: Date | string | null
+    has_created?: boolean | null
     comment_reactions?: comment_reactionsCreateNestedManyWithoutUsersInput
     comments?: commentsCreateNestedManyWithoutUsersInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_history?: video_historyCreateNestedManyWithoutUsersInput
     video_views?: video_viewsCreateNestedManyWithoutUsersInput
     videos?: videosCreateNestedManyWithoutUsersInput
   }
@@ -14872,10 +16599,12 @@ export namespace Prisma {
     avatar_url?: string | null
     bio?: string | null
     created_at?: Date | string | null
+    has_created?: boolean | null
     comment_reactions?: comment_reactionsUncheckedCreateNestedManyWithoutUsersInput
     comments?: commentsUncheckedCreateNestedManyWithoutUsersInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_history?: video_historyUncheckedCreateNestedManyWithoutUsersInput
     video_views?: video_viewsUncheckedCreateNestedManyWithoutUsersInput
     videos?: videosUncheckedCreateNestedManyWithoutUsersInput
   }
@@ -14898,6 +16627,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     comments?: commentsCreateNestedManyWithoutVideosInput
+    video_history?: video_historyCreateNestedManyWithoutVideosInput
     video_views?: video_viewsCreateNestedManyWithoutVideosInput
     categories?: categoriesCreateNestedOneWithoutVideosInput
     users: usersCreateNestedOneWithoutVideosInput
@@ -14918,6 +16648,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     comments?: commentsUncheckedCreateNestedManyWithoutVideosInput
+    video_history?: video_historyUncheckedCreateNestedManyWithoutVideosInput
     video_views?: video_viewsUncheckedCreateNestedManyWithoutVideosInput
   }
 
@@ -14944,10 +16675,12 @@ export namespace Prisma {
     avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    has_created?: NullableBoolFieldUpdateOperationsInput | boolean | null
     comment_reactions?: comment_reactionsUpdateManyWithoutUsersNestedInput
     comments?: commentsUpdateManyWithoutUsersNestedInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_history?: video_historyUpdateManyWithoutUsersNestedInput
     video_views?: video_viewsUpdateManyWithoutUsersNestedInput
     videos?: videosUpdateManyWithoutUsersNestedInput
   }
@@ -14959,10 +16692,12 @@ export namespace Prisma {
     avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    has_created?: NullableBoolFieldUpdateOperationsInput | boolean | null
     comment_reactions?: comment_reactionsUncheckedUpdateManyWithoutUsersNestedInput
     comments?: commentsUncheckedUpdateManyWithoutUsersNestedInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_history?: video_historyUncheckedUpdateManyWithoutUsersNestedInput
     video_views?: video_viewsUncheckedUpdateManyWithoutUsersNestedInput
     videos?: videosUncheckedUpdateManyWithoutUsersNestedInput
   }
@@ -14991,6 +16726,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     comments?: commentsUpdateManyWithoutVideosNestedInput
+    video_history?: video_historyUpdateManyWithoutVideosNestedInput
     video_views?: video_viewsUpdateManyWithoutVideosNestedInput
     categories?: categoriesUpdateOneWithoutVideosNestedInput
     users?: usersUpdateOneRequiredWithoutVideosNestedInput
@@ -15011,6 +16747,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     comments?: commentsUncheckedUpdateManyWithoutVideosNestedInput
+    video_history?: video_historyUncheckedUpdateManyWithoutVideosNestedInput
     video_views?: video_viewsUncheckedUpdateManyWithoutVideosNestedInput
   }
 
@@ -15021,10 +16758,12 @@ export namespace Prisma {
     avatar_url?: string | null
     bio?: string | null
     created_at?: Date | string | null
+    has_created?: boolean | null
     comment_reactions?: comment_reactionsCreateNestedManyWithoutUsersInput
     comments?: commentsCreateNestedManyWithoutUsersInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_history?: video_historyCreateNestedManyWithoutUsersInput
     video_reactions?: video_reactionsCreateNestedManyWithoutUsersInput
     videos?: videosCreateNestedManyWithoutUsersInput
   }
@@ -15036,10 +16775,12 @@ export namespace Prisma {
     avatar_url?: string | null
     bio?: string | null
     created_at?: Date | string | null
+    has_created?: boolean | null
     comment_reactions?: comment_reactionsUncheckedCreateNestedManyWithoutUsersInput
     comments?: commentsUncheckedCreateNestedManyWithoutUsersInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_history?: video_historyUncheckedCreateNestedManyWithoutUsersInput
     video_reactions?: video_reactionsUncheckedCreateNestedManyWithoutUsersInput
     videos?: videosUncheckedCreateNestedManyWithoutUsersInput
   }
@@ -15062,6 +16803,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     comments?: commentsCreateNestedManyWithoutVideosInput
+    video_history?: video_historyCreateNestedManyWithoutVideosInput
     video_reactions?: video_reactionsCreateNestedManyWithoutVideosInput
     categories?: categoriesCreateNestedOneWithoutVideosInput
     users: usersCreateNestedOneWithoutVideosInput
@@ -15082,6 +16824,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     comments?: commentsUncheckedCreateNestedManyWithoutVideosInput
+    video_history?: video_historyUncheckedCreateNestedManyWithoutVideosInput
     video_reactions?: video_reactionsUncheckedCreateNestedManyWithoutVideosInput
   }
 
@@ -15108,10 +16851,12 @@ export namespace Prisma {
     avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    has_created?: NullableBoolFieldUpdateOperationsInput | boolean | null
     comment_reactions?: comment_reactionsUpdateManyWithoutUsersNestedInput
     comments?: commentsUpdateManyWithoutUsersNestedInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_history?: video_historyUpdateManyWithoutUsersNestedInput
     video_reactions?: video_reactionsUpdateManyWithoutUsersNestedInput
     videos?: videosUpdateManyWithoutUsersNestedInput
   }
@@ -15123,10 +16868,12 @@ export namespace Prisma {
     avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    has_created?: NullableBoolFieldUpdateOperationsInput | boolean | null
     comment_reactions?: comment_reactionsUncheckedUpdateManyWithoutUsersNestedInput
     comments?: commentsUncheckedUpdateManyWithoutUsersNestedInput
     subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
     subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_history?: video_historyUncheckedUpdateManyWithoutUsersNestedInput
     video_reactions?: video_reactionsUncheckedUpdateManyWithoutUsersNestedInput
     videos?: videosUncheckedUpdateManyWithoutUsersNestedInput
   }
@@ -15155,6 +16902,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     comments?: commentsUpdateManyWithoutVideosNestedInput
+    video_history?: video_historyUpdateManyWithoutVideosNestedInput
     video_reactions?: video_reactionsUpdateManyWithoutVideosNestedInput
     categories?: categoriesUpdateOneWithoutVideosNestedInput
     users?: usersUpdateOneRequiredWithoutVideosNestedInput
@@ -15175,7 +16923,184 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     comments?: commentsUncheckedUpdateManyWithoutVideosNestedInput
+    video_history?: video_historyUncheckedUpdateManyWithoutVideosNestedInput
     video_reactions?: video_reactionsUncheckedUpdateManyWithoutVideosNestedInput
+  }
+
+  export type usersCreateWithoutVideo_historyInput = {
+    id?: string
+    clerk_user_id: string
+    channel_name: string
+    avatar_url?: string | null
+    bio?: string | null
+    created_at?: Date | string | null
+    has_created?: boolean | null
+    comment_reactions?: comment_reactionsCreateNestedManyWithoutUsersInput
+    comments?: commentsCreateNestedManyWithoutUsersInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_reactions?: video_reactionsCreateNestedManyWithoutUsersInput
+    video_views?: video_viewsCreateNestedManyWithoutUsersInput
+    videos?: videosCreateNestedManyWithoutUsersInput
+  }
+
+  export type usersUncheckedCreateWithoutVideo_historyInput = {
+    id?: string
+    clerk_user_id: string
+    channel_name: string
+    avatar_url?: string | null
+    bio?: string | null
+    created_at?: Date | string | null
+    has_created?: boolean | null
+    comment_reactions?: comment_reactionsUncheckedCreateNestedManyWithoutUsersInput
+    comments?: commentsUncheckedCreateNestedManyWithoutUsersInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_creator_idTousersInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedCreateNestedManyWithoutUsers_subscriptions_viewer_idTousersInput
+    video_reactions?: video_reactionsUncheckedCreateNestedManyWithoutUsersInput
+    video_views?: video_viewsUncheckedCreateNestedManyWithoutUsersInput
+    videos?: videosUncheckedCreateNestedManyWithoutUsersInput
+  }
+
+  export type usersCreateOrConnectWithoutVideo_historyInput = {
+    where: usersWhereUniqueInput
+    create: XOR<usersCreateWithoutVideo_historyInput, usersUncheckedCreateWithoutVideo_historyInput>
+  }
+
+  export type videosCreateWithoutVideo_historyInput = {
+    id?: string
+    title: string
+    description?: string | null
+    mux_status?: string | null
+    mux_asset_id?: string | null
+    mux_upload_id?: string | null
+    mux_playback_id?: string | null
+    mux_track_id?: string | null
+    mux_track_status?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    comments?: commentsCreateNestedManyWithoutVideosInput
+    video_reactions?: video_reactionsCreateNestedManyWithoutVideosInput
+    video_views?: video_viewsCreateNestedManyWithoutVideosInput
+    categories?: categoriesCreateNestedOneWithoutVideosInput
+    users: usersCreateNestedOneWithoutVideosInput
+  }
+
+  export type videosUncheckedCreateWithoutVideo_historyInput = {
+    id?: string
+    title: string
+    description?: string | null
+    mux_status?: string | null
+    mux_asset_id?: string | null
+    mux_upload_id?: string | null
+    mux_playback_id?: string | null
+    mux_track_id?: string | null
+    mux_track_status?: string | null
+    user_id: string
+    category_id?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    comments?: commentsUncheckedCreateNestedManyWithoutVideosInput
+    video_reactions?: video_reactionsUncheckedCreateNestedManyWithoutVideosInput
+    video_views?: video_viewsUncheckedCreateNestedManyWithoutVideosInput
+  }
+
+  export type videosCreateOrConnectWithoutVideo_historyInput = {
+    where: videosWhereUniqueInput
+    create: XOR<videosCreateWithoutVideo_historyInput, videosUncheckedCreateWithoutVideo_historyInput>
+  }
+
+  export type usersUpsertWithoutVideo_historyInput = {
+    update: XOR<usersUpdateWithoutVideo_historyInput, usersUncheckedUpdateWithoutVideo_historyInput>
+    create: XOR<usersCreateWithoutVideo_historyInput, usersUncheckedCreateWithoutVideo_historyInput>
+    where?: usersWhereInput
+  }
+
+  export type usersUpdateToOneWithWhereWithoutVideo_historyInput = {
+    where?: usersWhereInput
+    data: XOR<usersUpdateWithoutVideo_historyInput, usersUncheckedUpdateWithoutVideo_historyInput>
+  }
+
+  export type usersUpdateWithoutVideo_historyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: StringFieldUpdateOperationsInput | string
+    channel_name?: StringFieldUpdateOperationsInput | string
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    has_created?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    comment_reactions?: comment_reactionsUpdateManyWithoutUsersNestedInput
+    comments?: commentsUpdateManyWithoutUsersNestedInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_reactions?: video_reactionsUpdateManyWithoutUsersNestedInput
+    video_views?: video_viewsUpdateManyWithoutUsersNestedInput
+    videos?: videosUpdateManyWithoutUsersNestedInput
+  }
+
+  export type usersUncheckedUpdateWithoutVideo_historyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: StringFieldUpdateOperationsInput | string
+    channel_name?: StringFieldUpdateOperationsInput | string
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    has_created?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    comment_reactions?: comment_reactionsUncheckedUpdateManyWithoutUsersNestedInput
+    comments?: commentsUncheckedUpdateManyWithoutUsersNestedInput
+    subscriptions_subscriptions_creator_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_creator_idTousersNestedInput
+    subscriptions_subscriptions_viewer_idTousers?: subscriptionsUncheckedUpdateManyWithoutUsers_subscriptions_viewer_idTousersNestedInput
+    video_reactions?: video_reactionsUncheckedUpdateManyWithoutUsersNestedInput
+    video_views?: video_viewsUncheckedUpdateManyWithoutUsersNestedInput
+    videos?: videosUncheckedUpdateManyWithoutUsersNestedInput
+  }
+
+  export type videosUpsertWithoutVideo_historyInput = {
+    update: XOR<videosUpdateWithoutVideo_historyInput, videosUncheckedUpdateWithoutVideo_historyInput>
+    create: XOR<videosCreateWithoutVideo_historyInput, videosUncheckedCreateWithoutVideo_historyInput>
+    where?: videosWhereInput
+  }
+
+  export type videosUpdateToOneWithWhereWithoutVideo_historyInput = {
+    where?: videosWhereInput
+    data: XOR<videosUpdateWithoutVideo_historyInput, videosUncheckedUpdateWithoutVideo_historyInput>
+  }
+
+  export type videosUpdateWithoutVideo_historyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_status?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_asset_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_upload_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_playback_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_status?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    comments?: commentsUpdateManyWithoutVideosNestedInput
+    video_reactions?: video_reactionsUpdateManyWithoutVideosNestedInput
+    video_views?: video_viewsUpdateManyWithoutVideosNestedInput
+    categories?: categoriesUpdateOneWithoutVideosNestedInput
+    users?: usersUpdateOneRequiredWithoutVideosNestedInput
+  }
+
+  export type videosUncheckedUpdateWithoutVideo_historyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_status?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_asset_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_upload_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_playback_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_id?: NullableStringFieldUpdateOperationsInput | string | null
+    mux_track_status?: NullableStringFieldUpdateOperationsInput | string | null
+    user_id?: StringFieldUpdateOperationsInput | string
+    category_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    comments?: commentsUncheckedUpdateManyWithoutVideosNestedInput
+    video_reactions?: video_reactionsUncheckedUpdateManyWithoutVideosNestedInput
+    video_views?: video_viewsUncheckedUpdateManyWithoutVideosNestedInput
   }
 
   export type comment_reactionsCreateManyCommentsInput = {
@@ -15278,6 +17203,13 @@ export namespace Prisma {
     id?: string
     creator_id: string
     created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type video_historyCreateManyUsersInput = {
+    id?: string
+    video_id: string
+    last_viewed_at?: Date | string
     updated_at?: Date | string
   }
 
@@ -15408,6 +17340,27 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type video_historyUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    last_viewed_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    videos?: videosUpdateOneRequiredWithoutVideo_historyNestedInput
+  }
+
+  export type video_historyUncheckedUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    video_id?: StringFieldUpdateOperationsInput | string
+    last_viewed_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type video_historyUncheckedUpdateManyWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    video_id?: StringFieldUpdateOperationsInput | string
+    last_viewed_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type video_reactionsUpdateWithoutUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
@@ -15466,6 +17419,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     comments?: commentsUpdateManyWithoutVideosNestedInput
+    video_history?: video_historyUpdateManyWithoutVideosNestedInput
     video_reactions?: video_reactionsUpdateManyWithoutVideosNestedInput
     video_views?: video_viewsUpdateManyWithoutVideosNestedInput
     categories?: categoriesUpdateOneWithoutVideosNestedInput
@@ -15485,6 +17439,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     comments?: commentsUncheckedUpdateManyWithoutVideosNestedInput
+    video_history?: video_historyUncheckedUpdateManyWithoutVideosNestedInput
     video_reactions?: video_reactionsUncheckedUpdateManyWithoutVideosNestedInput
     video_views?: video_viewsUncheckedUpdateManyWithoutVideosNestedInput
   }
@@ -15532,6 +17487,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     comments?: commentsUpdateManyWithoutVideosNestedInput
+    video_history?: video_historyUpdateManyWithoutVideosNestedInput
     video_reactions?: video_reactionsUpdateManyWithoutVideosNestedInput
     video_views?: video_viewsUpdateManyWithoutVideosNestedInput
     users?: usersUpdateOneRequiredWithoutVideosNestedInput
@@ -15551,6 +17507,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     comments?: commentsUncheckedUpdateManyWithoutVideosNestedInput
+    video_history?: video_historyUncheckedUpdateManyWithoutVideosNestedInput
     video_reactions?: video_reactionsUncheckedUpdateManyWithoutVideosNestedInput
     video_views?: video_viewsUncheckedUpdateManyWithoutVideosNestedInput
   }
@@ -15576,6 +17533,13 @@ export namespace Prisma {
     user_id: string
     value: string
     created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type video_historyCreateManyVideosInput = {
+    id?: string
+    user_id: string
+    last_viewed_at?: Date | string
     updated_at?: Date | string
   }
 
@@ -15622,6 +17586,27 @@ export namespace Prisma {
     user_id?: StringFieldUpdateOperationsInput | string
     value?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type video_historyUpdateWithoutVideosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    last_viewed_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: usersUpdateOneRequiredWithoutVideo_historyNestedInput
+  }
+
+  export type video_historyUncheckedUpdateWithoutVideosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    last_viewed_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type video_historyUncheckedUpdateManyWithoutVideosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    last_viewed_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

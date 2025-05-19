@@ -144,7 +144,8 @@ exports.Prisma.UsersScalarFieldEnum = {
   channel_name: 'channel_name',
   avatar_url: 'avatar_url',
   bio: 'bio',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  has_created: 'has_created'
 };
 
 exports.Prisma.CategoriesScalarFieldEnum = {
@@ -197,6 +198,14 @@ exports.Prisma.Video_viewsScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
+exports.Prisma.Video_historyScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  video_id: 'video_id',
+  last_viewed_at: 'last_viewed_at',
+  updated_at: 'updated_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -221,7 +230,8 @@ exports.Prisma.ModelName = {
   videos: 'videos',
   comment_reactions: 'comment_reactions',
   video_reactions: 'video_reactions',
-  video_views: 'video_views'
+  video_views: 'video_views',
+  video_history: 'video_history'
 };
 
 /**

@@ -9,6 +9,10 @@ import Link from "next/link";
 import { useState } from "react";
 import { CommentForm } from "./comment-form";
 import { CommentReplies } from "./comment-replies";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import commentService from "@/service/axios/comments/comment.service";
+import { toast } from "sonner";
+import CommentsSection from "@/modules/videos/sections/comments-section";
 
  
 
@@ -22,42 +26,84 @@ import { CommentReplies } from "./comment-replies";
     const [isReplyOpen,setIsReplyOpen]=useState(false);
     const [isRepliesOpen,setIsRepliesOpen]=useState(false);
     const variant="comment"
+    const queryClient = useQueryClient();
+    // const {}=use
+    const {data:commentReactions,error}=useQuery({
+        queryKey:["reactionsComment",comment?.id],
+        queryFn:()=>commentService.getCommentReactions(comment?.id),
+        enabled:!!comment?.id,
+    })
+    // toogleCommentReactions
+    const {mutate:deleteComment}=useMutation({
+        mutationFn:commentService.deleteCommentByUser,
+        onSuccess: (_, deletedId) => {        
+            queryClient.invalidateQueries({ queryKey: ["commentDetail", comment.video_id] });
+        }
+    })
+    //    // dto: {
+            // userId,
+            // comment_id: string; type: string },
+    const {mutate:toogleComment}=useMutation({
+        mutationFn:commentService.toogleCommentReactions,
+        onSuccess: (_, deletedId) => {        
+            queryClient.invalidateQueries({ queryKey: ["reactionsComment", comment.id] });
+        }
+    })
+    const handleDeleteComment=(id:string)=>{
+        deleteComment(id)
+        toast.success("Xoa thanh cong")
+    }
+    const handleToogleCommentReactions=(type:"like"|"unlike")=>{
+        let response={
+            userId:comment?.users.id,
+            comment_id:comment.id,
+            type:type,
+        }
+        toogleComment(response)
+        console.log(response)
+    }
+    console.log(commentReactions)
     return(
             <>
                 <div className="flex gap-4">
-                    <Link href={`/users/${comment?.userId}`}>
+                    <Link href={`/users/${comment?.users?.id}`}>
                         <UserAvatar 
-                        imageUrl={"https://scontent.fsgn8-4.fna.fbcdn.net/v/t39.30808-6/496150454_3799684950248327_219587134787243704_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=JoJycapiivkQ7kNvwETfRna&_nc_oc=AdnI0UiR2vtsakP9xxDf8G3C9uGBZ4mwWjPkMnw3sLrj0J3HMUbfzdnw8hcTspUvCm8&_nc_zt=23&_nc_ht=scontent.fsgn8-4.fna&_nc_gid=CjRhbKdWtEGcd4ihhRB8_Q&oh=00_AfK9WouNqY2fQfnGo9oyJ5VmSQtiHyf_6-M7LZ0rNtm2kw&oe=6829235B"}
-                        name={comment.user.name}
+                        imageUrl={comment?.users?.avatar_url}
+                        name={comment?.users?.channel_name}
                         size={variant==="comment"?"lg":"sm"}>
                         
                         </UserAvatar>
                         </Link>
                         <div className="flex-1 min-w-0">
-                            <Link href={`/users/${comment.userId}`}>
+                            <Link href={`/users/${comment?.users?.id}`}>
                             <div className="flex items-center gap-2 mb-0.5">
-                                <span className="font-medium text-sm pb-0.5">   {comment.user.name}</span>
+                                <span className="font-medium text-sm pb-0.5">   {comment?.users?.channel_name}</span>
 
-                                <span className="text-xs text-muted-foreground">{
-                                    formatDistanceToNow(comment.createAt,{
+                                {/* <span className="text-xs text-muted-foreground">{
+                                    formatDistanceToNow(comment?.create_at,{
                                         addSuffix:true
                                     })
-                                    }</span>
+                                    }</span> */}
                              
                                 </div></Link>
-                                <p className="text-sm">{comment.value}</p>
+                                <p className="text-sm">{comment?.value}</p>
                                 <div className="flex items-center gap-2">
                                     <div className="flex items-center">
-                                        <Button disabled={false} variant="ghost" size="icon" className="size-8" onClick={()=>{}}>
+                                        <Button disabled={false} variant="ghost" size="icon" className="size-8" onClick={()=>{
+                                            handleToogleCommentReactions("like")
+                                        }}>
                                             <ThumbsUpIcon className={cn(
                                                 // comment.viewerReact==="Like" && "fill-black"
                                             )}/>
                                         </Button>
-                                        <span className="text-xs text-muted-foreground">0</span>
-                                        <Button disabled={false} variant="ghost" size="icon" className="size-8" onClick={()=>{}}>
+                                        <span className="text-xs text-muted-foreground">{commentReactions?.like}</span>
+                                        <Button disabled={false} variant="ghost" size="icon" className="size-8" onClick={()=>{
+                                                                                        handleToogleCommentReactions("unlike")
+
+                                        }}>
                                             <ThumbsDownIcon className={cn()}/>
                                         </Button>
-                                        <span className="text-xs text-muted-foreground">0</span>
+                                        <span className="text-xs text-muted-foreground">{commentReactions?.unlike}</span>
                                     </div>
                                     {
                                         variant==="comment"&&(
@@ -81,7 +127,9 @@ import { CommentReplies } from "./comment-replies";
                                     <MessageSquareIcon className="size-4"/>
                                     Reply
                                 </DropdownMenuItem>
-                                <DropdownMenuItem onClick={()=>{}}>
+                                <DropdownMenuItem onClick={()=>{
+                                    handleDeleteComment(comment?.id)
+                                }}>
                                     <MessageSquareIcon className="size-4"/>
                                     Delete
                                 </DropdownMenuItem>
@@ -95,8 +143,8 @@ import { CommentReplies } from "./comment-replies";
   <div className="mt-4 pl-14">
     <CommentForm
       variant="reply"
-      parentId={comment.id}
-      videoId={comment.videoId}
+      parentId={comment?.id}
+      videoId={comment?.video_id}
       onCancel={() => setIsReplyOpen(false)}
       onSuccess={() => {
         setIsReplyOpen(false)
@@ -107,7 +155,7 @@ import { CommentReplies } from "./comment-replies";
 )}
 
 
-           {comment.replyCount > 0 && variant === "comment" && (
+           {comment?.other_comments?.length > 0 && variant === "comment" && (
   <div className="pl-14">
     <Button
       variant="tertiary"
@@ -115,18 +163,20 @@ import { CommentReplies } from "./comment-replies";
       onClick={() => setIsRepliesOpen((current) => !current)}
     >
       {isRepliesOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
-      {comment.replyCount} replies
+      {comment?.other_comments.length} replies
     </Button>
   </div>
 )}
 
 
-                {comment.replyCount>0 && variant=="comment" && isRepliesOpen &&(
+                {comment?.other_comments?.length>0 && variant=="comment" && isRepliesOpen &&(
                     <CommentReplies
+                    
                     parentId={comment.id}
                     video={comment.videoId}
                     />
                 )}
             </>
+
     )
  }

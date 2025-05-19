@@ -100,16 +100,28 @@ export class VideoService {
   }
   
   // Lấy một video theo id
-  async findOne(id: string) {
-    const video = await this.prismaService.videos.findFirst({ where: { id } });
+  async findOne(id: string, userId?: string) {
+    const video = await this.prismaService.videos.findFirst({ where: { id },
+    include:{
+      users:{},
+      video_views:{},
+    } }
 
+ 
+    );
+  
     if (!video) {
       throw new NotFoundException('Video not found');
     }
-
-    return this.response.responseSend(id, 'Video fetched successfully', 200);
+  
+    // Kiểm tra userId có tồn tại thì mới gọi addView
+    if (userId) {
+      await this.addView(userId, video.id);
+    }
+  
+    return this.response.responseSend(video, 'Video fetched successfully', 200);
   }
-
+  
   // Lấy video theo category
   async findByCategories(category_id: string) {
     const videos = await this.prismaService.videos.findMany({
@@ -176,17 +188,22 @@ export class VideoService {
   }
 
     // tim kiem video
-    async searchVideos() {
-      // const response1 = await this.prismaService.videos.findMany({
-      //   where: {
-      //     title: {
-      //       contains: keyword,
-      //       mode: 'insensitive',
-      //     },
-      //   },
-      // });
+    async searchVideos(keyword:string) {
+      const response = await this.prismaService.videos.findMany({
+        where: {
+          title: {
+            contains: keyword,
+            mode: 'insensitive',
+          },
+        },
+        include:{
+          users:{
+            
+          }
+        }
+      });
       // console.log(response1)
-      const response=await this.prismaService.videos.findMany();
+      // const response=await this.prismaService.videos.findMany();
   
     
       return response

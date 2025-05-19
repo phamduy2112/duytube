@@ -14,13 +14,14 @@ class CommentService{
     async getCommentByVideo(id:number){
 
         try {
-            const response=await axiosWithAuth.get(`/comment-by-video/${id}`);
+            const response=await axiosWithAuth.get(`/comment/${id}`);
             return response.data;
         } catch (error) {
             
         }
 
     }
+    
     async putCommentByUser(idComment:number,data:any){
         try {
             const response=await axiosWithAuth.put(`/comment/${idComment}`,data)
@@ -49,9 +50,12 @@ class CommentService{
 //     CONSTRAINT fk_comment FOREIGN KEY (comment_id) REFERENCES comments(id) ON DELETE CASCADE,
 //     CONSTRAINT unique_user_comment UNIQUE (user_id, comment_id)
 // );
-async createCommentReactions(formData){
+async toogleCommentReactions(formData){
     try {
-        const response=await axiosWithAuth.post("comment-reactions",formData);
+        // dto: {
+            // userId,
+            // comment_id: string; type: string },
+        const response=await axiosWithAuth.post("comment/reactions",formData);
         return response.data;
 
     } catch (error) {
@@ -59,8 +63,9 @@ async createCommentReactions(formData){
     }
 
 }
-async getCommentReactions(){
-
+async getCommentReactions(id:string){
+    const response=await axiosWithAuth.get(`comment/count/${id}`);
+    return response.data;
 }
 async deleteCommentReactions(id:number){
     

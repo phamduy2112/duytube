@@ -3,10 +3,12 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { VideoGridCard, VideoGridCardSkeleton } from "@/modules/videos/ui/components/video-grid-card";
 import { VideoRowCard, VideoRowCardSkeleton } from "@/modules/videos/ui/components/video-row-card";
 import { mockVideos } from "@/scripts/seed-catelogries";
+import { VideoService } from "@/service/axios/videos/video";
+import { useQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
 
 interface ResultsSectionProps{
-    query:string|undefined;
-    categoryId:string|undefined;
+   data:any[]
 }
 
 const ResultsSectionSkeleton=()=>{
@@ -27,25 +29,32 @@ const ResultsSectionSkeleton=()=>{
 }
 
 export const ResultsSection=({
-    query,
-    categoryId,
+  data
 }:ResultsSectionProps)=>{
 
     const isMobile=useIsMobile();
-    const results=[{}]
+    // const results=[{}]
+     console.log(data)
+    
+        
+        
+        
     return (
         <>
         {isMobile?(
             <div className="flex flex-col gap-4 gap-y-10 md:hidden">
-                {results.map((video)=>(
+                { data.map((video)=>(
                     <VideoGridCard key={video.id} data={video}/>
                 ))}
             </div>
         ):(
             <div className="hidden flex-col gap-4 md:flex">
                 {
-                    mockVideos.map((video)=>(
-                        <VideoRowCard key={video.id} data={video} size="default"/>
+                     data.map((video)=>(
+                        <div className="w-[35rem]" key={video.id} >
+
+<VideoRowCard data={video} size="default"/>
+                        </div>
                     ))
                 }
             </div>

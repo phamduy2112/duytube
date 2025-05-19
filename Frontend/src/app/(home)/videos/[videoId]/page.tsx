@@ -17,16 +17,16 @@ interface PageProps {
   }
   
 const Page = async ({ params }: PageProps) => {
-  const { videoId } = params; // ✅ sử dụng được trong hàm async
-      const videoDetail = mockVideos.find((item) => item.id === String(videoId));
+  const { videoId } = await params; // ✅ sử dụng được trong hàm async
+      // const videoDetail = mockVideos.find((item) => item.id === String(videoId));
     
-      if (!videoDetail) {
-        return <div>Không tìm thấy video.</div>;
-      }
+      // if (!videoDetail) {
+      //   return <div>Không tìm thấy video.</div>;
+      // }
     
     return(
         <div className="pt-16">
-            {videoId}
+           
             {/* <FormSectionSuspense videoId={videoId} /> */}
 
              <div>
@@ -39,7 +39,7 @@ const Page = async ({ params }: PageProps) => {
              
                  <VideoSectionSuspense videoId={videoDetail.id}/>
              */}
-            <VideoView videoId={videoDetail.id}/>     
+            <VideoView videoId={videoId}/>     
                 </div>
         </div>
     )

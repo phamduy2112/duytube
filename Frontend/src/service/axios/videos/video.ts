@@ -6,20 +6,23 @@ export class VideoService{
         const response=await axiosWithAuth.get("videos")
         return response.data
     }
-    async getVideoDetail(id){
-        const response=await axiosWithAuth.get(`videos/${id}`);
+    static async getVideoDetail(data){
+        const response=await axiosWithAuth.get(`videos/${data.id}`,data.userId);
         return response.data
     }
     async getVideoTrending(id){
         const response=await axiosWithAuth.get('videos/trending');
         return response.data
     }
-    async searchVideo(name:string){
-        const response=await axiosWithAuth.get("search-videos",name)
+    static async searchVideo(keyword:string){
+        const response=await axiosWithAuth.get("videos/search", {
+            params: { keyword },
+          });
         return response.data
     }
     
 
 }
 
+  
 export default new VideoService();

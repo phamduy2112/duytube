@@ -5,6 +5,9 @@ import { Suspense } from "react";
 import { VideoTopRow, VideoTopRowSkeleton } from "../ui/components/video-top-row";
 import { CommentForm } from "@/modules/comments/ui/components/comment-form";
 import { CommentItem } from "@/modules/comments/ui/components/comment-items";
+import { VideoService } from "@/service/axios/videos/video";
+import { useQuery } from "@tanstack/react-query";
+import commentService from "@/service/axios/comments/comment.service";
 
 export const videoSection=({videoId})=>{
   return (
@@ -22,14 +25,21 @@ const VideoSectionSekeleton=()=>{
   )
 }
 export const VideoSectionSuspense = ({ videoId }) => {
-  const videoDetail = mockVideos.find((item) => item.id === String(videoId));
-
-  if (!videoDetail) {
-    return <div>Không tìm thấy video.</div>;
-  }
-  console.log(videoDetail)
-
-
+ const response={
+        id:videoId,
+    }
+     const {data:videoDetail,error}=useQuery({
+                queryKey:["videoDetail",response.id],
+                queryFn:()=>VideoService.getVideoDetail(response),
+                enabled:!!response.id,
+            })
+            const {data:Comment}=useQuery({
+              queryKey:["commentDetail",response.id],
+              queryFn:()=>commentService.getCommentByVideo(response.id),
+              enabled:!!response.id,
+          })    
+          
+          console.log(Comment)
   return (
     <div>
    
@@ -37,12 +47,12 @@ export const VideoSectionSuspense = ({ videoId }) => {
     <VideoTopRow video={videoDetail}/>
   <div>
       <p className="font-bold text-[1.2rem] py-3">
-      136 Comments
+       Comments
     </p>
-      <CommentForm/>
+      <CommentForm videoId={response.id} />
   </div>
     {
-  mockComments.map((item) => {
+  Comment?.map((item) => {
     return <CommentItem key={item.id} comment={item} />;
   })
 }

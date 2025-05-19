@@ -11,10 +11,19 @@ export class CommentService {
         userId: string;
         parentId?: string;
       }) {
+        const user = await this.prisma.users.findFirst({
+          where: {
+            clerk_user_id: data.userId, // <-- đây là `user_...`
+          },
+        });
+        
+        if (!user) {
+          throw new Error("User not found");
+        }
         return this.prisma.comments.create({
           data: {
             value: data.content,
-            user_id: data.userId,
+            user_id:   user.id,
             video_id: data.videoId,
             parent_id: data.parentId ?? null, // nếu không có parentId thì set null
           },
@@ -26,18 +35,27 @@ export class CommentService {
   async findByVideo(videoId: string) {
     return this.prisma.comments.findMany({
       where: {
-        video_id:videoId,
-        parent_id: null,
+        video_id: videoId,
+        parent_id: null, // chỉ lấy comment cha
       },
       include: {
-        users: true,
-        
+        users: true, // lấy user của comment cha
+        other_comments: {
+          include: {
+            users: true, // lấy user của reply
+          },
+          orderBy: {
+            created_at: 'asc',
+          },
+        },
       },
       orderBy: {
         created_at: 'desc',
       },
     });
   }
+  
+  
 
 //   // Sửa comment
   async update(id: string, data: { content: string }) {
@@ -60,8 +78,10 @@ export class CommentService {
     });
   }
 // video_reactions
-async toggleLike(userId: string, dto: { comment_id: string; type: string }) {
-    const existing = await this.prisma.comment_reactions.findUnique({
+async toggleLike(userId: string, dto: { comment_id: string; type: string }) 
+{
+
+  const existing = await this.prisma.comment_reactions.findUnique({
       where: {
         user_id_comment_id: {
           user_id: userId,

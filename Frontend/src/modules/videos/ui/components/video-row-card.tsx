@@ -89,7 +89,7 @@ export const VideoRowCard=({
     },[data.likeCount])
     return (
 <div className={videoRowCardVariants({ size })}>
-  <Link href={`/videos/1`} className={"w-[150px] md:w-[38%]"}>
+  <Link href={`/videos/${data?.id}`} className={"w-[150px] md:w-[38%]"}>
     <VideoThumbnail
       imageUrl={data.thumbnailUrl}
       previewUrl={data.previewUrl}
@@ -101,7 +101,7 @@ export const VideoRowCard=({
   <div className="flex-1 min-w-0">
     <div className="flex justify-between gap-x-2">
       <div className="flex-1 min-w-0">
-        <Link href={`/videos/1`}>
+        <Link href={`/videos/${data.id}`}>
           <h3 className={cn("font-medium line-clamp-1", size === "compact" ? "text-sm" : "text-base")}>
             {data.title}
           </h3>
@@ -114,16 +114,16 @@ export const VideoRowCard=({
 
         {size === "default" && (
           <>
-            <div className="flex items-center gap-2 my-3">
+            <div className="flex items-center gap-2 my-2">
               {/* Avatar và UserInfo KHÔNG nên nằm trong <Link href={`/videos/...`}> */}
               <UserAvatar
                 size="sm"
-                imageUrl="https://scontent.fsgn8-3.fna.fbcdn.net/v/t39.30808-6/480816026_3722212301328926_8576528358840974159_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=Ab_8Escdn8cQ7kNvwGBqZuB&_nc_oc=Adl7AXaLijXexDnWORbL8ayjPQbRk05nR9IuYE_y-QKQ6nHR3ovQJmh-mcAYMv7YIvjb7zNStcq6ypxClYWSKlKx&_nc_zt=23&_nc_ht=scontent.fsgn8-3.fna&_nc_gid=pHT3PQZxDjCyqvQCTbnoqg&oh=00_AfIjzN3GnDGxWhWujJQondEcn6NgBJjvAZZd1GnnUmI0PA&oe=68261059"
-                name={data.user.name}
+                imageUrl="https://i.pravatar.cc/150?img=1"
+                name={data?.users?.name}
               />
               {/* Nếu bạn muốn avatar hay user info link tới trang user thì: */}
-              <Link href={`/users/${data.user.id}`}>
-                <UserInfo size="sm" name={data.user.name} />
+              <Link href={`/users/${data?.users?.id}`}>
+                <UserInfo size="sm" name={data?.users?.channel_name} />
               </Link>
             </div>
 
@@ -142,7 +142,7 @@ export const VideoRowCard=({
 
         {size === "compact" && (
           <>
-            <UserInfo size="sm" name={data.user.name} />
+            <UserInfo size="sm" name={data?.users?.name} />
             <p className="text-xs text-muted-foreground mt-1">
               {compactViews} views | {compactLikes} likes
             </p>
