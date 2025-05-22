@@ -1,8 +1,7 @@
-"use client"
 import { Suspense } from "react";
 import { HomeVideoSection } from "@/modules/home/ui/sections/home-videos-sections";
 import { TrendingVideosSection } from "@/modules/home/ui/sections/trending-videos-section";
-import { LikedVideosSection } from "../sections/Liked-video-section";
+import { LikedVideosSection } from "../sections/likes-video-section";
 
 interface HomeViewProps{
     categoryId?:string;

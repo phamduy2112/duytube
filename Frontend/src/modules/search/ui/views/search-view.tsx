@@ -18,6 +18,7 @@ export const SearchView=({
 }:PageProps)=>{
     const isMobile=useIsMobile()
       const [categoryId, setCategoryId] = useState<string | null>(null);
+
       const {data:categories}=useQuery({
         queryKey:['category'],
         queryFn: ()=> categoriesApi.getCategory()

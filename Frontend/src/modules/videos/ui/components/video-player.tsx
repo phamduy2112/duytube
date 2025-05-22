@@ -18,11 +18,11 @@ export const VideoPlayer=({
     autoPlay,
     onPlay,
 }:VideoPlayerProps)=>{
-    if(!playbackId) return null
+    // if(!playbackId) return null
     return(
         <MuxPlayer
-        playbackId={playbackId}
-        poster={thumbnailUrl||"/placeholder.svg"}
+        playbackId={"1z5b00ZcPcx8189lclMgJwydH9GOxNxJbUx4S9fWAR8w"}
+        poster={`https://image.mux.com/1z5b00ZcPcx8189lclMgJwydH9GOxNxJbUx4S9fWAR8w/thumbnail.jpg`}
         playerInitTime={0}
         autoPlay={autoPlay}
         thumbnailTime={0}

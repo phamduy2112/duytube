@@ -1,21 +1,32 @@
-import { Input } from "@/components/ui/input"
-import { Trash2, Pause, Settings } from "lucide-react"
+import { Input } from "@/components/ui/input";
+import { Trash2 } from "lucide-react";
 
-export const HistorySidebar = () => {
+interface Props {
+  inputValue: string;
+  setInputValue: (value: string) => void;
+  onSearch: () => void;
+}
+
+export const HistorySidebar = ({ inputValue, setInputValue, onSearch }: Props) => {  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      onSearch(); // gọi hàm khi nhấn Enter
+    }
+  };
   return (
-    <div className=" p-4  space-y-4 text-sm">
-      {/* Search */}
-      <Input placeholder="Tìm kiếm trong danh sách video ..." className="text-sm" />
+    <div className="p-4 space-y-4 text-sm">
+      <Input
+        placeholder="Tìm kiếm trong danh sách video ..."
+        className="text-sm"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        onKeyDown={handleKeyDown}
+      />
 
-      {/* Options */}
       <ul className="space-y-2">
         <li className="flex items-center gap-2 cursor-pointer hover:underline">
           <Trash2 size={16} /> <span>Xoá tất cả nhật ký xem</span>
         </li>
-      
       </ul>
-
-    
     </div>
-  )
-}
+  );
+};

@@ -31,25 +31,27 @@ export const VideoTopRowSkeleton=()=>{
 }
 
 export const VideoTopRow=({video})=>{
-    // const compactViews=useMemo(()=>{
-    //     return Intl.NumberFormat("en",{
-    //         notation:"compact"
-    //     }).format(1000)
-    // },[])
-    // const expandedViews=useMemo(()=>{
-    //     return Intl.NumberFormat("en",{
-    //         notation:"standard"
-    //     }).format(1000)
-    // },[])
+   
     // const compactDate=useMemo(()=>{
-    //     return formatDistanceToNow(video.content.create_at,{addSuffix:true});
-    // },[video.content.create_at])
+    //     return formatDistanceToNow(video?.content?.create_at,{addSuffix:true});
+    // },[video?.content?.create_at])
     
     // const expandDate=useMemo(()=>{
     //     return format(video.content.createAt,"d MMM yyyy");
     // },[video.content.create_at])
 
     let videoDetail=video?.content;
+    let views=Number(video?.content?.video_views.length)
+    const compactViews=useMemo(()=>{
+        return Intl.NumberFormat("en",{
+            notation:"compact"
+        }).format(views)
+    },[])
+    const expandedViews=useMemo(()=>{
+        return Intl.NumberFormat("en",{
+            notation:"standard"
+        }).format(views)
+    },[])
     console.log(videoDetail)
     return (
         <div className="flex flex-col gap-4 mt-4">
@@ -57,15 +59,16 @@ export const VideoTopRow=({video})=>{
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                 <VideoOwner user={videoDetail?.users} videoId={videoDetail?.id}/>
                 <div className="flex overflow-x-auto sm:min-w-[calc(50%-6px)] sm:justify-end sm:overflow-visible pb-2 -mb-2 sm:pb-0 sm:mb-0 gap-2">
-                        <VideoReactions/>
+                        <VideoReactions id={videoDetail?.id}/>
                         <VideoMenu videoId={videoDetail?.id} variant="secondary"></VideoMenu>
                 </div>
             </div>
             <VideoDecription
-            compactViews={"0"}
-            expandedViews={"0"}
-            compactDate={"21/12/2003"}
-            expandedDate={"21/12/2003"}
+            
+            compactViews={compactViews}
+            expandedViews={expandedViews}
+            compactDate={"12"}
+            expandedDate={"21"}
             description="asdasd"
             />
         </div>

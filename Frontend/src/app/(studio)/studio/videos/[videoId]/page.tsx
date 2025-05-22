@@ -1,5 +1,6 @@
 import { VideoView } from "@/modules/videos/view/VideoView";
 import { VideoSectionSuspense } from "@/modules/videos/sections/video-section";
+import { FormSectionSuspense } from "../../ui/sections/form-section";
 
 // interface PageProps {
 //     params: { id: string };
@@ -11,8 +12,8 @@ const Page=async ({params})=>{
     console.log(videoId)
     return(
         <div className="mt-[3rem] w-[1650px] px-2">
-            {videoId}
-           <VideoSectionSuspense videoId={videoId}/>
+            
+           {/* <FormSectionSuspense videoId={videoId}/> */}
         </div>
     )
 

@@ -3,6 +3,9 @@
 import { VideoGridCard, VideoGridCardSkeleton } from "@/modules/videos/ui/components/video-grid-card"
 import { VideoRowCard, VideoRowCardSkeleton } from "@/modules/videos/ui/components/video-row-card"
 import { mockVideos } from "@/scripts/seed-catelogries"
+import { VideoService } from "@/service/axios/videos/video"
+import { useUser } from "@clerk/nextjs"
+import { useQuery } from "@tanstack/react-query"
 
 
 //  co sus
@@ -21,17 +24,18 @@ const HistoryVideosSectionSekeleton=()=>{
           
         </div>
 }
-export const HistoryVideosSection=()=>{
+export const HistoryVideosSection=({statusSubscription})=>{
+    console.log(statusSubscription)
     return (
         <div>
             <div className="flex flex-col gap-4 gap-y-10 md:hidden">
-  {mockVideos.map((video)=>(
-                <VideoGridCard key={video.id} data={video}/>
+  {statusSubscription?.map((video)=>(
+                <VideoGridCard key={video.id} data={video?.videos}/>
             ))}
             </div>
             <div className="hidden flex-col gap-4 gap-y-10 md:flex">
-  {mockVideos.map((video)=>(
-                <VideoRowCard key={video.id} data={video} size="default"/>
+  {statusSubscription?.map((video)=>(
+                <VideoRowCard key={video.id} data={video?.videos} size="default"/>
             ))}
             </div>
           

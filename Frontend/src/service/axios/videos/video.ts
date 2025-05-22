@@ -7,7 +7,14 @@ export class VideoService{
         return response.data
     }
     static async getVideoDetail(data){
-        const response=await axiosWithAuth.get(`videos/${data.id}`,data.userId);
+        console.log(data)
+        const response=await axiosWithAuth.get(`videos/${data.id}`,
+            {
+                params: {
+                  userId: data.userId, // thay bằng biến userId của bạn
+                },
+              }
+        );
         return response.data
     }
     async getVideoTrending(id){
@@ -20,8 +27,38 @@ export class VideoService{
           });
         return response.data
     }
-    
+    static async toogleReactionsVideo(formData){
+        const response=await axiosWithAuth.post("videos/toogle-reactions",formData);
+        return response.data;
+    }
+    static async getLikeCountVideo(id){
+        const response=await axiosWithAuth.get(`videos/reactions/${id}`)
+        return response.data;
+    }
 
+
+    static async historyVideo(id:string){
+        const response=await axiosWithAuth.get(`videos/history/${id}`);
+        return response.data
+    }
+    
+    static async getLikeVideoUser(id:string){
+        const response=await axiosWithAuth.get(`videos/like/${id}`);
+        return response.data
+    }
+
+    static async getMyVideoUser(id:string){
+        const response=await axiosWithAuth.get(`videos/user/${id}`);
+        return response.data
+    }
+
+    static async createVideosFormUser(data){
+   
+        const response=await axiosWithAuth.post("videos",data)
+        return response.data; // trả về { video, upload_url }
+    }
+
+    
 }
 
   

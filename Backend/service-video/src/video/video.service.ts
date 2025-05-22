@@ -23,17 +23,28 @@ export class VideoService {
 
   // Tạo video và lấy upload_url từ Mux
   async create(data: { title: string; user_id: string; description?: string;category_id:string}) {
+    const user = await this.prismaService.users.findFirst({
+      where: {
+        clerk_user_id: data.user_id
+      }
+    });
+
+    // Nếu không tìm thấy user thì không tiếp tục
+    if (!user) {
+      throw new Error("User not found");
+    }
     const upload = await this.uploads.create({
       new_asset_settings: {
         playback_policy: 'public',
       },
+      cors_origin: '*', // ⚠️ rất quan trọng!
     });
-
+    console.log(upload)
     const video = await this.prismaService.videos.create({
       data: {
         title: data.title,
         description: data.description,
-        user_id: data.user_id,
+        user_id: user.id,
         category_id:data.category_id,
         mux_status: 'waiting_upload',
         mux_upload_id: upload.id,
@@ -45,7 +56,34 @@ export class VideoService {
       upload_url: upload.url,
     };
   }
-
+  async checkMuxUploadStatus(uploadId: string) {
+    const upload = await this.uploads.retrieve(uploadId);
+  
+    // Nếu Mux đã gán asset_id cho upload thì video đã xử lý xong
+    if (upload.asset_id) {
+      const asset = await this.assets.retrieve(upload.asset_id);
+  
+      const playbackId = asset.playback_ids?.[0]?.id;
+  
+      await this.prismaService.videos.updateMany({
+        where: { mux_upload_id: uploadId },
+        data: {
+          mux_asset_id: asset.id,
+          mux_playback_id: playbackId,
+          mux_status: 'ready',
+        },
+      });
+  
+      return {
+        status: 'ready',
+        asset_id: asset.id,
+        playback_id: playbackId,
+      };
+    }
+  
+    return { status: 'processing' };
+  }
+  
   // Tạo user
   async createUser(data: { clerk_user_id: string; channel_name: string; avatar_url?: string; bio?: string }) {
     const user = await this.prismaService.users.create({
@@ -74,6 +112,48 @@ export class VideoService {
 
     return this.response.responseSend(videos, 'Videos fetched successfully', 200);
   }
+  async findVideoByUser(userId){
+    try {
+      const user = await this.prismaService.users.findFirst({
+        where: {
+          clerk_user_id: userId
+        }
+      });
+  
+      // Nếu không tìm thấy user thì không tiếp tục
+      if (!user) {
+        throw new Error("User not found");
+      }
+      const response=await this.prismaService.videos.findMany({
+        where:{
+          user_id:userId
+        },
+        include:{
+          users:true,
+        }
+      })
+      return response
+    } catch (error) {
+      
+    }
+  }
+  async getVideoByUser(user_id:string){
+    const existingUser=await this.prismaService.users.findFirst({
+      where:{
+        clerk_user_id:user_id,
+      }
+    })  
+    
+
+    const response=await this.prismaService.videos.findMany({
+      where:{
+        user_id:existingUser?.id
+      }
+    })
+    return this.response.responseSend(response,"Successfully",200)
+
+  }
+
   
   // 
   async findVideosTrending(){
@@ -103,8 +183,14 @@ export class VideoService {
   async findOne(id: string, userId?: string) {
     const video = await this.prismaService.videos.findFirst({ where: { id },
     include:{
-      users:{},
+      users:{
+        include:{
+          subscriptions_subscriptions_creator_idTousers:{},
+          subscriptions_subscriptions_viewer_idTousers:{}
+        }
+      },
       video_views:{},
+
     } }
 
  
@@ -116,10 +202,16 @@ export class VideoService {
   
     // Kiểm tra userId có tồn tại thì mới gọi addView
     if (userId) {
-      await this.addView(userId, video.id);
+        this.addView(userId, video.id);
     }
-  
-    return this.response.responseSend(video, 'Video fetched successfully', 200);
+    const total=this.getTotalViews(video.id)
+    const responseVideo={
+      ...video,
+      total
+      
+      
+    }
+    return this.response.responseSend(responseVideo, 'Video fetched successfully', 200);
   }
   
   // Lấy video theo category
@@ -162,21 +254,35 @@ export class VideoService {
     return this.response.responseSend(null, 'Video deleted successfully', 200);
   }
 
-  async addView(userId: string, videoId: string): Promise<void> {
+  async addView(userId: string, videoId: string) {
     try {
-      await this.prismaService.video_views.create({
+      const user = await this.prismaService.users.findFirst({
+        where: {
+          clerk_user_id: userId
+        }
+      });
+  
+      // Nếu không tìm thấy user thì không tiếp tục
+      if (!user) {
+        throw new Error("User not found");
+      }
+  
+      const resp = await this.prismaService.video_views.create({
         data: {
-          user_id: userId,
+          user_id: user?.id, // lúc này chắc chắn là string
           video_id: videoId,
         },
       });
-    } catch (error) {
-      // Nếu đã tồn tại (lỗi unique), thì bỏ qua
+  
+      return resp;
+    } catch (error: any) {
+      // Nếu là lỗi unique constraint thì bỏ qua
       if (error.code !== 'P2002') {
         throw error;
       }
     }
   }
+  
 
   // 📊 Lấy tổng lượt xem video
   async getTotalViews(videoId: string): Promise<number> {
@@ -208,4 +314,140 @@ export class VideoService {
     
       return response
     }
+    // 
+    async toogleReactions(dto: { clerk_user_id: string; video_id: string; type: string }) {
+      try {
+        // 1. Tìm user từ clerk_user_id
+        const user = await this.prismaService.users.findFirst({
+          where: {
+            clerk_user_id: dto.clerk_user_id,
+          },
+        });
+    
+        if (!user) {
+          throw new Error("User not found");
+        }
+    
+        const user_id = user.id;
+    
+        // 2. Kiểm tra xem đã có reaction cho video này chưa
+        const existingReaction = await this.prismaService.video_reactions.findUnique({
+          where: {
+            user_id_video_id: {
+              user_id,
+              video_id: dto.video_id,
+            },
+          },
+        });
+    
+        if (!existingReaction) {
+          // Nếu chưa có => tạo mới
+          return await this.prismaService.video_reactions.create({
+            data: {
+              user_id,
+              video_id: dto.video_id,
+              type: dto.type,
+            },
+          });
+        } else if (existingReaction.type === dto.type) {
+          // Nếu type giống => xóa (toggle off)
+          return await this.prismaService.video_reactions.delete({
+            where: { id: existingReaction.id },
+          });
+        } else {
+          // Nếu type khác => cập nhật
+          return await this.prismaService.video_reactions.update({
+            where: { id: existingReaction.id },
+            data: { type: dto.type },
+          });
+        }
+    
+      } catch (error) {
+        console.error('Error in toogleReactions:', error);
+        throw error;
+      }
+    }
+    
+    
+    async getLikeCount(video_id: string) {
+      if (!video_id || typeof video_id !== 'string') {
+        // throw new BadRequestException('Invalid video_id');
+      }
+    
+      try {
+        const [like, unlike] = await Promise.all([
+          this.prismaService.video_reactions.count({
+            where: { video_id, type: 'like' },
+          }),
+          this.prismaService.video_reactions.count({
+            where: { video_id, type: 'unlike' },
+          }),
+        ]);
+    
+        return { like, unlike };
+      } catch (error) {
+        console.error('Error in getLikeCount:', error);
+        // throw new InternalServerErrorException('Cannot fetch reaction counts');
+      }
+    }
+
+    async getHistory(user_id:string){
+
+      try {
+        const existingUser=await this.prismaService.users.findFirst({
+          where:{
+            clerk_user_id:user_id,
+          },
+         
+
+        })  
+        const getHistoryUser=await this.prismaService.video_views.findMany({
+          where:{
+            user_id:existingUser?.id
+          },
+          include:{
+      
+            videos:{
+              include:{
+                users:{},
+                video_views:{},
+              }
+            },
+          
+          }
+        })
+        return getHistoryUser
+      } catch (error) {
+        
+      }
+    }
+
+    async getLikeVideoByUser(user_id:string){
+      const existingUser=await this.prismaService.users.findFirst({
+        where:{
+          clerk_user_id:user_id,
+        }
+      })  
+      const response=await this.prismaService.video_reactions.findMany({
+        where:{
+          user_id:existingUser?.id,
+          type:"like"
+        },
+        include:{
+      
+          videos:{
+            include:{
+              users:{},
+              video_views:{},
+            }
+          },
+        
+        }
+
+      }) 
+      return this.response.responseSend(response,"Successfully",200);
+    }
+    
+   
+    
 }

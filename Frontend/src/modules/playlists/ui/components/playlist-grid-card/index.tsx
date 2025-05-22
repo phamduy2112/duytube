@@ -6,7 +6,7 @@ export const PlayListGridCard=({
     data
 })=>{
     return (
-        <Link href={`playlists/1`}>
+        <Link href={`playlists/${data.id}`}>
             <div className="flex flex-col gap-2 w-full group">
                 <PlaylistThumbnail
                 imageUrl="abc"

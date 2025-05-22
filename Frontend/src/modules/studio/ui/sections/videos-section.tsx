@@ -11,9 +11,12 @@ import { useState } from "react";
 import {format} from "date-fns"
 import { Globe2Icon, LockIcon } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useUser } from "@clerk/nextjs";
+import { useVideoOfUser } from "@/hooks/api/use-video-of-user";
 const ITEMS_PER_PAGE = 2;
 
 const VideosSectionSkeleton=()=>{
+
     return (
         <Table className="w-[1650px]">
                     <TableHeader className="">
@@ -71,15 +74,19 @@ const VideosSectionSkeleton=()=>{
 }
 
 export const VideosSection = () => {
+  const {user}=useUser()
+  console.log(user?.id)
+  const {data:VideosOfUser}=useVideoOfUser(user?.id);
+  let listVideo=VideosOfUser?.content
     const [page, setPage] = useState(1);
-    const [data, setData] = useState(mockVideos.slice(0, ITEMS_PER_PAGE));
+    const [data, setData] = useState(VideosOfUser?.content?.slice(0, ITEMS_PER_PAGE));
     const [isFetching, setIsFetching] = useState(false);
-    const hasNextPage = data.length < mockVideos.length;
+    const hasNextPage = data?.length < VideosOfUser?.content?.length;
 
     const fetchNextPage = () => {
         if (!hasNextPage) return;
 
-        setIsFetching(true);
+        setIsFetching(true); 
         setTimeout(() => {
             const nextData = mockVideos.slice(0, (page + 1) * ITEMS_PER_PAGE);
             setData(nextData);
@@ -87,6 +94,7 @@ export const VideosSection = () => {
             setIsFetching(false);
         }, 1000); // giả lập fetch
     };
+    console.log(VideosOfUser?.content) 
     const router=useRouter();
     return (
         <div className="w-full overflow-x-auto">
@@ -104,7 +112,7 @@ export const VideosSection = () => {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-  {data.map((video) => (
+  {VideosOfUser?.content?.map((video) => (
     <TableRow
       onClick={() => router.push(`/studio/videos/${video.id}`)}
       className="cursor-pointer"
@@ -133,7 +141,8 @@ export const VideosSection = () => {
       ):(
         <Globe2Icon className="size-4 mr-2"/>
       )}
-      {snakeCaseToTitle(video.visibility)}
+      {/* {snakeCaseToTitle(video.visibility)} */}
+        
         </div>
        
       </TableCell>

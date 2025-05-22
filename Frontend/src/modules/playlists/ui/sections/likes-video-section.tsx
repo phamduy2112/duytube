@@ -3,6 +3,9 @@
 import { VideoGridCard, VideoGridCardSkeleton } from "@/modules/videos/ui/components/video-grid-card"
 import { VideoRowCard, VideoRowCardSkeleton } from "@/modules/videos/ui/components/video-row-card"
 import { mockVideos } from "@/scripts/seed-catelogries"
+import { VideoService } from "@/service/axios/videos/video"
+import { useClerk, useUser } from "@clerk/nextjs"
+import { useQuery } from "@tanstack/react-query"
 
 
 //  co sus
@@ -22,6 +25,13 @@ import { mockVideos } from "@/scripts/seed-catelogries"
 //         </div>
 // }
 export const LikedVideosSection=()=>{
+    const {user}=useUser()
+    const {data}=useQuery({
+         queryKey: ["liked-video", user?.id],
+            queryFn: () => VideoService.historyVideo(user.id),
+            enabled: !!user?.id,
+    });
+    console.log(data)
     return (
         <div>
             <div className="flex flex-col gap-4 gap-y-10 md:hidden">

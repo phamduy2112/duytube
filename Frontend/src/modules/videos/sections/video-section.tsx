@@ -8,6 +8,7 @@ import { CommentItem } from "@/modules/comments/ui/components/comment-items";
 import { VideoService } from "@/service/axios/videos/video";
 import { useQuery } from "@tanstack/react-query";
 import commentService from "@/service/axios/comments/comment.service";
+import { useUser } from "@clerk/nextjs";
 
 export const videoSection=({videoId})=>{
   return (
@@ -25,9 +26,13 @@ const VideoSectionSekeleton=()=>{
   )
 }
 export const VideoSectionSuspense = ({ videoId }) => {
+    const { user } = useUser();
  const response={
         id:videoId,
+        userId:user?.id,
+        
     }
+    console.log(user?.id)
      const {data:videoDetail,error}=useQuery({
                 queryKey:["videoDetail",response.id],
                 queryFn:()=>VideoService.getVideoDetail(response),
@@ -39,15 +44,15 @@ export const VideoSectionSuspense = ({ videoId }) => {
               enabled:!!response.id,
           })    
           
-          console.log(Comment)
+      
   return (
     <div>
    
-      <VideoPlayer autoPlay playBackId="" thumbnaiUrl=""></VideoPlayer>
+    <VideoPlayer autoPlay playBackId="" thumbnaiUrl=""></VideoPlayer>
     <VideoTopRow video={videoDetail}/>
   <div>
       <p className="font-bold text-[1.2rem] py-3">
-       Comments
+       {Comment?.length} Comments
     </p>
       <CommentForm videoId={response.id} />
   </div>

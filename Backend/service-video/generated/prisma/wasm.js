@@ -206,6 +206,23 @@ exports.Prisma.Video_historyScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
+exports.Prisma.Playlist_videosScalarFieldEnum = {
+  id: 'id',
+  playlist_id: 'playlist_id',
+  video_id: 'video_id',
+  order: 'order',
+  added_at: 'added_at'
+};
+
+exports.Prisma.PlaylistsScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  user_id: 'user_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -231,7 +248,9 @@ exports.Prisma.ModelName = {
   comment_reactions: 'comment_reactions',
   video_reactions: 'video_reactions',
   video_views: 'video_views',
-  video_history: 'video_history'
+  video_history: 'video_history',
+  playlist_videos: 'playlist_videos',
+  playlists: 'playlists'
 };
 
 /**

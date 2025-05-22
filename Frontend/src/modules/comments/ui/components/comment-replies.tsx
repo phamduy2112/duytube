@@ -12,10 +12,12 @@ export const CommentReplies=({
     parentId,
     videoId,
     fetchNextPage,
-    comments,
+    commentReplies,
+     
     hasNextPage,
     isFetchingNextPage
 }:CommentRepliesProps)=>{
+
     const isLoading=false
     return (
         <div className="pl-14">
@@ -29,7 +31,7 @@ export const CommentReplies=({
                     }
 
                 {!isLoading && 
-  comments.map((comment) => {
+  commentReplies?.other_comments.map((comment) => {
     return (
       <CommentItem
         key={comment.id}

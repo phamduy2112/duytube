@@ -25,11 +25,16 @@ export const VideoThumbnailSkeleton=()=>{
 export const VideoThumbnail=(
     {imageUrl,previewUrl,title,duration}:VideoThumbnailProps
 )=>{
+    const url=""
     return (
         <div className="relative">
             <div className="relative w-full overflow-hidden rounded-xl aspect-video">
-                <Image src="./placeholder.svg" alt={title} fill className="w-full h-full object-cover group-hover:opacity-0"></Image>
-                <Image src={previewUrl??THUMBNAIL_FALLBACK} alt={title} fill className="w-full h-full object-cover group-hover:opacity-100"></Image>
+                {/* <Image src="./placeholder.svg" alt={title} fill className="w-full h-full object-cover group-hover:opacity-0"></Image> */}
+                {/* <Image src={previewUrl??THUMBNAIL_FALLBACK} alt={title} fill className="w-full h-full object-cover group-hover:opacity-100"></Image> */}
+                <img 
+                src="https://image.mux.com/1z5b00ZcPcx8189lclMgJwydH9GOxNxJbUx4S9fWAR8w/thumbnail.jpg" 
+                alt={title}  className="w-full h-full object-cover group-hover:opacity-100"></img>
+
             </div>
             <div className="absolute bottom-2 right-2 px-1 py-0.5 rounded bg-black/80 text-white text-xs font-medium">              
             {formatDuration(1234)}

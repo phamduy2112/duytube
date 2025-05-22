@@ -4,6 +4,9 @@ import { VideoGridCard, VideoGridCardSkeleton } from "@/modules/videos/ui/compon
 import { VideoRowCard, VideoRowCardSkeleton } from "@/modules/videos/ui/components/video-row-card"
 import { mockPlaylists, mockVideos } from "@/scripts/seed-catelogries"
 import { PlayListGridCard } from "../components/playlist-grid-card"
+import { useQuery } from "@tanstack/react-query"
+import { useUser } from "@clerk/nextjs"
+import { PlaylistsService } from "@/service/axios/playlists/playlists.service"
 
 
 //  co sus
@@ -23,12 +26,20 @@ const PlayListsSectionSekeleton=()=>{
         </div>
 }
 export const PlayListsSection=()=>{
+    const {user}=useUser();
+      const {data:playlists}=useQuery({
+        queryKey:["playlists",user?.id],
+        queryFn:()=>PlaylistsService.getUserPlaylists(user?.id),
+        enabled:!!user?.id
+    
+      })
+      console.log(playlists)
     return (
         <div>
             <div className="gap-4 gap-y-10 grid grid-cols-1 sm:gird-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4
             [@media(min-width:1920px)]:grid-cols-5 [@media(min-width:2200px):grid-cols-6]">
 
-                    {mockPlaylists.map((item)=>(
+                    {playlists?.map((item)=>(
                         <PlayListGridCard
                         key={item.id}
                         data={item}

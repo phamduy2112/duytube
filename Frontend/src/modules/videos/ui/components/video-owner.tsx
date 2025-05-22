@@ -3,14 +3,50 @@ import { Button } from "@/components/ui/button"
 import { UserAvatar } from "@/components/user-avatar"
 import { SubscriptionButton } from "@/modules/subscriptions/ui/components/subscription-button"
 import { UserInfo } from "@/modules/user/ui/components/user-info"
-import { useAuth } from "@clerk/nextjs"
+import { SubscriptionsService } from "@/service/axios/subscriptions/subscriptions.service"
+import { useAuth, useUser } from "@clerk/nextjs"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import Link from "next/link"
+import { useEffect, useState } from "react"
 
 
 export const VideoOwner=({user,videoId})=>{
 
     const {userId:clerkUserId}=useAuth()
-    console.log(user)
+    const {user:userDetail}=useUser()
+    const [subscribres,setSubscribres]=useState(false)
+    const queryClient=useQueryClient();
+    const {mutate:toggleReactionSubscription}=useMutation({
+        mutationFn:SubscriptionsService.toggleSubscriptions,
+        onSuccess:(data)=>{
+          queryClient.invalidateQueries({ queryKey: ["subscriptions", data] });
+            
+
+        },
+        onError:(data)=>{
+
+        }
+    })
+    const viewerId:any = userDetail?.id;
+    const creatorId = user?.id;
+    const {data:statusSubscription}=useQuery({
+        queryKey:["subscriptions", viewerId, creatorId],
+        queryFn:()=>SubscriptionsService.StatusSubscriptions(viewerId,creatorId),
+        enabled:!!viewerId&&!!creatorId
+    })
+    const handleToggleReactionSubscription=()=>{
+        const response={
+             viewerId: userDetail?.id,
+             creatorId: user?.id
+        }
+        toggleReactionSubscription(response)
+      
+    }
+    useEffect(() => {
+        setSubscribres(statusSubscription?.subscribed ?? false);
+      }, [statusSubscription?.subscribed]);
+
+    
     return (
         <div className="flex items-center sm:items-start justify-between sm:justify-start gap-3 min-w-0">
             <Link href={`/users/${user?.id}`} >
@@ -19,7 +55,7 @@ export const VideoOwner=({user,videoId})=>{
                     <div className="flex flex-col gap-1 min-w-0">
                     <UserInfo size="lg" name={user?.channel_name}/>
                     <span className="text-sm text-muted-foreground line-clamp-1">
-                        {0} subscribres
+                        {user?.subscriptions_subscriptions_creator_idTousers?.length} subscribres
                     </span>
                     </div>
                 </div>
@@ -37,9 +73,11 @@ export const VideoOwner=({user,videoId})=>{
                 ):(
                     <SubscriptionButton 
                     
-                    onClick={()=>{}}
+                    onClick={()=>{
+                        handleToggleReactionSubscription()
+                    }}
                     disabled={false}
-                    isSuscribed={false}
+                    isSuscribed={subscribres}
                     className="flex-none"
                     />
                 )

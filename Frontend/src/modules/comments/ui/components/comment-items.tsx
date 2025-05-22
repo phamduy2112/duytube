@@ -23,7 +23,7 @@ import CommentsSection from "@/modules/videos/sections/comments-section";
  export const CommentItem=({
     comment,
  }:CommentItemProps)=>{
-    const [isReplyOpen,setIsReplyOpen]=useState(false);
+    const [isReplyOpen,setIsReplyOpen]=useState(true);
     const [isRepliesOpen,setIsRepliesOpen]=useState(false);
     const variant="comment"
     const queryClient = useQueryClient();
@@ -60,9 +60,7 @@ import CommentsSection from "@/modules/videos/sections/comments-section";
             type:type,
         }
         toogleComment(response)
-        console.log(response)
     }
-    console.log(commentReactions)
     return(
             <>
                 <div className="flex gap-4">
@@ -163,7 +161,7 @@ import CommentsSection from "@/modules/videos/sections/comments-section";
       onClick={() => setIsRepliesOpen((current) => !current)}
     >
       {isRepliesOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
-      {comment?.other_comments.length} replies
+      {comment?.other_comments?.length} replies
     </Button>
   </div>
 )}
@@ -171,7 +169,7 @@ import CommentsSection from "@/modules/videos/sections/comments-section";
 
                 {comment?.other_comments?.length>0 && variant=="comment" && isRepliesOpen &&(
                     <CommentReplies
-                    
+                    commentReplies={comment}
                     parentId={comment.id}
                     video={comment.videoId}
                     />

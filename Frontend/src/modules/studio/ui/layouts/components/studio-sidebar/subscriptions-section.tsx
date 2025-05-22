@@ -1,7 +1,10 @@
 import { SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { UserAvatar } from "@/components/user-avatar";
-import { subscriptions } from "@/scripts/seed-catelogries";
+// import { subscriptions } from "@/scripts/seed-catelogries";
+import { SubscriptionsService } from "@/service/axios/subscriptions/subscriptions.service";
+import { useUser } from "@clerk/nextjs";
+import { useQuery } from "@tanstack/react-query";
 import { FlameIcon, HistoryIcon, HomeIcon, ListIcon, ListVideoIcon, PlaySquareIcon, ThumbsUpIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -23,26 +26,36 @@ export const LoadingSkeleton=()=>{
   export const SubscriptionsSection = () => {
    const isLoading=false
     const pathname=usePathname()
+    const {user}=useUser()
+
+    const {data}=useQuery({
+      queryKey:["subscriptions",user?.id],
+      queryFn:()=>SubscriptionsService.findMySubscriptions(user?.id),
+      enabled:!!user?.id,
+
+    })
+
+    console.log(data)
     return (
       <SidebarGroup>
         <SidebarGroupLabel>Subscriptions</SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu>
-            {subscriptions?.map((subscription) => (
+            {data?.map((subscription) => (
               <SidebarMenuItem key={`${subscription.creatorId}-${subscription.viewerID}`}>
                 <SidebarMenuButton asChild 
-                tooltip={subscription.user.name}
-                isActive={pathname===`/user/${subscription.user.id}`}
+                tooltip={subscription.channel_name	}
+                isActive={pathname===`/user/${subscription.id	}`}
                 
                 >
-                  <Link href={`/user/${subscription.user.id}`} className="flex items-center gap-4">
+                  <Link href={`/user/${subscription.id	}`} className="flex items-center gap-4">
                   <UserAvatar
                   size="xs"
-                  imageUrl={subscription.user.imageUrl}
-                  name={subscription.user.name}>
+                  imageUrl={subscription.avatar_url	}
+                  name={subscription.channel_name	}>
 
                   </UserAvatar>
-                  <span className="text-sm">{subscription.user.name}</span>
+                  <span className="text-sm">{subscription.channel_name	}</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>

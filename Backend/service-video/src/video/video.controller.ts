@@ -19,11 +19,26 @@ export class VideoController {
   async findAll() {
     return await this.videoService.findAll();
   }
-
+  @Get("user/:id")
+  async getVideoByUser(@Param("id") user_id:string){
+    console.log(user_id)
+    return await this.videoService.getVideoByUser(user_id)
+  }
   // Lấy video theo id
   @Get(':id')
-async findOne(@Param('id') id: string, @Body() body?: any) {
-  return await this.videoService.findOne(id, body?.userId);
+async findOne(@Param('id') id: string,  @Query('userId') userId?: string) {
+
+  return await this.videoService.findOne(id, userId);
+}
+
+@Get('/reactions/:id')
+async getLikeCountVideo(@Param("id") video_id:string){
+  return await this.videoService.getLikeCount(video_id)
+}
+
+@Post("toogle-reactions")
+async toogleReactionsVideo(@Body() body){
+  return await this.videoService.toogleReactions(body);
 }
 
   // Lấy video theo category
@@ -62,5 +77,17 @@ async findOne(@Param('id') id: string, @Body() body?: any) {
     return { videoId, views: count };
   }
   // 
+  @Get('/history/:id')
+  async getHistories(@Param("id") user_id:string){
+    return await this.videoService.getHistory(user_id);
+
+  }
+  @Get('/like/:id')
+  async getLikeVideoUser(@Param("id") user_id:string){
+    return await this.videoService.getLikeVideoByUser(user_id);
+
+  }
+
+
   
 }
