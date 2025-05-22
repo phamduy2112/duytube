@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { PlayIcon } from "lucide-react";
+import { ListVideoIcon, PlayIcon } from "lucide-react";
 import Image from "next/image";
 
 interface PlaylistThumbnailProps{
@@ -41,7 +41,10 @@ export const PlaylistThumbnail=({
             </div>
 
         </div>
-
+    <div className="absolute bottom-2 right-2 px-1 py-0.5 rounded bg-black/80 text-white text-xs font-medium flex items-center gap-x-1">
+    <ListVideoIcon className="size-4"/>
+    {0} videos
+    </div>
     </div>
    )
 }

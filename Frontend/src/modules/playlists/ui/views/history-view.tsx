@@ -5,6 +5,7 @@ import { HistorySidebar } from "../sections/history-sidebar-section";
 import { useUser } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
 import { VideoService } from "@/service/axios/videos/video";
+import { mockVideos } from "@/scripts/seed-catelogries";
 
 export const HistorygView = () => {
   const [inputValue, setInputValue] = useState(""); // Giá trị đang gõ
@@ -24,6 +25,7 @@ export const HistorygView = () => {
       history.videos?.title?.toLowerCase().includes(searchTerm.toLowerCase())
     );
   };
+  
 
   return (
     <div className="m-auto mb-10 px-4 my-auto flex flex-col gap-y-6">
@@ -34,12 +36,12 @@ export const HistorygView = () => {
         </p>
       </div>
 
-      <div className="flex justify-between gap-[5rem]">
-        <div className="w-[30rem] xl:w-[50rem]">
-          <HistoryVideosSection statusSubscription={filterHistoryVideos()} />
+      <div className="flex justify-between flex-col-reverse lg:flex-row lg:gap-[5rem]">
+        <div className="lg:w-[30rem] xl:w-[50rem]">
+          <HistoryVideosSection statusSubscription={mockVideos} />
         </div>
 
-        <div className="w-[20rem] xl:w-[20rem]">
+        <div className="lg:w-[20rem] xl:w-[20rem]">
           <HistorySidebar
             inputValue={inputValue}
             setInputValue={setInputValue}

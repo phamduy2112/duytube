@@ -2,13 +2,19 @@
 
 import { FilterCarousel } from "@/components/filter-carousel";
 import { categoryNames } from "@/scripts/seed-catelogries";
+import { ICategory } from "@/service/type/categories.type";
 import { Suspense, useState } from "react";
 
 interface categorySectionProps{
     categoryId?:string;
+    data: {
+        value: string;
+        label: string;
+    }[];
+    onChange:()=>void
 }
 
-export const CategoriesSection=({data,onChange,categoryId}:any)=>{
+export const CategoriesSection=({data,onChange,categoryId}:categorySectionProps)=>{
     return (
         <Suspense fallback="<p>Loading...</p>">
             <CategoriesSectionSuspense data={data} onChange={onChange} categoryId={categoryId}/>
@@ -19,7 +25,7 @@ const CategoriesSkeleton=()=>{
     return <FilterCarousel isLoading data={[]} onSelect={()=>{}}/>
     
 }
-export const CategoriesSectionSuspense=({data,onChange,categoryId}:any)=>{
+export const CategoriesSectionSuspense=({data,onChange,categoryId}:categorySectionProps)=>{
 
     return (
         <div>
@@ -34,7 +40,6 @@ export const CategoriesSectionSuspense=({data,onChange,categoryId}:any)=>{
 
            </FilterCarousel>
            <div className="mt-4">
-        ID được chọn: {categoryId ?? "Tất cả"}
       </div>
         </div>
     )

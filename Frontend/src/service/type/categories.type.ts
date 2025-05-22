@@ -1,11 +1,15 @@
+import { Video } from "@mux/mux-node/resources/index.mjs";
 
-export interface ICategories{
-    id:string;
-    name:string;
-    slug:string;
-    created_at:string;
-    update_at:string;
+
+export interface ICategory {
+  id: string;
+  name: string;
+  slug: string;
+  created_at?: Date;
+  updated_at?: Date;
+  videos: Video[];
 }
+
 export interface ICreateCategories{
     name:string;
     slug:string;

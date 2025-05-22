@@ -80,30 +80,30 @@ export const VideoRowCard=({
     const compactViews=useMemo(()=>{
         return Intl.NumberFormat("en",{
             notation:"compact"
-        }).format(data.viewCount);
-    },[data.viewCount])
+        }).format(data?.viewCount);
+    },[data?.viewCount])
     const compactLikes=useMemo(()=>{
         return Intl.NumberFormat("en",{
             notation:"compact"
-        }).format(data.likeCount);
-    },[data.likeCount])
+        }).format(data?.likeCount);
+    },[data?.likeCount])
     return (
 <div className={videoRowCardVariants({ size })}>
   <Link href={`/videos/${data?.id}`} className={"w-[150px] md:w-[38%]"}>
     <VideoThumbnail
-      imageUrl={data.thumbnailUrl}
-      previewUrl={data.previewUrl}
-      title={data.title}
-      duration={data.duration}
+      imageUrl={data?.thumbnailUrl}
+      previewUrl={data?.previewUrl}
+      title={data?.title}
+      duration={data?.duration}
     />
   </Link>
 
   <div className="flex-1 min-w-0">
     <div className="flex justify-between gap-x-2">
       <div className="flex-1 min-w-0">
-        <Link href={`/videos/${data.id}`}>
+        <Link href={`/videos/${data?.id}`}>
           <h3 className={cn("font-medium line-clamp-1", size === "compact" ? "text-sm" : "text-base")}>
-            {data.title}
+            {data?.title}
           </h3>
           {size === "default" && (
             <p className="text-xs text-muted-foreground mt-1">
@@ -130,7 +130,7 @@ export const VideoRowCard=({
             <Tooltip>
               <TooltipTrigger asChild>
                 <p className="text-xs text-muted-foreground w-fit line-clamp-1">
-                  {data.description ?? "No description"}
+                  {data?.description ?? "No description"}
                 </p>
               </TooltipTrigger>
               <TooltipContent className="bg-black/70" side="bottom" align="center">
@@ -151,7 +151,7 @@ export const VideoRowCard=({
       </div>
 
       <div className="flex-none">
-        <VideoMenu videoId={data.id} onRemove={onRemove} />
+        <VideoMenu videoId={data?.id} onRemove={onRemove} />
       </div>
     </div>
   </div>

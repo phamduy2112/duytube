@@ -2,14 +2,15 @@ import { InfiniteScroll } from "@/components/infinite-scroll"
 import { VideoGridCard } from "@/modules/videos/ui/components/video-grid-card"
 import { mockVideos } from "@/scripts/seed-catelogries"
 import { VideoService } from "@/service/axios/videos/video"
+import { IVideo } from "@/service/type/video.type"
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
 import { useMemo } from "react"
 
 interface HomeVideosSectionProps{
-    categoryId?:string
+    data:IVideo[]
 }
 
-export const HomeVideoSection=({categoryId}:HomeVideosSectionProps)=>{
+export const HomeVideoSection=()=>{
  // Giả lập phân trang trên client (nếu API trả về toàn bộ data)
 const pageSize = 3;
 
@@ -38,7 +39,7 @@ const {
   },
   initialPageParam: 0,
 });
-console.log(data)
+
     return (
 <div className="w-[full] px-4">
             <div className="gap-4 gap-y-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4

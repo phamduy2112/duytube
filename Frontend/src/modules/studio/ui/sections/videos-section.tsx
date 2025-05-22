@@ -18,7 +18,7 @@ const ITEMS_PER_PAGE = 2;
 const VideosSectionSkeleton=()=>{
 
     return (
-        <Table className="w-[1650px]">
+        <Table className="w-[800px] lg:w-[1200px] 2xl:w-[1650px]">
                     <TableHeader className="">
                         <TableRow>
                             <TableHead className="pl-6 w-[510px]">Video</TableHead>

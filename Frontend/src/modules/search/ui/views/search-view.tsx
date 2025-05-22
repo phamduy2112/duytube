@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
 import categoriesApi from "@/service/axios/categories/categories.api";
 import { VideoService } from "@/service/axios/videos/video";
+import { ICategory } from "@/service/type/categories.type";
 
 interface PageProps{
     query:any
@@ -24,7 +25,7 @@ export const SearchView=({
         queryFn: ()=> categoriesApi.getCategory()
     })
         const dataCategories = useMemo(() => {
-          return categories?.content?.map((category) => ({
+          return categories?.content?.map((category:ICategory) => ({
             value: category.id,
             label: category.name,
           })) || [];

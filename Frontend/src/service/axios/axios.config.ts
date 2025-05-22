@@ -8,6 +8,6 @@ import axios, { AxiosInstance } from 'axios'
 // }
 
 export const axiosWithAuth = axios.create({
-    baseURL: "http://localhost:8080/",
+    baseURL: "https://05ac-123-21-155-211.ngrok-free.app/",
         timeout: 180_000,
 });

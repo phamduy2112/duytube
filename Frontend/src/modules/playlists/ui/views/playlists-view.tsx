@@ -12,7 +12,7 @@ interface HomeViewProps{
 
 export const PlayListsView=()=>{
     return (
-        <div className=" max-w-[1650px] w-[100%] mx-auto mb-10 px-4 pt-2.5 flex flex-col gap-y-6">
+        <div className="w-[350px] sm:w-[600px] md:w-[700px] lg:w-[1000px] xl:w-[1100px] [@media(min-width:1560px)]:w-[1350px]  [@media(min-width:1920px)]:w-[1650px]   mx-auto mb-10 px-4 pt-2.5 flex flex-col gap-y-6">
                 {/*  */}
                
            <div className="flex justify-between items-center">
@@ -30,6 +30,7 @@ export const PlayListsView=()=>{
                 <PlusIcon/>
              </Button>
            </div>
+
            <PlayListsSection/>
            
   
