@@ -6,5 +6,7 @@ async function bootstrap() {
   app.enableCors();
   app.use('/webhooks/clerk', express.raw({ type: '*/*' }));
   await app.listen(process.env.PORT ?? 8080);
+  console.log(`Listening on port ${process.env.PORT}`)
+
 }
 bootstrap();
