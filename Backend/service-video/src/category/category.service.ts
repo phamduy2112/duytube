@@ -10,7 +10,7 @@ export class CategoryService {
           const categories=await this.prismaService.categories.findMany();
           return this.response.responseSend(categories,"Successfully",200)
         } catch (error) {
-          
+          console.log(error)
         }
     
       }

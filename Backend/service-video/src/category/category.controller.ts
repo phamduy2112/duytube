@@ -9,7 +9,10 @@ export class CategoryController {
   findAll() {
     return this.categoryService.findAll();
   }
-
+  @Get("/get")
+  findAllA() {
+    return [{ id: 1, name: 'Dien thoai' }];
+  }
   @Get('limit')
   findLimit(@Query('limit') limit: string) {
     return this.categoryService.findLimit(+limit);
