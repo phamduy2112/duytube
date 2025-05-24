@@ -14,8 +14,8 @@ export class VideoService {
     private readonly response: ResponseService,
   ) {
     const muxClient = new Mux({
-      tokenId: process.env.MUX_TOKEN_ID,
-      tokenSecret: process.env.MUX_TOKEN_SECRET,
+      tokenId: "979ef3f7-8800-499a-8429-e3626146a2e4",
+      tokenSecret: "UPN8ulYgp4jalwi3JormkIyEpzu+5dq3IXYJ2inJx/bUX1riQgU9nnRHwIy/yrkKTKIFHtNrsPV",
     });
 
     this.uploads = muxClient.video.uploads;

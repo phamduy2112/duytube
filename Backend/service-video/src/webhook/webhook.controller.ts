@@ -13,7 +13,7 @@ private prisma:PrismaService
   async handleGet(@Body() payload: any) {
     return await this.userService.getUserClerk(payload);
   }
-  @Post('mux/webhook')
+  @Post('/mux/webhook')
   async handleWebhook(@Body() body: any, @Headers() headers: any) {
     console.log('📦 Mux webhook received:', body);
 
@@ -36,7 +36,7 @@ private prisma:PrismaService
 
     return { received: true };
   }
-  @Post('clerk/webhook')
+  @Post('/clerk/webhook')
     async handleWebshook(@Body() body:any){
       return await this.userService.createFromClerk(body)
     }
