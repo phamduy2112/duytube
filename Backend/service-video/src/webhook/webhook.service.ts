@@ -31,7 +31,7 @@ export class WebhookService {
       },
     });
   
-    return existingUser;
+    return response;
   }
   async getUserClerk(data){
     

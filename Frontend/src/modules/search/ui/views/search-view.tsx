@@ -8,6 +8,7 @@ import { useEffect, useMemo, useState } from "react";
 import categoriesApi from "@/service/axios/categories/categories.api";
 import { VideoService } from "@/service/axios/videos/video";
 import { ICategory } from "@/service/type/categories.type";
+import { IVideo } from "@/service/type/video.type";
 
 interface PageProps{
     query:any
@@ -35,16 +36,14 @@ export const SearchView=({
             queryFn:()=>VideoService.searchVideo(query),
             enabled:!!query,
         })
-      console.log(data)
       const dataVideos = useMemo(() => {
         if (!data) return [];
       
         return categoryId
-          ? data.filter((item) => item.category_id === categoryId)
+          ? data.filter((item:IVideo) => item.category_id === categoryId)
           : data;
       }, [data, categoryId]);
       
-        console.log("categoryId",categoryId)
     return(
         <div className="max-w-[1300px] mx-auto mb-10 flex flex-col gap-y-6 px-4 pt-2.5">
       <CategoriesSection data={dataCategories} categoryId={categoryId} onChange={setCategoryId} />

@@ -1,8 +1,6 @@
 "use client";
 
 import { FilterCarousel } from "@/components/filter-carousel";
-import { categoryNames } from "@/scripts/seed-catelogries";
-import { ICategory } from "@/service/type/categories.type";
 import { Suspense, useState } from "react";
 
 interface categorySectionProps{
@@ -11,7 +9,7 @@ interface categorySectionProps{
         value: string;
         label: string;
     }[];
-    onChange:()=>void
+    onChange:(id:string)=>string
 }
 
 export const CategoriesSection=({data,onChange,categoryId}:categorySectionProps)=>{
@@ -34,7 +32,6 @@ export const CategoriesSectionSuspense=({data,onChange,categoryId}:categorySecti
            data={data}
             onSelect={(id) => {
           console.log("Selected ID:", id); // lấy ra ID tại đây
-          onChange(id);
         }}
            >
 

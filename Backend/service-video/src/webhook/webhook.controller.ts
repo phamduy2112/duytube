@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { WebhookService } from './webhook.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 
-@Controller('mux')
+@Controller('')
 export class WebhookController {
   constructor(private readonly userService: WebhookService,
 private prisma:PrismaService
@@ -13,7 +13,7 @@ private prisma:PrismaService
   async handleGet(@Body() payload: any) {
     return await this.userService.getUserClerk(payload);
   }
-  @Post('webhook')
+  @Post('mux/webhook')
   async handleWebhook(@Body() body: any, @Headers() headers: any) {
     console.log('📦 Mux webhook received:', body);
 
@@ -36,6 +36,11 @@ private prisma:PrismaService
 
     return { received: true };
   }
+  @Post('clerk/webhook')
+    async handleWebshook(@Body() body:any){
+      return await this.userService.createFromClerk(body)
+    }
+  
 
   // @Post()
   // async handleWebhook(@Body() payload: any) {

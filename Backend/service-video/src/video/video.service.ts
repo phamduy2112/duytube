@@ -1,7 +1,8 @@
 import Mux from '@mux/mux-node';
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { ResponseService } from 'src/model/response';
+import { IResponse, ResponseService } from 'src/model/response';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { IVideo } from 'src/type/video.type';
 
 @Injectable()
 export class VideoService {
@@ -99,19 +100,16 @@ export class VideoService {
   }
 
   // Lấy tất cả video
-  async findAll() {
-    const videos = await this.prismaService.videos.findMany({
-      orderBy: { created_at: 'desc' },
-      include:{
-        users:{
-          
-        }
-      }
-    });
+async findAll() {
+  const videos = await this.prismaService.videos.findMany({
+    orderBy: { created_at: 'desc' },
+    include: {
+      users: true
+    }
+  });
 
-
-    return this.response.responseSend(videos, 'Videos fetched successfully', 200);
-  }
+  return this.response.responseSend(videos, 'Videos fetched successfully', 200);
+}
   async findVideoByUser(userId){
     try {
       const user = await this.prismaService.users.findFirst({

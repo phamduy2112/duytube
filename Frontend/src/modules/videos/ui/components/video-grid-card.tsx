@@ -29,7 +29,7 @@ export const VideoGridCard=({data,onRemove}:VideoGridCardProps)=>{
                 </VideoThumbnail>
 
                 <div className="mt-[.5rem]">
-      {/* <VideoInfo data={data} /> */}
+      <VideoInfo data={data} />
 
                 </div>
           

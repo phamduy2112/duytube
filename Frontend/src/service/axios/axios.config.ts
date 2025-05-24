@@ -8,6 +8,6 @@ import axios, { AxiosInstance } from 'axios'
 // }
 
 export const axiosWithAuth = axios.create({
-    baseURL: "https://05ac-123-21-155-211.ngrok-free.app/",
+    baseURL: "https://duytube-production.up.railway.app/",
         timeout: 180_000,
 });

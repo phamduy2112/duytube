@@ -9,8 +9,12 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 
+interface TypeVideoOwner{
+    user:String,
+    videoId:String,
+}
 
-export const VideoOwner=({user,videoId})=>{
+export const VideoOwner=({user,videoId}:TypeVideoOwner)=>{
 
     const {userId:clerkUserId}=useAuth()
     const {user:userDetail}=useUser()
