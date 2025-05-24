@@ -3,7 +3,7 @@ import { axiosWithAuth } from "../axios.config"
 export class AuthService{
   
     static async createUser(data:any){
-        const response=await axiosWithAuth.post("webhook",data)
+        const response=await axiosWithAuth.post("clerk/webhook",data)
         return response.data
     }
     static async getUser(data:any){
