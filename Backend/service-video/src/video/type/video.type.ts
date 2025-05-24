@@ -1,5 +1,6 @@
 import { ICategory } from 'src/category/type/category.type';
 import { IUser } from 'src/type/user.type';
+import { IPlaylistVideo } from 'src/type/video.type';
 
 
 export interface IVideo {
