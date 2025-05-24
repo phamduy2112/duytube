@@ -24,7 +24,8 @@ export class VideoService {
 
   // Tạo video và lấy upload_url từ Mux
   async create(data: { title: string; user_id: string; description?: string;category_id:string}) {
-    const user = await this.prismaService.users.findFirst({
+ try {
+     const user = await this.prismaService.users.findFirst({
       where: {
         clerk_user_id: data.user_id
       }
@@ -56,9 +57,13 @@ export class VideoService {
       video,
       upload_url: upload.url,
     };
+ } catch (error) {
+  console.log(error )
+ }
   }
   async checkMuxUploadStatus(uploadId: string) {
-    const upload = await this.uploads.retrieve(uploadId);
+   try {
+     const upload = await this.uploads.retrieve(uploadId);
   
     // Nếu Mux đã gán asset_id cho upload thì video đã xử lý xong
     if (upload.asset_id) {
@@ -83,6 +88,9 @@ export class VideoService {
     }
   
     return { status: 'processing' };
+   } catch (error) {
+    console.log(error)
+   }
   }
   
   // Tạo user
