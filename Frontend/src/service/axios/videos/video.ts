@@ -6,6 +6,15 @@ export class VideoService{
         const response=await axiosWithAuth.get("videos")
         return response.data
     }
+    static async getVideoLimit(limit:number){
+        try {
+            const response=await axiosWithAuth.get(`videos/limit/${limit}`);
+        return response.data
+        } catch (error) {
+            
+        }
+
+    }
     static async getVideoDetail(data){
         console.log(data)
         const response=await axiosWithAuth.get(`videos/${data.id}`,

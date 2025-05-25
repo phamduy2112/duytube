@@ -21,7 +21,16 @@ export class VideoService {
     this.uploads = muxClient.video.uploads;
     this.assets = muxClient.video.assets;
   }
-
+ async findLimit(limit:number){
+        try {
+          const videos = await this.prismaService.videos.findMany({
+            take: limit
+          });
+          return this.response.responseSend(videos,"Successfully",200)
+        } catch (error) {
+          
+        }
+      }
   // Tạo video và lấy upload_url từ Mux
   async create(data: { title: string; user_id: string; description?: string;category_id:string}) {
  try {
@@ -41,7 +50,7 @@ export class VideoService {
       },
       cors_origin: '*', // ⚠️ rất quan trọng!
     });
-    console.log(upload)
+  
     const video = await this.prismaService.videos.create({
       data: {
         title: data.title,
@@ -112,7 +121,8 @@ async findAll() {
   const videos = await this.prismaService.videos.findMany({
     orderBy: { created_at: 'desc' },
     include: {
-      users: true
+      users: true,
+      video_views:true,
     }
   });
 
@@ -138,7 +148,7 @@ async findAll() {
           users:true,
         }
       })
-      return response
+    return this.response.responseSend(response, 'Video updated successfully', 200);
     } catch (error) {
       
     }
@@ -182,7 +192,7 @@ async findAll() {
         }
       }
     })
-    return videos
+    return this.response.responseSend(videos,"Successfully",200)
   }
   
   // Lấy một video theo id

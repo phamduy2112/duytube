@@ -26,9 +26,9 @@ const {
     const start = pageParam * pageSize;
     const end = start + pageSize;
     return {
-      content: allVideos.content.slice(start, end),
+      content: allVideos.data.slice(start, end),
       currentPage: pageParam,
-      totalPages: Math.ceil(allVideos.content.length / pageSize),
+      totalPages: Math.ceil(allVideos.data.length / pageSize),
     };
   },
   getNextPageParam: (lastPage) => {
@@ -39,6 +39,7 @@ const {
   },
   initialPageParam: 0,
 });
+console.log(data)
 
     return (
 <div className="w-[full] px-4">

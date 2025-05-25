@@ -25,7 +25,8 @@ export const HistorygView = () => {
       history.videos?.title?.toLowerCase().includes(searchTerm.toLowerCase())
     );
   };
-  
+
+  console.log(statusSubscription)
 
   return (
     <div className="m-auto mb-10 px-4 my-auto flex flex-col gap-y-6">
@@ -38,7 +39,13 @@ export const HistorygView = () => {
 
       <div className="flex justify-between flex-col-reverse lg:flex-row lg:gap-[5rem]">
         <div className="lg:w-[30rem] xl:w-[50rem]">
-          <HistoryVideosSection statusSubscription={mockVideos} />
+       {
+  Array.isArray(statusSubscription) && statusSubscription.length > 0 ? (
+    <HistoryVideosSection statusSubscription={filterHistoryVideos()} />
+  ) : (
+    <>Chưa có lịch sử video</>
+  )
+}
         </div>
 
         <div className="lg:w-[20rem] xl:w-[20rem]">

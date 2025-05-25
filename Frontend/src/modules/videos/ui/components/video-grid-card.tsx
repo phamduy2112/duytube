@@ -20,8 +20,8 @@ export const VideoGridCard=({data,onRemove}:VideoGridCardProps)=>{
             <Link href={`/videos/${data?.id}`}>
             <VideoThumbnail 
             data={data}
-            imageUrl={data?.thumbnailUrl}
-            previewUrl={data?.previewUrl}
+            imageUrl={data?.mux_playback_id}
+            previewUrl={data?.mux_playback_id}
             title={data?.title}
             duration={data?.duration}
             >

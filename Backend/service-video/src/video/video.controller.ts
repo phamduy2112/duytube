@@ -40,6 +40,10 @@ async getLikeCountVideo(@Param("id") video_id:string){
 async toogleReactionsVideo(@Body() body){
   return await this.videoService.toogleReactions(body);
 }
+@Get("limit/:id")
+async findLimit(@Param('id') id: string){
+  return await this.videoService.findLimit(+id);
+}
 
   // Lấy video theo category
   @Get('/category/:id')

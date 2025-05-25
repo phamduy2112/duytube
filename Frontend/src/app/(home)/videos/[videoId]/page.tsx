@@ -25,7 +25,7 @@ const Page = async ({ params }: PageProps) => {
       // }
     
     return(
-        <div className="pt-16">
+        <div className="">
            
             {/* <FormSectionSuspense videoId={videoId} /> */}
 

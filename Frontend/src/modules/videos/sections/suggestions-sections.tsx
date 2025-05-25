@@ -4,6 +4,8 @@ import { VideoRowCard, VideoRowCardSkeleton } from '../ui/components/video-row-c
 import { InfiniteScroll } from '@/components/infinite-scroll'
 import { VideoGridCardSkeleton } from '../ui/components/video-grid-card';
 import { mockVideos } from '@/scripts/seed-catelogries';
+import { useQuery } from '@tanstack/react-query';
+import { VideoService } from '@/service/axios/videos/video';
 
 interface SuggestionsSectionProps{
     videoId:string;
@@ -44,7 +46,12 @@ function SuggestionsSectionSuspense({
     isManual
 }:SuggestionsSectionProps) {
 const suggestedVideos = mockVideos.filter((item) => item.id !== String(videoId));
-
+// getVideoLimit
+   const {data:videoLimit}=useQuery({
+        queryKey:['video_limit',10],
+        queryFn: ()=> VideoService.getVideoLimit(10)
+    })
+console.log(videoLimit)
   return (
   <>
     <div className='hidden md:block space-y-3'>

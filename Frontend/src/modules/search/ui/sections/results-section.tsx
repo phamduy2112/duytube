@@ -51,7 +51,7 @@ export const ResultsSection=({
             <div className="hidden flex-col gap-4 md:flex">
                 {
                      data.map((video)=>(
-                        <div className="w-[35rem]" key={video.id} >
+                        <div className="xl:w-[60rem] 2xl:w-[70rem]" key={video.id} >
 
 <VideoRowCard data={video} size="default"/>
                         </div>

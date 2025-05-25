@@ -91,8 +91,8 @@ export const VideoRowCard=({
 <div className={videoRowCardVariants({ size })}>
   <Link href={`/videos/${data?.id}`} className={"w-[150px] md:w-[38%]"}>
     <VideoThumbnail
-      imageUrl={data?.thumbnailUrl}
-      previewUrl={data?.previewUrl}
+      imageUrl={data?.mux_playback_id}
+      previewUrl={data?.mux_playback_id}
       title={data?.title}
       duration={data?.duration}
     />
