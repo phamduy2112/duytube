@@ -301,7 +301,8 @@ async findAll() {
 
     // tim kiem video
     async searchVideos(keyword:string) {
-      const response = await this.prismaService.videos.findMany({
+     try {
+       const response = await this.prismaService.videos.findMany({
         where: {
           title: {
             contains: keyword,
@@ -314,11 +315,12 @@ async findAll() {
           }
         }
       });
-      // console.log(response1)
-      // const response=await this.prismaService.videos.findMany();
-  
-    
-      return response
+
+         return this.response.responseSend(response, 'Search video successfully', 200);
+
+     } catch (error) {
+      return error      
+     }
     }
     // 
     async toogleReactions(dto: { clerk_user_id: string; video_id: string; type: string }) {
@@ -422,7 +424,8 @@ async findAll() {
           
           }
         })
-        return getHistoryUser
+              return this.response.responseSend(getHistoryUser, 'Search video successfully', 200);
+
       } catch (error) {
         
       }

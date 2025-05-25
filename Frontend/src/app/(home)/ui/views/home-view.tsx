@@ -14,7 +14,7 @@ export const HomeView = () => {
         queryFn: ()=> categoriesApi.getCategory()
     })
     const dataCategories = useMemo(() => {
-      return data?.content?.map((category:ICategory ) => ({
+      return data?.data?.map((category:ICategory ) => ({
         value: category.id,
         label: category.name,
       })) || [];

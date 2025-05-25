@@ -1,9 +1,12 @@
 import { Injectable } from '@nestjs/common';
+import { ResponseService } from 'src/model/response';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class CommentService {
-    constructor(private prisma:PrismaService){}
+    constructor(private prisma:PrismaService,
+      private response:ResponseService,
+    ){}
       // Thêm comment hoặc reply
       async create(data: {
         content: string;
@@ -33,7 +36,7 @@ export class CommentService {
 
   // Lấy danh sách comment + reply của video
   async findByVideo(videoId: string) {
-    return this.prisma.comments.findMany({
+    const response= this.prisma.comments.findMany({
       where: {
         video_id: videoId,
         parent_id: null, // chỉ lấy comment cha
@@ -53,6 +56,8 @@ export class CommentService {
         created_at: 'desc',
       },
     });
+    return this.response.responseSend(response, "Successfully", 200);
+
   }
   
   
