@@ -13,6 +13,7 @@ import { Globe2Icon, LockIcon } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useUser } from "@clerk/nextjs";
 import { useVideoOfUser } from "@/hooks/api/use-video-of-user";
+import { IVideo } from "@/service/type/video.type";
 const ITEMS_PER_PAGE = 2;
 
 const VideosSectionSkeleton=()=>{
@@ -75,27 +76,9 @@ const VideosSectionSkeleton=()=>{
 
 export const VideosSection = () => {
   const {user}=useUser()
-  console.log(user?.id)
-  const {data:VideosOfUser}=useVideoOfUser(user?.id);
-  let listVideo=VideosOfUser?.content
-    const [page, setPage] = useState(1);
-    const [data, setData] = useState(VideosOfUser?.content?.slice(0, ITEMS_PER_PAGE));
-    const [isFetching, setIsFetching] = useState(false);
-    const hasNextPage = data?.length < VideosOfUser?.content?.length;
-
-    const fetchNextPage = () => {
-        if (!hasNextPage) return;
-
-        setIsFetching(true); 
-        setTimeout(() => {
-            const nextData = mockVideos.slice(0, (page + 1) * ITEMS_PER_PAGE);
-            setData(nextData);
-            setPage(prev => prev + 1);
-            setIsFetching(false);
-        }, 1000); // giả lập fetch
-    };
-    console.log(VideosOfUser?.content) 
-    const router=useRouter();
+const userId = user?.id;
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useVideoOfUser(userId);
+  console.log(data?.pages?.content)
     return (
         <div className="w-full overflow-x-auto">
             <div className="border-y">
@@ -112,7 +95,7 @@ export const VideosSection = () => {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-  {VideosOfUser?.content?.map((video) => (
+  {data?.pages?.content?.map((video:IVideo) => (
     <TableRow
       onClick={() => router.push(`/studio/videos/${video.id}`)}
       className="cursor-pointer"
@@ -167,12 +150,12 @@ export const VideosSection = () => {
 
                 </Table>
             </div>
-            <InfiniteScroll
+            {/* <InfiniteScroll
                 hasNextPage={hasNextPage}
                 isFetchingNextPage={isFetching}
                 fetchNextPage={fetchNextPage}
                 isManual={false} // hoặc true nếu muốn chỉ bấm nút để load
-            />
+            /> */}
 
         </div>
     );

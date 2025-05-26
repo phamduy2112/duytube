@@ -31,7 +31,6 @@ export const CategoriesSectionSuspense=({data,onChange,categoryId}:categorySecti
            value={categoryId}
            data={data}
             onSelect={(id) => {
-          console.log("Selected ID:", id); // lấy ra ID tại đây
         }}
            >
 

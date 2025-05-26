@@ -1,4 +1,4 @@
-import { ICategory } from "../category/type/category.type";
+import { ICategory } from '@/service/type/categories.type';
 import { IUser } from "./user.type";
 
 export interface IVideo {

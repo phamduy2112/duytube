@@ -33,8 +33,7 @@ export const ResultsSection=({
 }:ResultsSectionProps)=>{
 
     const isMobile=useIsMobile();
-    // const results=[{}]
-     console.log(data)
+  
     
         
         

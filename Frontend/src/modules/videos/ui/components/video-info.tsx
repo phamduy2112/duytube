@@ -27,15 +27,17 @@ export const VideoInfoSkeleton=()=>{
 
 export const VideoInfo=({data,onRemove}:VideoInfoProps)=>{
     // console.log(data)
-//   const compactViews=useMemo(()=>{
-//         return Intl.NumberFormat("en",{
-//             notation:"compact"
-//         }).format(data.viewCount);
-//     },[data.viewCount])
+    const length = Array.isArray(data?.video_views) ? data.video_views.length : 0;
+
+  const compactViews=useMemo(()=>{
+        return Intl.NumberFormat("en",{
+            notation:"compact"
+        }).format(length);
+    },[length])
   const compactDate=useMemo(()=>{
         return formatDistanceToNow(data?.updated_at,{addSuffix:true})
     },[data?.updated_at])
-    
+    console.log(length)
 return (
     <div className="flex gap-3 justify-between">
 
@@ -54,7 +56,7 @@ return (
     
 <UserInfo name={data?.users?.channel_name}/>
     <p className="text-sm text-gray-600 line-clamp-1">
-        {0} views * {compactDate}
+        {compactViews} views * {compactDate}
         </p>
 
        </div>

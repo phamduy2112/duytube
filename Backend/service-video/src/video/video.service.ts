@@ -24,7 +24,12 @@ export class VideoService {
  async findLimit(limit:number){
         try {
           const videos = await this.prismaService.videos.findMany({
-            take: limit
+            take: limit,
+             include: {
+      users: true,
+      video_views:true,
+      video_reactions:true
+    }
           });
           return this.response.responseSend(videos,"Successfully",200)
         } catch (error) {
@@ -123,6 +128,7 @@ async findAll() {
     include: {
       users: true,
       video_views:true,
+      video_reactions:true
     }
   });
 
@@ -144,9 +150,11 @@ async findAll() {
         where:{
           user_id:userId
         },
-        include:{
-          users:true,
-        }
+       include: {
+      users: true,
+      video_views:true,
+      video_reactions:true
+    }
       })
     return this.response.responseSend(response, 'Video updated successfully', 200);
     } catch (error) {

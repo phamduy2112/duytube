@@ -135,10 +135,12 @@ async toggleLike(userId: string, dto: { comment_id: string; type: string })
       },
     }),
   ])
-  return {
+  const response={
     like: likeCount,
     unlike: unlikeCount,
-  };
+  }
+      return this.response.responseSend(response, "Successfully", 200);
+
  }
 
 }
