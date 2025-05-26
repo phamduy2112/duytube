@@ -1,4 +1,4 @@
-import { ICategory } from '@/service/type/categories.type';
+import { ICategory } from "src/category/type/category.type";
 import { IUser } from "./user.type";
 
 export interface IVideo {
@@ -19,7 +19,7 @@ export interface IVideo {
   playlist_videos: IPlaylistVideo[];
   video_reactions: IVideoReaction[];
   video_views: IVideoView[];
-  categories?: ICategory | null;
+  categories?: ICategory[] | null;
   users: IUser;
 }
 export interface IVideoView {
