@@ -52,9 +52,9 @@ export class PlaylistsController {
     return this.playlistsService.update(+id, updatePlaylistDto);
   }
 
-  @Delete('')
-  remove(@Body body:any) {
-  const {playlist_id, video_id, type}=body;
-    return this.playlistsService.removeVideoFromPlaylist(playlist_id, video_id, type);
-  }
+@Delete('')
+remove(@Body() body: any) {
+  const { playlist_id, video_id, type } = body;
+  return this.playlistsService.removeVideoFromPlaylist(playlist_id, video_id, type);
+}
 }
