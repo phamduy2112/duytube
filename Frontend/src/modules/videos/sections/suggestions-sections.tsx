@@ -6,6 +6,7 @@ import { VideoGridCardSkeleton } from '../ui/components/video-grid-card';
 import { mockVideos } from '@/scripts/seed-catelogries';
 import { useQuery } from '@tanstack/react-query';
 import { VideoService } from '@/service/axios/videos/video';
+import { Button } from '@/components/ui/button';
 
 interface SuggestionsSectionProps{
     videoId:string;
@@ -54,7 +55,18 @@ const suggestedVideos = mockVideos.filter((item) => item.id !== String(videoId))
   return (
   <>
     <div className='hidden md:block space-y-3'>
-        
+        <div className='flex gap-[.5rem]'>
+            <Button>
+                Tat ca
+            </Button>
+            <Button variant={"outline"}>
+                Video vua xem
+            </Button>
+            <Button variant={"outline"}>
+                Da xem
+            </Button>
+           
+        </div>
     {videoLimit?.data?.map((video) => {
  return <VideoRowCard
     key={video.id}
@@ -65,6 +77,18 @@ const suggestedVideos = mockVideos.filter((item) => item.id !== String(videoId))
 
     </div>
     <div className='block md:hidden space-y-10'>
+           <div className='flex gap-[.5rem]'>
+            <Button>
+                Tat ca
+            </Button>
+            <Button variant={"outline"}>
+                Video vua xem
+            </Button>
+            <Button variant={"outline"}>
+                Da xem
+            </Button>
+           
+        </div>
         {videoLimit?.data?.map((video) => {
   return (
     <VideoRowCard

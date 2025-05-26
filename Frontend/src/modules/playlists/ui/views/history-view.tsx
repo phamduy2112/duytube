@@ -17,16 +17,17 @@ export const HistorygView = () => {
     queryFn: () => VideoService.historyVideo(user.id),
     enabled: !!user?.id,
   });
+  const hisotryVideo=statusSubscription?.data
 
   const filterHistoryVideos = () => {
-    if (!statusSubscription || !Array.isArray(statusSubscription)) return [];
+    if (!hisotryVideo || !Array.isArray(hisotryVideo)) return [];
 
-    return statusSubscription.filter((history: any) =>
+    return hisotryVideo.filter((history: any) =>
       history.videos?.title?.toLowerCase().includes(searchTerm.toLowerCase())
     );
   };
 
-  console.log(statusSubscription)
+  console.log(hisotryVideo)
 
   return (
     <div className="m-auto mb-10 px-4 my-auto flex flex-col gap-y-6">
@@ -40,7 +41,7 @@ export const HistorygView = () => {
       <div className="flex justify-between flex-col-reverse lg:flex-row lg:gap-[5rem]">
         <div className="lg:w-[30rem] xl:w-[50rem]">
        {
-  Array.isArray(statusSubscription) && statusSubscription.length > 0 ? (
+  Array.isArray(hisotryVideo) && hisotryVideo.length > 0 ? (
     <HistoryVideosSection statusSubscription={filterHistoryVideos()} />
   ) : (
     <>Chưa có lịch sử video</>

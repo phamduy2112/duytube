@@ -70,10 +70,11 @@ export const CommentForm = ({
       ...(variant === "reply" && { parentId }),
     }
 
-    console.log(response)
+   
     mutate(response);
     toast.success("Thanh cong")
   };
+const value = form.watch("value"); // 👈 theo dõi giá trị textarea
 
   return (
     <Form {...form}>
@@ -116,9 +117,14 @@ export const CommentForm = ({
                 Cancel
               </Button>
             )}
-            <Button type="submit" size="sm">
-              {variant === "reply" ? "Reply" : "Comment"}
-            </Button>
+       <Button
+  type="submit"
+  size="sm"
+  disabled={!value?.trim()}
+  className={!value?.trim() ? "opacity-50 cursor-not-allowed" : ""}
+>
+  {variant === "reply" ? "Reply" : "Comment"}
+</Button>
           </div>
         </div>
       </form>

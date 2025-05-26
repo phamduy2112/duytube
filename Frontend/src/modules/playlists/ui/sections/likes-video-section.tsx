@@ -26,22 +26,22 @@ import { useQuery } from "@tanstack/react-query"
 // }
 export const LikedVideosSection=()=>{
     const {user}=useUser()
-    const {data}=useQuery({
+    const {data:videoLike}=useQuery({
          queryKey: ["liked-video", user?.id],
-            queryFn: () => VideoService.historyVideo(user.id),
+            queryFn: () => VideoService.getLikeVideoUser(user.id),
             enabled: !!user?.id,
     });
-    console.log(data)
+    console.log(videoLike?.data)
     return (
         <div>
             <div className="flex flex-col gap-4 gap-y-10 md:hidden">
-  {mockVideos.map((video)=>(
-                <VideoGridCard key={video.id} data={video}/>
+  {videoLike?.data?.map((video)=>(
+                <VideoGridCard key={video.id} data={video?.videos}/>
             ))}
             </div>
-            <div className="hidden flex-col gap-4 gap-y-10 md:flex">
-  {mockVideos.map((video)=>(
-                <VideoRowCard key={video.id} data={video} size="default"/>
+            <div className="hidden flex-col gap-4 gap-y-10 md:flex w-[40rem] my-auto">
+  {videoLike?.data?.map((video)=>(
+                <VideoRowCard key={video.id} data={video?.videos} size="default"/>
             ))}
             </div>
           

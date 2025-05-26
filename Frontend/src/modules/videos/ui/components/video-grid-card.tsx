@@ -19,7 +19,6 @@ export const VideoGridCard=({data,onRemove}:VideoGridCardProps)=>{
         <div className="flex flex-col gap-2 w-full group">
             <Link href={`/videos/${data?.id}`}>
             <VideoThumbnail 
-            data={data}
             imageUrl={data?.mux_playback_id}
             previewUrl={data?.mux_playback_id}
             title={data?.title}

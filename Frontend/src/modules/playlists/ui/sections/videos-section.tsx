@@ -30,17 +30,17 @@ export const VideosSection=({playlistId})=>{
         queryFn:()=>PlaylistsService.getDetailPlaylists(playlistId),
         enabled:!!playlistId
     })
-    console.log(playlistDetail)
+    console.log("playlistDetail",playlistDetail)
     return (
         <div>
             <div className="flex flex-col gap-4 gap-y-10 md:hidden">
-  {playlistDetail?.playlist_videos?.map((video)=>(
-                <VideoGridCard key={video.id} data={video}/>
+  {playlistDetail?.data?.playlist_videos?.map((video)=>(
+                <VideoGridCard key={video.id} data={video?.videos}/>
             ))}
             </div>
             <div className="hidden flex-col gap-4 gap-y-10 md:flex">
-  {playlistDetail?.playlist_videos.map((video)=>(
-                <VideoRowCard key={video.id} data={video} size="default"/>
+  {playlistDetail?.data?.playlist_videos.map((video)=>(
+                <VideoRowCard key={video.id} data={video?.videos} size="default"/>
             ))}
             </div>
           

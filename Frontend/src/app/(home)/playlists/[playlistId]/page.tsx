@@ -9,8 +9,7 @@ const Page = async ({params}) => {
   
 const {playlistId}=await params
   return (
-    <div>
-      <h1>Playlist ID: sadasd</h1>
+    <div>   
       {/* Fetch và hiển thị thông tin playlist dựa trên playlistId */}
       <VideosView playlistId={playlistId}/>
     </div>

@@ -78,7 +78,7 @@ export const VideosSection = () => {
   const {user}=useUser()
 const userId = user?.id;
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useVideoOfUser(userId);
-  console.log(data?.pages?.content)
+  console.log("data",data?.pages)
     return (
         <div className="w-full overflow-x-auto">
             <div className="border-y">
@@ -95,7 +95,7 @@ const userId = user?.id;
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-  {data?.pages?.content?.map((video:IVideo) => (
+  {data?.pages?.map((video) => (
     <TableRow
       onClick={() => router.push(`/studio/videos/${video.id}`)}
       className="cursor-pointer"

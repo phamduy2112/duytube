@@ -1,3 +1,4 @@
+'use client'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
@@ -5,10 +6,11 @@ import { VideoService } from '@/service/axios/videos/video'
 import { useUser } from '@clerk/nextjs'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { ThumbsDownIcon, ThumbsUpIcon } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react'
 
 function VideoReactions({id}) {
-    const viewerReaction="like"
+    
+  const [viewerReaction,setViewerReaction]=useState(false)
     const { user } = useUser();
       const queryClient = useQueryClient();
 
@@ -31,7 +33,7 @@ const {data:getLikeCount}=useQuery({
     // const { user_id, video_id, type } = dto;
 // 
 
-    const handleToggleReactionsVideo=(type)=>{
+    const handleToggleReactionsVideo=(type:string)=>{
     
       const data={
         video_id:id,
@@ -39,6 +41,7 @@ const {data:getLikeCount}=useQuery({
         type
 
       }
+      setViewerReaction(type)
       toggleReactionVideo(data);
 
     }
@@ -50,7 +53,11 @@ const {data:getLikeCount}=useQuery({
         className='rounded-l-full rounded-r-none gap-2 pr-4'
         onClick={()=>{handleToggleReactionsVideo("like")}}
         >
-            <ThumbsUpIcon className={cn("size-5",viewerReaction==="like" && "fill-black")}></ThumbsUpIcon>
+            <ThumbsUpIcon className={cn("size-5",viewerReaction==="like" && "fill-black")}
+            
+            
+            
+            ></ThumbsUpIcon>
             {getLikeCount?.like}
         </Button>
         <Separator orientation='vertical' className='h-7'/>

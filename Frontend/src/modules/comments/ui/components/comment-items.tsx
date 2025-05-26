@@ -26,7 +26,7 @@ import CommentsSection from "@/modules/videos/sections/comments-section";
     const [isRepliesOpen,setIsRepliesOpen]=useState(false);
     const variant="comment"
     const queryClient = useQueryClient();
-    // const {}=use
+
     const {data:commentReactions,error}=useQuery({
         queryKey:["reactionsComment",comment?.id],
         queryFn:()=>commentService.getCommentReactions(comment?.id),
@@ -39,9 +39,7 @@ import CommentsSection from "@/modules/videos/sections/comments-section";
             queryClient.invalidateQueries({ queryKey: ["commentDetail", comment.video_id] });
         }
     })
-    //    // dto: {
-            // userId,
-            // comment_id: string; type: string },
+
     const {mutate:toogleComment}=useMutation({
         mutationFn:commentService.toogleCommentReactions,
         onSuccess: (_, deletedId) => {        
@@ -60,6 +58,7 @@ import CommentsSection from "@/modules/videos/sections/comments-section";
         }
         toogleComment(response)
     }
+    console.log(commentReactions)
     return(
             <>
                 <div className="flex gap-4">
@@ -93,14 +92,15 @@ import CommentsSection from "@/modules/videos/sections/comments-section";
                                                 // comment.viewerReact==="Like" && "fill-black"
                                             )}/>
                                         </Button>
-                                        <span className="text-xs text-muted-foreground">{commentReactions?.like}</span>
+                                        <span className="text-xs text-muted-foreground">{commentReactions?.data?.like}</span>
                                         <Button disabled={false} variant="ghost" size="icon" className="size-8" onClick={()=>{
                                                                                         handleToogleCommentReactions("unlike")
 
                                         }}>
+                                           
                                             <ThumbsDownIcon className={cn()}/>
                                         </Button>
-                                        <span className="text-xs text-muted-foreground">{commentReactions?.unlike}</span>
+                                        <span className="text-xs text-muted-foreground">{commentReactions?.data?.unlike}</span>
                                     </div>
                                     {
                                         variant==="comment"&&(

@@ -15,10 +15,7 @@ export const VideosView=({playlistId}:VideosViewProps)=>{
                 {/*  */}
                
              <div>
-                <h1 className="text-2xl font-bold">Custom playlist</h1>
-                <p className="text-xs text-muted-foreground">
-           Custom playlist
-                </p>
+            
                 <PlaylistHeaderSection playlistId={playlistId}/>
                 <VideosSection playlistId={playlistId}/>
              </div>

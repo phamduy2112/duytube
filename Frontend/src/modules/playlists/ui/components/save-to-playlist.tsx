@@ -53,9 +53,18 @@ const {user}=useUser();
       toast.error('Tạo playlist thất bại!');
     },
   });
+//  createPlaylistMutation.mutate({
+//       video_id: videoId,
+//       selected: selected,
+//     });
 
-
-  
+// console.log(
+//   {
+//       video_id: videoId,
+//       selected: selected,
+//     }
+// )
+  console.log(playlists)
 
   return (
     <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
@@ -69,7 +78,9 @@ const {user}=useUser();
 
         <h2 className="text-lg font-medium mb-4">Lưu video vào...</h2>
 
-{playlists.map(item => (
+{
+  playlists?.data?.length>0 ? (
+    playlists?.data?.map(item => (
   <div key={item.id} className="flex items-center justify-between mb-3">
     <div className="flex items-center gap-2">
       <input
@@ -87,8 +98,16 @@ const {user}=useUser();
       ) : null}
     </div>
   </div>
-))}
-<button
+))
+  ):(
+    <>
+    Chua co danh sach phat
+    </>
+  )
+}
+{
+  selected.length>0 &&(
+    <button
   onClick={() => {
     createPlaylistMutation.mutate({
       video_id: videoId,
@@ -98,6 +117,8 @@ const {user}=useUser();
 >
   Lưu
 </button>
+  )
+}
 <button
   onClick={() => setPage(2)}
   className="mt-3 w-full border rounded-lg py-2 text-blue-600 hover:bg-gray-100 flex items-center justify-center gap-2"

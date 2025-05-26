@@ -32,22 +32,18 @@ export const PlaylistCreateModal = ({
         onOpenChange(open);
         setPage(1)
     }
-    console.log(videoId)
-  return (
-    <Dialog open={open} onOpenChange={modalOpen}>
-    
-        {
-            page==1 ?
-            <DialogContent className="p-0 h-[400px] w-[20rem] overflow-y-auto rounded-xl">
-            <SaveToPlaylistModal onClose={() => cancel()} setPage={setPage} videoId={videoId}/>
+   if (!open) return null;
 
-            </DialogContent>
-           
-            :<DialogContent className="w-[20rem]">
-                <CreatePlaylistForm onCancel={()=>cancel()} setPage={setPage} videoId={videoId} />
-            </DialogContent>
-        }
-    
-    </Dialog>
-  );
+return (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+    <div className="w-[20rem] rounded-xl bg-white p-4">
+      {page === 1 ? (
+        <SaveToPlaylistModal onClose={cancel} setPage={setPage} videoId={videoId} />
+      ) : (
+        <CreatePlaylistForm onCancel={cancel} setPage={setPage} videoId={videoId} />
+      )}
+    </div>
+  </div>
+);
+
 };

@@ -172,6 +172,11 @@ async findAll() {
     const response=await this.prismaService.videos.findMany({
       where:{
         user_id:existingUser?.id
+      },
+      include:{
+        video_reactions:true,
+        video_views:true,
+        comments:true
       }
     })
     return this.response.responseSend(response,"Successfully",200)
@@ -209,11 +214,11 @@ async findAll() {
     include:{
       users:{
         include:{
-          subscriptions_subscriptions_creator_idTousers:{},
-          subscriptions_subscriptions_viewer_idTousers:{}
+          subscriptions_subscriptions_creator_idTousers:true,
+          subscriptions_subscriptions_viewer_idTousers:true
         }
       },
-      video_views:{},
+     video_views:true,
 
     } }
 

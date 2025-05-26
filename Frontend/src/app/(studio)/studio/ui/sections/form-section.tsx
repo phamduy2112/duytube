@@ -57,7 +57,7 @@ export const FormSectionSuspense = ({ videoId }) => {
     <ThumbnailUploadModal open={thumbnailModalOpen} onOpenChange={setThumbnailModalOpen} videoId={videoId}/>
         <FormProvider {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-                <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center justify-between mb-6 mt-[5rem]">
                     <div>
                         <h1 className="text-2xl font-bold">Video details</h1>
                         <p className="text-xs text-muted-foreground">Manage your video details</p>
@@ -92,22 +92,7 @@ export const FormSectionSuspense = ({ videoId }) => {
                                 </FormItem>
                             )}
                         ></FormField>
-                        <FormField control={form.control}
-                            name="description"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Description</FormLabel>
-                                    <FormControl>
-                                        <Textarea
-                                            {...field}
-                                            value={field.value ?? ""}
-                                            className="resize-none pr-10"
-                                            placeholder="Add a title to your video"
-                                        />
-                                    </FormControl>
-                                </FormItem>
-                            )}
-                        ></FormField>
+                      
                         <FormField control={form.control}
                             name="description"
                             render={({ field }) => (

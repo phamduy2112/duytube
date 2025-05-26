@@ -11,9 +11,11 @@ const Page=async ({params})=>{
     const  {videoId}=await params;
     console.log(videoId)
     return(
-        <div className="mt-[3rem] w-[1650px] px-2">
-            
-           {/* <FormSectionSuspense videoId={videoId}/> */}
+        <div className="mt-[3rem] w-[100%]  px-2">
+          <div className="w-[1600px] m-auto">
+                   <FormSectionSuspense videoId={videoId}/>
+          </div>
+    
         </div>
     )
 
