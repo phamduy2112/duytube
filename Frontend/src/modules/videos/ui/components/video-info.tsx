@@ -27,7 +27,7 @@ export const VideoInfoSkeleton=()=>{
 
 export const VideoInfo=({data,onRemove}:VideoInfoProps)=>{
     // console.log(data)
-    const length = Array.isArray(data?.video_views) ? data.video_views.length : 0;
+const length = Array.isArray(data?.video_views) ? data.video_views.length : 0;
 
   const compactViews=useMemo(()=>{
         return Intl.NumberFormat("en",{

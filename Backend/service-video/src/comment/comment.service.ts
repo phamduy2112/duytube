@@ -36,7 +36,7 @@ export class CommentService {
 
   // Lấy danh sách comment + reply của video
   async findByVideo(videoId: string) {
-    const response= this.prisma.comments.findMany({
+    const response= await this.prisma.comments.findMany({
       where: {
         video_id: videoId,
         parent_id: null, // chỉ lấy comment cha

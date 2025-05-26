@@ -8,7 +8,6 @@ interface VideoThumbnailProps{
     title:string;
     duration:number;
     imageUrl?:string|null;
-    data:any[]
     previewUrl?:string|null
 
 }

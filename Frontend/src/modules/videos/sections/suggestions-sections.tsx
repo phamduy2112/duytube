@@ -51,12 +51,11 @@ const suggestedVideos = mockVideos.filter((item) => item.id !== String(videoId))
         queryKey:['video_limit',10],
         queryFn: ()=> VideoService.getVideoLimit(10)
     })
-console.log(videoLimit)
   return (
   <>
     <div className='hidden md:block space-y-3'>
         
-    {suggestedVideos.map((video) => {
+    {videoLimit?.data?.map((video) => {
  return <VideoRowCard
     key={video.id}
     data={video}
@@ -66,7 +65,7 @@ console.log(videoLimit)
 
     </div>
     <div className='block md:hidden space-y-10'>
-        {suggestedVideos.map((video) => {
+        {videoLimit?.data?.map((video) => {
   return (
     <VideoRowCard
       key={video.id}

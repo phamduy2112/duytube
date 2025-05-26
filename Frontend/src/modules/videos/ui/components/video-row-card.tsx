@@ -10,6 +10,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import VideoMenu from "./video-menu";
 import { useMemo }  from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { formatDistanceToNow } from "date-fns";
 
 
 const videoRowCardVariants=cva('group flex min-w-0',{
@@ -77,16 +78,17 @@ export const VideoRowCardSkeleton =({size}:VariantProps<typeof videoRowCardVaria
 export const VideoRowCard=({
     data,size,onRemove
 }:VideoRowCardProps)=>{
-    const compactViews=useMemo(()=>{
+ const length = Array.isArray(data?.video_views) ? data.video_views.length : 0;
+
+  const compactViews=useMemo(()=>{
         return Intl.NumberFormat("en",{
             notation:"compact"
-        }).format(data?.viewCount);
-    },[data?.viewCount])
-    const compactLikes=useMemo(()=>{
-        return Intl.NumberFormat("en",{
-            notation:"compact"
-        }).format(data?.likeCount);
-    },[data?.likeCount])
+        }).format(length);
+    },[length])
+   const compactDate=useMemo(()=>{
+         return formatDistanceToNow(data?.updated_at,{addSuffix:true})
+     },[data?.updated_at])
+     console.log(length)
     return (
 <div className={videoRowCardVariants({ size })}>
   <Link href={`/videos/${data?.id}`} className={"w-[150px] md:w-[38%]"}>
@@ -107,7 +109,7 @@ export const VideoRowCard=({
           </h3>
           {size === "default" && (
             <p className="text-xs text-muted-foreground mt-1">
-              {compactViews} views | {compactLikes} likes
+        {compactViews} views * {compactDate}
             </p>
           )}
         </Link>
@@ -142,9 +144,10 @@ export const VideoRowCard=({
 
         {size === "compact" && (
           <>
-            <UserInfo size="sm" name={data?.users?.name} />
+         <UserInfo name={data?.users?.channel_name}/>
+
             <p className="text-xs text-muted-foreground mt-1">
-              {compactViews} views | {compactLikes} likes
+        {compactViews} views * {compactDate}
             </p>
           </>
         )}

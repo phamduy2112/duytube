@@ -32,7 +32,7 @@ export const VideoSectionSuspense = ({ videoId }) => {
         userId:user?.id,
         
     }
-    console.log(user?.id)
+   
      const {data:videoDetail,error}=useQuery({
                 queryKey:["videoDetail",response.id],
                 queryFn:()=>VideoService.getVideoDetail(response),
@@ -43,7 +43,7 @@ export const VideoSectionSuspense = ({ videoId }) => {
               queryFn:()=>commentService.getCommentByVideo(response.id),
               enabled:!!response.id,
           })    
-          
+     console.log(Comment)
       
   return (
     <div>
@@ -56,11 +56,11 @@ export const VideoSectionSuspense = ({ videoId }) => {
     </p>
       <CommentForm videoId={response.id} />
   </div>
-    {
+    {/* {
   Comment?.map((item) => {
     return <CommentItem key={item.id} comment={item} />;
   })
-}
+} */}
 
      
     </div>

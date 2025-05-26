@@ -40,13 +40,15 @@ export const VideoTopRow=({video})=>{
     //     return format(video.content.createAt,"d MMM yyyy");
     // },[video.content.create_at])
 
-    let videoDetail=video?.content;
+    let videoDetail=video?.data;
     let views=Number(video?.content?.video_views.length)
-    const compactViews=useMemo(()=>{
+ const length = Array.isArray(videoDetail?.video_views) ? videoDetail.video_views.length : 0;
+
+  const compactViews=useMemo(()=>{
         return Intl.NumberFormat("en",{
             notation:"compact"
-        }).format(views)
-    },[])
+        }).format(length);
+           },[length])
     const expandedViews=useMemo(()=>{
         return Intl.NumberFormat("en",{
             notation:"standard"
