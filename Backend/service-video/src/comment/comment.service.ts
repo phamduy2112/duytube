@@ -61,7 +61,32 @@ export class CommentService {
 
   }
   
-  
+ async getReactionComment(clerk_user_id: string, comment_id: string) {
+  try {
+    const user = await this.prisma.users.findUnique({
+      where: {
+        clerk_user_id,
+      },
+    });
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    const reaction = await this.prisma.comment_reactions.findFirst({
+      where: {
+        user_id: user.id,
+        comment_id: comment_id,
+      },
+    });
+
+    return reaction;
+  } catch (error) {
+    console.error("Error in getReactionComment:", error);
+    throw error;
+  }
+}
+
 
 //   // Sửa comment
   async update(id: string, data: { content: string }) {

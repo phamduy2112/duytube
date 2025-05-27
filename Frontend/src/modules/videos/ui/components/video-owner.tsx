@@ -1,4 +1,5 @@
 'use client'
+import { RequireLoginWrapper } from "@/components/require-login"
 import { Button } from "@/components/ui/button"
 import { UserAvatar } from "@/components/user-avatar"
 import { SubscriptionButton } from "@/modules/subscriptions/ui/components/subscription-button"
@@ -17,7 +18,7 @@ interface TypeVideoOwner{
 export const VideoOwner=({user,videoId}:TypeVideoOwner)=>{
 
     const {userId:clerkUserId}=useAuth()
-    const {user:userDetail}=useUser()
+    const {user:userDetail,isSignedIn}=useUser()
     const [subscribres,setSubscribres]=useState(false)
     const queryClient=useQueryClient();
     const {mutate:toggleReactionSubscription}=useMutation({
@@ -42,6 +43,9 @@ export const VideoOwner=({user,videoId}:TypeVideoOwner)=>{
         const response={
              viewerId: userDetail?.id,
              creatorId: user?.id
+        }
+        if(!isSignedIn){
+            return
         }
         toggleReactionSubscription(response)
       
@@ -75,7 +79,8 @@ export const VideoOwner=({user,videoId}:TypeVideoOwner)=>{
                         Edit video</Link>
                     </Button>
                 ):(
-                    <SubscriptionButton 
+                   <RequireLoginWrapper>
+                     <SubscriptionButton 
                     
                     onClick={()=>{
                         handleToggleReactionSubscription()
@@ -84,6 +89,7 @@ export const VideoOwner=({user,videoId}:TypeVideoOwner)=>{
                     isSuscribed={subscribres}
                     className="flex-none"
                     />
+                   </RequireLoginWrapper>
                 )
             }
         </div>
