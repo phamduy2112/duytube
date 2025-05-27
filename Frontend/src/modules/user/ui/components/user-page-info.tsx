@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils"
 import { SubscriptionButton } from "@/modules/subscriptions/ui/components/subscription-button"
 import Link from "next/link"
 import UserNavBar from "./user-navbar"
+import { useUser } from "@clerk/nextjs"
 export const UserPageInfoSkeleton=()=>{
     return (
         <div className="py-6">
@@ -38,7 +39,8 @@ export const UserPageInfoSkeleton=()=>{
 export const UserPageInfo=({user})=>{
     const isPending=false;
     const isLoaded=true
-        const userId=1
+    const {user:userDetail}=useUser();
+        const userId=userDetail?.id;
           console.log("s,",user)
     return (
         <div className="py-6">
@@ -104,23 +106,13 @@ export const UserPageInfo=({user})=>{
                         <div>
                             • This channel is to share beautiful lyrics video and promote good melody songs
                         </div>
-                         <div>
-                  <SubscriptionButton
-                disabled={isPending||!isLoaded}
-                isSuscribed={false}
-                // onClick={onclick}
-                className="flex-none"
-                />
-                
-            </div>
-                    </div>
-                    
-                </div>
-                {/* {userId===user.clerkId?(
+                         <div className="flex gap-[.5rem] mt-[.5rem]">
+             
+                         {userId===user.clerk_user_id?(
 <Button
                 variant="secondary"
                 asChild
-                className="mt-3 rounded-full"
+                className=" rounded-full"
                 >
                     <Link href="/studio">Go to studio</Link>
 
@@ -134,7 +126,12 @@ export const UserPageInfo=({user})=>{
                 />
 
                 )}
-                */}
+            </div>
+                    </div>
+                    
+                </div>
+       
+               
            
             
          

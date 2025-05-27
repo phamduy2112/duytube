@@ -65,7 +65,7 @@ export const VideoOwner=({user,videoId}:TypeVideoOwner)=>{
                 </div>
             </Link>
             {
-                clerkUserId===user?.clerkId?(
+                viewerId==user?.clerk_user_id?(
                     <Button
                     variant="secondary"
                     className="rounded-full"

@@ -12,6 +12,9 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import commentService from "@/service/axios/comments/comment.service";
 import { toast } from "sonner";
 import CommentsSection from "@/modules/videos/sections/comments-section";
+import { RequireLoginWrapper } from "@/components/require-login";
+import { useUser } from "@clerk/nextjs";
+import { formatDistanceToNow } from "date-fns";
 
  
 
@@ -26,7 +29,7 @@ import CommentsSection from "@/modules/videos/sections/comments-section";
     const [isRepliesOpen,setIsRepliesOpen]=useState(false);
     const variant="comment"
     const queryClient = useQueryClient();
-
+    const {user,isSignedIn}=useUser()
     const {data:commentReactions,error}=useQuery({
         queryKey:["reactionsComment",comment?.id],
         queryFn:()=>commentService.getCommentReactions(comment?.id),
@@ -50,15 +53,20 @@ import CommentsSection from "@/modules/videos/sections/comments-section";
         deleteComment(id)
         toast.success("Xoa thanh cong")
     }
+    const userId=user?.id
+    const viewerId=comment?.users?.clerk_user_id;
     const handleToogleCommentReactions=(type:"like"|"unlike")=>{
         let response={
-            userId:comment?.users.id,
+            userId,
             comment_id:comment.id,
             type:type,
         }
+       if(!isSignedIn){
+        return
+       }
         toogleComment(response)
     }
-    console.log(commentReactions)
+   
     return(
             <>
                 <div className="flex gap-4">
@@ -75,21 +83,22 @@ import CommentsSection from "@/modules/videos/sections/comments-section";
                             <div className="flex items-center gap-2 mb-0.5">
                                 <span className="font-medium text-sm pb-0.5">   {comment?.users?.channel_name}</span>
 
-                                {/* <span className="text-xs text-muted-foreground">{
-                                    formatDistanceToNow(comment?.create_at,{
+                                <span className="text-xs text-muted-foreground">{
+                                    formatDistanceToNow(comment?.created_at,{
                                         addSuffix:true
                                     })
-                                    }</span> */}
+                                    }</span>
                              
                                 </div></Link>
                                 <p className="text-sm">{comment?.value}</p>
-                                <div className="flex items-center gap-2">
+                               <RequireLoginWrapper>
+                                  <div className="flex items-center gap-2">
                                     <div className="flex items-center">
                                         <Button disabled={false} variant="ghost" size="icon" className="size-8" onClick={()=>{
                                             handleToogleCommentReactions("like")
                                         }}>
                                             <ThumbsUpIcon className={cn(
-                                                // comment.viewerReact==="Like" && "fill-black"
+                                               comment?.type=="like" && "fill-black"
                                             )}/>
                                         </Button>
                                         <span className="text-xs text-muted-foreground">{commentReactions?.data?.like}</span>
@@ -110,10 +119,13 @@ import CommentsSection from "@/modules/videos/sections/comments-section";
                                         )
                                     }
                                 </div>
+                               </RequireLoginWrapper>
+                              
 
                                 
                         </div>
-                        <DropdownMenu>
+                      {
+                        isSignedIn &&   <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                 <Button variant="ghost" size="icon" className="size-8">
                                     <MoreVerticalIcon/>
@@ -124,16 +136,25 @@ import CommentsSection from "@/modules/videos/sections/comments-section";
                                     <MessageSquareIcon className="size-4"/>
                                     Reply
                                 </DropdownMenuItem>
-                                <DropdownMenuItem onClick={()=>{
+                                {
+                                    userId==viewerId ? (
+                                           <DropdownMenuItem onClick={()=>{
                                     handleDeleteComment(comment?.id)
                                 }}>
                                     <MessageSquareIcon className="size-4"/>
                                     Delete
                                 </DropdownMenuItem>
+                                    ):(
+                                        <></>
+                                    )
+                                }
+                             
                            
 
                             </DropdownMenuContent>
                         </DropdownMenu>
+                      }  
+                      
                 
                 </div>
              {!isReplyOpen && variant === "comment" && (
@@ -148,6 +169,7 @@ import CommentsSection from "@/modules/videos/sections/comments-section";
         setIsRepliesOpen(true) // <- đoạn này không được gọi nếu CommentForm không hiển thị
       }}
     />
+  
   </div>
 )}
 

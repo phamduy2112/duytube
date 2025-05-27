@@ -219,6 +219,7 @@ async findAll() {
         }
       },
      video_views:true,
+     video_reactions:true,
 
     } }
 
@@ -375,6 +376,7 @@ async findAll() {
     // 
     async toogleReactions(dto: { clerk_user_id: string; video_id: string; type: string }) {
       try {
+        
         // 1. Tìm user từ clerk_user_id
         const user = await this.prismaService.users.findFirst({
           where: {
@@ -507,6 +509,6 @@ async findAll() {
       return this.response.responseSend(response,"Successfully",200);
     }
     
-   
+  //  
     
 }

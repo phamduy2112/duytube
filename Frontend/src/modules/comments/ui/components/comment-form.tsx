@@ -34,8 +34,7 @@ export const CommentForm = ({
   onSuccess,
   variant = "comment",
 }: CommentFormProps) => {
-  const { user } = useUser();
-
+  const { user,isSignedIn } = useUser();
   const form = useForm<FormValues>({
     defaultValues: {
       value: "",
@@ -120,7 +119,7 @@ const value = form.watch("value"); // 👈 theo dõi giá trị textarea
        <Button
   type="submit"
   size="sm"
-  disabled={!value?.trim()}
+disabled={!value?.trim() || !isSignedIn}
   className={!value?.trim() ? "opacity-50 cursor-not-allowed" : ""}
 >
   {variant === "reply" ? "Reply" : "Comment"}

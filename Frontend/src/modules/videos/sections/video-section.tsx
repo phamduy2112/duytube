@@ -9,6 +9,7 @@ import { VideoService } from "@/service/axios/videos/video";
 import { useQuery } from "@tanstack/react-query";
 import commentService from "@/service/axios/comments/comment.service";
 import { useUser } from "@clerk/nextjs";
+import { RequireLoginWrapper } from "@/components/require-login";
 
 export const videoSection=({videoId})=>{
   return (
@@ -54,7 +55,10 @@ export const VideoSectionSuspense = ({ videoId }) => {
       <p className="font-bold text-[1.2rem] py-3">
        {comment?.data?.length} Comments
     </p>
-      <CommentForm videoId={response.id} />
+    <RequireLoginWrapper>
+   <CommentForm videoId={response.id} />
+    </RequireLoginWrapper>
+   
   </div>
     {
   comment?.data?.map((item) => {

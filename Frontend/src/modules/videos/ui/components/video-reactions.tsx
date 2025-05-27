@@ -10,8 +10,7 @@ import React, { useState } from 'react'
 
 function VideoReactions({id}) {
     
-  const [viewerReaction,setViewerReaction]=useState(false)
-    const { user } = useUser();
+    const { user,isSignedIn} = useUser();
       const queryClient = useQueryClient();
 
 const {data:getLikeCount}=useQuery({
@@ -30,8 +29,8 @@ const {data:getLikeCount}=useQuery({
 
         }
     })
-    // const { user_id, video_id, type } = dto;
-// 
+    
+  const [viewerReaction,setViewerReaction]=useState("like")
 
     const handleToggleReactionsVideo=(type:string)=>{
     
@@ -41,9 +40,12 @@ const {data:getLikeCount}=useQuery({
         type
 
       }
+      if(!isSignedIn){
+        return
+      }
       setViewerReaction(type)
       toggleReactionVideo(data);
-
+      console.log(data)
     }
   return (
     <div className='flex items-center-safe flex-none'>

@@ -46,6 +46,7 @@ export class CommentService {
         other_comments: {
           include: {
             users: true, // lấy user của reply
+            comment_reactions:true,
           },
           orderBy: {
             created_at: 'asc',
@@ -85,11 +86,21 @@ export class CommentService {
 // video_reactions
 async toggleLike(userId: string, dto: { comment_id: string; type: string }) 
 {
-
+    const user = await this.prisma.users.findFirst({
+          where: {
+            clerk_user_id: userId,
+          },
+        });
+    
+        if (!user) {
+          throw new Error("User not found");
+        }
+    
+        const user_id = user.id;
   const existing = await this.prisma.comment_reactions.findUnique({
       where: {
         user_id_comment_id: {
-          user_id: userId,
+          user_id,
           comment_id: dto.comment_id,
         },
       },

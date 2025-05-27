@@ -29,7 +29,7 @@ const userId = user?.id;
             </div> */}
       <div>
         {activeItem =="Trang chủ" ?(
-<div className="relative w-full">
+<div className="relative 2xl:w-[1600px] ">
               <h3 className="py-[1rem] font-bold text-[1.1rem]">Dành cho bạn</h3>
 
   <Carousel className="w-full">
