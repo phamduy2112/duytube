@@ -39,6 +39,11 @@ export class WebhookService {
       where: {
         clerk_user_id: data.clerkId,
       },
+      include:{
+        videos:true,
+        subscriptions_subscriptions_creator_idTousers:true,
+        subscriptions_subscriptions_viewer_idTousers:true,
+      }
     });
 
     return existingUser

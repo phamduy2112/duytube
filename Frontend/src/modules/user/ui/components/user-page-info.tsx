@@ -39,6 +39,7 @@ export const UserPageInfo=({user})=>{
     const isPending=false;
     const isLoaded=true
         const userId=1
+          console.log("s,",user)
     return (
         <div className="py-6">
             <div className="flex flex-col md:hidden">
@@ -55,7 +56,7 @@ export const UserPageInfo=({user})=>{
                         // }}
                     />
                     <div className="flex-1 min-w-0">
-                        <h1 className="text-xl font-bold">{user.name}</h1>
+                        <h1 className="text-xl font-bold">{user.channel_name}</h1>
                         <div className="flex items-center gap-1 text-xs text-muted-foreground mt-1">
                             <span>{user.subscriberCount} subscribers</span>
                             <span>|</span>
@@ -84,8 +85,8 @@ export const UserPageInfo=({user})=>{
                 <div className="flex items-center gap-3">
                     <UserAvatar 
                     size="lg"
-                    imageUrl={user.imageUrl}
-                        name={user.name}
+                    imageUrl={user.avatar_url}
+                        name={user.channel_name}
                         className={cn(userId===user.clerkId && "cursor-pointer hover:opacity-80 transition-opacity","w-[100px] h-[100px]")}
                         // onClick={()=>{
                         //     if(user.clerkId==userId){
@@ -94,7 +95,7 @@ export const UserPageInfo=({user})=>{
                         // }}
                     />
                     <div className="flex-1 min-w-0">
-                        <h1 className="text-3xl font-bold">{user.name}</h1>
+                        <h1 className="text-3xl font-bold">{user.channel_name}</h1>
                         <div className="flex items-center gap-1 text-sm text-muted-foreground">
                             <span>2 subscribers</span>
                             <span>|</span>
