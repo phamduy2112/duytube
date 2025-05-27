@@ -8,12 +8,16 @@ export const useVideoOfUser = (userId: string) => {
     queryKey: ['videos-of-user', userId],
     queryFn: async ({ pageParam = 0 }) => {
       const allVideoOfUsers = await VideoService.getMyVideoUser(userId);
+      const videos = allVideoOfUsers.data; // giả định là mảng video đơn giản
+
       const start = pageParam * pageSize;
       const end = start + pageSize;
+      const slicedVideos = videos.slice(start, end);
+
       return {
-        content: allVideoOfUsers.data.slice(start, end),
+        content: slicedVideos, // mảng video cho trang hiện tại
         currentPage: pageParam,
-        totalPages: Math.ceil(allVideoOfUsers.data.length / pageSize),
+        totalPages: Math.ceil(videos.length / pageSize),
       };
     },
     getNextPageParam: (lastPage) => {

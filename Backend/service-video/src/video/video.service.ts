@@ -243,6 +243,37 @@ async findAll() {
     return this.response.responseSend(responseVideo, 'Video fetched successfully', 200);
   }
   
+
+  async getVideoOne(id:string,userId:string){
+
+ const existingUser=await this.prismaService.users.findFirst({
+        where:{
+          clerk_user_id:userId,
+        }
+      })       
+    
+      const video = await this.prismaService.videos.findFirst({ where: { id,user_id:existingUser?.id },
+    include:{
+      users:{
+        include:{
+          subscriptions_subscriptions_creator_idTousers:true,
+          subscriptions_subscriptions_viewer_idTousers:true
+        }
+      },
+     video_views:true,
+
+    } }
+
+ 
+    );
+  
+    if (!video) {
+      throw new NotFoundException('Video not found');
+    }
+    return this.response.responseSend(video, 'Video fetched successfully', 200);
+
+  }
+
   // Lấy video theo category
   async findByCategories(category_id: string) {
     const videos = await this.prismaService.videos.findMany({
@@ -255,7 +286,7 @@ async findAll() {
   }
 
   // Cập nhật video
-  async update(id: string, updateVideoDto: { title?: string; description?: string }) {
+  async update(id: string, updateVideoDto: any) {
     const video = await this.prismaService.videos.findUnique({ where: { id } });
 
     if (!video) {

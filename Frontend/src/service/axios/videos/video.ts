@@ -67,6 +67,11 @@ export class VideoService{
         return response.data; // trả về { video, upload_url }
     }
 
+    static async getVideoDetailStudio(responseData:any){
+        const response=await axiosWithAuth.post(`videos/studio/video/${responseData.videoId}`,responseData.userId);
+            return response.data; // trả về { video, upload_url }
+    }
+
     
 }
 

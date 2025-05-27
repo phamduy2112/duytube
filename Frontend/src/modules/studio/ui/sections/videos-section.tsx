@@ -77,8 +77,12 @@ const VideosSectionSkeleton=()=>{
 export const VideosSection = () => {
   const {user}=useUser()
 const userId = user?.id;
+
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useVideoOfUser(userId);
-  console.log("data",data?.pages)
+  console.log("data",data?.pages[0]?.content)
+  
+  // const title = data?.pages?.content?.title;
+// console.log(title); // "Tiêu đề video
     return (
         <div className="w-full overflow-x-auto">
             <div className="border-y">
@@ -95,7 +99,8 @@ const userId = user?.id;
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-  {data?.pages?.map((video) => (
+  {data?.pages[0]?.content?.map((video) => (
+    
     <TableRow
       onClick={() => router.push(`/studio/videos/${video.id}`)}
       className="cursor-pointer"
@@ -105,12 +110,16 @@ const userId = user?.id;
       <TableCell className="pl-6">
         <div className="flex items-center gap-4">
           <div className="relative aspect-video w-36 shrink-0">
-            <VideoThumbnail title={video.title} duration={video.duration || 0} />
+         
+            <VideoThumbnail
+            imageUrl={video?.mux_playback_id}
+            title={video?.title} duration={video.duration || 0} />
           </div>
           <div className="flex flex-col overflow-hidden gap-y-1">
-            <span className="text-sm line-clamp-1">{video.title}</span>
+            <span className="text-sm line-clamp-1">{video?.title}</span>
             <span className="text-xs text-muted-foreground line-clamp-1">
-              {video.description || "No description"}
+                {video.description || "No description"}
+          
             </span>
           </div>
         </div>
@@ -134,7 +143,7 @@ const userId = user?.id;
       <TableCell>{snakeCaseToTitle("ready")||"ready"}</TableCell> {/* Bạn có thể sửa chỗ này thành dữ liệu thật */}
 
       {/* Date */}
-      <TableCell>{format(new Date( "2024-01-01"),"d MMM yyyy") || "2024-01-01"}</TableCell>
+      <TableCell>{format(new Date(video.created_at),"d MMM yyyy") || "2024-01-01"}</TableCell>
 
       {/* Views */}
       <TableCell className="text-right">{video.views}</TableCell>
