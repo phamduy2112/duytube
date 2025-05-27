@@ -40,8 +40,6 @@ export class WebhookService {
         clerk_user_id: data.clerkId,
       },
     });
-  console.log(!!existingUser)
-  console.log('data.clerkId:', data.clerkId);    
 
     return existingUser
   }

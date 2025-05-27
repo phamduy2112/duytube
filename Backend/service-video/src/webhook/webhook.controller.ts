@@ -1,4 +1,4 @@
-import { Controller, Post, HttpCode, Req, Res, Body, Get, Headers } from '@nestjs/common';
+import { Controller, Post, HttpCode, Param, Res, Body, Get, Headers } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { WebhookService } from './webhook.service';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -9,9 +9,9 @@ export class WebhookController {
 private prisma:PrismaService
 
   ) {}
-  @Post("/get")
-  async handleGet(@Body() payload: any) {
-    return await this.userService.getUserClerk(payload);
+  @Get("/user/get/:id")
+  async handleGet(@Param('id') id: string) {
+    return await this.userService.getUserClerk(id);
   }
   @Post('/mux/webhook')
   async handleWebhook(@Body() body: any, @Headers() headers: any) {

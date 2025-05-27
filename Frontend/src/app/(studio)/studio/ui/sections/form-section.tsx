@@ -13,7 +13,7 @@ import { VideoPlayer } from "@/modules/videos/ui/components/video-player";
 import { categoryNames, mockVideos } from "@/scripts/seed-catelogries";
 import { VideoService } from "@/service/axios/videos/video";
 import { useUser } from "@clerk/nextjs";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { CopyCheckIcon, CopyIcon, Globe2Icon, ImagePlus, ImagePlusIcon, LockIcon, MoreVerticalIcon, RotateCcwIcon, TrashIcon } from "lucide-react"
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import Image from "next/image";
@@ -36,15 +36,17 @@ interface FormSectionProps {
 // })
 
 export const FormSectionSuspense = ({ videoId }) => {
-    const video = mockVideos.find((item) => item.id == videoId)
         const fullUrl=`localhost:3000/videos/${videoId}`
 
-    const form = useForm({
-        defaultValues: video
-    })
-    const onSubmit = async (data) => {
-        console.log(data)
-    }
+  const form = useForm({
+  defaultValues: {
+    title: "",
+    description: "",
+    category_id: "",
+  }
+})
+
+
       const {user}=useUser()
 const userId = user?.id;
     const [isCopied, setIsCopied] = useState(false);
@@ -75,15 +77,31 @@ useEffect(() => {
     form.reset({
       title: videoDetail.title || "",
       description: videoDetail.description || "",
-      categoryId: videoDetail.category || "",
-      visibility: videoDetail.visibility || "public",
+      category_id: videoDetail.category || "",
     });
   }
 }, [videoDetail]);
   const { data: categories, isLoading, isError } = useApiCategory();
 
-console.log(form)
 
+const queryClient=useQueryClient()
+ const {mutate:updateVideo}=useMutation({
+        mutationFn:VideoService.updateVideoDetail,
+        onSuccess:()=>{
+          queryClient.invalidateQueries({ queryKey: ["update-video",form ] });
+
+        },
+        onError:(data)=>{
+
+        }
+    })
+        const onSubmit = async (data) => {
+       const formData={
+        ...data,
+        id:videoId
+       }
+    updateVideo(formData);
+    }
     return (
     <>
     <ThumbnailUploadModal open={thumbnailModalOpen} onOpenChange={setThumbnailModalOpen} videoId={videoId}/>
@@ -113,19 +131,19 @@ console.log(form)
                 </div>
                 <div className="grid grid-col-1 lg:grid-cols-5 gap-6">
                     <div className="space-y-8 lg:col-span-3">
-                        <FormField control={form.control}
-                            name="title"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Title</FormLabel>
-                                    <FormControl>
-                                        <Input {...field} placeholder="Add to a title to your video"
-                                        value={videoDetail?.title}
-                                        />
-                                    </FormControl>
-                                </FormItem>
-                            )}
-                        ></FormField>
+                       <FormField
+  control={form.control}
+  name="title"
+  render={({ field }) => (
+    <FormItem>
+      <FormLabel>Title</FormLabel>
+      <FormControl>
+        <Input {...field} placeholder="Add a title to your video" />
+      </FormControl>
+    </FormItem>
+  )}
+/>
+
                       
                        <FormField
   control={form.control}
@@ -146,7 +164,7 @@ console.log(form)
 
 <FormField
   control={form.control}
-  name="categoryId"
+  name="category_id"
   render={({ field }) => (
     <FormItem>
       <FormLabel>Category</FormLabel>
@@ -188,7 +206,7 @@ console.log(form)
                                         Video link
                                     </p>
                                     <div className="flex items-center gap-x-2">
-                                        <Link href={`/videos/${video?.id}`}>
+                                        <Link href={`/videos/${1}`}>
                                             <p className="line-clamp-1 text-sm text-blue-500">
                                                 locahost:3000/123
                                             </p>
@@ -210,7 +228,7 @@ console.log(form)
                                 <div className="flex flex-col gap-y-1">
                                     <p className="text-muted-foreground text-xs">Video status</p>
                                     <p className="text-sm">
-                                        {snakeCaseToTitle(video?.visibility || "preparing")}
+                                        {snakeCaseToTitle("preparing")}
                                     </p>
                                 </div>
                             </div>
@@ -219,46 +237,47 @@ console.log(form)
                                 <div className="flex flex-col gap-y-1">
                                     <p className="text-muted-foreground text-xs">Subtitles status</p>
                                     <p className="text-sm">
-                                        {snakeCaseToTitle(video?.visibility || "no_audio")}
+                                        {snakeCaseToTitle( "no_audio")}
                                     </p>
                                 </div>
                             </div>
 
                         </div>
-   <FormField
-                            control={form.control}
-                            name="category"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Category</FormLabel>
-                                    <Select
-                                        onValueChange={field.onChange}
-                                        value={field.value}
-                                        defaultValue={field.value ?? undefined}
-                                    >
-                                        <FormControl>
-                                            <SelectTrigger>
-                                                <SelectValue placeholder="Select a category" />
-                                            </SelectTrigger>
-                                        </FormControl>
-                                        <SelectContent>
-                                         <SelectItem value="public">
-                                           <div className="flex items-center">
-                                           <Globe2Icon className="size-4 mr-2"/>
-                                           Public
-                                           </div>
-                                         </SelectItem>
-                                         <SelectItem value="private">
-                                           <div className="flex items-center">
-                                           <LockIcon className="size-4 mr-2"/>
-                                           Private
-                                           </div>
-                                         </SelectItem>
-                                        </SelectContent>
-                                    </Select>
-                                </FormItem>
-                            )}
-                        />
+ {/* <FormField
+  control={form.control}
+  name="visibility" // <-- fix chỗ này
+  render={({ field }) => (
+    <FormItem>
+      <FormLabel>Visibility</FormLabel>
+      <Select
+        onValueChange={field.onChange}
+        value={field.value}
+        defaultValue={field.value ?? undefined}
+      >
+        <FormControl>
+          <SelectTrigger>
+            <SelectValue placeholder="Select visibility" />
+          </SelectTrigger>
+        </FormControl>
+        <SelectContent>
+          <SelectItem value="public">
+            <div className="flex items-center">
+              <Globe2Icon className="size-4 mr-2" />
+              Public
+            </div>
+          </SelectItem>
+          <SelectItem value="private">
+            <div className="flex items-center">
+              <LockIcon className="size-4 mr-2" />
+              Private
+            </div>
+          </SelectItem>
+        </SelectContent>
+      </Select>
+    </FormItem>
+  )}
+/> */}
+
                         <FormField 
                         name="thmbnaiUrl"
                         control={form.control}
@@ -269,7 +288,7 @@ console.log(form)
                                     <div className="p-0.5 border border-dashed border-neutral-400 relative h-[84px] w-[153px] group">
                                         <Image 
                                         
-                                        src={video?.thumbnail ??"/placeholder.svg"} className="object-cover" fill alt="Thmbnail"></Image>
+                                        src={"/placeholder.svg"} className="object-cover" fill alt="Thmbnail"></Image>
 
                                     </div>
                                 </FormControl>
