@@ -26,9 +26,9 @@ export class VideoController {
   }
   
   @Get("studio/video/:id")
-  async getVideoOne(@Param('id') id: string,@Body() body:any) {
+  async getVideoOne(@Param('id') id: string) {
 
-  return await this.videoService.getVideoOne(id,body.userId);
+  return await this.videoService.getVideoOne(id);
 }
   // Lấy video theo id
   @Get(':id')
