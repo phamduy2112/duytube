@@ -6,6 +6,7 @@ import { FormControl, FormField, FormItem, FormLabel } from "@/components/ui/for
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { useApiCategory } from "@/hooks/api/use-category";
 import { snakeCaseToTitle } from "@/lib/utils";
 import { ThumbnailUploadModal } from "@/modules/studio/ui/component/thumbnail-upload-modal";
 import { VideoPlayer } from "@/modules/videos/ui/components/video-player";
@@ -17,7 +18,7 @@ import { CopyCheckIcon, CopyIcon, Globe2Icon, ImagePlus, ImagePlusIcon, LockIcon
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 
 interface FormSectionProps {
@@ -60,13 +61,29 @@ const userId = user?.id;
         userId
     }
     // getVideoDetailStudio
-    const {data}=useQuery({
+    const {data:studioVideoDetail}=useQuery({
         queryKey:["studio-video-detail",response],
         queryFn:()=>VideoService.getVideoDetailStudio(response),
         
 
     })
-    console.log(data)
+    
+   const videoDetail=studioVideoDetail?.data
+// Khi có dữ liệu mới từ API → reset lại form
+useEffect(() => {
+  if (videoDetail) {
+    form.reset({
+      title: videoDetail.title || "",
+      description: videoDetail.description || "",
+      categoryId: videoDetail.category || "",
+      visibility: videoDetail.visibility || "public",
+    });
+  }
+}, [videoDetail]);
+  const { data: categories, isLoading, isError } = useApiCategory();
+
+console.log(form)
+
     return (
     <>
     <ThumbnailUploadModal open={thumbnailModalOpen} onOpenChange={setThumbnailModalOpen} videoId={videoId}/>
@@ -102,63 +119,66 @@ const userId = user?.id;
                                 <FormItem>
                                     <FormLabel>Title</FormLabel>
                                     <FormControl>
-                                        <Input {...field} placeholder="Add to a title to your video" />
-                                    </FormControl>
-                                </FormItem>
-                            )}
-                        ></FormField>
-                      
-                        <FormField control={form.control}
-                            name="description"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Description</FormLabel>
-                                    <FormControl>
-                                        <Textarea
-                                            {...field}
-                                            value={field.value ?? ""}
-                                            className="resize-none pr-10"
-                                            placeholder="Add a title to your video"
+                                        <Input {...field} placeholder="Add to a title to your video"
+                                        value={videoDetail?.title}
                                         />
                                     </FormControl>
                                 </FormItem>
                             )}
                         ></FormField>
-                        <FormField
-                            control={form.control}
-                            name="category"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Category</FormLabel>
-                                    <Select
-                                        onValueChange={field.onChange}
-                                        value={field.value}
-                                        defaultValue={field.value ?? undefined}
-                                    >
-                                        <FormControl>
-                                            <SelectTrigger>
-                                                <SelectValue placeholder="Select a category" />
-                                            </SelectTrigger>
-                                        </FormControl>
-                                        <SelectContent>
-                                            {categoryNames.map((category) => (
-                                                <SelectItem value={category.id} key={category.id}>
-                                                    {category.name}
-                                                </SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
-                                </FormItem>
-                            )}
-                        />
+                      
+                       <FormField
+  control={form.control}
+  name="description"
+  render={({ field }) => (
+    <FormItem>
+      <FormLabel>Description</FormLabel>
+      <FormControl>
+        <Textarea
+          {...field}
+          className="resize-none pr-10"
+          placeholder="Add a description"
+        />
+      </FormControl>
+    </FormItem>
+  )}
+/>
+
+<FormField
+  control={form.control}
+  name="categoryId"
+  render={({ field }) => (
+    <FormItem>
+      <FormLabel>Category</FormLabel>
+      <Select
+        onValueChange={field.onChange}
+        value={field.value}
+      >
+        <FormControl>
+          <SelectTrigger>
+            <SelectValue placeholder="Select a category" />
+          </SelectTrigger>
+        </FormControl>
+        <SelectContent>
+          {categories?.data.map((category) => (
+            <SelectItem value={category.id} key={category.id}>
+              {category.name}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </FormItem>
+  )}
+/>
+
+
 
 
                     </div>
                     <div className="flex flex-col gap-y-8 lg:col-span-2">
                         <div className="flex flex-col gap-4 bg-[#F9F9F9] rounded-xl overflow-hidden h-fit">
                             <VideoPlayer
-                                playBackId={video?.id}
-                                thumbnaiUrl={"https://www.youtube.com/watch?v=kXr-kci4SP4"}
+                                playBackId={videoDetail?.mux_playback_id}
                             />
                         </div>
                         <div className="p-4 flex flex-col gap-y-6">

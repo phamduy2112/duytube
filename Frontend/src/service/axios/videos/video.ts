@@ -16,7 +16,6 @@ export class VideoService{
 
     }
     static async getVideoDetail(data){
-        console.log(data)
         const response=await axiosWithAuth.get(`videos/${data.id}`,
             {
                 params: {
@@ -24,6 +23,10 @@ export class VideoService{
                 },
               }
         );
+        return response.data
+    }
+    static async updateVideoDetail(data){
+        const response=await axiosWithAuth.put(`vides/${data.id}`,data);
         return response.data
     }
     async getVideoTrending(id){

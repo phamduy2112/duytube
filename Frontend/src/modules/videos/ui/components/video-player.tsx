@@ -13,16 +13,17 @@ export const VideoPlayerSkeleton=()=>{
 }
 
 export const VideoPlayer=({
-    playbackId,
+    playBackId,
     thumbnailUrl,
     autoPlay,
     onPlay,
 }:VideoPlayerProps)=>{
+    console.log("ac",playBackId)
     // if(!playbackId) return null
     return(
         <MuxPlayer
-        playbackId={"1z5b00ZcPcx8189lclMgJwydH9GOxNxJbUx4S9fWAR8w"}
-        poster={`https://image.mux.com/1z5b00ZcPcx8189lclMgJwydH9GOxNxJbUx4S9fWAR8w/thumbnail.jpg`}
+        playbackId={playBackId}
+        poster={`https://image.mux.com/${playBackId}/thumbnail.jpg`}
         playerInitTime={0}
         autoPlay={autoPlay}
         thumbnailTime={0}

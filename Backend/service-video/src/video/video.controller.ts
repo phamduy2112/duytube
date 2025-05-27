@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, Patch, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Patch, Query, Put } from '@nestjs/common';
 import { VideoService } from './video.service';
 
 @Controller('videos')
@@ -58,8 +58,8 @@ async findLimit(@Param('id') id: string){
   }
 
   // Cập nhật video
-  @Patch(':id')
-  async update(@Param('id') id: string, @Body() body: { title?: string; description?: string }) {
+  @Put(':id')
+  async update(@Param('id') id: string, @Body() body:any) {
     return await this.videoService.update(id, body);
   }
 

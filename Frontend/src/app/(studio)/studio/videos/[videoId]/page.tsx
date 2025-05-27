@@ -12,7 +12,7 @@ const Page=async ({params})=>{
     console.log(videoId)
     return(
         <div className="mt-[3rem] w-[100%]  px-2">
-          <div className="w-[1600px] m-auto">
+          <div className="2xl:w-[1600px] m-auto">
                    <FormSectionSuspense videoId={videoId}/>
           </div>
     
