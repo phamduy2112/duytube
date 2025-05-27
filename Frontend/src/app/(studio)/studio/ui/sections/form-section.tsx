@@ -10,6 +10,9 @@ import { snakeCaseToTitle } from "@/lib/utils";
 import { ThumbnailUploadModal } from "@/modules/studio/ui/component/thumbnail-upload-modal";
 import { VideoPlayer } from "@/modules/videos/ui/components/video-player";
 import { categoryNames, mockVideos } from "@/scripts/seed-catelogries";
+import { VideoService } from "@/service/axios/videos/video";
+import { useUser } from "@clerk/nextjs";
+import { useQuery } from "@tanstack/react-query";
 import { CopyCheckIcon, CopyIcon, Globe2Icon, ImagePlus, ImagePlusIcon, LockIcon, MoreVerticalIcon, RotateCcwIcon, TrashIcon } from "lucide-react"
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import Image from "next/image";
@@ -41,7 +44,8 @@ export const FormSectionSuspense = ({ videoId }) => {
     const onSubmit = async (data) => {
         console.log(data)
     }
-    
+      const {user}=useUser()
+const userId = user?.id;
     const [isCopied, setIsCopied] = useState(false);
     const onCopy = async () => {
         await navigator.clipboard.writeText("localhost:3000")
@@ -51,7 +55,18 @@ export const FormSectionSuspense = ({ videoId }) => {
         }, 2000)
     }
     const [thumbnailModalOpen,setThumbnailModalOpen]=useState(false);
+    const response={
+        videoId,
+        userId
+    }
+    // getVideoDetailStudio
+    const {data}=useQuery({
+        queryKey:["studio-video-detail",response],
+        queryFn:()=>VideoService.getVideoDetailStudio(response),
+        
 
+    })
+    console.log(data)
     return (
     <>
     <ThumbnailUploadModal open={thumbnailModalOpen} onOpenChange={setThumbnailModalOpen} videoId={videoId}/>
