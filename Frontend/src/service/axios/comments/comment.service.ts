@@ -38,18 +38,7 @@ class CommentService{
             
         }
     }
-    // 
-    // CREATE TABLE comment_reactions (
-//     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-//     user_id UUID NOT NULL,
-//     comment_id UUID NOT NULL,
-//     type TEXT NOT NULL,
-//     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-//     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-//     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-//     CONSTRAINT fk_comment FOREIGN KEY (comment_id) REFERENCES comments(id) ON DELETE CASCADE,
-//     CONSTRAINT unique_user_comment UNIQUE (user_id, comment_id)
-// );
+
 async toogleCommentReactions(formData){
     try {
         // dto: {
@@ -61,6 +50,13 @@ async toogleCommentReactions(formData){
     } catch (error) {
         
     }
+
+}
+ async getReactionsComment(data:{commentId: string, clerk_user_id: string}){
+    const response=await axiosWithAuth.get(`comment/${data.commentId}/reaction`,{ params: {
+          clerk_user_id:data.clerk_user_id, // query param
+        },})
+              return response.data;
 
 }
 async getCommentReactions(id:string){

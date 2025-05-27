@@ -35,6 +35,16 @@ import { formatDistanceToNow } from "date-fns";
         queryFn:()=>commentService.getCommentReactions(comment?.id),
         enabled:!!comment?.id,
     })
+    const response={
+        commentId:comment?.id,
+        clerk_user_id:user?.id
+    }
+    const {data:getCommentReactions}=useQuery({
+        queryKey:["reactuib",response],
+        queryFn:()=>commentService.getReactionsComment(response),
+        enabled:!!response,
+    })
+    console.log(getCommentReactions)
     // toogleCommentReactions
     const {mutate:deleteComment}=useMutation({
         mutationFn:commentService.deleteCommentByUser,

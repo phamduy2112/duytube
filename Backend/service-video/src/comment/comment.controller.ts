@@ -28,6 +28,14 @@ export class CommentController {
     return this.commentService.remove(videoId)
   }
 
+  @Get(':commentId/reaction')
+async getCommentReaction(
+  @Param('commentId') commentId: string,
+  @Query('clerk_user_id') clerkUserId: string,
+) {
+  return this.commentService.getReactionComment(clerkUserId, commentId);
+}
+
   @Post('/reactions')
   async toggleLike(
     @Body() dto: {
