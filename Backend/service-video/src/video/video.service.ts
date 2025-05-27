@@ -248,7 +248,7 @@ async findAll() {
 
 
     
-      const video = await this.prismaService.videos.findFirst({ where: { id,user_id:existingUser?.id },
+      const video = await this.prismaService.videos.findFirst({ where: { id },
     include:{
       users:{
         include:{
