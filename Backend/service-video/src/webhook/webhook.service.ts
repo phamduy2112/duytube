@@ -36,20 +36,24 @@ export class WebhookService {
 async getUserClerk(data) {
   console.log("📥 Input data:", data);
 
-  const existingUser = await this.prisma.users.findUnique({
+  const existingUser = await this.prisma.users.findFirst({
     where: {
       clerk_user_id: data.clerkId,
     },
-    include: {
-      videos: true,
-      subscriptions_subscriptions_creator_idTousers: true,
-      subscriptions_subscriptions_viewer_idTousers: true,
-    },
+   
   });
 
-  console.log("🔍 Found user:", existingUser?.id);
+ if (!existingUser) {
+          throw new Error("User not found");
+        }
+  
+        console.log("🔍 Found user:", existingUser?.id);
 
-  return existingUser;
+  return await this.prisma.users.findUnique({
+    where:{
+      id:existingUser?.id
+    }
+  });
 }
 
   
