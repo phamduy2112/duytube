@@ -30,12 +30,12 @@ export const LoadingSkeleton=()=>{
 
     const {data}=useQuery({
       queryKey:["subscriptions",user?.id],
-      queryFn:()=>SubscriptionsService.findMySubscriptions(user!.id),
+      queryFn:()=>SubscriptionsService.findYourSubscriptions(user!.id),
       enabled:!!user?.id,
 
     })
 
-    console.log("data",data)
+    console.log("data",user?.id)
     const log=data
     return (
       <SidebarGroup>
@@ -48,16 +48,17 @@ export const LoadingSkeleton=()=>{
               <SidebarMenuItem key={`${subscription.creatorId}-${subscription.viewerID}`}>
                 <SidebarMenuButton asChild 
                 tooltip={subscription.channel_name	}
-                isActive={pathname===`/user/${subscription.id	}`}
+                isActive={pathname==`/user/${subscription.clerk_user_id	}`}
                 
                 >
-                  <Link href={`/user/${subscription.id	}`} className="flex items-center gap-4">
+                  <Link href={`/user/${subscription.clerk_user_id}`} className="flex items-center gap-4">
                   <UserAvatar
                   size="xs"
                   imageUrl={subscription.avatar_url	}
                   name={subscription.channel_name	}>
 
                   </UserAvatar>
+                
                   <span className="text-sm">{subscription.channel_name	}</span>
                   </Link>
                 </SidebarMenuButton>

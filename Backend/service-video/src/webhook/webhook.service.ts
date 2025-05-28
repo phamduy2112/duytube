@@ -35,16 +35,19 @@ export class WebhookService {
   }
   async getUserClerk(data){
     
-    const existingUser = await this.prisma.users.findFirst({
-      where: {
-        clerk_user_id: data.clerkId,
-      },
-      include:{
-        videos:true,
-        subscriptions_subscriptions_creator_idTousers:true,
-        subscriptions_subscriptions_viewer_idTousers:true,
-      }
-    });
+  const existingUser = await this.prisma.users.findFirst({
+  where: {
+    clerk_user_id: data.clerkId,
+  },
+  include: {
+    videos: true,
+    subscriptions_subscriptions_creator_idTousers: true,
+    subscriptions_subscriptions_viewer_idTousers: true,
+  }
+});
+
+console.log('Found user ID:', existingUser?.id);
+console.log('Found user clerk_user_id:', existingUser?.clerk_user_id);
 
     return existingUser
   }
