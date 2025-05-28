@@ -36,7 +36,7 @@ export class VideoService{
         const response=await axiosWithAuth.put(`videos/${data.id}`,data);
         return response.data
     }
-    async getVideoTrending(id){
+   static async getVideoTrending(){
         const response=await axiosWithAuth.get('videos/trending');
         return response.data
     }

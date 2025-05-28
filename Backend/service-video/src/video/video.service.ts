@@ -198,13 +198,15 @@ async findAll() {
       },
       take:10
     })
-    const videos=await this.prismaService.videos.findMany({
-      where:{
-        id:{
-          in:viewCounts.map((v)=>v.video_id)
-        }
-      }
-    })
+const videos = await this.prismaService.videos.findMany({
+  where: {
+    id: {
+      in: viewCounts
+        .map(v => v.video_id)
+        .filter(id => typeof id === 'string' && id.length === 36 && id.includes('-')) // lọc nhẹ
+    }
+  }
+})
     return this.response.responseSend(videos,"Successfully",200)
   }
   

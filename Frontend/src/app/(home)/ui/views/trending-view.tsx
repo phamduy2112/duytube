@@ -5,6 +5,8 @@ import { TrendingVideosSection } from "@/modules/home/ui/sections/trending-video
 import { CarouselItem } from "@/components/ui/carousel";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { useQuery } from "@tanstack/react-query";
+import { VideoService } from "@/service/axios/videos/video";
 
 const MocksTrending = [
   { id: 1, value: "Mới nhất" },
@@ -13,7 +15,11 @@ const MocksTrending = [
 
 export const TrendingView = () => {
   const [selected, setSelected] = useState<string | null>("Mới nhất");
-
+  const {data}=useQuery({
+    queryKey:["videos-trending"],
+    queryFn:()=>VideoService.getVideoTrending(),
+  })
+  console.log(data)
   return (
     <div className="max-w-[1650px]  m-auto mb-10 px-4 flex flex-col gap-y-6">
       <div>
@@ -36,9 +42,9 @@ export const TrendingView = () => {
         </div>
       </div>
 
-<div className="lg:w-[50rem]">
+{/* <div className="lg:w-[50rem]">
     <TrendingVideosSection />
-</div>
+</div> */}
     
     </div>
   );
