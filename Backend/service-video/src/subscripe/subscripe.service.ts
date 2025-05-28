@@ -62,35 +62,32 @@ export class SubscripeService {
   
 
 
-  async getMySubscriptions(viewerId: string) {
-  const users = await this.prismaService.users.findMany({
-    where: {
-      subscriptions_subscriptions_viewer_idTousers: {
-        some: {
-          viewer_id: viewerId,
-        },
+  async getMySubscriptions(data: string) {
+    const user = await this.prismaService.users.findFirst({
+      where: {
+        clerk_user_id: data, // thay bằng ID đúng từ DB
       },
-    },
-  });
+      include:{
+        subscriptions_subscriptions_creator_idTousers:true,
+        subscriptions_subscriptions_viewer_idTousers:true,
+      }
+    });
+    
+    return user
+  }
+  
 
-  return users;
-}
-
-
- async getSubscribersOfCreator(creatorId: string) {
-  const users = await this.prismaService.users.findMany({
-    where: {
-      subscriptions_subscriptions_viewer_idTousers: {
-        some: {
-          creator_id: creatorId,
-        },
+  async getSubscribersOfCreator(creatorId:string){
+    const subs=await this.prismaService.subscriptions.findMany({
+      where:{
+        creator_id:creatorId
       },
-    },
-  });
-
-  return users;
-}
-
+      include:{
+        users_subscriptions_creator_idTousers:true,
+      }
+    })
+    return subs.map((s)=>s.users_subscriptions_creator_idTousers);
+  }
 
   async checkSubscribers(viewerId: string, creatorId: string){
     const existingUser = await this.prismaService.users.findFirst({
@@ -115,43 +112,6 @@ export class SubscripeService {
     return {
       subscribed: !!existing,
     };
-  }
-  async  syncVideoToPlaylists(video_id: string, selected: string[]) {
-    // 1. Lấy playlist hiện có chứa video
-    const currentPlaylistVideos = await this.prismaService.playlist_videos.findMany({
-      where: { video_id },
-      select: { playlist_id: true }
-    });
-  
-    const currentPlaylistIds = currentPlaylistVideos.map(pv => pv.playlist_id);
-  
-    // 2. Tính playlist cần thêm và playlist cần xóa
-    const toAdd = selected.filter(id => !currentPlaylistIds.includes(id));
-    const toRemove = currentPlaylistIds.filter(id => !selected.includes(id));
-  
-    // 3. Thêm video vào các playlist mới
-    await Promise.all(
-      toAdd.map(async playlist_id => {
-        const videoCount = await this.prismaService.playlist_videos.count({ where: { playlist_id } });
-        await this.prismaService.playlist_videos.create({
-          data: {
-            playlist_id,
-            video_id,
-            order: videoCount + 1
-          }
-        });
-      })
-    );
-  
-    // 4. Xóa video khỏi các playlist không nằm trong selected
-    await this.prismaService.playlist_videos.deleteMany({
-      where: {
-        video_id,
-        playlist_id: { in: toRemove }
-      }
-    });
-  
-    return { added: toAdd.length, removed: toRemove.length };
   }
 
   
