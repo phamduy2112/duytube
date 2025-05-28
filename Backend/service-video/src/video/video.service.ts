@@ -185,31 +185,22 @@ async findAll() {
 
   
   // 
-  async findVideosTrending(){
-    const viewCounts=await this.prismaService.video_views.groupBy({
-      by:['video_id'],
-      _count:{
-        video_id:true,
-      },
-      orderBy:{
-        _count:{
-          video_id:"desc"
-        },
-      },
-      take:10
-    })
-const videos = await this.prismaService.videos.findMany({
-  where: {
-    id: {
-      in: viewCounts
-        .map(v => v.video_id)
-        .filter(id => typeof id === 'string' && id.length === 36 && id.includes('-')) // lọc nhẹ
-    }
-  }
-})
-    return this.response.responseSend(videos,"Successfully",200)
-  }
-  
+async findVideosTrending() {
+  const trendingVideos = await this.prismaService.$queryRawUnsafe<any[]>(`
+    SELECT v.*
+    FROM "videos" v
+    INNER JOIN (
+      SELECT "video_id", COUNT(*) AS views
+      FROM "video_views"
+      GROUP BY "video_id"
+      ORDER BY views DESC
+      LIMIT 10
+    ) AS top_views ON v.id = top_views.video_id
+  `);
+
+  return this.response.responseSend(trendingVideos, "Successfully", 200);
+}
+
   // Lấy một video theo id
   async findOne(id: string, userId?: string) {
     const video = await this.prismaService.videos.findFirst({ where: { id },
