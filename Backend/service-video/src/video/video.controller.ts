@@ -29,7 +29,7 @@ async getCommentReaction(
   @Param('videoId') videoId: string,
   @Query('clerk_user_id') clerkUserId: string,
 ) {
-  return this.videoService.getReactionVideo(clerkUserId, videoId);
+  return this.videoService.getReactionVideos(clerkUserId, videoId);
 }
 
   @Get("studio/video/:id")

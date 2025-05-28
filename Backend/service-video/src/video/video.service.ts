@@ -258,7 +258,7 @@ async findAll() {
     const reaction = await this.prismaService.video_reactions.findFirst({
       where: {
         user_id: user.id,
-        id: video_id,
+        video_id: video_id,
       },
     });
 

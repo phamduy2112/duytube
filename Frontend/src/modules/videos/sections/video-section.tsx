@@ -44,12 +44,12 @@ export const VideoSectionSuspense = ({ videoId }) => {
               queryFn:()=>commentService.getCommentByVideo(response.id),
               enabled:!!response.id,
           })    
-     console.log(comment)
+     console.log("videoDetail",videoDetail)
       
   return (
     <div>
    
-    <VideoPlayer autoPlay playBackId="" thumbnaiUrl=""></VideoPlayer>
+    <VideoPlayer autoPlay playBackId={videoDetail?.data?.mux_playback_id} thumbnaiUrl=""></VideoPlayer>
     <VideoTopRow video={videoDetail}/>
   <div>
       <p className="font-bold text-[1.2rem] py-3">
