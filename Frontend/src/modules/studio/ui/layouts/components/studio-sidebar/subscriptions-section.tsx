@@ -30,7 +30,7 @@ export const LoadingSkeleton=()=>{
 
     const {data}=useQuery({
       queryKey:["subscriptions",user?.id],
-      queryFn:()=>SubscriptionsService.findYourSubscriptions(user!.id),
+      queryFn:()=>SubscriptionsService.findMySubscriptions(user!.id),
       enabled:!!user?.id,
 
     })
