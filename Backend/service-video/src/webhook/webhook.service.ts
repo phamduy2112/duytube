@@ -35,7 +35,7 @@ export class WebhookService {
   }
   async getUserClerk(data){
     
-  const existingUser = await this.prisma.users.findFirst({
+  const existingUser = await this.prisma.users.findUnique({
   where: {
     clerk_user_id: data.clerkId,
   },
