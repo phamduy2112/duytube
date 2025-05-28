@@ -38,6 +38,11 @@ export class WebhookService {
       where: {
         clerk_user_id: data, // thay bằng ID đúng từ DB
       },
+      include:{
+        subscriptions_subscriptions_creator_idTousers:true,
+        subscriptions_subscriptions_viewer_idTousers:true,
+        
+      }
     });
     console.log(user);
     return user

@@ -30,21 +30,21 @@ export const LoadingSkeleton=()=>{
 
     const {data}=useQuery({
       queryKey:["subscriptions",user?.id],
-      queryFn:()=>SubscriptionsService.findYourSubscriptions(user!.id),
+      queryFn:()=>SubscriptionsService.findMySubscriptions(user!.id),
       enabled:!!user?.id,
 
     })
-
-    console.log("data",user?.id)
-    const log=data
+console.log("1",data)
+    
+    // const log=data
     return (
       <SidebarGroup>
         <SidebarGroupLabel>Subscriptions</SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu>
-            {JSON.stringify(data)}
+          
             
-            {data?.map((subscription:any) => (
+            {data?.subscriptions_subscriptions_viewer_idTousers?.map((subscription:any) => (
               <SidebarMenuItem key={`${subscription.creatorId}-${subscription.viewerID}`}>
                 <SidebarMenuButton asChild 
                 tooltip={subscription.channel_name	}
