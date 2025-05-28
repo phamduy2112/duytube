@@ -46,8 +46,8 @@ export class WebhookService {
   }
 });
 
-console.log('Found user ID:', existingUser?.id);
-console.log('Found user clerk_user_id:', existingUser?.clerk_user_id);
+console.log('Found user ID:', existingUser);
+console.log('Found user clerk_user_id:',data);
 
     return existingUser
   }
