@@ -1,5 +1,5 @@
 import { InfiniteScroll } from "@/components/infinite-scroll"
-import { VideoGridCard } from "@/modules/videos/ui/components/video-grid-card"
+import { VideoGridCard, VideoGridCardSkeleton } from "@/modules/videos/ui/components/video-grid-card"
 import { mockVideos } from "@/scripts/seed-catelogries"
 import { VideoService } from "@/service/axios/videos/video"
 import { IVideo } from "@/service/type/video.type"
@@ -10,36 +10,46 @@ interface HomeVideosSectionProps{
     data:IVideo[]
 }
 
-export const HomeVideoSection=()=>{
+export const HomeVideoSection=({categoryId})=>{
  // Giả lập phân trang trên client (nếu API trả về toàn bộ data)
 const pageSize = 3;
 
-const {
-  data,
-  fetchNextPage,
-  hasNextPage,
-  isFetchingNextPage,
-} = useInfiniteQuery({
-  queryKey: ['videos'],
-  queryFn: async ({ pageParam = 0 }) => {
-    const allVideos = await VideoService.getVideo(); // giả sử trả về tất cả
-    const start = pageParam * pageSize;
-    const end = start + pageSize;
-    return {
-      content: allVideos.data.slice(start, end),
-      currentPage: pageParam,
-      totalPages: Math.ceil(allVideos.data.length / pageSize),
-    };
-  },
-  getNextPageParam: (lastPage) => {
-    if (lastPage.currentPage < lastPage.totalPages - 1) {
-      return lastPage.currentPage + 1;
-    }
-    return undefined;
-  },
-  initialPageParam: 0,
-});
-console.log(data)
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+  } = useInfiniteQuery({
+    queryKey: ['videos', categoryId],
+    queryFn: async ({ pageParam = 0 }) => {
+      const allVideos = await VideoService.getVideo(); // giả sử trả về tất cả
+
+      // Lọc nếu có categoryId
+      const filtered = categoryId
+        ? allVideos.data.filter((v) => v.categoryId === categoryId)
+        : allVideos.data;
+
+      const start = pageParam * pageSize;
+      const end = start + pageSize;
+
+      return {
+        content: filtered.slice(start, end), // sửa ở đây
+        currentPage: pageParam,
+        totalPages: Math.ceil(filtered.length / pageSize), // sửa ở đây
+      };
+    },
+    getNextPageParam: (lastPage) => {
+      if (lastPage.currentPage < lastPage.totalPages - 1) {
+        return lastPage.currentPage + 1;
+      }
+      return undefined;
+    },
+    initialPageParam: 0,
+  });
+
+
+const skeletonCount = 6; // số lượng skeleton hiển thị khi load
 
     return (
 <div className="w-[full] px-4">
@@ -47,12 +57,18 @@ console.log(data)
             
             
             ">
-  
-  {data?.pages.flatMap((page) => page.content).map((video) => (
+  {
+    isLoading ? Array(skeletonCount).fill(0).map((_, idx) => (
+            <div className="w-[300px]" key={idx}>
+              <VideoGridCardSkeleton />
+            </div>
+          )) : data?.pages.flatMap((page) => page.content).map((video) => (
   <div className="w-[300px]" key={video.id}>
     <VideoGridCard data={video} />
   </div>
-))}
+))
+  }
+  
   
             </div>
             <InfiniteScroll

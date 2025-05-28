@@ -1,3 +1,4 @@
+import { ICreateComment } from "@/service/type/comments.type";
 import { axiosWithAuth } from "../axios.config";
 
 class CommentService{
@@ -30,7 +31,7 @@ class CommentService{
             
         }
     }
-    async deleteCommentByUser(idComment:number){
+    async deleteCommentByUser(idComment:string){
         try {
             const response=await axiosWithAuth.delete(`/comment/${idComment}`)
             return response.data

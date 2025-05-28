@@ -4,6 +4,9 @@ import { VideoGridCard, VideoGridCardSkeleton } from "@/modules/videos/ui/compon
 import { VideoRowCard, VideoRowCardSkeleton } from "@/modules/videos/ui/components/video-row-card"
 import { mockVideos, subscriptions } from "@/scripts/seed-catelogries"
 import { SubscriptionItem, SubscriptionItemSkeleton } from "../components/subscription-item"
+import { useQuery } from "@tanstack/react-query"
+import { SubscriptionsService } from "@/service/axios/subscriptions/subscriptions.service"
+import { useUser } from "@clerk/nextjs"
 
 
 //  co sus
@@ -19,13 +22,20 @@ const SubscriptionsSectionSekeleton=()=>{
         </div>
 }
 export const SubscriptionsSection=()=>{
+      const {user}=useUser()
+const {data}=useQuery({
+      queryKey:["subscriptions",user?.id],
+      queryFn:()=>SubscriptionsService.findMySubscriptions(user!.id),
+      enabled:!!user?.id,
+
+    })
     return (
         <>
          <div className="flex flex-col gap-4">
-            {subscriptions.map((subscription)=>(
+            {data.map((subscription:any)=>(
                 <SubscriptionItem
-                name={subscription.user.name}
-                imageUrl={subscription.user.imageUrl}
+                name={subscription.user.channel_name}
+                imageUrl={subscription.user.avatar_url}
                 subscriberCount={3}
                 disabled={false}
                 ></SubscriptionItem>

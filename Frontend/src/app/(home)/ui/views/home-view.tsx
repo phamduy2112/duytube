@@ -6,7 +6,7 @@ import { HomeVideoSection } from "@/modules/home/ui/sections/home-videos-section
 import { categoryNames } from "@/scripts/seed-catelogries";
 import { useQuery } from "@tanstack/react-query";
 import categoriesApi from "@/service/axios/categories/categories.api";
-import { ICategory } from "@/service/type/categories.type";
+import { ICategories } from "@/service/type/categories.type";
 export const HomeView = () => {
   const [categoryId, setCategoryId] = useState<string | null>(null);
     const {data}=useQuery({
@@ -14,7 +14,7 @@ export const HomeView = () => {
         queryFn: ()=> categoriesApi.getCategory()
     })
     const dataCategories = useMemo(() => {
-      return data?.data?.map((category:ICategory) => ({
+      return data?.data?.map((category:ICategories) => ({
         value: category.id,
         label: category.name,
       })) || [];

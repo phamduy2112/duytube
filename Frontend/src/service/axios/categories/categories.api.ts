@@ -41,14 +41,7 @@ async putCategory(dataForm: IUpdateCategory): Promise<ICategories> {
     throw error;
   }
 }
-    async deleteCategory(id:number):Promise<any>{
-        try {
-            const response=await axiosWithAuth.delete(id);
-            return response.data
-        } catch (error) {
-            
-        }
-    }
+
 
 }
 

@@ -9,15 +9,15 @@ import { useQuery } from "@tanstack/react-query"
 
 
 //  co sus
-const HistoryVideosSectionSekeleton=()=>{
+export const HistoryVideosSectionSekeleton=()=>{
     return     <div>
             <div className="flex flex-col gap-4 gap-y-10 md:hidden">
-  {Array.from({length:18}).map((_,index)=>(
+  {Array.from({length:6}).map((_,index)=>(
                 <VideoGridCardSkeleton key={index} />
             ))}
             </div>
             <div className="hidden flex-col gap-4 gap-y-10 md:flex">
-  {Array.from({length:18}).map((_,index)=>(
+  {Array.from({length:6}).map((_,index)=>(
                 <VideoRowCardSkeleton key={index}  size="compact"/>
             ))}
             </div>
@@ -25,7 +25,6 @@ const HistoryVideosSectionSekeleton=()=>{
         </div>
 }
 export const HistoryVideosSection=({statusSubscription})=>{
-    console.log(statusSubscription)
     return (
         <div>
             <div className="flex flex-col gap-4 gap-y-10 md:hidden">

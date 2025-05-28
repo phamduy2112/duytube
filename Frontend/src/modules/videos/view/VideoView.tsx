@@ -9,7 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import { VideoService } from "@/service/axios/videos/video";
 
 interface VideoViewProps{
-    id:String;
+    videoId:string;
 }
 
 export const VideoView=({videoId}:VideoViewProps)=>{

@@ -30,7 +30,7 @@ export const LoadingSkeleton=()=>{
 
     const {data}=useQuery({
       queryKey:["subscriptions",user?.id],
-      queryFn:()=>SubscriptionsService.findMySubscriptions(user?.id),
+      queryFn:()=>SubscriptionsService.findMySubscriptions(user!.id),
       enabled:!!user?.id,
 
     })
@@ -41,7 +41,7 @@ export const LoadingSkeleton=()=>{
         <SidebarGroupLabel>Subscriptions</SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu>
-            {data?.map((subscription) => (
+            {data?.map((subscription:any) => (
               <SidebarMenuItem key={`${subscription.creatorId}-${subscription.viewerID}`}>
                 <SidebarMenuButton asChild 
                 tooltip={subscription.channel_name	}

@@ -124,7 +124,7 @@ export const VideoRowCard=({
                 name={data?.users?.name}
               />
               {/* Nếu bạn muốn avatar hay user info link tới trang user thì: */}
-              <Link href={`/users/${data?.users?.id}`}>
+              <Link href={`/user/${data?.users?.id}`}>
                 <UserInfo size="sm" name={data?.users?.channel_name} />
               </Link>
             </div>

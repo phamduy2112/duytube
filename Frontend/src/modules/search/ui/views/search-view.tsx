@@ -31,7 +31,7 @@ export const SearchView=({
             label: category.name,
           })) || [];
         }, [categories]);
-        const {data,error}=useQuery({
+        const {data,error,isLoading}=useQuery({
             queryKey:["searchVideos",query],
             queryFn:()=>VideoService.searchVideo(query),
             enabled:!!query,
@@ -46,7 +46,7 @@ export const SearchView=({
       
     return(
         <div className="max-w-[1300px] mx-auto mb-10 flex flex-col gap-y-6 px-4 pt-2.5">
-      <CategoriesSection data={dataCategories} categoryId={categoryId} onChange={setCategoryId} />
+      {/* <CategoriesSection data={dataCategories} categoryId={categoryId} onChange={setCategoryId} /> */}
             <ResultsSection data={dataVideos}/>
         </div>
     )

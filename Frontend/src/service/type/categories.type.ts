@@ -1,7 +1,7 @@
 import { Video } from "@mux/mux-node/resources/index.mjs";
 
 
-export interface ICategory {
+export interface ICategories {
   id: string;
   name: string;
   slug: string;

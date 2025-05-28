@@ -6,6 +6,22 @@ interface Props {
   setInputValue: (value: string) => void;
   onSearch: () => void;
 }
+export const HistorySidebarSkeleton = () => {
+  return (
+    <div className="p-4 space-y-4 text-sm animate-pulse">
+      {/* Skeleton for Input */}
+      <div className="h-9 bg-gray-300 rounded-md" />
+
+      {/* Skeleton for Trash item */}
+      <ul className="space-y-2">
+        <li className="flex items-center gap-2">
+          <div className="w-4 h-4 bg-gray-300 rounded" />
+          <div className="h-4 bg-gray-300 rounded w-3/4" />
+        </li>
+      </ul>
+    </div>
+  );
+};
 
 export const HistorySidebar = ({ inputValue, setInputValue, onSearch }: Props) => {  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {

@@ -76,6 +76,11 @@ async findLimit(@Param('id') id: string){
     return await this.videoService.remove(id);
   }
 
+  @Get("/trending")
+  async VideoTrending(){
+    return await this.videoService.findVideosTrending();
+  }
+
   // Tạo user mới (tùy chọn - nếu bạn muốn test user)
   @Post('/user')
   async createUser(@Body() body: { clerk_user_id: string; channel_name: string; avatar_url?: string; bio?: string }) {
