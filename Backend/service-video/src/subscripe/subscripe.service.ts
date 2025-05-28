@@ -62,17 +62,20 @@ export class SubscripeService {
   
 
 
-  async getMySubscriptions(viewerId:string){
-    const subscriptions=await this.prismaService.subscriptions.findMany({
-      where:{
-        viewer_id:viewerId,
+  async getMySubscriptions(viewerId: string) {
+  const users = await this.prismaService.users.findMany({
+    where: {
+      subscriptions_subscriptions_viewer_idTousers: {
+        some: {
+          viewer_id: viewerId,
+        },
       },
-      include:{
-        users_subscriptions_viewer_idTousers:true,
-      }
-    })
-    return subscriptions.map((s)=>s.users_subscriptions_viewer_idTousers)
-  }
+    },
+  });
+
+  return users;
+}
+
 
   async getSubscribersOfCreator(creatorId:string){
     const subs=await this.prismaService.subscriptions.findMany({

@@ -30,12 +30,12 @@ export const LoadingSkeleton=()=>{
 
     const {data}=useQuery({
       queryKey:["subscriptions",user?.id],
-      queryFn:()=>SubscriptionsService.findMySubscriptions(user!.id),
+      queryFn:()=>SubscriptionsService.findYourSubscriptions(user!.id),
       enabled:!!user?.id,
 
     })
 
-    console.log("data",user?.id)
+    console.log("data",data)
     const log=data
     return (
       <SidebarGroup>
