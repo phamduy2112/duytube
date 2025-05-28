@@ -1,3 +1,5 @@
+'use client'
+
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 import { UserAvatar } from "@/components/user-avatar"
@@ -6,6 +8,9 @@ import { SubscriptionButton } from "@/modules/subscriptions/ui/components/subscr
 import Link from "next/link"
 import UserNavBar from "./user-navbar"
 import { useUser } from "@clerk/nextjs"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { SubscriptionsService } from "@/service/axios/subscriptions/subscriptions.service"
+import { useEffect, useState } from "react"
 export const UserPageInfoSkeleton=()=>{
     return (
         <div className="py-6">
@@ -39,9 +44,43 @@ export const UserPageInfoSkeleton=()=>{
 export const UserPageInfo=({user})=>{
     const isPending=false;
     const isLoaded=true
-    const {user:userDetail}=useUser();
+    const {user:userDetail,isSignedIn}=useUser();
         const userId=userDetail?.id;
-          console.log("s,",user)
+            const queryClient=useQueryClient();
+    const [subscribres,setSubscribres]=useState(false)
+ const {mutate:toggleReactionSubscription}=useMutation({
+        mutationFn:SubscriptionsService.toggleSubscriptions,
+        onSuccess:(data)=>{
+          queryClient.invalidateQueries({ queryKey: ["subscriptions", data] });
+            
+
+        },
+        onError:(data)=>{
+
+        }
+    })
+const viewerId:any = userDetail?.id;
+    const creatorId = user?.id;
+    const {data:statusSubscription}=useQuery({
+        queryKey:["subscriptions", viewerId, creatorId],
+        queryFn:()=>SubscriptionsService.StatusSubscriptions(viewerId,creatorId),
+        enabled:!!viewerId&&!!creatorId
+    })
+    const handleToggleReactionSubscription=()=>{
+        const response={
+             viewerId: userDetail?.id,
+             creatorId: user?.id
+        }
+        if(!isSignedIn){
+            return
+        }
+        toggleReactionSubscription(response)
+      
+    }
+    useEffect(() => {
+        setSubscribres(statusSubscription?.subscribed ?? false);
+      }, [statusSubscription?.subscribed]);
+
     return (
         <div className="py-6">
             <div className="flex flex-col md:hidden">
@@ -120,8 +159,8 @@ export const UserPageInfo=({user})=>{
                 ) :(
   <SubscriptionButton
                 disabled={isPending||!isLoaded}
-                isSuscribed={user}
-                // onClick={onclick}
+                isSuscribed={subscribres}
+                onClick={handleToggleReactionSubscription}
                 className="flex-none"
                 />
 

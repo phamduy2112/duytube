@@ -67,10 +67,17 @@ export class SubscripeService {
       where: {
         clerk_user_id: data, // thay bằng ID đúng từ DB
       },
-      include:{
-        subscriptions_subscriptions_creator_idTousers:true,
-        subscriptions_subscriptions_viewer_idTousers:true,
-      }
+  include: {
+        subscriptions_subscriptions_viewer_idTousers: {
+          include: {
+            users_subscriptions_creator_idTousers: true, // lấy info creator (người được follow)
+          },
+        },
+        subscriptions_subscriptions_creator_idTousers: {
+          include: {
+            users_subscriptions_viewer_idTousers: true, // lấy info viewer (người follow)
+          },
+        },
     });
     
     return user

@@ -58,7 +58,7 @@ console.log("1",data)
                   name={subscription.channel_name	}>
 
                   </UserAvatar>
-                
+                  {JSON.stringify(subscription)}
                   <span className="text-sm">{subscription.channel_name	}</span>
                   </Link>
                 </SidebarMenuButton>
