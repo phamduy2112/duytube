@@ -24,7 +24,14 @@ export class VideoController {
     console.log(user_id)
     return await this.videoService.getVideoByUser(user_id)
   }
-  
+    @Get(':videoId/reaction')
+async getCommentReaction(
+  @Param('videoId') videoId: string,
+  @Query('clerk_user_id') clerkUserId: string,
+) {
+  return this.videoService.getReactionVideo(clerkUserId, videoId);
+}
+
   @Get("studio/video/:id")
   async getVideoOne(@Param('id') id: string) {
 

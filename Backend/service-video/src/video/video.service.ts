@@ -243,7 +243,31 @@ async findAll() {
     }
     return this.response.responseSend(responseVideo, 'Video fetched successfully', 200);
   }
-  
+   async getReactionVideo(clerk_user_id: string, video_id: string) {
+  try {
+    const user = await this.prismaService.users.findUnique({
+      where: {
+        clerk_user_id,
+      },
+    });
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    const reaction = await this.prismaService.videos.findFirst({
+      where: {
+        user_id: user.id,
+        id: video_id,
+      },
+    });
+
+    return reaction;
+  } catch (error) {
+    console.error("Error in getReactionComment:", error);
+    throw error;
+  }
+}
 
   async getVideoOne(id:string){
 
