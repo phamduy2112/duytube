@@ -17,6 +17,15 @@ export class SubscriptionsService{
         )
     return response.data
     }
+    static async findYourSubscriptions(creatorId:string){
+        const response=await axiosWithAuth.get("subscripe/get-my",{
+            params:{
+                creatorId
+            }
+        }
+        )
+    return response.data
+    }
     // status
     static async StatusSubscriptions(viewerId:string,creatorId:string){
         const response=await axiosWithAuth.get("subscripe/status",{

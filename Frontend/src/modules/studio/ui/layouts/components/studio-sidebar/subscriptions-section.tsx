@@ -35,12 +35,15 @@ export const LoadingSkeleton=()=>{
 
     })
 
-    console.log(data)
+    console.log("data",user?.id)
+    const log=data
     return (
       <SidebarGroup>
         <SidebarGroupLabel>Subscriptions</SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu>
+            {JSON.stringify(data)}
+            
             {data?.map((subscription:any) => (
               <SidebarMenuItem key={`${subscription.creatorId}-${subscription.viewerID}`}>
                 <SidebarMenuButton asChild 

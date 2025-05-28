@@ -16,7 +16,13 @@ export class SubscripeController {
   @Get("get")
   findMySubscriptions(@Param("viewerId") viewerId:string ) {
     
-    return this.subscripeService.getSubscribersOfCreator(viewerId);
+    return this.subscripeService.getMySubscriptions(viewerId);
+  }
+
+  @Get("get-my")
+  findYourSubscriptions(@Param("creatorId") creatorId:string ) {
+    
+    return this.subscripeService.getSubscribersOfCreator(creatorId);
   }
 
 
