@@ -63,11 +63,9 @@ export class SubscripeService {
 
 
   async getMySubscriptions(data: string) {
-    const user = await this.prismaService.users.findFirst({
-      where: {
-        clerk_user_id: data, // thay bằng ID đúng từ DB
-      },
-  include: {
+   const user = await this.prismaService.users.findFirst({
+      where: { clerk_user_id: data },
+      include: {
         subscriptions_subscriptions_viewer_idTousers: {
           include: {
             users_subscriptions_creator_idTousers: true, // lấy info creator (người được follow)
@@ -78,9 +76,14 @@ export class SubscripeService {
             users_subscriptions_viewer_idTousers: true, // lấy info viewer (người follow)
           },
         },
+      },
     });
-    
-    return user
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    return user;
   }
   
 
