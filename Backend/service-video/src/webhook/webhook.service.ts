@@ -33,28 +33,15 @@ export class WebhookService {
   
     return response;
   }
-async getUserClerk(data) {
-  console.log("📥 Input data:", data);
-
-  const existingUser = await this.prisma.users.findFirst({
-    where: {
-      clerk_user_id: data.clerkId,
-    },
-   
-  });
-
- if (!existingUser) {
-          throw new Error("User not found");
-        }
-  
-        console.log("🔍 Found user:", existingUser?.id);
-
-  return await this.prisma.users.findUnique({
-    where:{
-      id:existingUser?.id
-    }
-  });
-}
+  async getUserClerk(data) {
+    const user = await this.prisma.users.findFirst({
+      where: {
+        clerk_user_id: data, // thay bằng ID đúng từ DB
+      },
+    });
+    console.log(user);
+    return user
+  }
 
   
 
