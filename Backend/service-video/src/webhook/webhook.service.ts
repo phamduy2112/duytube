@@ -33,24 +33,25 @@ export class WebhookService {
   
     return response;
   }
-  async getUserClerk(data){
-    
+async getUserClerk(data) {
+  console.log("📥 Input data:", data);
+
   const existingUser = await this.prisma.users.findUnique({
-  where: {
-    clerk_user_id: data.clerkId,
-  },
-  include: {
-    videos: true,
-    subscriptions_subscriptions_creator_idTousers: true,
-    subscriptions_subscriptions_viewer_idTousers: true,
-  }
-});
+    where: {
+      clerk_user_id: data.clerkId,
+    },
+    include: {
+      videos: true,
+      subscriptions_subscriptions_creator_idTousers: true,
+      subscriptions_subscriptions_viewer_idTousers: true,
+    },
+  });
 
-console.log('Found user ID:', existingUser);
-console.log('Found user clerk_user_id:',data);
+  console.log("🔍 Found user:", existingUser?.id);
 
-    return existingUser
-  }
+  return existingUser;
+}
+
   
 
 }
