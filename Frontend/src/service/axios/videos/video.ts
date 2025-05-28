@@ -15,6 +15,13 @@ export class VideoService{
         }
 
     }
+     static async getReactionsVideos(data:{videoId: string, clerk_user_id: string}){
+    const response=await axiosWithAuth.get(`videos/${data.videoId}/reaction`,{ params: {
+          clerk_user_id:data.clerk_user_id, // query param
+        },})
+              return response.data;
+
+}
     static async getVideoDetail(data){
         const response=await axiosWithAuth.get(`videos/${data.id}`,
             {

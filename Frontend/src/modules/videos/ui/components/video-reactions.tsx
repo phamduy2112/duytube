@@ -18,7 +18,17 @@ const {data:getLikeCount}=useQuery({
         queryFn:()=>VideoService.getLikeCountVideo(id),
         enabled:!!id
       })
-      console.log(getLikeCount)
+      const response={
+        videoId:id,
+        clerk_user_id:user?.id
+      }
+const {data:getLikeCountVideo}=useQuery({
+        queryKey:["get-like-count",id],
+        queryFn:()=>VideoService.getReactionsVideos(response),
+        enabled:!!id
+      })
+      
+      console.log("getLikeCountVideo",getLikeCountVideo)
     const {mutate:toggleReactionVideo}=useMutation({
         mutationFn:VideoService.toogleReactionsVideo,
         onSuccess:(data)=>{
