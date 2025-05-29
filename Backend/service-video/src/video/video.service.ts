@@ -142,6 +142,11 @@ async findVideosTrending() {
         _count: 'desc'  // sắp xếp giảm dần theo số lượt xem
       }
     },
+    include:{
+      users:true,
+      video_views:true,
+  video_reactions:true
+    },
     take: 10,
   });
 }

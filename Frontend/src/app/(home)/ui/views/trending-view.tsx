@@ -42,9 +42,9 @@ export const TrendingView = () => {
         </div>
       </div>
 
-{/* <div className="lg:w-[50rem]">
-    <TrendingVideosSection />
-</div> */}
+<div className="lg:w-[50rem]">
+    <TrendingVideosSection data={data}/>
+</div>
     
     </div>
   );
