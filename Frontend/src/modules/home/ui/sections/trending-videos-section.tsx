@@ -11,16 +11,16 @@ export const TrendingVideosSection=({data})=>{
     console.log("video",data)
     return (
         <div>
-          {/* <div className="flex flex-col gap-4 gap-y-10 md:hidden">
+          <div className="flex flex-col gap-4 gap-y-10 md:hidden">
   {data?.map((video)=>(
-                <VideoGridCard key={video.id} data={video?.videos}/>
+                <VideoGridCard key={video.id} data={video}/>
             ))}
             </div>
             <div className="hidden flex-col gap-4 gap-y-10 md:flex">
   {data?.map((video)=>(
-                <VideoRowCard key={video.id} data={video?.videos} size="default"/>
+                <VideoRowCard key={video.id} data={video} size="default"/>
             ))}
-            </div> */}
+            </div>
           
         </div>
     )

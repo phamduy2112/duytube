@@ -29,18 +29,24 @@ const {data}=useQuery({
       enabled:!!user?.id,
 
     })
+
     return (
         <>
          <div className="flex flex-col gap-4">
-            {data.map((subscription:any)=>(
-                <SubscriptionItem
-                name={subscription.user.channel_name}
-                imageUrl={subscription.user.avatar_url}
+            {data?.subscriptions_subscriptions_viewer_idTousers?.map((subscription:any)=>(
+              <div className="w-[600px]">
+                  <SubscriptionItem
+                name={subscription?.users_subscriptions_creator_idTousers?.channel_name}
+                imageUrl={subscription?.users_subscriptions_creator_idTousers?.avatar_url}
                 subscriberCount={3}
                 disabled={false}
+
                 ></SubscriptionItem>
-            ))}</div> 
-          
+              </div>
+            ))}
+        
+            </div> 
+ 
         </>
     )
 }

@@ -3,6 +3,7 @@ import { SubscriptionsView } from "@/modules/subscriptions/ui/views/subscription
 const Page=async ()=>{
     return (
         <SubscriptionsView/>
+        // <>asdas</>
     )
 }
 

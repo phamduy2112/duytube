@@ -1,4 +1,4 @@
-"use client"
+
 
 import { SubscriptionsSection } from "../sections/subscription-sections";
 

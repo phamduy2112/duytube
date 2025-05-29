@@ -68,7 +68,18 @@ export class SubscripeService {
       include: {
         subscriptions_subscriptions_viewer_idTousers: {
           include: {
-            users_subscriptions_creator_idTousers: true, // lấy info creator (người được follow)
+            users_subscriptions_creator_idTousers: {
+              include:{
+                videos:{
+                    include: {
+      users: true,
+      video_views:true,
+      video_reactions:true
+    }
+                },
+              }
+            }, // lấy info creator (người được follow)
+            
           },
         },
         subscriptions_subscriptions_creator_idTousers: {
