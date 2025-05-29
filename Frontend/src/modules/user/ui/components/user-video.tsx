@@ -5,14 +5,14 @@ import { mockVideos } from '@/scripts/seed-catelogries'
 import { useUser } from '@clerk/nextjs';
 import React, { useMemo, useState } from 'react'
 
-function UserVideo() {
+function UserVideo({videos}) {
      const {user}=useUser()
 const userId = user?.id;
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useVideoOfUser(userId);
   const [filter,setFilter]=useState<'all'|'newest'|'oldest'>('all')
-  const videos=useMemo(()=>{
-      if (!data?.pages[0]?.content) return [];
-        const original = [...data.pages[0].content];
+  const filterVideos=useMemo(()=>{
+      if (!videos) return [];
+        const original = [...videos];
  if (filter === 'newest') {
     return original.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
   }
@@ -40,9 +40,16 @@ const userId = user?.id;
             [@media(min-width:1920px)]:grid-cols-5 [@media(min-width:2200px):grid-cols-6]
             
             ">
-              {videos?.map((video)=>(
+              {
+                filterVideos.length>0 ?(
+filterVideos?.map((video)=>(
                   <VideoGridCard data={video} />
-              ))}
+              ))
+                ) :(
+                <>Chua co video</> 
+                )
+              }
+            
             </div>
       </>
   )

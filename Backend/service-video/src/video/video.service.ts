@@ -186,19 +186,32 @@ async findAll() {
   
   // 
 async findVideosTrending() {
-  const trendingVideos = await this.prismaService.$queryRawUnsafe<any[]>(`
-    SELECT v.*
-    FROM "videos" v
-    INNER JOIN (
-      SELECT "video_id", COUNT(*) AS views
-      FROM "video_views"
-      GROUP BY "video_id"
-      ORDER BY views DESC
-      LIMIT 10
-    ) AS top_views ON v.id = top_views.video_id
-  `);
+ const topVideos = await this.prismaService.video_views.groupBy({
+  by: ['video_id'],
+  _count: {
+    video_id: true,
+  },
+  orderBy: {
+    _count: {
+      video_id: 'desc',
+    },
+  },
+  take: 10,
+});
 
-  return this.response.responseSend(trendingVideos, "Successfully", 200);
+const videoIds = topVideos.map((v) => v.video_id);
+
+const videos = await this.prismaService.videos.findMany({
+  where: {
+    id: { in: videoIds },
+  },
+  include: {
+    users: true, // nếu bạn muốn thông tin người đăng
+    categories: true, // nếu cần thông tin category
+  },
+});
+
+  return this.response.responseSend(videos, "Successfully", 200);
 }
 
   // Lấy một video theo id
@@ -226,7 +239,7 @@ async findVideosTrending() {
     // Kiểm tra userId có tồn tại thì mới gọi addView
     if (userId) {
         this.addView(userId, video.id);
-    }
+    } 
     const total=this.getTotalViews(video.id)
     const responseVideo={
       ...video,

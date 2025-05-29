@@ -18,6 +18,7 @@ interface UserSectionProps {
   userId: string;
   handleItemClick: (item: string) => void;
   activeItem: string;
+  isLoading:boolean
 }
 
 const UserSectionSkeleton=()=>{
@@ -30,7 +31,7 @@ const UserSectionSkeleton=()=>{
         </div>
     )
 }
-const UserSection = ({ userId,handleItemClick,activeItem}:UserSectionProps) => {
+const UserSection = ({ userId,handleItemClick,activeItem,isLoading}:UserSectionProps) => {
 
   // const {user}=useUser();
   const {data:user}=useQuery({
@@ -44,7 +45,7 @@ const UserSection = ({ userId,handleItemClick,activeItem}:UserSectionProps) => {
   if (!user) {
     return <div>Không tìm thấy người dùng.</div>;
   }
-  console.log(user)
+
   return (
     <div className="flex flex-col ">
             <UserPageBanner user={user}/>
