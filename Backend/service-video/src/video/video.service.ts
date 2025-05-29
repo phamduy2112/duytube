@@ -134,6 +134,18 @@ async findAll() {
 
   return this.response.responseSend(videos, 'Videos fetched successfully', 200);
 }
+async findVideosTrending() {
+  // Giả sử trả về 10 video có nhiều view nhất trong 7 ngày gần nhất
+  return await this.prismaService.videos.findMany({
+    orderBy: {
+      video_views: {
+        _count: 'desc'  // sắp xếp giảm dần theo số lượt xem
+      }
+    },
+    take: 10,
+  });
+}
+
   async findVideoByUser(userId){
     try {
       const user = await this.prismaService.users.findFirst({
@@ -185,34 +197,6 @@ async findAll() {
 
   
   // 
-async findVideosTrending() {
- const topVideos = await this.prismaService.video_views.groupBy({
-  by: ['video_id'],
-  _count: {
-    video_id: true,
-  },
-  orderBy: {
-    _count: {
-      video_id: 'desc',
-    },
-  },
-  take: 10,
-});
-
-const videoIds = topVideos.map((v) => v.video_id);
-
-const videos = await this.prismaService.videos.findMany({
-  where: {
-    id: { in: videoIds },
-  },
-  include: {
-    users: true, // nếu bạn muốn thông tin người đăng
-    categories: true, // nếu cần thông tin category
-  },
-});
-
-  return this.response.responseSend(videos, "Successfully", 200);
-}
 
   // Lấy một video theo id
   async findOne(id: string, userId?: string) {
