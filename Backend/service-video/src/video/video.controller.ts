@@ -19,6 +19,11 @@ export class VideoController {
   async findAll() {
     return await this.videoService.findAll();
   }
+  
+  @Get("/trending")
+  async VideoTrending(){
+    return await this.videoService.findVideosTrending();
+  }
   @Get("user/:id")
   async getVideoByUser(@Param("id") user_id:string){
     console.log(user_id)
@@ -76,10 +81,6 @@ async findLimit(@Param('id') id: string){
     return await this.videoService.remove(id);
   }
 
-  @Get("/trending")
-  async VideoTrending(){
-    return await this.videoService.findVideosTrending();
-  }
 
   // Tạo user mới (tùy chọn - nếu bạn muốn test user)
   @Post('/user')
