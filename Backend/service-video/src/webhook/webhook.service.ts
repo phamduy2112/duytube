@@ -41,7 +41,7 @@ export class WebhookService {
       include:{
         subscriptions_subscriptions_creator_idTousers:true,
         subscriptions_subscriptions_viewer_idTousers:true,
-        
+        videos:true,
       }
     });
     console.log(user);

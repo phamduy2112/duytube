@@ -47,19 +47,19 @@ console.log("1",data)
             {data?.subscriptions_subscriptions_viewer_idTousers?.map((subscription:any) => (
               <SidebarMenuItem key={`${subscription.creatorId}-${subscription.viewerID}`}>
                 <SidebarMenuButton asChild 
-                tooltip={subscription.channel_name	}
-                isActive={pathname==`/user/${subscription.clerk_user_id	}`}
+                tooltip={subscription?.users_subscriptions_creator_idTousers.channel_name	}
+                isActive={pathname==`/user/${subscription?.users_subscriptions_creator_idTousers?.clerk_user_id	}`}
                 
                 >
-                  <Link href={`/user/${subscription.clerk_user_id}`} className="flex items-center gap-4">
+                  <Link href={`/user/${subscription?.users_subscriptions_creator_idTousers?.clerk_user_id}`} className="flex items-center gap-4">
                   <UserAvatar
                   size="xs"
-                  imageUrl={subscription.avatar_url	}
-                  name={subscription.channel_name	}>
+                  imageUrl={subscription?.users_subscriptions_creator_idTousers?.avatar_url	}
+                  name={subscription?.users_subscriptions_creator_idTousers?.channel_name	}>
 
                   </UserAvatar>
-                  {JSON.stringify(subscription)}
-                  <span className="text-sm">{subscription.channel_name	}</span>
+                
+                  <span className="text-sm">{subscription?.users_subscriptions_creator_idTousers?.channel_name	}</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>

@@ -17,8 +17,8 @@ export const VideosVideoSection=({activeItem})=>{
     const {user}=useUser()
 const userId = user?.id;
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useVideoOfUser(userId);
-  console.log("data",data?.pages[0]?.content)
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useVideoOfUser("2");
+  console.log("data1",data?.pages[0]?.content)
     return (
         <div>
             {/* <div className="gap-4 gap-y-10 grid grid-cols-1 sm:gird-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4

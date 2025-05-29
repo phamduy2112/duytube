@@ -25,12 +25,14 @@ const VideosSectionSekeleton=()=>{
 }
 export const VideosSection=({playlistId})=>{
 
-    const {data:playlistDetail}=useQuery({
+    const {data:playlistDetail,isLoading}=useQuery({
         queryKey:["playlist-detail",playlistId],
         queryFn:()=>PlaylistsService.getDetailPlaylists(playlistId),
         enabled:!!playlistId
     })
-    console.log("playlistDetail",playlistDetail)
+    if(isLoading){
+        return <VideosSectionSekeleton/>
+    }
     return (
         <div>
             <div className="flex flex-col gap-4 gap-y-10 md:hidden">
