@@ -84,7 +84,17 @@ export class SubscripeService {
         },
         subscriptions_subscriptions_creator_idTousers: {
           include: {
-            users_subscriptions_viewer_idTousers: true, // lấy info viewer (người follow)
+            users_subscriptions_viewer_idTousers: {
+                 include:{
+                videos:{
+                    include: {
+      users: true,
+      video_views:true,
+      video_reactions:true
+    }
+                },
+              }
+            }, // lấy info viewer (người follow)
           },
         },
       },
