@@ -1,6 +1,7 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { HomeNavBar } from "./components/home-navbar";
 import {  HomeSidebar } from "./components/home-sidebar";
+import { Suspense } from "react";
 
 interface HomeLayoutProps{
     children:React.ReactNode;
@@ -12,7 +13,9 @@ export const HomeLayout=({children}:HomeLayoutProps)=>{
            <div className="w-full">
           
 
-            <HomeNavBar></HomeNavBar>
+            <Suspense fallback={<div>Loading navbar...</div>}>
+        <HomeNavBar />
+      </Suspense>
            </div>
         <div className="flex min-h-screen">
           {/* HomeSidebar */}
