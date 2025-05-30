@@ -11,9 +11,9 @@ import commentService from "@/service/axios/comments/comment.service";
 import { useUser } from "@clerk/nextjs";
 import { RequireLoginWrapper } from "@/components/require-login";
 
-export const videoSection=({videoId})=>{
+export const videoSection=({videoId}:any)=>{
   return (
-    <Suspense fallback={<VideoSectionSuspense/>}>
+    <Suspense fallback={<VideoSectionSuspense videoId={videoId}/>}>
       <VideoSectionSuspense videoId={videoId}/>
     </Suspense>
   )
@@ -26,7 +26,7 @@ const VideoSectionSekeleton=()=>{
     </>
   )
 }
-export const VideoSectionSuspense = ({ videoId }) => {
+export const VideoSectionSuspense = ({ videoId }:any) => {
     const { user } = useUser();
  const response={
         id:videoId,
@@ -49,7 +49,7 @@ export const VideoSectionSuspense = ({ videoId }) => {
   return (
     <div>
    
-    <VideoPlayer autoPlay playBackId={videoDetail?.data?.mux_playback_id} thumbnaiUrl=""></VideoPlayer>
+    <VideoPlayer autoPlay playBackId={videoDetail?.data?.mux_playback_id}></VideoPlayer>
     <VideoTopRow video={videoDetail}/>
   <div>
       <p className="font-bold text-[1.2rem] py-3">
@@ -61,8 +61,8 @@ export const VideoSectionSuspense = ({ videoId }) => {
    
   </div>
     {
-  comment?.data?.map((item) => {
-    return <CommentItem key={item.id} comment={item} />;
+  comment?.data?.map((item:any) => {
+    return <CommentItem key={item.id} comment={item} variant={"comment"} />;
   })
 }
 

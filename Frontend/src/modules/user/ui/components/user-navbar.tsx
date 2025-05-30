@@ -8,7 +8,7 @@ const Navbar = ({activeItem,handleItemClick}:NavbarProps) => {
   const [hoveredItem, setHoveredItem] = useState(null);
 
   // Hàm thay đổi trạng thái khi hover vào item
-  const handleMouseEnter = (item) => {
+  const handleMouseEnter = (item:any) => {
     setHoveredItem(item);
   };
 

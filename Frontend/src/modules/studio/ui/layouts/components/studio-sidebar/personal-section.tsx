@@ -36,8 +36,8 @@ console.log('isSignedIn:', isSignedIn);
       <SidebarGroupContent>
         <SidebarMenu>
           {items
-            .filter((item) => !item.auth || isSignedIn)
-            .map((item) => (
+            .filter((item:any) => !item.auth || isSignedIn)
+            .map((item:any) => (
               <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton asChild tooltip={item.title} isActive={pathname === item.url}>
                   <Link href={item.url} className="flex items-center gap-4">

@@ -4,7 +4,7 @@ import { PlaylistInfo } from "./playlist-info"
 
 export const PlayListGridCard=({
     data
-})=>{
+}:any)=>{
     const videoCount=data?.playlist_videos.length;
     return (
         <Link href={`playlists/${data.id}`}>

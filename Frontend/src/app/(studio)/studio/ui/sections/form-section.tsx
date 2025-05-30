@@ -35,7 +35,7 @@ interface FormSectionProps {
 //     )
 // })
 
-export const FormSectionSuspense = ({ videoId }) => {
+export const FormSectionSuspense = ({ videoId }:FormSectionProps) => {
         const fullUrl=`localhost:3000/videos/${videoId}`
 
   const form = useForm({
@@ -43,6 +43,7 @@ export const FormSectionSuspense = ({ videoId }) => {
     title: "",
     description: "",
     category_id: "",
+    thumbnaiUrl:"",
   }
 })
 
@@ -95,7 +96,7 @@ const queryClient=useQueryClient()
 
         }
     })
-        const onSubmit = async (data) => {
+        const onSubmit = async (data:any) => {
        const formData={
         ...data,
         id:videoId
@@ -104,7 +105,7 @@ const queryClient=useQueryClient()
     }
     return (
     <>
-    <ThumbnailUploadModal open={thumbnailModalOpen} onOpenChange={setThumbnailModalOpen} videoId={videoId}/>
+    {/* <ThumbnailUploadModal open={thumbnailModalOpen} onOpenChange={setThumbnailModalOpen} videoId={videoId}/> */}
         <FormProvider {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
                 <div className="flex items-center justify-between mb-6 mt-[5rem]">
@@ -178,7 +179,7 @@ const queryClient=useQueryClient()
           </SelectTrigger>
         </FormControl>
         <SelectContent>
-          {categories?.data.map((category) => (
+          {categories?.data.map((category:any) => (
             <SelectItem value={category.id} key={category.id}>
               {category.name}
             </SelectItem>
@@ -278,44 +279,48 @@ const queryClient=useQueryClient()
   )}
 /> */}
 
-                        <FormField 
-                        name="thmbnaiUrl"
-                        control={form.control}
-                        render={()=>(
-                            <FormItem>
-                                <FormLabel>Thumbnail</FormLabel>
-                                <FormControl>
-                                    <div className="p-0.5 border border-dashed border-neutral-400 relative h-[84px] w-[153px] group">
-                                        <Image 
-                                        
-                                        src={"/placeholder.svg"} className="object-cover" fill alt="Thmbnail"></Image>
+                     <FormField 
+  name="thumbnaiUrl"
+  control={form.control}
+  render={({ field }) => (
+    <FormItem>
+      <FormLabel>Thumbnail</FormLabel>
+      <FormControl>
+        <div className="p-0.5 border border-dashed border-neutral-400 relative h-[84px] w-[153px] group">
+          <Image 
+            src="/placeholder.svg"
+            className="object-cover"
+            fill
+            alt="Thumbnail"
+          />
 
-                                    </div>
-                                </FormControl>
-                            </FormItem>
-                        )}
-                        >
-                          <DropdownMenu>
-                                <DropdownMenuTrigger asChild>
-                                    <Button
-                                    type="button"
-                                    size="icon"
-                                    className="bg-black/50 hover:bg-black/50 absolute top-1 right-1 rounded-full opacity-100 md:opacity-0 group-hover:opacity-100">
-                                        <MoreVerticalIcon className="text-white"></MoreVerticalIcon>
-                                    </Button>
-                                    <DropdownMenuContent align="start" side="right">
-                                        <DropdownMenuItem onClick={()=>setThumbnailModalOpen(true)}>
-                                            <ImagePlusIcon className="size-4 mr-1"></ImagePlusIcon>
-                                            Changne
-                                        </DropdownMenuItem>
-                                        <DropdownMenuItem >
-                                            <RotateCcwIcon className="size-4 mr-1"></RotateCcwIcon>
-                                            Restore
-                                        </DropdownMenuItem>
-                                    </DropdownMenuContent>
-                                </DropdownMenuTrigger>
-                          </DropdownMenu>
-                        </FormField>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                type="button"
+                size="icon"
+                className="bg-black/50 hover:bg-black/50 absolute top-1 right-1 rounded-full opacity-100 md:opacity-0 group-hover:opacity-100">
+                <MoreVerticalIcon className="text-white" />
+              </Button>
+            </DropdownMenuTrigger>
+            
+            <DropdownMenuContent align="start" side="right">
+              <DropdownMenuItem onClick={() => setThumbnailModalOpen(true)}>
+                <ImagePlusIcon className="size-4 mr-1" />
+                Change
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <RotateCcwIcon className="size-4 mr-1" />
+                Restore
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+      </FormControl>
+    </FormItem>
+  )}
+/>
+
 
                     </div>
 

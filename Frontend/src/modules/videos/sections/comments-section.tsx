@@ -11,7 +11,7 @@ import React, { Suspense } from 'react'
 //     )
 // }
 
-export default function CommentsSection({videoId}) {
+export default function CommentsSection({videoId}:any) {
   return (
     <div className='mt-6'>
         <div className='flex flex-col gap-6'>

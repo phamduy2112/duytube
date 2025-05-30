@@ -2,8 +2,7 @@
 import MuxPlayer from "@mux/mux-player-react"
 
 interface VideoPlayerProps{
-    playBackId?:string|null|undefined;
-    thumbnaiUrl?:string|null|undefined;
+    playBackId?:string|undefined;
     autoPlay?:boolean;
     onPlay?:()=>void
 }
@@ -14,7 +13,6 @@ export const VideoPlayerSkeleton=()=>{
 
 export const VideoPlayer=({
     playBackId,
-    thumbnailUrl,
     autoPlay,
     onPlay,
 }:VideoPlayerProps)=>{
@@ -22,7 +20,7 @@ export const VideoPlayer=({
     // if(!playbackId) return null
     return(
         <MuxPlayer
-        playbackId={playBackId}
+       playbackId={playBackId}
         poster={`https://image.mux.com/${playBackId}/thumbnail.jpg`}
         playerInitTime={0}
         autoPlay={autoPlay}

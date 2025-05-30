@@ -7,17 +7,17 @@ import { mockVideos } from "@/scripts/seed-catelogries"
 
 //  co sus, co load
 
-export const TrendingVideosSection=({data})=>{
+export const TrendingVideosSection=({data}:any)=>{
     console.log("video",data)
     return (
         <div>
           <div className="flex flex-col gap-4 gap-y-10 md:hidden">
-  {data?.map((video)=>(
+  {data?.map((video:any)=>(
                 <VideoGridCard key={video.id} data={video}/>
             ))}
             </div>
             <div className="hidden flex-col gap-4 gap-y-10 md:flex">
-  {data?.map((video)=>(
+  {data?.map((video:any)=>(
                 <VideoRowCard key={video.id} data={video} size="default"/>
             ))}
             </div>

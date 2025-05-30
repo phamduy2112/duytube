@@ -41,7 +41,7 @@ export const UserPageInfoSkeleton=()=>{
 }
 
 
-export const UserPageInfo=({user})=>{
+export const UserPageInfo=({user}:any)=>{
     const isPending=false;
     const isLoaded=true
     const {user:userDetail,isSignedIn}=useUser();

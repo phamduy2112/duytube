@@ -7,7 +7,7 @@ import { VideoGridCard, VideoGridCardSkeleton } from "@/modules/videos/ui/compon
 import { VideoRowCard, VideoRowCardSkeleton } from "@/modules/videos/ui/components/video-row-card";
 
 interface ResultsSectionProps {
-  data: any[]; // bạn nên dùng kiểu rõ ràng hơn nếu có
+  data: any; // bạn nên dùng kiểu rõ ràng hơn nếu có
 }
 
 const ResultsSectionSkeleton = () => {
@@ -44,13 +44,13 @@ export const ResultsSection = ({ data }: ResultsSectionProps) => {
     <>
       {isMobile ? (
         <div className="flex flex-col gap-4 gap-y-10 md:hidden">
-          {data?.data?.map((video) => (
+          {data?.data?.map((video:any) => (
             <VideoGridCard key={video.id} data={video} />
           ))}
         </div>
       ) : (
         <div className="hidden flex-col gap-4 md:flex">
-          {data?.data?.map((video) => (
+          {data?.data?.map((video:any) => (
             <div className="xl:w-[60rem] 2xl:w-[70rem]" key={video.id}>
               <VideoRowCard data={video} size="default" />
             </div>

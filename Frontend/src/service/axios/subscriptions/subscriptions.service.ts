@@ -3,7 +3,7 @@ import { axiosWithAuth } from "../axios.config"
 
 export class SubscriptionsService{
 
-    static async toggleSubscriptions(data){
+    static async toggleSubscriptions(data:any){
         // viewerId,creatorId
         const response=await axiosWithAuth.post("subscripe",data);
         return response.data

@@ -76,7 +76,7 @@ const VideosSectionSkeleton=()=>{
 
 export const VideosSection = () => {
   const {user}=useUser()
-const userId = user?.id;
+const userId = user!.id;
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useVideoOfUser(userId);
   console.log("data",data?.pages[0]?.content)
@@ -99,10 +99,10 @@ const userId = user?.id;
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-  {data?.pages[0]?.content?.map((video) => (
+  {data?.pages[0]?.content?.map((video:any) => (
     
     <TableRow
-      onClick={() => router.push(`/studio/videos/${video.id}`)}
+      // onClick={() => router.push(`/studio/videos/${video.id}`)}
       className="cursor-pointer"
       key={video.id}
     >

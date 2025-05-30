@@ -1,7 +1,7 @@
 
 export const PlaylistInfo=({
     data
-})=>{
+}:any)=>{
     return (
         <div className="flex gap-3">
                 <div className="flex-1 min-w-0">

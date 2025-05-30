@@ -3,7 +3,7 @@ import { VideoThumbnail, VideoThumbnailSkeleton } from "./video-thumbnail"
 import { VideoInfo, VideoInfoSkeleton } from "./video-info"
 
 interface VideoGridCardProps{
-    data:any[]
+    data:any
     onRemove?:()=>void
 }
 export const VideoGridCardSkeleton=()=>{

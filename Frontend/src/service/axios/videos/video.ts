@@ -22,7 +22,7 @@ export class VideoService{
               return response.data;
 
 }
-    static async getVideoDetail(data){
+    static async getVideoDetail(data:any){
         const response=await axiosWithAuth.get(`videos/${data.id}`,
             {
                 params: {
@@ -32,7 +32,7 @@ export class VideoService{
         );
         return response.data
     }
-    static async updateVideoDetail(data){
+    static async updateVideoDetail(data:any){
         const response=await axiosWithAuth.put(`videos/${data.id}`,data);
         return response.data
     }
@@ -46,11 +46,11 @@ export class VideoService{
           });
         return response.data
     }
-    static async toogleReactionsVideo(formData){
+    static async toogleReactionsVideo(formData:any){
         const response=await axiosWithAuth.post("videos/toogle-reactions",formData);
         return response.data;
     }
-    static async getLikeCountVideo(id){
+    static async getLikeCountVideo(id:string){
         const response=await axiosWithAuth.get(`videos/reactions/${id}`)
         return response.data;
     }
@@ -71,7 +71,7 @@ export class VideoService{
         return response.data
     }
 
-    static async createVideosFormUser(data){
+    static async createVideosFormUser(data:any){
    
         const response=await axiosWithAuth.post("videos",data)
         return response.data; // trả về { video, upload_url }

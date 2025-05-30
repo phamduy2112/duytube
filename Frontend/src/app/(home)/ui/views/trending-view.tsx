@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { TrendingVideosSection } from "@/modules/home/ui/sections/trending-videos-section";
-import { CarouselItem } from "@/components/ui/carousel";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";

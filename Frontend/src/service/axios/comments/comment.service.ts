@@ -1,4 +1,4 @@
-import { ICreateComment } from "@/service/type/comments.type";
+import { ICreateComment, IToogleCommentReactions } from "@/service/type/comments.type";
 import { axiosWithAuth } from "../axios.config";
 
 class CommentService{
@@ -40,7 +40,7 @@ class CommentService{
         }
     }
 
-async toogleCommentReactions(formData){
+async toogleCommentReactions(formData:IToogleCommentReactions){
     try {
         // dto: {
             // userId,

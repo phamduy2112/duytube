@@ -7,7 +7,7 @@ export const ResponsiveModal=({
     open,
     title,
     onOpenChange,
-})=>{
+}:any)=>{
     const isMobile=useIsMobile();
     if(isMobile){
         return (

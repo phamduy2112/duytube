@@ -9,7 +9,7 @@ export default function UserRegister() {
   const { isSignedIn, user } = useUser();
   const hasCalled = useRef(false); // ✅ Ngăn gọi mutate nhiều lần
 
-  const { mutate, isLoading, isError } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: AuthService.createUser,
     onSuccess: (data) => {
       console.log("✅ Tạo thành công:", data);

@@ -1,7 +1,7 @@
 import { AlertTriangleIcon } from "lucide-react";
 
 
-export const VideoBanner=({status})=>{
+export const VideoBanner=({status}:any)=>{
     if(status==="ready") return null;
     return (
         <div className="bg-yellow-500 py-3 px-4 rounded-b-xl flex items-center gap-2">

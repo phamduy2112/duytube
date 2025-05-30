@@ -23,7 +23,7 @@ const VideosSectionSekeleton=()=>{
           
         </div>
 }
-export const VideosSection=({playlistId})=>{
+export const VideosSection=({playlistId}:any )=>{
 
     const {data:playlistDetail,isLoading}=useQuery({
         queryKey:["playlist-detail",playlistId],
@@ -36,12 +36,12 @@ export const VideosSection=({playlistId})=>{
     return (
         <div>
             <div className="flex flex-col gap-4 gap-y-10 md:hidden">
-  {playlistDetail?.data?.playlist_videos?.map((video)=>(
+  {playlistDetail?.data?.playlist_videos?.map((video:any)=>(
                 <VideoGridCard key={video.id} data={video?.videos}/>
             ))}
             </div>
             <div className="hidden flex-col gap-4 gap-y-10 md:flex">
-  {playlistDetail?.data?.playlist_videos.map((video)=>(
+  {playlistDetail?.data?.playlist_videos.map((video:any)=>(
                 <VideoRowCard key={video.id} data={video?.videos} size="default"/>
             ))}
             </div>

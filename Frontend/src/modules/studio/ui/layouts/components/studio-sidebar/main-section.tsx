@@ -32,7 +32,7 @@ const items = [
       <SidebarGroup>
         <SidebarGroupContent>
           <SidebarMenu>
-            {items.map((item) => (
+            {items.map((item:any) => (
               <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton asChild 
                 tooltip={item.title}

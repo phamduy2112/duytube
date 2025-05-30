@@ -11,13 +11,12 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 
 interface TypeVideoOwner{
-    user:String,
+    user:any,
     videoId:String,
 }
 
 export const VideoOwner=({user,videoId}:TypeVideoOwner)=>{
 
-    const {userId:clerkUserId}=useAuth()
     const {user:userDetail,isSignedIn}=useUser()
     const [subscribres,setSubscribres]=useState(false)
     const queryClient=useQueryClient();
@@ -33,16 +32,16 @@ export const VideoOwner=({user,videoId}:TypeVideoOwner)=>{
         }
     })
     const viewerId:any = userDetail?.id;
-    const creatorId = user?.id;
+    const creatorId:any  = user?.id;
     const {data:statusSubscription}=useQuery({
         queryKey:["subscriptions", viewerId, creatorId],
         queryFn:()=>SubscriptionsService.StatusSubscriptions(viewerId,creatorId),
         enabled:!!viewerId&&!!creatorId
     })
     const handleToggleReactionSubscription=()=>{
-        const response={
+        const response:any={
              viewerId: userDetail?.id,
-             creatorId: user?.id
+             creatorId: creatorId
         }
         if(!isSignedIn){
             return

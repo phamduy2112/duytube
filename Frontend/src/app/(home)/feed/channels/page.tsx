@@ -1,10 +1,13 @@
 import { ChannelView } from '@/modules/home/ui/views/channel-view'
-import React from 'react'
+import { Suspense } from 'react'
+
 
 function Page() {
   return (
-    <div>
-                    <ChannelView/>
+    <div>  <Suspense fallback={<div>Loading...</div>}>
+      <ChannelView />
+    </Suspense>
+                  
 
     </div>
   )

@@ -24,7 +24,7 @@ export const SubscriptionItem=({
     subscriberCount,
     onUnsubscribe,
     disabled
-})=>{
+}:any)=>{
     return(
         <div className="flex items-start gap-4">
             <UserAvatar
@@ -44,7 +44,7 @@ export const SubscriptionItem=({
                     </div>
                     <SubscriptionButton
                     size="sm"
-                    onClick={(e)=>{
+                    onClick={(e:any)=>{
                         e.preventDefault()
                     }}
                     disabled={disabled}

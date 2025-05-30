@@ -11,23 +11,24 @@ import { CommentReplies } from "./comment-replies";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import commentService from "@/service/axios/comments/comment.service";
 import { toast } from "sonner";
-import CommentsSection from "@/modules/videos/sections/comments-section";
 import { RequireLoginWrapper } from "@/components/require-login";
 import { useUser } from "@clerk/nextjs";
 import { formatDistanceToNow } from "date-fns";
+import { ICommentReactions, IToogleCommentReactions } from "@/service/type/comments.type";
 
  
 
  interface CommentItemProps{
-    comment:any[];
+    comment:any;
+    variant:any;
+
  }
 
  export const CommentItem=({
-    comment,
+    comment,variant
  }:CommentItemProps)=>{
     const [isReplyOpen,setIsReplyOpen]=useState(true);
     const [isRepliesOpen,setIsRepliesOpen]=useState(false);
-    const variant="comment"
     const queryClient = useQueryClient();
     const {user,isSignedIn}=useUser()
     const {data:commentReactions,error}=useQuery({
@@ -35,16 +36,15 @@ import { formatDistanceToNow } from "date-fns";
         queryFn:()=>commentService.getCommentReactions(comment?.id),
         enabled:!!comment?.id,
     })
-    const response={
+    const response:ICommentReactions={
         commentId:comment?.id,
-        clerk_user_id:user?.id
+        clerk_user_id:user!.id
     }
     const {data:getCommentReactions}=useQuery({
         queryKey:["reactuib",response],
         queryFn:()=>commentService.getReactionsComment(response),
         enabled:!!response,
     })
-    console.log(getCommentReactions)
     // toogleCommentReactions
     const {mutate:deleteComment}=useMutation({
         mutationFn:commentService.deleteCommentByUser,
@@ -59,14 +59,14 @@ import { formatDistanceToNow } from "date-fns";
             queryClient.invalidateQueries({ queryKey: ["reactionsComment", comment.id] });
         }
     })
-    const handleDeleteComment=(id:string)=>{
-        deleteComment(id)
+    const handleDeleteComment=(id:number)=>{
+        deleteComment(String(id))
         toast.success("Xoa thanh cong")
     }
-    const userId=user?.id
+    const userId=user!.id
     const viewerId=comment?.users?.clerk_user_id;
     const handleToogleCommentReactions=(type:"like"|"unlike")=>{
-        let response={
+        let response:IToogleCommentReactions={
             userId,
             comment_id:comment.id,
             type:type,
@@ -200,9 +200,10 @@ import { formatDistanceToNow } from "date-fns";
 
                 {comment?.other_comments?.length>0 && variant=="comment" && isRepliesOpen &&(
                     <CommentReplies
+                    
                     commentReplies={comment}
                     parentId={comment.id}
-                    video={comment.videoId}
+                    videoId={comment.videoId}
                     />
                 )}
             </>

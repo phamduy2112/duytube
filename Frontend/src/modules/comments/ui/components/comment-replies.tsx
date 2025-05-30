@@ -4,18 +4,16 @@ import { Button } from "@/components/ui/button";
 import { mockComments } from "@/scripts/seed-catelogries";
 
 interface CommentRepliesProps{
-    parentId:string;
-    videoId:string;
+    parentId?:string;
+    videoId?:string;
+    commentReplies?:any;
 }
 
 export const CommentReplies=({
     parentId,
     videoId,
-    fetchNextPage,
     commentReplies,
-     
-    hasNextPage,
-    isFetchingNextPage
+
 }:CommentRepliesProps)=>{
 
     const isLoading=false
@@ -31,27 +29,21 @@ export const CommentReplies=({
                     }
 
                 {!isLoading && 
-  commentReplies?.other_comments.map((comment) => {
+  commentReplies?.other_comments.map((comment:any) => {
     return (
       <CommentItem
         key={comment.id}
         comment={comment}
         variant="reply"
-      />
+        
+        />
     );
   })
 }
 
                 </div>
 
-{
-    hasNextPage&&(
-        <Button variant="tertiary" size="sm" onClick={()=>fetchNextPage()} disabled={isFetchingNextPage}>
-            <CornerDownRightIcon/>
-            Show more replies
-        </Button>
-    )
-}
+
         </div>
 
     )

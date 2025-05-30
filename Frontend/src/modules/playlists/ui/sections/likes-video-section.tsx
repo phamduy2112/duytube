@@ -47,12 +47,12 @@ export const LikedVideosSection = () => {
   return (
     <div>
       <div className="flex flex-col gap-4 gap-y-10 md:hidden">
-        {videoLike?.data?.map((video) => (
+        {videoLike?.data?.map((video:any) => (
           <VideoGridCard key={video.id} data={video?.videos} />
         ))}
       </div>
       <div className="hidden flex-col gap-4 gap-y-10 md:flex w-[40rem] my-auto">
-        {videoLike?.data?.map((video) => (
+        {videoLike?.data?.map((video:any) => (
           <VideoRowCard key={video.id} data={video?.videos} size="default" />
         ))}
       </div>

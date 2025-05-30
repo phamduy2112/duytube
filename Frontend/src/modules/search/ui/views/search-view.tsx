@@ -7,7 +7,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
 import categoriesApi from "@/service/axios/categories/categories.api";
 import { VideoService } from "@/service/axios/videos/video";
-import { ICategory } from "@/service/type/categories.type";
 import { IVideo } from "@/service/type/video.type";
 
 interface PageProps{
@@ -26,7 +25,7 @@ export const SearchView=({
         queryFn: ()=> categoriesApi.getCategory()
     })
         const dataCategories = useMemo(() => {
-          return categories?.content?.map((category:ICategory) => ({
+          return categories?.content?.map((category:any) => ({
             value: category.id,
             label: category.name,
           })) || [];
@@ -46,7 +45,7 @@ export const SearchView=({
       
     return(
         <div className="max-w-[1300px] mx-auto mb-10 flex flex-col gap-y-6 px-4 pt-2.5">
-      {/* <CategoriesSection data={dataCategories} categoryId={categoryId} onChange={setCategoryId} /> */}
+      <CategoriesSection data={dataCategories} categoryId={categoryId} onChange={setCategoryId} />
             <ResultsSection data={dataVideos}/>
         </div>
     )

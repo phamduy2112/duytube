@@ -7,7 +7,7 @@ interface PageProps {
   }
 export const dynamic="force-dynamic";
 
-const Page=async ({params}:PageProps)=>{
+const Page=async ({params}:any)=>{
     const  {videoId}=await params;
 
     return(

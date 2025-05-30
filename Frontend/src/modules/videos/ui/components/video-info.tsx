@@ -9,7 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { UserAvatar } from "@/components/user-avatar";
 
 interface VideoInfoProps{
-    data:any[];
+    data:any;
     onRemove?:()=>void;
 }
 

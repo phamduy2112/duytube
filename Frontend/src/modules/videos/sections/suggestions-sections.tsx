@@ -46,7 +46,7 @@ function SuggestionsSectionSuspense({
     videoId,
     isManual
 }:SuggestionsSectionProps) {
-const suggestedVideos = mockVideos.filter((item) => item.id !== String(videoId));
+const suggestedVideos = mockVideos.filter((item:any) => item.id !== String(videoId));
 // getVideoLimit
    const {data:videoLimit}=useQuery({
         queryKey:['video_limit',10],
@@ -67,7 +67,7 @@ const suggestedVideos = mockVideos.filter((item) => item.id !== String(videoId))
             </Button>
            
         </div>
-    {videoLimit?.data?.map((video) => {
+    {videoLimit?.data?.map((video:any) => {
  return <VideoRowCard
     key={video.id}
     data={video}
@@ -89,7 +89,7 @@ const suggestedVideos = mockVideos.filter((item) => item.id !== String(videoId))
             </Button>
            
         </div>
-        {videoLimit?.data?.map((video) => {
+        {videoLimit?.data?.map((video:any) => {
   return (
     <VideoRowCard
       key={video.id}

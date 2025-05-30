@@ -19,8 +19,8 @@ export const SubbscribedView=()=>{
 
 
   const { data } = useQuery({
-    queryKey: ["subscriptions", user.id],
-    queryFn: () => SubscriptionsService.findMySubscriptions(user.id),
+    queryKey: ["subscriptions", user?.id],
+    queryFn: () => SubscriptionsService.findMySubscriptions(user!.id),
   })
     return (
         <div className="max-w-[1650px] mx-auto mb-10 px-4 pt-15 flex flex-col gap-y-6">
@@ -35,7 +35,9 @@ export const SubbscribedView=()=>{
                 </div>
               
              </div>
-             <SubcribedVideosSection data={data}/>
+             {data?.subscriptions_subscriptions_viewer_idTousers?.length > 0          ?   
+              <SubcribedVideosSection data={data?.subscriptions_subscriptions_viewer_idTousers}/>
+:"Chưa có người đăng kí "}
       
               
         </div>

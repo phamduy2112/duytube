@@ -18,7 +18,7 @@ export const CategoriesSection = ({ data, categoryId, onChange, isLoading }: Cat
       setShowSkeleton(false);
     }, 500); // delay 500ms
 
-    return () => clearTimeout(timeout);
+    return () => clearTimeout(timeout); 
   }, []);
 
   return (

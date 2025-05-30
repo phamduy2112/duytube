@@ -28,7 +28,7 @@ export const PersonalSection = () => {
       <SidebarGroupLabel>You</SidebarGroupLabel>
       <SidebarGroupContent>
         <SidebarMenu>
-          {items.map((item) => (
+          {items.map((item:any) => (
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton asChild isActive={pathname === item.url} tooltip={item.title}>
                 {isSignedIn || !item.auth ? (

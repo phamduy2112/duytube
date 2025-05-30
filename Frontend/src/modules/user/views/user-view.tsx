@@ -5,13 +5,17 @@ import { VideosVideoSection } from '../ui/components/video-sections'
 import { useQuery } from '@tanstack/react-query';
 import { UserService } from '@/service/axios/user/user.service';
 
-function UserView({userId}) {
+interface IUserView{
+  userId:string;
+}
+
+function UserView({userId}:IUserView) {
   const [activeItem, setActiveItem] = useState("Trang chủ"); // Thêm state activeItem
   const handleItemClick = (item:string) => {
     setActiveItem(item); // Cập nhật item được chọn
   };
     // const {user}=useUser();
-  const {data:userDetail}=useQuery({
+  const {data:userDetail,isLoading}=useQuery({
     queryKey:["get-user-detail",userId],
     queryFn:()=>UserService.getUser(userId),
     enabled:!!userId,
@@ -26,7 +30,7 @@ function UserView({userId}) {
   return (
     <div className='flex flex-col max-w-[full] px-4 pt-2.5 mx-auto'>
 
-        <UserSection userId={userId} activeItem={activeItem} handleItemClick={handleItemClick}/>
+        <UserSection userId={userId} activeItem={activeItem} handleItemClick={handleItemClick} isLoading={isLoading}/>
         
         <VideosVideoSection activeItem={activeItem} userDetail={userDetail}/>
     </div>

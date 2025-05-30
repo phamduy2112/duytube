@@ -7,10 +7,10 @@ import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
 import { useMemo } from "react"
 
 interface HomeVideosSectionProps{
-    data:IVideo[]
+    categoryId:string|null,
 }
 
-export const HomeVideoSection=({categoryId})=>{
+export const HomeVideoSection=({categoryId}:HomeVideosSectionProps)=>{
  // Giả lập phân trang trên client (nếu API trả về toàn bộ data)
 const pageSize = 3;
 
@@ -27,7 +27,7 @@ const pageSize = 3;
 
       // Lọc nếu có categoryId
       const filtered = categoryId
-        ? allVideos.data.filter((v) => v.categoryId === categoryId)
+        ? allVideos.data.filter((v:any) => v.categoryId === categoryId)
         : allVideos.data;
 
       const start = pageParam * pageSize;

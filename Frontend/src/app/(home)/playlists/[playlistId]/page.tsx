@@ -4,7 +4,7 @@ import { VideosView } from '@/modules/playlists/ui/views/videos-view';
 import React from 'react';
 
 
-const Page = async ({params}) => {
+const Page = async ({params}:any) => {
  
   
 const {playlistId}=await params

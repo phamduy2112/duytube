@@ -1,13 +1,12 @@
 import { Button } from '@/components/ui/button'
 import { useVideoOfUser } from '@/hooks/api/use-video-of-user';
 import { VideoGridCard } from '@/modules/videos/ui/components/video-grid-card'
-import { mockVideos } from '@/scripts/seed-catelogries'
 import { useUser } from '@clerk/nextjs';
 import React, { useMemo, useState } from 'react'
 
-function UserVideo({videos}) {
+function UserVideo({videos}:any) {
      const {user}=useUser()
-const userId = user?.id;
+const userId = user!.id;
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useVideoOfUser(userId);
   const [filter,setFilter]=useState<'all'|'newest'|'oldest'>('all')
   const filterVideos=useMemo(()=>{
@@ -42,7 +41,7 @@ const userId = user?.id;
             ">
               {
                 filterVideos.length>0 ?(
-filterVideos?.map((video)=>(
+filterVideos?.map((video:any)=>(
                   <VideoGridCard data={video} />
               ))
                 ) :(

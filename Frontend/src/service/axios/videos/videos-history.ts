@@ -2,12 +2,12 @@ import { axiosWithAuth } from "../axios.config";
 
 class VideosHistory{
 
-    async getVideosHistory(idUser:string){
+    async getVideosHistory(idUser:any){
         const response = await axiosWithAuth.get("history",idUser);
         return response.data
     }
 
-    async deleteVideosHistory(id:number){
+    async deleteVideosHistory(id:any){
         const response=await axiosWithAuth.delete("history",id);
         return response.data
     }

@@ -1,5 +1,5 @@
+import { ICategory } from './../../../../Backend/service-video/src/category/type/category.type';
 import { User } from "@clerk/nextjs/server";
-import { ICategory } from "./categories.type";
 import { PlaylistVideo, VideoHistory, VideoReaction, VideoView } from "./tongHop.type";
 
 export interface IVideo {
@@ -21,7 +21,7 @@ export interface IVideo {
   video_history: VideoHistory[];
   video_reactions: VideoReaction[];
   video_views: IVideoView[];
-  categories?: ICategory | null;
+  categories?: ICategory[] | null;
   users: User;
 }
 export interface IVideoView {

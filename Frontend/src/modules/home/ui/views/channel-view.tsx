@@ -1,7 +1,4 @@
-import { Suspense } from "react";
-import { HomeVideoSection } from "@/modules/home/ui/sections/home-videos-sections";
-import { TrendingVideosSection } from "@/modules/home/ui/sections/trending-videos-section";
-import { SubcribedVideosSection } from "../sections/subscribed-videos-sections";
+
 import { ChannelSubscribedSections } from "../sections/channel-subscribed-sections";
 
 interface HomeViewProps{

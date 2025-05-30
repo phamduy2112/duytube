@@ -15,7 +15,7 @@ const PlaylistHeaderSectionSkeleton=()=>{
     )
 }
 //  co suspense
-export const PlaylistHeaderSection=({playlistId})=> {
+export const PlaylistHeaderSection=({playlistId}:any)=> {
   return (
     <div className='flex justify-between items-center'>
         <div>

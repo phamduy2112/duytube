@@ -21,7 +21,7 @@ interface SaveToPlaylistModalProps {
   
 }
 
-const SaveToPlaylistModal: React.FC<SaveToPlaylistModalProps> = ({ onClose,setPage,videoId }:any) => {
+const SaveToPlaylistModal = ({ onClose,setPage,videoId }:any) => {
   const [selected, setSelected] = useState<number[]>([]);
   const [showCreateForm, setShowCreateForm] = useState(false);
 const {user}=useUser();
@@ -33,7 +33,7 @@ const {user}=useUser();
 
   const {data:playlists}=useQuery({
     queryKey:["playlists",user?.id],
-    queryFn:()=>PlaylistsService.getUserPlaylists(user?.id),
+    queryFn:()=>PlaylistsService.getUserPlaylists(user!.id),
     enabled:!!user?.id
 
   })
@@ -80,7 +80,7 @@ const {user}=useUser();
 
 {
   playlists?.data?.length>0 ? (
-    playlists?.data?.map(item => (
+    playlists?.data?.map((item:any) => (
   <div key={item.id} className="flex items-center justify-between mb-3">
     <div className="flex items-center gap-2">
       <input

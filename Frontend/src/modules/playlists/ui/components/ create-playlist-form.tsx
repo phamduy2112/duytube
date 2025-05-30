@@ -13,7 +13,7 @@ interface Props {
   videoId:string;
 }
 
-const CreatePlaylistForm: React.FC<Props> = ({ onCancel, setPage,videoId }) => {
+const CreatePlaylistForm = ({ onCancel, setPage,videoId }:any) => {
   const [title, setTitle] = useState('');
   const [privacy, setPrivacy] = useState<PrivacyOption>('Riêng tư');
   const [collaborative, setCollaborative] = useState(false);
@@ -21,12 +21,7 @@ const CreatePlaylistForm: React.FC<Props> = ({ onCancel, setPage,videoId }) => {
   const queryClient = useQueryClient();
   const {user}=useUser();
   const createPlaylistMutation = useMutation({
-    mutationFn: (data: {
-      title: string;
-      description?: string;
-      user_id: string;
-      video_id:string;
-    }) => PlaylistsService.createPlaylist(data),
+    mutationFn: (data:any) => PlaylistsService.createPlaylist(data),
     onSuccess: () => {
 
       

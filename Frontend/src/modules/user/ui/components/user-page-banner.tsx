@@ -8,7 +8,7 @@ export const UserPageBannerSkeleton=()=>{
     return <Skeleton className="w-full max-h-[200px] h-[15px] md:h-[25vh]"/>
 }
 
-export const UserPageBanner=({user})=>{
+export const UserPageBanner=({user}:any)=>{
     // const {userId}=useAuth();
     console.log(user)
     return (

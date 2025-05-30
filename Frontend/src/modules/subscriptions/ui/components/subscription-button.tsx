@@ -1,12 +1,12 @@
-import {Button,ButtonProps} from '@/components/ui/button'
+import {Button} from '@/components/ui/button'
 import { cn } from '@/lib/utils';
 
 interface SubscriptionButtonProps{
-    onClick:ButtonProps["onClick"];
+    onClick:any["onClick"];
     disabled:boolean;
     isSuscribed:boolean;
     className?:string
-    size?:ButtonProps["size"]
+    size?:any["size"]
 }
 
 export const SubscriptionButton=({

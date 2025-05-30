@@ -22,7 +22,12 @@ interface CommentFormProps {
   onCancel?: () => void;
   variant?: "comment" | "reply";
 }
-
+interface CommentPayload {
+  content: string;
+  videoId: string;
+  userId?: string;    // có thể undefined nếu user chưa login
+  parentId?: string | number;
+}
 type FormValues = {
   value: string;
 };
@@ -62,7 +67,7 @@ export const CommentForm = ({
 
   const onSubmit = (data: FormValues) => {
 
-    const response={
+    const response:any={
       content:data.value,
       videoId,
       userId:user?.id,

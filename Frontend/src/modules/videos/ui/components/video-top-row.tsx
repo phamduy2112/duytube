@@ -31,7 +31,7 @@ export const VideoTopRowSkeleton=()=>{
     )
 }
 
-export const VideoTopRow=({video})=>{
+export const VideoTopRow=({video}:any)=>{
    
     // const compactDate=useMemo(()=>{
     //     return formatDistanceToNow(video?.content?.create_at,{addSuffix:true});
