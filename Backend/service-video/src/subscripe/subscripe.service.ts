@@ -8,30 +8,24 @@ export class SubscripeService {
 
   constructor(private prismaService:PrismaService){}
   
-async create(viewerClerkId: string, creatorClerkId: string) {
-  if (viewerClerkId === creatorClerkId) return;
+async create(viewerClerkId: string, creatorId: string) {
+  if (viewerClerkId === creatorId) return;
 
-  const viewer = await this.prismaService.users.findFirst({
+  const existingUser = await this.prismaService.users.findFirst({
     where: { clerk_user_id: viewerClerkId },
   });
 
-  const creator = await this.prismaService.users.findFirst({
-    where: { clerk_user_id: creatorClerkId },
-  });
+  if (!existingUser) throw new Error('Viewer not found');
 
-  if (!viewer) throw new Error('Viewer not found');
-  if (!creator) throw new Error('Creator not found');
+  const viewerInternalId = existingUser.id;
 
-  const viewerInternalId = viewer.id;
-  const creatorInternalId = creator.id;
-
-  if (viewerInternalId === creatorInternalId) return;
+  if (viewerInternalId === creatorId) return;
 
   const existingSubscription = await this.prismaService.subscriptions.findUnique({
     where: {
       viewer_id_creator_id: {
         viewer_id: viewerInternalId,
-        creator_id: creatorInternalId,
+        creator_id: creatorId,
       },
     },
   });
@@ -41,7 +35,7 @@ async create(viewerClerkId: string, creatorClerkId: string) {
       where: {
         viewer_id_creator_id: {
           viewer_id: viewerInternalId,
-          creator_id: creatorInternalId,
+          creator_id: creatorId,
         },
       },
     });
@@ -50,13 +44,14 @@ async create(viewerClerkId: string, creatorClerkId: string) {
     await this.prismaService.subscriptions.create({
       data: {
         viewer_id: viewerInternalId,
-        creator_id: creatorInternalId,
+        creator_id: creatorId,
       },
     });
     return { subscribed: true };
   }
 }
 
+  
 
 
   async getMySubscriptions(data: string) {
