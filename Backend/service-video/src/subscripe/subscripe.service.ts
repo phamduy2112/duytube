@@ -8,58 +8,55 @@ export class SubscripeService {
 
   constructor(private prismaService:PrismaService){}
   
-  async create(viewerClerkId: string, creatorId: string) {
-    if (viewerClerkId === creatorId) {
-      return;
-    }
-  
-    // Tìm user theo clerk_user_id
-    const existingUser = await this.prismaService.users.findFirst({
-      where: {
-        clerk_user_id: viewerClerkId,
+async create(viewerClerkId: string, creatorClerkId: string) {
+  if (viewerClerkId === creatorClerkId) return;
+
+  const viewer = await this.prismaService.users.findFirst({
+    where: { clerk_user_id: viewerClerkId },
+  });
+
+  const creator = await this.prismaService.users.findFirst({
+    where: { clerk_user_id: creatorClerkId },
+  });
+
+  if (!viewer) throw new Error('Viewer not found');
+  if (!creator) throw new Error('Creator not found');
+
+  const viewerInternalId = viewer.id;
+  const creatorInternalId = creator.id;
+
+  if (viewerInternalId === creatorInternalId) return;
+
+  const existingSubscription = await this.prismaService.subscriptions.findUnique({
+    where: {
+      viewer_id_creator_id: {
+        viewer_id: viewerInternalId,
+        creator_id: creatorInternalId,
       },
-    });
-  
-    // Nếu không tìm thấy user thì dừng
-    if (!existingUser) {
-      throw new Error('Viewer not found');
-    }
-  
-    const viewerInternalId = existingUser.id;
-  
-    // Kiểm tra xem đã đăng ký chưa
-    const existingSubscription = await this.prismaService.subscriptions.findUnique({
+    },
+  });
+
+  if (existingSubscription) {
+    await this.prismaService.subscriptions.delete({
       where: {
         viewer_id_creator_id: {
           viewer_id: viewerInternalId,
-          creator_id: creatorId,
+          creator_id: creatorInternalId,
         },
       },
     });
-  
-    if (existingSubscription) {
-      // Hủy đăng ký
-      await this.prismaService.subscriptions.delete({
-        where: {
-          viewer_id_creator_id: {
-            viewer_id: viewerInternalId,
-            creator_id: creatorId,
-          },
-        },
-      });
-      return { subscribed: false };
-    } else {
-      // Tạo đăng ký mới
-      await this.prismaService.subscriptions.create({
-        data: {
-          viewer_id: viewerInternalId,
-          creator_id: creatorId,
-        },
-      });
-      return { subscribed: true };
-    }
+    return { subscribed: false };
+  } else {
+    await this.prismaService.subscriptions.create({
+      data: {
+        viewer_id: viewerInternalId,
+        creator_id: creatorInternalId,
+      },
+    });
+    return { subscribed: true };
   }
-  
+}
+
 
 
   async getMySubscriptions(data: string) {

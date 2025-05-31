@@ -148,7 +148,7 @@ async toggleLike(userId: string, dto: { comment_id: string; type: string })
     // Nếu chưa tồn tại thì tạo mới
     return this.prisma.comment_reactions.create({
       data: {
-        user_id: userId,
+        user_id,
         comment_id: dto.comment_id,
         type: dto.type,
       },
