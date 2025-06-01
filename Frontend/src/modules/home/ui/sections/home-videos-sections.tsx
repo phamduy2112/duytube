@@ -53,16 +53,15 @@ const skeletonCount = 6; // số lượng skeleton hiển thị khi load
 
     return (
 <div className="w-[full] px-4">
-            <div className="gap-4 gap-y-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4
-            
-            
+            <div className="gap-4 gap-y-10 grid grid-cols-1 sm:gird-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4
+            [@media(min-width:1920px)]:grid-cols-5 [@media(min-width:2200px):grid-cols-6]
             ">
   {
     isLoading ? Array(skeletonCount).fill(0).map((_, idx) => (
             <div className="w-[300px]" key={idx}>
               <VideoGridCardSkeleton />
             </div>
-          )) : data?.pages.flatMap((page) => page.content).map((video) => (
+          )) : data?.pages.flatMap((page) => page.content).map((video:any) => (
   <div className="w-[300px]" key={video.id}>
     <VideoGridCard data={video} />
   </div>

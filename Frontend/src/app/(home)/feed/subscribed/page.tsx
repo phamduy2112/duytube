@@ -4,9 +4,7 @@ import { Suspense } from 'react'
 
 function Page() {
   return (
- <Suspense fallback={<div>Loading...</div>}>
-       <SubbscribedView />
-     </Suspense>
+ <SubbscribedView />
  
   )
 }

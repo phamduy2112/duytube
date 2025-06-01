@@ -31,6 +31,10 @@ import { ICommentReactions, IToogleCommentReactions } from "@/service/type/comme
     const [isRepliesOpen,setIsRepliesOpen]=useState(false);
     const queryClient = useQueryClient();
     const {user,isSignedIn}=useUser()
+    if (!isSignedIn || !user || !comment) return null;
+
+const userId = user.id;
+
     const {data:commentReactions,error}=useQuery({
         queryKey:["reactionsComment",comment?.id],
         queryFn:()=>commentService.getCommentReactions(comment?.id),
@@ -38,7 +42,7 @@ import { ICommentReactions, IToogleCommentReactions } from "@/service/type/comme
     })
     const response:ICommentReactions={
         commentId:comment?.id,
-        clerk_user_id:user!.id
+        clerk_user_id:userId
     }
     const {data:getCommentReactions}=useQuery({
         queryKey:["reactuib",response],
@@ -63,7 +67,6 @@ import { ICommentReactions, IToogleCommentReactions } from "@/service/type/comme
         deleteComment(String(id))
         toast.success("Xoa thanh cong")
     }
-    const userId=user!.id
     const viewerId=comment?.users?.clerk_user_id;
     const handleToogleCommentReactions=(type:"like"|"unlike")=>{
         let response:IToogleCommentReactions={
@@ -76,11 +79,11 @@ import { ICommentReactions, IToogleCommentReactions } from "@/service/type/comme
        }
         toogleComment(response)
     }
-   
+   console.log()
     return(
             <>
                 <div className="flex gap-4">
-                    <Link href={`/users/${comment?.users?.id}`}>
+                    <Link href={`/user/${comment?.users?.clerk_user_id}`}>
                         <UserAvatar 
                         imageUrl={comment?.users?.avatar_url}
                         name={comment?.users?.channel_name}
@@ -89,7 +92,7 @@ import { ICommentReactions, IToogleCommentReactions } from "@/service/type/comme
                         </UserAvatar>
                         </Link>
                         <div className="flex-1 min-w-0">
-                            <Link href={`/users/${comment?.users?.id}`}>
+                            <Link href={`/users/${comment?.users?.clerk_user_id}`}>
                             <div className="flex items-center gap-2 mb-0.5">
                                 <span className="font-medium text-sm pb-0.5">   {comment?.users?.channel_name}</span>
 
@@ -183,7 +186,7 @@ import { ICommentReactions, IToogleCommentReactions } from "@/service/type/comme
   </div>
 )}
 
-
+{/* 
            {comment?.other_comments?.length > 0 && variant === "comment" && (
   <div className="pl-14">
     <Button
@@ -195,17 +198,17 @@ import { ICommentReactions, IToogleCommentReactions } from "@/service/type/comme
       {comment?.other_comments?.length} replies
     </Button>
   </div>
-)}
+)} */}
 
 
-                {comment?.other_comments?.length>0 && variant=="comment" && isRepliesOpen &&(
+                {/* {comment?.other_comments?.length>0 && variant=="comment" && isRepliesOpen &&(
                     <CommentReplies
                     
                     commentReplies={comment}
                     parentId={comment.id}
                     videoId={comment.videoId}
                     />
-                )}
+                )} */}
             </>
 
     )

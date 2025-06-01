@@ -32,7 +32,7 @@ export const CommentReplies=({
   commentReplies?.other_comments.map((comment:any) => {
     return (
       <CommentItem
-        key={comment.id}
+        key={comment?.users?.id}
         comment={comment}
         variant="reply"
         

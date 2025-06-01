@@ -7,6 +7,7 @@ import { SubscriptionItem, SubscriptionItemSkeleton } from "../components/subscr
 import { useQuery } from "@tanstack/react-query"
 import { SubscriptionsService } from "@/service/axios/subscriptions/subscriptions.service"
 import { useUser } from "@clerk/nextjs"
+import { UserService } from "@/service/axios/user/user.service"
 
 
 //  co sus
@@ -25,7 +26,7 @@ export const SubscriptionsSection=()=>{
       const {user}=useUser()
 const {data}=useQuery({
       queryKey:["subscriptions",user?.id],
-      queryFn:()=>SubscriptionsService.findMySubscriptions(user!.id),
+      queryFn:()=>UserService.getUser(user!.id),
       enabled:!!user?.id,
 
     })
@@ -36,7 +37,7 @@ const {data}=useQuery({
             {data?.subscriptions_subscriptions_viewer_idTousers?.map((subscription:any)=>(
               <div className="w-[600px]">
                   <SubscriptionItem
-                name={subscription?.users_subscriptions_creator_idTousers?.channel_name}
+                name="duy"
                 imageUrl={subscription?.users_subscriptions_creator_idTousers?.avatar_url}
                 subscriberCount={3}
                 disabled={false}

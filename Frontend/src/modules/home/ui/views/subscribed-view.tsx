@@ -9,6 +9,7 @@ import { LayoutGrid, List } from "lucide-react";
 import { SubscriptionsService } from "@/service/axios/subscriptions/subscriptions.service";
 import { useQuery } from "@tanstack/react-query";
 import { useUser } from "@clerk/nextjs";
+import { UserService } from "@/service/axios/user/user.service";
 
 interface HomeViewProps{
     categoryId?:string;
@@ -20,7 +21,7 @@ export const SubbscribedView=()=>{
 
   const { data } = useQuery({
     queryKey: ["subscriptions", user?.id],
-    queryFn: () => SubscriptionsService.findMySubscriptions(user!.id),
+    queryFn: () => UserService.getUser(user!.id),
   })
     return (
         <div className="max-w-[1650px] mx-auto mb-10 px-4 pt-15 flex flex-col gap-y-6">

@@ -56,7 +56,7 @@ export const VideoOwner=({user,videoId}:TypeVideoOwner)=>{
     
     return (
         <div className="flex items-center sm:items-start justify-between sm:justify-start gap-3 min-w-0">
-            <Link href={`/user/${user?.id}`} >
+            <Link href={`/user/${user?.clerk_user_id}`} >
                 <div className="flex items-center sm:items-start gap-3 min-w-0">
                     <UserAvatar size="lg" imageUrl="https://i.pravatar.cc/150?img=1" name={user?.name}/>
                     <div className="flex flex-col gap-1 min-w-0">

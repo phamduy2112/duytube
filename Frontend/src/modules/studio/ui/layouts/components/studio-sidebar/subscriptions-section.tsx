@@ -3,6 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { UserAvatar } from "@/components/user-avatar";
 // import { subscriptions } from "@/scripts/seed-catelogries";
 import { SubscriptionsService } from "@/service/axios/subscriptions/subscriptions.service";
+import { UserService } from "@/service/axios/user/user.service";
 import { useUser } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
 import { FlameIcon, HistoryIcon, HomeIcon, ListIcon, ListVideoIcon, PlaySquareIcon, ThumbsUpIcon } from "lucide-react";
@@ -30,7 +31,7 @@ export const LoadingSkeleton=()=>{
 
     const {data}=useQuery({
       queryKey:["subscriptions",user?.id],
-      queryFn:()=>SubscriptionsService.findMySubscriptions(user!.id),
+      queryFn:()=>UserService.getUser(user!.id),
       enabled:!!user?.id,
 
     })
@@ -45,9 +46,10 @@ console.log("1",data)
           
             
             {data?.subscriptions_subscriptions_viewer_idTousers?.map((subscription:any) => (
+              
               <SidebarMenuItem key={`${subscription.creatorId}-${subscription.viewerID}`}>
                 <SidebarMenuButton asChild 
-                tooltip={subscription?.users_subscriptions_creator_idTousers.channel_name	}
+                tooltip="Dyu"
                 isActive={pathname==`/user/${subscription?.users_subscriptions_creator_idTousers?.clerk_user_id	}`}
                 
                 >
@@ -58,7 +60,7 @@ console.log("1",data)
                   name={subscription?.users_subscriptions_creator_idTousers?.channel_name	}>
 
                   </UserAvatar>
-                
+              <p>       {JSON.stringify(subscription)}  </p>
                   <span className="text-sm">{subscription?.users_subscriptions_creator_idTousers?.channel_name	}</span>
                   </Link>
                 </SidebarMenuButton>
