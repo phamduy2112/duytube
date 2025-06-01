@@ -17,6 +17,26 @@ const items = [
   { title: "Subscriptions", url: "/playlists/liked", icon: ThumbsUpIcon, auth: true },
   { title: "All playlists", url: "/playlists", icon: ListVideoIcon, auth: true },
 ];
+import { Skeleton } from "@/components/ui/skeleton";
+
+export const PersonalSectionSkeleton = () => {
+  return (
+    <SidebarGroup>
+      <SidebarGroupContent>
+        <SidebarMenu>
+          {Array.from({ length: 3 }).map((_, index) => (
+            <SidebarMenuItem key={index}>
+              <div className="flex items-center gap-4 px-3 py-2">
+                <Skeleton className="h-5 w-5 rounded" /> {/* Icon placeholder */}
+                <Skeleton className="h-4 w-24" />         {/* Title placeholder */}
+              </div>
+            </SidebarMenuItem>
+          ))}
+        </SidebarMenu>
+      </SidebarGroupContent>
+    </SidebarGroup>
+  );
+};
 
 export const PersonalSection = () => {
   const pathname = usePathname();

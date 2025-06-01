@@ -3,26 +3,37 @@ import { VideoBanner } from "../ui/components/video-banner";
 import { VideoPlayer, VideoPlayerSkeleton } from "../ui/components/video-player";
 import { Suspense } from "react";
 import { VideoTopRow, VideoTopRowSkeleton } from "../ui/components/video-top-row";
-import { CommentForm } from "@/modules/comments/ui/components/comment-form";
-import { CommentItem } from "@/modules/comments/ui/components/comment-items";
+import { CommentForm, CommentFormSkeleton } from "@/modules/comments/ui/components/comment-form";
+import { CommentItem, CommentItemSkeleton } from "@/modules/comments/ui/components/comment-items";
 import { VideoService } from "@/service/axios/videos/video";
 import { useQuery } from "@tanstack/react-query";
 import commentService from "@/service/axios/comments/comment.service";
 import { useUser } from "@clerk/nextjs";
 import { RequireLoginWrapper } from "@/components/require-login";
+import { Skeleton } from "@/components/ui/skeleton";
 
-export const videoSection=({videoId}:any)=>{
-  return (
-    <Suspense fallback={<VideoSectionSuspense videoId={videoId}/>}>
-      <VideoSectionSuspense videoId={videoId}/>
-    </Suspense>
-  )
-}
-const VideoSectionSekeleton=()=>{
+// export const VideoSection=({videoId}:any)=>{
+//   return (
+//     <Suspense fallback={<VideoSectionSekeleton />}>
+//       <VideoSectionSuspense videoId={videoId}/>
+//     </Suspense>
+//   )
+// }
+export const VideoSectionSekeleton=()=>{
   return (
     <>
     <VideoPlayerSkeleton/>
     <VideoTopRowSkeleton/>
+      <div>
+     <Skeleton className="h-8 w-80 mb-3"/>
+    <RequireLoginWrapper>
+   <CommentFormSkeleton />
+    </RequireLoginWrapper>
+<div className="mt-[1rem]">
+
+</div>
+   
+  </div>
     </>
   )
 }
@@ -44,7 +55,6 @@ export const VideoSectionSuspense = ({ videoId }:any) => {
               queryFn:()=>commentService.getCommentByVideo(response.id),
               enabled:!!response.id,
           })    
-     console.log("videoDetail",videoDetail)
       
   return (
     <div>

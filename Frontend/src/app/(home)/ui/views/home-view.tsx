@@ -19,6 +19,7 @@ export const HomeView = () => {
         label: category.name, 
       })) || [];
     }, [data]);
+    console.log(categoryId)
 
   return (
     <div className="sm:w-[100%] 2xl:w-[1600px] mb-10 px-4 pt-2.5 flex flex-col gap-y-6">

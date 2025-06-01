@@ -75,12 +75,19 @@ const VideosSectionSkeleton=()=>{
 }
 
 export const VideosSection = () => {
-  const {user}=useUser()
-const userId = user!.id;
+ const { user } = useUser();
+  const userId = user?.id;
+  if(!user){
+    return null
+  }
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useVideoOfUser(userId);
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useVideoOfUser(user?.id);
   console.log("data",data?.pages[0]?.content)
-  
+    const router = useRouter();
+const handleRowClick = (videoId: string) => {
+    router.push(`/studio/videos/${videoId}`);
+  };
+
   // const title = data?.pages?.content?.title;
 // console.log(title); // "Tiêu đề video
     return (
@@ -98,61 +105,42 @@ const userId = user!.id;
                             <TableHead className="text-right pr-6">Likes</TableHead>
                         </TableRow>
                     </TableHeader>
-                    <TableBody>
-  {data?.pages[0]?.content?.map((video:any) => (
-    
-    <TableRow
-      // onClick={() => router.push(`/studio/videos/${video.id}`)}
-      className="cursor-pointer"
-      key={video.id}
-    >
-      {/* Video (title + thumbnail) */}
+          <TableBody>
+  {data?.pages[0]?.content?.map((video:any,key:number) => (
+    <TableRow key={key} className="cursor-pointer"                 
+    onClick={() => handleRowClick(video.id)}
+>
       <TableCell className="pl-6">
         <div className="flex items-center gap-4">
           <div className="relative aspect-video w-36 shrink-0">
-         
             <VideoThumbnail
-            imageUrl={video?.mux_playback_id}
-            title={video?.title} duration={video.duration || 0} />
+              imageUrl={video?.mux_playback_id}
+              title={video?.title}
+              duration={video.duration || 0}
+            />
           </div>
           <div className="flex flex-col overflow-hidden gap-y-1">
             <span className="text-sm line-clamp-1">{video?.title}</span>
             <span className="text-xs text-muted-foreground line-clamp-1">
-                {video.description || "No description"}
-          
+              {video.description || "No description"}
             </span>
           </div>
         </div>
       </TableCell>
-
-      {/* Visibility */}
       <TableCell>
         <div className="flex items-center">
-        {video.visibility==="private"?(
-        <LockIcon className="size-4 mr-2"/>
-      ):(
-        <Globe2Icon className="size-4 mr-2"/>
-      )}
-      {/* {snakeCaseToTitle(video.visibility)} */}
-        
+          {video.visibility === "private" ? (
+            <LockIcon className="size-4 mr-2" />
+          ) : (
+            <Globe2Icon className="size-4 mr-2" />
+          )}
         </div>
-       
       </TableCell>
-
-      {/* Status */}
-      <TableCell>{snakeCaseToTitle("ready")||"ready"}</TableCell> {/* Bạn có thể sửa chỗ này thành dữ liệu thật */}
-
-      {/* Date */}
-      <TableCell>{format(new Date(video.created_at),"d MMM yyyy") || "2024-01-01"}</TableCell>
-
-      {/* Views */}
+      <TableCell>{snakeCaseToTitle("ready")}</TableCell>
+      <TableCell>{format(new Date(video.created_at), "d MMM yyyy")}</TableCell>
       <TableCell className="text-right">{video.views}</TableCell>
-
-      {/* Comments */}
-      <TableCell className="text-right">{video.comments || 0}</TableCell>
-
-      {/* Likes */}
-      <TableCell className="text-right pr-6">{video.likes || 0}</TableCell>
+      <TableCell className="text-right">0</TableCell>
+      <TableCell className="text-right pr-6">0</TableCell>
     </TableRow>
   ))}
 </TableBody>

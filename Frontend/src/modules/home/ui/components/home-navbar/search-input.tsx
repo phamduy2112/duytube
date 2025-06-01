@@ -3,7 +3,16 @@
 import { SearchIcon, X } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
+export const SearchInputSkeleton = () => {
+  return (
+    <div className="flex w-full max-w-[600px]">
+      <Skeleton className="w-full h-10 rounded-l-full" />
+      <Skeleton className="w-12 h-10 rounded-r-full ml-[-1px]" />
+    </div>
+  );
+};
 export const SearchInput = () => {
   const searchParams = useSearchParams();
   const query = searchParams.get("query") || "";

@@ -4,7 +4,9 @@ import { Suspense } from 'react'
 
 function Page() {
   return (
- <SubbscribedView />
+<div>
+   <SubbscribedView />
+</div>
  
   )
 }

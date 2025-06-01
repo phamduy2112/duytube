@@ -7,6 +7,7 @@ import { mockVideos } from '@/scripts/seed-catelogries';
 import { useQuery } from '@tanstack/react-query';
 import { VideoService } from '@/service/axios/videos/video';
 import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface SuggestionsSectionProps{
     videoId:string;
@@ -24,10 +25,15 @@ export const SuggestionsSection=({
     )
 }
 
-const SuggestionsSectionSkeleton=()=>{
+export const SuggestionsSectionSkeleton=()=>{
     return (
 
         <>
+           <div className="flex gap-[.5rem] mb-3">
+          <Skeleton className="h-10 w-[80px]" />
+          <Skeleton className="h-10 w-[120px]" />
+          <Skeleton className="h-10 w-[80px]" />
+        </div>
         <div className='hidden md:block space-y-3'>
             {Array.from({length:8}).map((_,index)=>(
                 <VideoRowCardSkeleton key={index} size="compact"/>
@@ -46,7 +52,7 @@ function SuggestionsSectionSuspense({
     videoId,
     isManual
 }:SuggestionsSectionProps) {
-const suggestedVideos = mockVideos.filter((item:any) => item.id !== String(videoId));
+const suggestedVideos = mockVideos.filter((item) => item.id !== String(videoId));
 // getVideoLimit
    const {data:videoLimit}=useQuery({
         queryKey:['video_limit',10],

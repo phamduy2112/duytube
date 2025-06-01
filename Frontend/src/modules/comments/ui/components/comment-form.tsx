@@ -14,6 +14,7 @@ import { useUser } from "@clerk/nextjs";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import commentService from "@/service/axios/comments/comment.service";
 import { toast } from "sonner";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface CommentFormProps {
   videoId: string;
@@ -31,7 +32,18 @@ interface CommentPayload {
 type FormValues = {
   value: string;
 };
-
+export const CommentFormSkeleton=()=>{
+  return (  <div className="flex gap-4">
+    <Skeleton className="w-10 h-10 rounded-full" />
+    <div className="flex-1 space-y-2">
+      <Skeleton className="h-[70px] w-full rounded-md" />
+      <div className="flex justify-end gap-2">
+        <Skeleton className="h-8 w-20 rounded-md" />
+        <Skeleton className="h-8 w-20 rounded-md" />
+      </div>
+    </div>
+  </div>)
+}
 export const CommentForm = ({
   videoId,
   parentId,

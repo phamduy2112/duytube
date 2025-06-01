@@ -9,12 +9,8 @@ export class SubscriptionsService{
         return response.data
     }
     static async findMySubscriptions(viewerId:string){
-        const response=await axiosWithAuth.get("subscripe/get",{
-            params:{
-                viewerId
-            }
-        }
-        )
+        const response=await axiosWithAuth.get(`subscripe/get/${viewerId}`)
+
     return response.data
     }
     static async findYourSubscriptions(creatorId:string){

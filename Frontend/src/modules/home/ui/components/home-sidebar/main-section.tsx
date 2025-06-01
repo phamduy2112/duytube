@@ -21,7 +21,27 @@ const items = [
       icon: FlameIcon,
     },
   ];
-  
+import { Skeleton } from "@/components/ui/skeleton";
+
+export const MainSectionSkeleton = () => {
+  return (
+    <SidebarGroup>
+      <SidebarGroupContent>
+        <SidebarMenu>
+          {Array.from({ length: 3 }).map((_, index) => (
+            <SidebarMenuItem key={index}>
+              <div className="flex items-center gap-4 px-3 py-2">
+                <Skeleton className="h-5 w-5 rounded" /> {/* Icon placeholder */}
+                <Skeleton className="h-4 w-24" />         {/* Title placeholder */}
+              </div>
+            </SidebarMenuItem>
+          ))}
+        </SidebarMenu>
+      </SidebarGroupContent>
+    </SidebarGroup>
+  );
+};
+
   export const MainSection = () => {
     const clerk=useClerk();
     const {isSignedIn}=useAuth()

@@ -4,28 +4,41 @@ import { Button } from "@/components/ui/button"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import Image from "next/image"
 import Link from "next/link"
-import { SearchInput } from "./search-input"
-import { AuthButton } from "@/modules/auth/ui/components/auth-button"
+import { SearchInput, SearchInputSkeleton } from "./search-input"
+import { AuthButton, AuthButtonSkeleton } from "@/modules/auth/ui/components/auth-button"
+import { LogoSection, LogoSectionSkeleton } from "./logo-section"
+import { useEffect, useState } from "react"
 
 export const HomeNavBar=()=>{
+       const [showSkeleton, setShowSkeleton] = useState(true);
+        
+          useEffect(() => {
+            const timeout = setTimeout(() => {
+              setShowSkeleton(false);
+            }, 500); // delay 500ms
+        
+            return () => clearTimeout(timeout); 
+          }, []);
+        
     return (
         <div className="fixed top-0 left-0 right-0 h-16 bg-white flex items-center px-2 pr-5 z-50">
-            <div className="flex items-center gap-4 w-full">
-                <div className="flex items-center flex-shrink-0">
-                   
-                   <SidebarTrigger />
-
-                 
-                    <Link href="">
-                    <div className="p-4 flex items-center gap-1">
-                    <Image src="/youtube.jpg" alt="Logo" width={32} height={32}>
-                        </Image>
-                        <p className="text-xl font-semibold tracking-tight">DuyTuBe</p>
-                    </div>
-                   
-
-                        </Link>
+           {
+            showSkeleton ? (
+               <div className="flex items-center gap-4 w-full">
+            <LogoSectionSkeleton/>
+                {/* Search bar */}
+                <div className="flex-1 flex justify-center max-w-[720px] mx-auto">
+                    <SearchInputSkeleton/>
                 </div>
+                <div className="flex-shrink-0 items-center flex gap-4">
+                    {/*  */}
+                    <AuthButtonSkeleton/>
+                </div>
+            </div>
+            ):(
+            
+                  <div className="flex items-center gap-4 w-full">
+            <LogoSection/>
                 {/* Search bar */}
                 <div className="flex-1 flex justify-center max-w-[720px] mx-auto">
                     <SearchInput/>
@@ -35,6 +48,8 @@ export const HomeNavBar=()=>{
                     <AuthButton/>
                 </div>
             </div>
+            )
+           }
         </div>
     )
 }

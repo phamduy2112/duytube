@@ -26,10 +26,10 @@ export const LikedVideosSection = () => {
   });
 
   const isDataLoading = isLoading || !isLoaded || isFetching;
-
   if (isDataLoading) {
     return (
       <div>
+        {videoLike?.data?.length>0 ?<></> :<>"You don't have like video"</>}
         <div className="flex flex-col gap-4 gap-y-10 md:hidden">
           {Array.from({ length: 6 }).map((_, index) => (
             <VideoGridCardSkeleton key={index} />

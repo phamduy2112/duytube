@@ -31,7 +31,7 @@ export const LoadingSkeleton=()=>{
 
     const {data}=useQuery({
       queryKey:["subscriptions",user?.id],
-      queryFn:()=>UserService.getUser(user!.id),
+      queryFn:()=>SubscriptionsService.findMySubscriptions(user!.id),
       enabled:!!user?.id,
 
     })
@@ -49,11 +49,11 @@ console.log("1",data)
               
               <SidebarMenuItem key={`${subscription.creatorId}-${subscription.viewerID}`}>
                 <SidebarMenuButton asChild 
-                tooltip="Dyu"
+                tooltip={subscription?.users_subscriptions_creator_idTousers?.channel_name}
                 isActive={pathname==`/user/${subscription?.users_subscriptions_creator_idTousers?.clerk_user_id	}`}
                 
                 >
-                  <Link href={`/user/${subscription?.users_subscriptions_creator_idTousers?.clerk_user_id}`} className="flex items-center gap-4">
+                  <Link href={`/user/${subscription?.users_subscriptions_creator_idTousers?.clerk_user_id}`} className="flex items-center">
                   <UserAvatar
                   size="xs"
                   imageUrl={subscription?.users_subscriptions_creator_idTousers?.avatar_url	}
@@ -73,7 +73,7 @@ console.log("1",data)
                         asChild
                         isActive={pathname==="/subscriptions"}
                         >
-                            <Link href="">
+                            <Link href="/subscriptions">
                             <ListIcon className="size-4"></ListIcon>
                             <span className="text-sm">All Subscriptions</span>
                             </Link>

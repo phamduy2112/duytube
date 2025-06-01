@@ -32,7 +32,7 @@ export const LikedgView=()=>{
                 {/*  */}
                {
                 showSkeleton ? <LikedHeaderSkeleton/>:  <div>
-                <h1 className="text-2xl font-bold">Liked</h1>
+                <h1 className="text-2xl font-bold">Video likes</h1>
                 <p className="text-xs text-muted-foreground">
             Videos you have liked
                 </p>

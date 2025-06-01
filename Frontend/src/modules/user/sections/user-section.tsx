@@ -21,7 +21,7 @@ interface UserSectionProps {
   isLoading:boolean
 }
 
-const UserSectionSkeleton=()=>{
+export const UserSectionSkeleton=()=>{
     return(
         <div className="flex flex-col">
             <UserPageBannerSkeleton/>
@@ -51,6 +51,7 @@ const UserSection = ({ userId,handleItemClick,activeItem,isLoading}:UserSectionP
             <UserPageBanner user={user}/>
             <UserPageInfo user={user}/>
             <UserNavBar handleItemClick={handleItemClick} activeItem={activeItem}/>
+    {/* <UserSectionSkeleton/> */}
     </div>
 
   );

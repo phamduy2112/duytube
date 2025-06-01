@@ -11,7 +11,7 @@ const Page = async ({ params }: PageProps) => {
   const { userId } = resolvedParams;
 
   return (
-    <div className="pt-17">
+    <div className="">
       <UserView userId={userId} />
     </div>
   );

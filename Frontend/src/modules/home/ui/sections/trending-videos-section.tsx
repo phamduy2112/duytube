@@ -8,7 +8,6 @@ import { mockVideos } from "@/scripts/seed-catelogries"
 //  co sus, co load
 
 export const TrendingVideosSection=({data}:any)=>{
-    console.log("video",data)
     return (
         <div>
           <div className="flex flex-col gap-4 gap-y-10 md:hidden">

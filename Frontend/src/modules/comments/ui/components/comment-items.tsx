@@ -15,6 +15,7 @@ import { RequireLoginWrapper } from "@/components/require-login";
 import { useUser } from "@clerk/nextjs";
 import { formatDistanceToNow } from "date-fns";
 import { ICommentReactions, IToogleCommentReactions } from "@/service/type/comments.type";
+import { Skeleton } from "@/components/ui/skeleton";
 
  
 
@@ -22,6 +23,40 @@ import { ICommentReactions, IToogleCommentReactions } from "@/service/type/comme
     comment:any;
     variant:any;
 
+ }
+
+ export const CommentItemSkeleton=()=>{
+    return (
+        <>
+  <div className="flex gap-4">
+    <Skeleton className="w-10 h-10 rounded-full" />
+
+    <div className="flex-1 min-w-0 space-y-2">
+      <div className="flex items-center gap-2">
+        <Skeleton className="h-4 w-24 rounded" />
+        <Skeleton className="h-3 w-16 rounded" />
+      </div>
+
+      <Skeleton className="h-4 w-full rounded" />
+      <Skeleton className="h-4 w-3/4 rounded" />
+
+      <div className="flex items-center gap-2 mt-2">
+        <Skeleton className="h-8 w-8 rounded" />
+        <Skeleton className="h-4 w-5 rounded" />
+        <Skeleton className="h-8 w-8 rounded" />
+        <Skeleton className="h-4 w-5 rounded" />
+        <Skeleton className="h-8 w-16 rounded" />
+      </div>
+    </div>
+
+    <Skeleton className="h-8 w-8 rounded" />
+  </div>
+
+  <div className="mt-4 pl-14">
+    <Skeleton className="h-10 w-full rounded" />
+  </div>
+</>
+    )
  }
 
  export const CommentItem=({
@@ -79,8 +114,7 @@ const userId = user.id;
        }
         toogleComment(response)
     }
-   console.log()
-    return(
+    return (
             <>
                 <div className="flex gap-4">
                     <Link href={`/user/${comment?.users?.clerk_user_id}`}>

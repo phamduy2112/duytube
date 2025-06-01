@@ -23,6 +23,7 @@ export const VideoGridCard=({data,onRemove}:VideoGridCardProps)=>{
             previewUrl={data?.mux_playback_id}
             title={data?.title}
             duration={data?.duration}
+            
             >
                 
                 </VideoThumbnail>

@@ -31,9 +31,9 @@ export const UserPageInfoSkeleton=()=>{
                     <div className="flex-1 min-w-0">
                         <Skeleton className="h-8 w-64"/>
                         <Skeleton className="h-5 w-48 mt-4"/>
-
+<Skeleton className="h-10 w-32 mt-3 rounded-full"/>
                     </div>
-                    <Skeleton className="h-10 w-32 mt-3 rounded-full"/>
+                    
 
             </div>
         </div>

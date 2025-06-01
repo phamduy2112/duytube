@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query"
 import { SubscriptionsService } from "@/service/axios/subscriptions/subscriptions.service"
 import { useUser } from "@clerk/nextjs"
 import { UserService } from "@/service/axios/user/user.service"
+import { useUserSubscriptions } from "@/hooks/api/use-user"
 
 
 //  co sus
@@ -24,22 +25,17 @@ const SubscriptionsSectionSekeleton=()=>{
 }
 export const SubscriptionsSection=()=>{
       const {user}=useUser()
-const {data}=useQuery({
-      queryKey:["subscriptions",user?.id],
-      queryFn:()=>UserService.getUser(user!.id),
-      enabled:!!user?.id,
-
-    })
+  const {data}=useUserSubscriptions(user?.id)
 
     return (
         <>
          <div className="flex flex-col gap-4">
-            {data?.subscriptions_subscriptions_viewer_idTousers?.map((subscription:any)=>(
-              <div className="w-[600px]">
+            {data?.subscriptions_subscriptions_viewer_idTousers?.map((subscription:any,index:number)=>(
+              <div className="w-[300px] md:w-[450px] lg:w-[650px] 2xl:w-[700px]" key={index}>
                   <SubscriptionItem
                 name="duy"
                 imageUrl={subscription?.users_subscriptions_creator_idTousers?.avatar_url}
-                subscriberCount={3}
+                subscriberCount={data?.subscriptions_subscriptions_creator_idTousers?.length}
                 disabled={false}
 
                 ></SubscriptionItem>

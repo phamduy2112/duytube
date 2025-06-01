@@ -36,9 +36,10 @@ export const PlayListsSection=({showSkeleton}:any)=>{
        if (showSkeleton) {
     return <PlayListsSectionSekeleton />;
   }
-
+ 
     return (
         <div>
+          {playlists?.data?.length>0 ?<></> :<>You have not playlists</>}
          <div className="gap-4 gap-y-10 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4
 [@media(min-width:1920px)]:grid-cols-5 [@media(min-width:2200px)]:grid-cols-6">
                     {playlists?.data?.length>0 && playlists?.data?.map((item:any)=>(

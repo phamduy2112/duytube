@@ -27,7 +27,7 @@ const pageSize = 3;
 
       // Lọc nếu có categoryId
       const filtered = categoryId
-        ? allVideos.data.filter((v:any) => v.categoryId === categoryId)
+        ? allVideos.data.filter((v:any) => v.category_id == categoryId)
         : allVideos.data;
 
       const start = pageParam * pageSize;
@@ -53,8 +53,7 @@ const skeletonCount = 6; // số lượng skeleton hiển thị khi load
 
     return (
 <div className="w-[full] px-4">
-            <div className="gap-4 gap-y-10 grid grid-cols-1 sm:gird-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4
-            [@media(min-width:1920px)]:grid-cols-5 [@media(min-width:2200px):grid-cols-6]
+            <div className="gap-4 gap-y-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5
             ">
   {
     isLoading ? Array(skeletonCount).fill(0).map((_, idx) => (

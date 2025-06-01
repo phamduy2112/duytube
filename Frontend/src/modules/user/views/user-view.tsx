@@ -1,6 +1,6 @@
 'use client'
-import React, { useState } from 'react'
-import UserSection from '../sections/user-section'
+import React, { useEffect, useState } from 'react'
+import UserSection, { UserSectionSkeleton } from '../sections/user-section'
 import { VideosVideoSection } from '../ui/components/video-sections'
 import { useQuery } from '@tanstack/react-query';
 import { UserService } from '@/service/axios/user/user.service';
@@ -11,6 +11,8 @@ interface IUserView{
 
 function UserView({userId}:IUserView) {
   const [activeItem, setActiveItem] = useState("Trang chủ"); // Thêm state activeItem
+const [showSkeleton, setShowSkeleton] = useState(true);
+
   const handleItemClick = (item:string) => {
     setActiveItem(item); // Cập nhật item được chọn
   };
@@ -23,16 +25,29 @@ function UserView({userId}:IUserView) {
 
   })
 
-  if (!userDetail) {
-    return <div>Không tìm thấy người dùng.</div>;
-  }
+
+useEffect(() => {
+    const timeout = setTimeout(() => {
+      setShowSkeleton(false);
+    }, 500); // delay 500ms
+
+    return () => clearTimeout(timeout); 
+  }, []);
+
+  
 
   return (
     <div className='flex flex-col max-w-[full] px-4 pt-2.5 mx-auto'>
+      {
+        showSkeleton ?
+        <UserSectionSkeleton/>       
 
-        <UserSection userId={userId} activeItem={activeItem} handleItemClick={handleItemClick} isLoading={isLoading}/>
+        :<UserSection userId={userId} activeItem={activeItem} handleItemClick={handleItemClick} isLoading={isLoading}/>
+
+      }
         
-        <VideosVideoSection activeItem={activeItem} userDetail={userDetail}/>
+    
+        <VideosVideoSection activeItem={activeItem} userDetail={userDetail} isLoading={showSkeleton}/>
     </div>
   )
 }
