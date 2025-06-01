@@ -19,7 +19,7 @@ export class SubscripeController {
   }
   
 
-  @Get("get")
+  @Get("get/:viewerId")
   findMySubscriptions(@Param("viewerId") viewerId:string ) {
     
     return this.subscripeService.getMySubscriptions(viewerId);

@@ -60,7 +60,7 @@ console.log("1",data)
                   name={subscription?.users_subscriptions_creator_idTousers?.channel_name	}>
 
                   </UserAvatar>
-              <p>       {JSON.stringify(subscription)}  </p>
+              <p>      </p>
                   <span className="text-sm">{subscription?.users_subscriptions_creator_idTousers?.channel_name	}</span>
                   </Link>
                 </SidebarMenuButton>
