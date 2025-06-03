@@ -27,6 +27,7 @@ export class NotificationController {
     return this.notificationService.update(+id, updateNotificationDto);
   }
 
+  // asdasd
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.notificationService.remove(+id);
