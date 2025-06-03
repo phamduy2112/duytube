@@ -11,9 +11,10 @@ import { ReactionsModule } from './reactions/reactions.module';
 import { WebhookModule } from './webhook/webhook.module';
 import { SubscripeModule } from './subscripe/subscripe.module';
 import { PlaylistsModule } from './playlists/playlists.module';
+import { NotificationModule } from './notification/notification.module';
 
 @Module({
-  imports: [PrismaModule, ResponseModule,CategoryModule, VideoModule, MediaModule, CommentModule, ReactionsModule, WebhookModule, SubscripeModule, PlaylistsModule],
+  imports: [PrismaModule, ResponseModule,CategoryModule, VideoModule, MediaModule, CommentModule, ReactionsModule, WebhookModule, SubscripeModule, PlaylistsModule, NotificationModule],
   controllers: [AppController],
   providers: [AppService],
 })

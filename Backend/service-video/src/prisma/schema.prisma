@@ -45,12 +45,14 @@ model users {
   has_created                                   Boolean?            @default(false)
   comment_reactions                             comment_reactions[]
   comments                                      comments[]
+  notifications                                 notifications[]
   playlists                                     playlists[]
   subscriptions_subscriptions_creator_idTousers subscriptions[]     @relation("subscriptions_creator_idTousers")
   subscriptions_subscriptions_viewer_idTousers  subscriptions[]     @relation("subscriptions_viewer_idTousers")
   video_history                                 video_history[]
   video_reactions                               video_reactions[]
   video_views                                   video_views[]
+  video_watch_later                             video_watch_later[]
   videos                                        videos[]
 }
 
@@ -64,26 +66,28 @@ model categories {
 }
 
 model videos {
-  id               String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title            String
-  description      String?
-  mux_status       String?
-  mux_asset_id     String?           @unique
-  mux_upload_id    String?           @unique
-  mux_playback_id  String?           @unique
-  mux_track_id     String?           @unique
-  mux_track_status String?
-  user_id          String            @db.Uuid
-  category_id      String?           @db.Uuid
-  created_at       DateTime?         @default(now()) @db.Timestamptz(6)
-  updated_at       DateTime?         @default(now()) @db.Timestamptz(6)
-  comments         comments[]
-  playlist_videos  playlist_videos[]
-  video_history    video_history[]
-  video_reactions  video_reactions[]
-  video_views      video_views[]
-  categories       categories?       @relation(fields: [category_id], references: [id], onUpdate: NoAction)
-  users            users             @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  id                String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title             String
+  description       String?
+  mux_status        String?
+  mux_asset_id      String?             @unique
+  mux_upload_id     String?             @unique
+  mux_playback_id   String?             @unique
+  mux_track_id      String?             @unique
+  mux_track_status  String?
+  user_id           String              @db.Uuid
+  category_id       String?             @db.Uuid
+  created_at        DateTime?           @default(now()) @db.Timestamptz(6)
+  updated_at        DateTime?           @default(now()) @db.Timestamptz(6)
+  comments          comments[]
+  notifications     notifications[]
+  playlist_videos   playlist_videos[]
+  video_history     video_history[]
+  video_reactions   video_reactions[]
+  video_views       video_views[]
+  video_watch_later video_watch_later[]
+  categories        categories?         @relation(fields: [category_id], references: [id], onUpdate: NoAction)
+  users             users               @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
 }
 
 model comment_reactions {
@@ -157,4 +161,27 @@ model playlists {
   updated_at      DateTime?         @default(now()) @db.Timestamptz(6)
   playlist_videos playlist_videos[]
   users           users             @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_playlists_user")
+}
+
+model notifications {
+  id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id    String    @db.Uuid
+  content    String
+  is_read    Boolean?  @default(false)
+  video_id   String?   @db.Uuid
+  type       String    @db.VarChar(50)
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+  users      users     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_notification_user")
+  videos     videos?   @relation(fields: [video_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_notification_video")
+}
+
+model video_watch_later {
+  id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id    String    @db.Uuid
+  video_id   String    @db.Uuid
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+  users      users     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_watch_later_user")
+  videos     videos    @relation(fields: [video_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_watch_later_video")
+
+  @@unique([user_id, video_id], map: "uc_watch_later_user_video")
 }
