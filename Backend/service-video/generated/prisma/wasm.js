@@ -226,6 +226,7 @@ exports.Prisma.PlaylistsScalarFieldEnum = {
 exports.Prisma.NotificationsScalarFieldEnum = {
   id: 'id',
   user_id: 'user_id',
+  clerk_user_id: 'clerk_user_id',
   content: 'content',
   is_read: 'is_read',
   video_id: 'video_id',

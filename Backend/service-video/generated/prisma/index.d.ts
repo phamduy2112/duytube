@@ -14848,6 +14848,7 @@ export namespace Prisma {
   export type NotificationsMinAggregateOutputType = {
     id: string | null
     user_id: string | null
+    clerk_user_id: string | null
     content: string | null
     is_read: boolean | null
     video_id: string | null
@@ -14858,6 +14859,7 @@ export namespace Prisma {
   export type NotificationsMaxAggregateOutputType = {
     id: string | null
     user_id: string | null
+    clerk_user_id: string | null
     content: string | null
     is_read: boolean | null
     video_id: string | null
@@ -14868,6 +14870,7 @@ export namespace Prisma {
   export type NotificationsCountAggregateOutputType = {
     id: number
     user_id: number
+    clerk_user_id: number
     content: number
     is_read: number
     video_id: number
@@ -14880,6 +14883,7 @@ export namespace Prisma {
   export type NotificationsMinAggregateInputType = {
     id?: true
     user_id?: true
+    clerk_user_id?: true
     content?: true
     is_read?: true
     video_id?: true
@@ -14890,6 +14894,7 @@ export namespace Prisma {
   export type NotificationsMaxAggregateInputType = {
     id?: true
     user_id?: true
+    clerk_user_id?: true
     content?: true
     is_read?: true
     video_id?: true
@@ -14900,6 +14905,7 @@ export namespace Prisma {
   export type NotificationsCountAggregateInputType = {
     id?: true
     user_id?: true
+    clerk_user_id?: true
     content?: true
     is_read?: true
     video_id?: true
@@ -14983,6 +14989,7 @@ export namespace Prisma {
   export type NotificationsGroupByOutputType = {
     id: string
     user_id: string
+    clerk_user_id: string | null
     content: string
     is_read: boolean | null
     video_id: string | null
@@ -15010,6 +15017,7 @@ export namespace Prisma {
   export type notificationsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     user_id?: boolean
+    clerk_user_id?: boolean
     content?: boolean
     is_read?: boolean
     video_id?: boolean
@@ -15022,6 +15030,7 @@ export namespace Prisma {
   export type notificationsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     user_id?: boolean
+    clerk_user_id?: boolean
     content?: boolean
     is_read?: boolean
     video_id?: boolean
@@ -15034,6 +15043,7 @@ export namespace Prisma {
   export type notificationsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     user_id?: boolean
+    clerk_user_id?: boolean
     content?: boolean
     is_read?: boolean
     video_id?: boolean
@@ -15046,6 +15056,7 @@ export namespace Prisma {
   export type notificationsSelectScalar = {
     id?: boolean
     user_id?: boolean
+    clerk_user_id?: boolean
     content?: boolean
     is_read?: boolean
     video_id?: boolean
@@ -15053,7 +15064,7 @@ export namespace Prisma {
     created_at?: boolean
   }
 
-  export type notificationsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "content" | "is_read" | "video_id" | "type" | "created_at", ExtArgs["result"]["notifications"]>
+  export type notificationsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "clerk_user_id" | "content" | "is_read" | "video_id" | "type" | "created_at", ExtArgs["result"]["notifications"]>
   export type notificationsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | usersDefaultArgs<ExtArgs>
     videos?: boolean | notifications$videosArgs<ExtArgs>
@@ -15076,6 +15087,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       user_id: string
+      clerk_user_id: string | null
       content: string
       is_read: boolean | null
       video_id: string | null
@@ -15508,6 +15520,7 @@ export namespace Prisma {
   interface notificationsFieldRefs {
     readonly id: FieldRef<"notifications", 'String'>
     readonly user_id: FieldRef<"notifications", 'String'>
+    readonly clerk_user_id: FieldRef<"notifications", 'String'>
     readonly content: FieldRef<"notifications", 'String'>
     readonly is_read: FieldRef<"notifications", 'Boolean'>
     readonly video_id: FieldRef<"notifications", 'String'>
@@ -17152,6 +17165,7 @@ export namespace Prisma {
   export const NotificationsScalarFieldEnum: {
     id: 'id',
     user_id: 'user_id',
+    clerk_user_id: 'clerk_user_id',
     content: 'content',
     is_read: 'is_read',
     video_id: 'video_id',
@@ -18048,6 +18062,7 @@ export namespace Prisma {
     NOT?: notificationsWhereInput | notificationsWhereInput[]
     id?: UuidFilter<"notifications"> | string
     user_id?: UuidFilter<"notifications"> | string
+    clerk_user_id?: StringNullableFilter<"notifications"> | string | null
     content?: StringFilter<"notifications"> | string
     is_read?: BoolNullableFilter<"notifications"> | boolean | null
     video_id?: UuidNullableFilter<"notifications"> | string | null
@@ -18060,6 +18075,7 @@ export namespace Prisma {
   export type notificationsOrderByWithRelationInput = {
     id?: SortOrder
     user_id?: SortOrder
+    clerk_user_id?: SortOrderInput | SortOrder
     content?: SortOrder
     is_read?: SortOrderInput | SortOrder
     video_id?: SortOrderInput | SortOrder
@@ -18075,6 +18091,7 @@ export namespace Prisma {
     OR?: notificationsWhereInput[]
     NOT?: notificationsWhereInput | notificationsWhereInput[]
     user_id?: UuidFilter<"notifications"> | string
+    clerk_user_id?: StringNullableFilter<"notifications"> | string | null
     content?: StringFilter<"notifications"> | string
     is_read?: BoolNullableFilter<"notifications"> | boolean | null
     video_id?: UuidNullableFilter<"notifications"> | string | null
@@ -18087,6 +18104,7 @@ export namespace Prisma {
   export type notificationsOrderByWithAggregationInput = {
     id?: SortOrder
     user_id?: SortOrder
+    clerk_user_id?: SortOrderInput | SortOrder
     content?: SortOrder
     is_read?: SortOrderInput | SortOrder
     video_id?: SortOrderInput | SortOrder
@@ -18103,6 +18121,7 @@ export namespace Prisma {
     NOT?: notificationsScalarWhereWithAggregatesInput | notificationsScalarWhereWithAggregatesInput[]
     id?: UuidWithAggregatesFilter<"notifications"> | string
     user_id?: UuidWithAggregatesFilter<"notifications"> | string
+    clerk_user_id?: StringNullableWithAggregatesFilter<"notifications"> | string | null
     content?: StringWithAggregatesFilter<"notifications"> | string
     is_read?: BoolNullableWithAggregatesFilter<"notifications"> | boolean | null
     video_id?: UuidNullableWithAggregatesFilter<"notifications"> | string | null
@@ -18957,6 +18976,7 @@ export namespace Prisma {
 
   export type notificationsCreateInput = {
     id?: string
+    clerk_user_id?: string | null
     content: string
     is_read?: boolean | null
     type: string
@@ -18968,6 +18988,7 @@ export namespace Prisma {
   export type notificationsUncheckedCreateInput = {
     id?: string
     user_id: string
+    clerk_user_id?: string | null
     content: string
     is_read?: boolean | null
     video_id?: string | null
@@ -18977,6 +18998,7 @@ export namespace Prisma {
 
   export type notificationsUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     is_read?: NullableBoolFieldUpdateOperationsInput | boolean | null
     type?: StringFieldUpdateOperationsInput | string
@@ -18988,6 +19010,7 @@ export namespace Prisma {
   export type notificationsUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     is_read?: NullableBoolFieldUpdateOperationsInput | boolean | null
     video_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18998,6 +19021,7 @@ export namespace Prisma {
   export type notificationsCreateManyInput = {
     id?: string
     user_id: string
+    clerk_user_id?: string | null
     content: string
     is_read?: boolean | null
     video_id?: string | null
@@ -19007,6 +19031,7 @@ export namespace Prisma {
 
   export type notificationsUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     is_read?: NullableBoolFieldUpdateOperationsInput | boolean | null
     type?: StringFieldUpdateOperationsInput | string
@@ -19016,6 +19041,7 @@ export namespace Prisma {
   export type notificationsUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     is_read?: NullableBoolFieldUpdateOperationsInput | boolean | null
     video_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19780,6 +19806,7 @@ export namespace Prisma {
   export type notificationsCountOrderByAggregateInput = {
     id?: SortOrder
     user_id?: SortOrder
+    clerk_user_id?: SortOrder
     content?: SortOrder
     is_read?: SortOrder
     video_id?: SortOrder
@@ -19790,6 +19817,7 @@ export namespace Prisma {
   export type notificationsMaxOrderByAggregateInput = {
     id?: SortOrder
     user_id?: SortOrder
+    clerk_user_id?: SortOrder
     content?: SortOrder
     is_read?: SortOrder
     video_id?: SortOrder
@@ -19800,6 +19828,7 @@ export namespace Prisma {
   export type notificationsMinOrderByAggregateInput = {
     id?: SortOrder
     user_id?: SortOrder
+    clerk_user_id?: SortOrder
     content?: SortOrder
     is_read?: SortOrder
     video_id?: SortOrder
@@ -21950,6 +21979,7 @@ export namespace Prisma {
 
   export type notificationsCreateWithoutUsersInput = {
     id?: string
+    clerk_user_id?: string | null
     content: string
     is_read?: boolean | null
     type: string
@@ -21959,6 +21989,7 @@ export namespace Prisma {
 
   export type notificationsUncheckedCreateWithoutUsersInput = {
     id?: string
+    clerk_user_id?: string | null
     content: string
     is_read?: boolean | null
     video_id?: string | null
@@ -22256,6 +22287,7 @@ export namespace Prisma {
     NOT?: notificationsScalarWhereInput | notificationsScalarWhereInput[]
     id?: UuidFilter<"notifications"> | string
     user_id?: UuidFilter<"notifications"> | string
+    clerk_user_id?: StringNullableFilter<"notifications"> | string | null
     content?: StringFilter<"notifications"> | string
     is_read?: BoolNullableFilter<"notifications"> | boolean | null
     video_id?: UuidNullableFilter<"notifications"> | string | null
@@ -22581,6 +22613,7 @@ export namespace Prisma {
 
   export type notificationsCreateWithoutVideosInput = {
     id?: string
+    clerk_user_id?: string | null
     content: string
     is_read?: boolean | null
     type: string
@@ -22591,6 +22624,7 @@ export namespace Prisma {
   export type notificationsUncheckedCreateWithoutVideosInput = {
     id?: string
     user_id: string
+    clerk_user_id?: string | null
     content: string
     is_read?: boolean | null
     type: string
@@ -24533,6 +24567,7 @@ export namespace Prisma {
 
   export type notificationsCreateManyUsersInput = {
     id?: string
+    clerk_user_id?: string | null
     content: string
     is_read?: boolean | null
     video_id?: string | null
@@ -24662,6 +24697,7 @@ export namespace Prisma {
 
   export type notificationsUpdateWithoutUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     is_read?: NullableBoolFieldUpdateOperationsInput | boolean | null
     type?: StringFieldUpdateOperationsInput | string
@@ -24671,6 +24707,7 @@ export namespace Prisma {
 
   export type notificationsUncheckedUpdateWithoutUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     is_read?: NullableBoolFieldUpdateOperationsInput | boolean | null
     video_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24680,6 +24717,7 @@ export namespace Prisma {
 
   export type notificationsUncheckedUpdateManyWithoutUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     is_read?: NullableBoolFieldUpdateOperationsInput | boolean | null
     video_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24984,6 +25022,7 @@ export namespace Prisma {
   export type notificationsCreateManyVideosInput = {
     id?: string
     user_id: string
+    clerk_user_id?: string | null
     content: string
     is_read?: boolean | null
     type: string
@@ -25058,6 +25097,7 @@ export namespace Prisma {
 
   export type notificationsUpdateWithoutVideosInput = {
     id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     is_read?: NullableBoolFieldUpdateOperationsInput | boolean | null
     type?: StringFieldUpdateOperationsInput | string
@@ -25068,6 +25108,7 @@ export namespace Prisma {
   export type notificationsUncheckedUpdateWithoutVideosInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     is_read?: NullableBoolFieldUpdateOperationsInput | boolean | null
     type?: StringFieldUpdateOperationsInput | string
@@ -25077,6 +25118,7 @@ export namespace Prisma {
   export type notificationsUncheckedUpdateManyWithoutVideosInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: StringFieldUpdateOperationsInput | string
+    clerk_user_id?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     is_read?: NullableBoolFieldUpdateOperationsInput | boolean | null
     type?: StringFieldUpdateOperationsInput | string
