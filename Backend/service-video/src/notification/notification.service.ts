@@ -9,7 +9,7 @@ export class NotificationService {
     private prisma:PrismaService,
   ){}
   async create(createNotificationDto: any) {
-    const { type, video_id, content, clerk_user_id } = createNotificationDto;
+    const { type, video_id, content, clerk_user_id,user_id } = createNotificationDto;
   
     const existingUser = await this.prisma.users.findFirst({
       where: {
@@ -26,8 +26,10 @@ export class NotificationService {
         type,
         video_id,
         content,
+        user_id,
         is_read:false,
-        user_id: existingUser.id, // dùng id từ bảng users
+        clerk_user_id: existingUser.id, // dùng id từ bảng users
+      
       },
     });
   

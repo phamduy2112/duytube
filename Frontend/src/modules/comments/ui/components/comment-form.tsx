@@ -80,6 +80,7 @@ export const CommentForm = ({
     video_id:videoId,
     content:`Co nguoi moi comment`,
     clerk_user_id:user?.id,
+    user_id:ownerId
   })
   const {createNotification}=useCreateNotification()
   const handleCancel = () => {
@@ -91,11 +92,12 @@ export const CommentForm = ({
 
     const response:any={
       content:data.value,
-      user_id:ownerId,
+      userId:user?.id,
       videoId,
-      clerk_user_id:user?.id,
+
       ...(variant === "reply" && { parentId }),
     }
+    console.log(response)
 
   
         
