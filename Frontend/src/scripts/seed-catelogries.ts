@@ -12,6 +12,25 @@ export const categoryNames = [
     { id: "11", name: "Health" },
   
   ];
+
+  export const playlist = [
+  {
+    id: 'oAgQVa164XWtvop2zOAeOg18aQIpISQto1o4OgiofhY',
+    title: 'Video 1: Trận chiến mở đầu',
+    mux_playback_id: 'oAgQVa164XWtvop2zOAeOg18aQIpISQto1o4OgiofhY',
+  },
+  {
+    id: 'b9V3sWZa02tQ0142Lt5RmjKx8YBzZPddK00P1IEhq00',
+    title: 'Video 2: Pha combat mãn nhãn',
+    mux_playback_id: '1z5b00ZcPcx8189lclMgJwydH9GOxNxJbUx4S9fWAR8w',
+  },
+  {
+    id: '78a9fL3P8Md1pQ5yTWXQsRkM6ybwG57OGzU2uVAZAXw',
+    title: 'Video 3: Boss cuối xuất hiện',
+    mux_playback_id: 'oAgQVa164XWtvop2zOAeOg18aQIpISQto1o4OgiofhY',
+  },
+];
+
 export const mockComments = [
   {
     id: "1",

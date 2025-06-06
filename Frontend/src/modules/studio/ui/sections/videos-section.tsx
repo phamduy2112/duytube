@@ -14,6 +14,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useUser } from "@clerk/nextjs";
 import { useVideoOfUser } from "@/hooks/api/use-video-of-user";
 import { IVideo } from "@/service/type/video.type";
+import { truncateWords } from "@/contants";
 const ITEMS_PER_PAGE = 2;
 
 const VideosSectionSkeleton=()=>{
@@ -122,7 +123,7 @@ const handleRowClick = (videoId: string) => {
           <div className="flex flex-col overflow-hidden gap-y-1">
             <span className="text-sm line-clamp-1">{video?.title}</span>
             <span className="text-xs text-muted-foreground line-clamp-1">
-              {video.description || "No description"}
+              {truncateWords(video.description,15) || "No description"}
             </span>
           </div>
         </div>

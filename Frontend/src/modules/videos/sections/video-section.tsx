@@ -55,7 +55,7 @@ export const VideoSectionSuspense = ({ videoId }:any) => {
               queryFn:()=>commentService.getCommentByVideo(response.id),
               enabled:!!response.id,
           })    
-      
+   
   return (
     <div>
    
@@ -66,7 +66,7 @@ export const VideoSectionSuspense = ({ videoId }:any) => {
        {comment?.data?.length} Comments
     </p>
     <RequireLoginWrapper>
-   <CommentForm videoId={response.id} />
+   <CommentForm videoId={response.id} ownerId={videoDetail?.data?.user_id} />
     </RequireLoginWrapper>
    
   </div>

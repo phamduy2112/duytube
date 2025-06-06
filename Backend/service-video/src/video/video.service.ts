@@ -529,19 +529,12 @@ async findVideosTrending() {
     }
     
   //  
-  async removeLikeVideo(clerk_user_id:string,id:string){
-    const user = await this.prismaService.users.findFirst({
-      where: {
-        clerk_user_id, // thay bằng ID đúng từ DB
-      },
-    })
-    if(!user){
-      return null
-    }
+  async removeLikeVideo(id:string){
+   
     const response=await  this.prismaService.video_reactions.delete({
       where:{
         id,
-        user_id:user?.id
+    
       }
     })
 return response

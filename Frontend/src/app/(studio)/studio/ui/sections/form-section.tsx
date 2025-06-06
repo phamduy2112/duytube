@@ -8,9 +8,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { useApiCategory } from "@/hooks/api/use-category";
 import { snakeCaseToTitle } from "@/lib/utils";
+import TitleGenerator from "@/modules/AI/generate-title";
 import { ThumbnailUploadModal } from "@/modules/studio/ui/component/thumbnail-upload-modal";
 import { VideoPlayer } from "@/modules/videos/ui/components/video-player";
 import { categoryNames, mockVideos } from "@/scripts/seed-catelogries";
+import { generateVideoData } from "@/service/axios/Al/AI.service";
 import { VideoService } from "@/service/axios/videos/video";
 import { useUser } from "@clerk/nextjs";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -20,6 +22,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Suspense, useEffect, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
+import { toast } from "sonner";
 
 interface FormSectionProps {
     videoId: string;
@@ -67,12 +70,26 @@ const userId = user?.id;
     const {data:studioVideoDetail}=useQuery({
         queryKey:["studio-video-detail",response],
         queryFn:()=>VideoService.getVideoDetailStudio(response),
-        
+          enabled: !!videoId && !!userId,
+
 
     })
-    
+    const { title, description } = form.watch();
+
+const generateVideoMutation = useMutation({
+  mutationFn: () => generateVideoData(title),
+  onSuccess: (data) => {
+    if (data?.videoDescription) {
+      form.setValue("description", data.videoDescription);
+      console.log(data)
+    }
+  },
+});
+
+// Truyền dữ liệu xuống TitleGenerator
    const videoDetail=studioVideoDetail?.data
 // Khi có dữ liệu mới từ API → reset lại form
+// reset khi có videoDetail
 useEffect(() => {
   if (videoDetail) {
     form.reset({
@@ -82,6 +99,9 @@ useEffect(() => {
     });
   }
 }, [videoDetail]);
+
+
+
   const { data: categories, isLoading, isError } = useApiCategory();
 
 
@@ -101,7 +121,10 @@ const queryClient=useQueryClient()
         ...data,
         id:videoId
        }
-    updateVideo(formData);
+       
+       updateVideo(formData);
+               toast.success("Lưu thành công")
+
     }
     return (
     <>
@@ -131,7 +154,7 @@ const queryClient=useQueryClient()
                     </div>
                 </div>
                 <div className="grid grid-col-1 lg:grid-cols-5 gap-6">
-                    <div className="space-y-8 lg:col-span-3">
+                    <div className="space-y-3 lg:col-span-3">
                        <FormField
   control={form.control}
   name="title"
@@ -144,8 +167,14 @@ const queryClient=useQueryClient()
     </FormItem>
   )}
 />
+<Button
+  onClick={() => generateVideoMutation.mutate()}
+  disabled={generateVideoMutation.isPending}
+  className="bg-blue-600"
+>
+  {generateVideoMutation.isPending ? "Đang tạo nội dung..." : "Tạo nội dung với AI"}
+</Button>
 
-                      
                        <FormField
   control={form.control}
   name="description"
@@ -189,6 +218,10 @@ const queryClient=useQueryClient()
     </FormItem>
   )}
 />
+ <div>
+   
+              
+              </div>
 
 
 

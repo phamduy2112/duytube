@@ -8,6 +8,8 @@ import { SearchInput, SearchInputSkeleton } from "./search-input"
 import { AuthButton, AuthButtonSkeleton } from "@/modules/auth/ui/components/auth-button"
 import { LogoSection, LogoSectionSkeleton } from "./logo-section"
 import { useEffect, useState } from "react"
+import { Bell } from "lucide-react"
+import Notification from "./notification"
 
 export const HomeNavBar=()=>{
        const [showSkeleton, setShowSkeleton] = useState(true);
@@ -45,7 +47,10 @@ export const HomeNavBar=()=>{
                 </div>
                 <div className="flex-shrink-0 items-center flex gap-4">
                     {/*  */}
+                  
                     <AuthButton/>
+                    
+             
                 </div>
             </div>
             )

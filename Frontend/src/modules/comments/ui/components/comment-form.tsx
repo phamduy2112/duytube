@@ -15,10 +15,12 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import commentService from "@/service/axios/comments/comment.service";
 import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useCreateNotification } from "@/hooks/api/use-notification";
 
 interface CommentFormProps {
   videoId: string;
   parentId?: string;
+  ownerId?:string
   onSuccess?: () => void;
   onCancel?: () => void;
   variant?: "comment" | "reply";
@@ -49,6 +51,7 @@ export const CommentForm = ({
   parentId,
   onCancel,
   onSuccess,
+  ownerId,
   variant = "comment",
 }: CommentFormProps) => {
   const { user,isSignedIn } = useUser();
@@ -72,6 +75,13 @@ export const CommentForm = ({
           console.error("❌ Lỗi:", error);
         },
   })
+  const dataNotification:any=({
+    type:"comment",
+    video_id:videoId,
+    content:`Co nguoi moi comment`,
+    clerk_user_id:user?.id,
+  })
+  const {createNotification}=useCreateNotification()
   const handleCancel = () => {
     form.reset();
     onCancel?.();
@@ -81,14 +91,24 @@ export const CommentForm = ({
 
     const response:any={
       content:data.value,
+      user_id:ownerId,
       videoId,
-      userId:user?.id,
+      clerk_user_id:user?.id,
       ...(variant === "reply" && { parentId }),
     }
 
+  
+        
+
    
     mutate(response);
+
     toast.success("Thanh cong")
+      if(user?.id==ownerId){
+        return
+    }
+
+    createNotification(dataNotification); // đúng cách
   };
 const value = form.watch("value"); // 👈 theo dõi giá trị textarea
 

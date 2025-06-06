@@ -8,15 +8,19 @@ import { useQuery } from '@tanstack/react-query';
 import { VideoService } from '@/service/axios/videos/video';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
+import MuxPlaylist from '../ui/components/video-playlist';
 
 interface SuggestionsSectionProps{
     videoId:string;
-    isManual?:boolean
+    isManual?:boolean,
+        isPlaylist?:boolean,
+
 }
 
 export const SuggestionsSection=({
     videoId,
-    isManual
+    isManual,
+    
 }:SuggestionsSectionProps)=>{
     return (
         <Suspense fallback={<p>Loading...</p>}>
@@ -50,14 +54,15 @@ export const SuggestionsSectionSkeleton=()=>{
 
 function SuggestionsSectionSuspense({
     videoId,
-    isManual
+    isManual,
+    isPlaylist=false,
 }:SuggestionsSectionProps) {
-const suggestedVideos = mockVideos.filter((item) => item.id !== String(videoId));
 // getVideoLimit
    const {data:videoLimit}=useQuery({
         queryKey:['video_limit',10],
         queryFn: ()=> VideoService.getVideoLimit(10)
     })
+    const suggestedVideos = videoLimit?.data?.filter((item: any) => String(item.id) !== String(videoId));
   return (
   <>
     <div className='hidden md:block space-y-3'>
@@ -71,8 +76,11 @@ const suggestedVideos = mockVideos.filter((item) => item.id !== String(videoId))
             <Button variant={"outline"}>
                 Da xem
             </Button>
+  
            
         </div>
+        {isPlaylist?  <MuxPlaylist data={videoLimit}/>: ''}
+     
     {videoLimit?.data?.map((video:any) => {
  return <VideoRowCard
     key={video.id}
@@ -95,7 +103,7 @@ const suggestedVideos = mockVideos.filter((item) => item.id !== String(videoId))
             </Button>
            
         </div>
-        {videoLimit?.data?.map((video:any) => {
+        {suggestedVideos?.map((video:any) => {
   return (
     <VideoRowCard
       key={video.id}

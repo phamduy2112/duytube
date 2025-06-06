@@ -6,12 +6,12 @@ interface PlaylistThumbnailProps{
     title:string;
     videoCount:number;
     className?:string;
-    imageUrl?:string|null;
+    playbackId?:string|null;
 
 }
 
 export const PlaylistThumbnail=({
-    title,videoCount,className,imageUrl
+    title,videoCount,className,playbackId
 }:PlaylistThumbnailProps)=>{
    return (
      <div className={cn("relative pt-3 group",className)}>
@@ -24,7 +24,7 @@ export const PlaylistThumbnail=({
             "></div>
             {/*  */}
             <div className="relative overflow-hidden w-full rounded-xl aspect-video">
-                <Image src={"./placeholder.svg"}
+                <Image src={`https://image.mux.com/${playbackId}/thumbnail.jpg`}
                 alt={title}
                 className="w-full h-full object-cover"
                 fill

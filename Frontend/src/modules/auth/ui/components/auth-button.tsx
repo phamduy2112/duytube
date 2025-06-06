@@ -3,6 +3,7 @@ import { SignedOut, SignedIn, SignInButton, UserButton } from "@clerk/nextjs"
 import { ClapperboardIcon, UserCircleIcon } from "lucide-react"
 import Link from "next/link"
 import { Skeleton } from "@/components/ui/skeleton";
+import Notification from "@/modules/home/ui/components/home-navbar/notification";
 
 export const AuthButtonSkeleton = () => {
   return (
@@ -27,6 +28,9 @@ export const AuthButton=()=>{
                 </Link>
 
             </Button>
+                <Button variant={"link"}>
+                    <Notification/>
+                </Button>
             <UserButton>
                 <UserButton.MenuItems>
                     <UserButton.Link
