@@ -2,8 +2,8 @@ import { axiosWithAuth } from "../axios.config";
 
 export class NotificationoService{
    
-    static async getNotification(){
-        const response=await axiosWithAuth.get("notification")
+    static async getNotification(id:string){
+        const response=await axiosWithAuth.get(`notification/${id}`)
         return response.data
     }
        static async createNotification(formData:any){

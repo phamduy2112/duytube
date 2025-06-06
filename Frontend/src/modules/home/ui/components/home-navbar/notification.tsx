@@ -1,9 +1,22 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { UserAvatar } from '@/components/user-avatar'
+import { NotificationoService } from '@/service/axios/notification/notification.service'
+import { useUser } from '@clerk/nextjs'
+import { useQuery } from '@tanstack/react-query'
+import { formatDistanceToNow } from 'date-fns'
 import { Bell } from 'lucide-react'
 import React, { useState } from 'react'
 
 function Notification() {
+    const {user}=useUser()
+    if(!user){
+      return null
+    }
+    const {data:notification,error}=useQuery({
+        queryKey:["notification",user?.id],
+        queryFn:()=>NotificationoService.getNotification(user?.id),
+        enabled:!!user?.id,
+    })
   return (
     <div> 
 <DropdownMenu >
@@ -13,7 +26,9 @@ function Notification() {
     <DropdownMenuSeparator />
     <DropdownMenuItem>
         <div>
-               <div className="flex gap-3">
+          {notification?.map((item)=>{
+            return (
+  <div className="flex gap-3">
                  <div>
                         <UserAvatar
                         imageUrl="https://yt3.ggpht.com/yti/ANjgQV9lu9ZqUHoOmFdhvvuoE9kZFb5QMHvTSQs5hIXfyacQgA=s88-c-k-c0x00ffffff-no-rj"
@@ -22,13 +37,19 @@ function Notification() {
                     </div>
                <div>
                 <div>
-            <p>                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci placeat molestias blanditiis fugiat dolore? Quis vitae temporibus dolore quasi illo? Veniam obcaecati tenetur tempora! Fuga ratione at ea possimus aperiam!
+            <p>               
+              {item?.content}
 </p>
-<p>2 hours</p>
+<p>{ formatDistanceToNow(item?.created_at,{
+                                                      addSuffix:true
+                                                  })}</p>
                 </div>
 
                </div>
                  </div>
+            )
+          })}
+             
         </div>
     </DropdownMenuItem>
   

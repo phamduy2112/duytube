@@ -51,14 +51,17 @@ export class NotificationService {
     });
   
     // 2. Trả về các thông báo chưa đọc
-    const notifications = await this.prisma.notifications.findMany({
-      where: {
-        user_id: user.id,
+   const notifications = await this.prisma.notifications.findMany({
+  where: { user_id: user.id },
+  include: {
+    videos: true,
+    users: {
+      select: {
+        clerk_user_id: true,
       },
-      orderBy: {
-        created_at: 'desc',
-      },
-    });
+    },
+  },
+});
   
     return notifications;
   }
