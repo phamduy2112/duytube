@@ -31,7 +31,7 @@ className="bg-secondary/50 rounded-xl p-3 cursor-pointer hover:bg-secondary/70 t
                 {isExpanded ? expandedViews : compactViews} views
         </span>
         <span className="font-medium">
-                {isExpanded ? compactDate : expandedDate} views
+                {isExpanded ? expandedDate : compactDate} 
         </span>
     </div>
     <div className="relative">
@@ -41,9 +41,9 @@ className="bg-secondary/50 rounded-xl p-3 cursor-pointer hover:bg-secondary/70 t
             <div>
                 {
                     isExpanded  ?(
-                        <>Show less <ChevronUpIcon className="size-4"/></>
+                        <div className="flex gap-1 items-center">Show less <ChevronUpIcon className="size-4"/></div>
                     ) : (
-                      <> Show more <ChevronDownIcon className="size-4"/></>
+                      <div className="flex gap-1 items-center"> Show more <ChevronDownIcon className="size-4"/></div>
                     )
 
                 }

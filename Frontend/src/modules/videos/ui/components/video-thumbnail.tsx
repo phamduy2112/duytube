@@ -1,5 +1,4 @@
 import { Skeleton } from "@/components/ui/skeleton";
-import { THUMBNAIL_FALLBACK } from "@/contants"
 import { formatDuration } from "@/lib/utils"
 import Image from "next/image"
 import { VideoInfo } from "./video-info";

@@ -75,15 +75,7 @@ const userId = user.id;
         queryFn:()=>commentService.getCommentReactions(comment?.id),
         enabled:!!comment?.id,
     })
-    const response:ICommentReactions={
-        commentId:comment?.id,
-        clerk_user_id:userId
-    }
-    const {data:getCommentReactions}=useQuery({
-        queryKey:["reactuib",response],
-        queryFn:()=>commentService.getReactionsComment(response),
-        enabled:!!response,
-    })
+
     // toogleCommentReactions
     const {mutate:deleteComment}=useMutation({
         mutationFn:commentService.deleteCommentByUser,
@@ -99,8 +91,10 @@ const userId = user.id;
         }
     })
     const handleDeleteComment=(id:number)=>{
+                toast.success("Delete comment successfully")
+
         deleteComment(String(id))
-        toast.success("Xoa thanh cong")
+       
     }
     const viewerId=comment?.users?.clerk_user_id;
     const handleToogleCommentReactions=(type:"like"|"unlike")=>{
@@ -143,6 +137,7 @@ const userId = user.id;
                                     <div className="flex items-center">
                                         <Button disabled={false} variant="ghost" size="icon" className="size-8" onClick={()=>{
                                             handleToogleCommentReactions("like")
+                                            toast.success("Liked comment successfully")
                                         }}>
                                             <ThumbsUpIcon className={cn(
                                                comment?.type=="like" && "fill-black"
@@ -151,6 +146,7 @@ const userId = user.id;
                                         <span className="text-xs text-muted-foreground">{commentReactions?.data?.like}</span>
                                         <Button disabled={false} variant="ghost" size="icon" className="size-8" onClick={()=>{
                                                                                         handleToogleCommentReactions("unlike")
+                                            toast.success("Unliked comment successfully")
 
                                         }}>
                                            
@@ -213,14 +209,14 @@ const userId = user.id;
       onCancel={() => setIsReplyOpen(false)}
       onSuccess={() => {
         setIsReplyOpen(false)
-        setIsRepliesOpen(true) // <- đoạn này không được gọi nếu CommentForm không hiển thị
+        
       }}
     />
   
   </div>
 )}
 
-{/* 
+
            {comment?.other_comments?.length > 0 && variant === "comment" && (
   <div className="pl-14">
     <Button
@@ -232,17 +228,17 @@ const userId = user.id;
       {comment?.other_comments?.length} replies
     </Button>
   </div>
-)} */}
+)}
 
 
-                {/* {comment?.other_comments?.length>0 && variant=="comment" && isRepliesOpen &&(
+                {comment?.other_comments?.length>0 && variant=="comment" && isRepliesOpen &&(
                     <CommentReplies
                     
                     commentReplies={comment}
                     parentId={comment.id}
                     videoId={comment.videoId}
                     />
-                )} */}
+                )}
             </>
 
     )

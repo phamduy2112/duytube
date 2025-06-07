@@ -68,14 +68,9 @@ function SuggestionsSectionSuspense({
     <div className='hidden md:block space-y-3'>
         <div className='flex gap-[.5rem]'>
             <Button>
-                Tat ca
+                All
             </Button>
-            <Button variant={"outline"}>
-                Video vua xem
-            </Button>
-            <Button variant={"outline"}>
-                Da xem
-            </Button>
+       
   
            
         </div>
@@ -93,14 +88,9 @@ function SuggestionsSectionSuspense({
     <div className='block md:hidden space-y-10'>
            <div className='flex gap-[.5rem]'>
             <Button>
-                Tat ca
+                All
             </Button>
-            <Button variant={"outline"}>
-                Video vua xem
-            </Button>
-            <Button variant={"outline"}>
-                Da xem
-            </Button>
+         
            
         </div>
         {suggestedVideos?.map((video:any) => {

@@ -1,62 +1,69 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
-import { UserAvatar } from '@/components/user-avatar'
-import { NotificationoService } from '@/service/axios/notification/notification.service'
 import { useUser } from '@clerk/nextjs'
-import { useQuery } from '@tanstack/react-query'
 import { formatDistanceToNow } from 'date-fns'
 import { Bell } from 'lucide-react'
-import React, { useState } from 'react'
+import React from 'react'
+
+import { useQuery } from '@tanstack/react-query'
+import Image from 'next/image'
+import { NotificationoService } from '@/service/axios/notification/notification.service'
 
 function Notification() {
-    const {user}=useUser()
-    if(!user){
-      return null
-    }
-    const {data:notification,error}=useQuery({
-        queryKey:["notification",user?.id],
-        queryFn:()=>NotificationoService.getNotification(user?.id),
-        enabled:!!user?.id,
-    })
-  return (
-    <div> 
-<DropdownMenu >
-  <DropdownMenuTrigger><Bell/></DropdownMenuTrigger>
-  <DropdownMenuContent className='w-[500px]' align='end'>
-    <DropdownMenuLabel>Notifications</DropdownMenuLabel>
-    <DropdownMenuSeparator />
-    <DropdownMenuItem>
-        <div>
-          {notification?.map((item)=>{
-            return (
-  <div className="flex gap-3">
-                 <div>
-                        <UserAvatar
-                        imageUrl="https://yt3.ggpht.com/yti/ANjgQV9lu9ZqUHoOmFdhvvuoE9kZFb5QMHvTSQs5hIXfyacQgA=s88-c-k-c0x00ffffff-no-rj"
-                        name="duy"
-                        />
-                    </div>
-               <div>
-                <div>
-            <p>               
-              {item?.content}
-</p>
-<p>{ formatDistanceToNow(item?.created_at,{
-                                                      addSuffix:true
-                                                  })}</p>
-                </div>
+  const { user } = useUser();
+  if (!user) return null;
 
-               </div>
-                 </div>
-            )
-          })}
-             
+  // Lấy notifications
+  const { data: notifications } = useQuery({
+    queryKey: ['notification', user.id],
+    queryFn: () => NotificationoService.getNotification(user.id),
+    enabled: !!user.id,
+  });
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger>
+        <Bell />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-[500px]" align="end">
+        <DropdownMenuLabel>Notifications</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <div className="max-h-[400px] overflow-y-auto px-2">
+          {notifications?.map((item:any) => (
+            <DropdownMenuItem key={item.id} className="flex gap-3 items-center">
+              
+
+              {/* Nội dung thông báo */}
+              <div className="flex flex-col flex-grow min-w-0">
+                <p className="text-sm truncate">{item.content}</p>
+                <p className="text-xs text-gray-500">
+                  {formatDistanceToNow(new Date(item.created_at), { addSuffix: true })}
+                </p>
+              </div>
+              {/* Thumbnail hình nhỏ, cố định kích thước */}
+              <div className="relative w-16 h-9 flex-shrink-0 rounded overflow-hidden bg-gray-200">
+                {item.videos?.mux_playback_id ? (
+                  <Image
+                    src={`https://image.mux.com/${item.videos.mux_playback_id}/thumbnail.jpg`}
+                    alt="video thumbnail"
+                    layout="fill"
+                    objectFit="cover"
+                    priority={false}
+                  />
+                ) : (
+                  <div className="flex items-center justify-center w-full h-full text-gray-400 text-xs">
+                    No Image
+                  </div>
+                )}
+              </div>
+            </DropdownMenuItem>
+          ))}
+          {!notifications?.length && (
+            <p className="p-4 text-center text-gray-400">No notifications</p>
+          )}
         </div>
-    </DropdownMenuItem>
-  
-  </DropdownMenuContent>
-</DropdownMenu>
-      </div>
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }
 
-export default Notification
+export default Notification;

@@ -37,8 +37,9 @@ const thumbnaiVariants=cva('group flex min-w-0',{
 })
 interface VideoRowCardProps extends VariantProps<typeof videoRowCardVariants>{
 data:any,
-onRemove?:()=>void
+  onRemove?: (id: string) => void;
 }
+
 export const VideoRowCardSkeleton =({size}:VariantProps<typeof videoRowCardVariants>)=>{
     return (
         <div className={videoRowCardVariants({size})}>
@@ -73,7 +74,7 @@ export const VideoRowCardSkeleton =({size}:VariantProps<typeof videoRowCardVaria
         </div>
     )
 }
-// LILITH12TH
+
 
 export const VideoRowCard=({
     data,size,onRemove
@@ -88,7 +89,6 @@ export const VideoRowCard=({
    const compactDate=useMemo(()=>{
          return formatDistanceToNow(data?.updated_at,{addSuffix:true})
      },[data?.updated_at])
-     console.log(length)
     return (
 <div className={videoRowCardVariants({ size })}>
   <Link href={`/videos/${data?.id}`} className={"w-[150px] md:w-[38%]"}>
@@ -154,7 +154,7 @@ export const VideoRowCard=({
       </div>
 
       <div className="flex-none">
-        <VideoMenu videoId={data?.id} onRemove={onRemove} />
+        <VideoMenu videoId={data?.id}  onRemove={() => onRemove?.(data?.id)}/>
       </div>
     </div>
   </div>

@@ -1,3 +1,4 @@
+import { toast } from 'sonner';
 import { Injectable } from '@nestjs/common';
 import { ResponseService } from 'src/model/response';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -90,14 +91,19 @@ export class CommentService {
 
 //   // Sửa comment
   async update(id: string, data: { content: string }) {
+        toast.success("Successfully")
+
     return this.prisma.comments.update({
       where: { id },
       data: { value: data.content },
     });
+    
   }
 
 //   // Xóa comment (và reply nếu có)
   async remove(id: string) {
+        toast.success("Successfully")
+
     // Xóa replies trước (nếu có)
     await this.prisma.comments.deleteMany({
       where: { parent_id: id },

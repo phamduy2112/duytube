@@ -82,6 +82,15 @@ export class VideoService{
             return response.data; // trả về { video, upload_url }
     }
 
+    static async deleteLikeVideo(id:string){
+        const response=await axiosWithAuth.delete(`remove-like-video/all/${id}`);
+        return response;
+    }
+    static async deleteHistoryVideos(id:string){
+        const response=await axiosWithAuth.delete(`history/all/${id}`);
+        return response;
+    }
+
     
 }
 

@@ -78,14 +78,14 @@ export const CommentForm = ({
   const dataNotification:any=({
     type:"comment",
     video_id:videoId,
-    content:`Co nguoi moi comment`,
+    content:`Video of you have create comment`,
     clerk_user_id:user?.id,
     user_id:ownerId
   })
   const {createNotification}=useCreateNotification()
   const handleCancel = () => {
     form.reset();
-    onCancel?.();
+   onCancel?.();
   };
 
   const onSubmit = (data: FormValues) => {
@@ -97,20 +97,22 @@ export const CommentForm = ({
 
       ...(variant === "reply" && { parentId }),
     }
-    console.log(response)
 
   
         
 
    
     mutate(response);
-
-    toast.success("Thanh cong")
+    if(variant==="comment"){
+    toast.success("Successfully")
       if(user?.id==ownerId){
         return
     }
 
     createNotification(dataNotification); // đúng cách
+    }
+
+
   };
 const value = form.watch("value"); // 👈 theo dõi giá trị textarea
 

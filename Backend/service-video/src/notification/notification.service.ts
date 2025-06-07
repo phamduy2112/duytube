@@ -11,15 +11,12 @@ export class NotificationService {
   async create(createNotificationDto: any) {
     const { type, video_id, content, clerk_user_id,user_id } = createNotificationDto;
   
-    const existingUser = await this.prisma.users.findFirst({
-      where: {
-        clerk_user_id,
-      },
-    });
   
-    if (!existingUser) {
-      return null; // Không tìm thấy user → không tạo notification
-    }
+    const userClerk=await this.prisma.users.findFirst({
+      where:{
+        id:clerk_user_id
+      }
+    })
   
     const notification = await this.prisma.notifications.create({
       data: {
@@ -28,7 +25,7 @@ export class NotificationService {
         content,
         user_id,
         is_read:false,
-        clerk_user_id: existingUser.id, // dùng id từ bảng users
+        clerk_user_id: userClerk?.clerk_user_id, // dùng id từ bảng users
       
       },
     });

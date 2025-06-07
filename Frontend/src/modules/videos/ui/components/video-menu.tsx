@@ -29,7 +29,6 @@ function VideoMenu({ videoId, variant = 'ghost', onRemove }: VideoMenuProps) {
     const fullUrl = `${window.location.origin}/video/${videoId}`;
     navigator.clipboard.writeText(fullUrl);
   };
-  console.log(videoId)
 
   return (
     <>

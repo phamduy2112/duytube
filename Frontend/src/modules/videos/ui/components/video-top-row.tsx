@@ -33,13 +33,7 @@ export const VideoTopRowSkeleton=()=>{
 
 export const VideoTopRow=({video}:any)=>{
    
-    // const compactDate=useMemo(()=>{
-    //     return formatDistanceToNow(video?.content?.create_at,{addSuffix:true});
-    // },[video?.content?.create_at])
-    
-    // const expandDate=useMemo(()=>{
-    //     return format(video.content.createAt,"d MMM yyyy");
-    // },[video.content.create_at])
+
 
     let videoDetail=video?.data;
     let views=Number(video?.content?.video_views.length)
@@ -53,8 +47,19 @@ export const VideoTopRow=({video}:any)=>{
     const expandedViews=useMemo(()=>{
         return Intl.NumberFormat("en",{
             notation:"standard"
-        }).format(views)
+        }).format(length)
     },[views])
+    const compactDate = useMemo(() => {
+  if (!videoDetail?.created_at) return '';
+  return formatDistanceToNow(new Date(videoDetail.created_at), { addSuffix: true });
+}, [videoDetail?.created_at]);
+
+    
+    const expandDate=useMemo(()=>{
+          if (!videoDetail?.created_at) return '';
+
+        return format(videoDetail?.created_at,"d MMM yyyy");
+    },[videoDetail?.created_at])
     return (
         <div className="flex flex-col gap-4 mt-4">
             <h1 className="text-xl font-semibold">{videoDetail?.title}</h1>
@@ -72,9 +77,9 @@ export const VideoTopRow=({video}:any)=>{
             
             compactViews={compactViews}
             expandedViews={expandedViews}
-            compactDate={"12"}
-            expandedDate={"21"}
-            description="asdasd"
+            compactDate={compactDate}
+            expandedDate={expandDate}
+            description={videoDetail?.description}
             />
         </div>
     )
