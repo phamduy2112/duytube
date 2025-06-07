@@ -65,4 +65,12 @@ export class CommentService {
       where: { id },
     });
   }
+
+  async getReactionComment(user_id:string,video_id:string){
+      try {
+        
+      } catch (error) {
+        
+      }
+  }
 }

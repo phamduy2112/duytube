@@ -72,7 +72,7 @@ export const FilterCarousel = ({
                     </CarouselItem>
 
                     {/* Dynamic items */}
-                    {data?.map((item:any) => (
+                    {data?.map((item) => (
                         <CarouselItem key={item.value} className="pl-3 basis-auto">
                             <Badge
                                 onClick={() => onSelect?.(item.value)}

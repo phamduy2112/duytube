@@ -65,7 +65,10 @@ export class WebhookService {
       video_views:true,
       video_reactions:true
     }
+    
                 },
+        
+              
               }
             }
           }
@@ -79,7 +82,7 @@ export class WebhookService {
         },
       }
     });
-    console.log(user);
+    
     return user
   }
 

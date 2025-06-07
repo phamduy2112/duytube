@@ -91,7 +91,6 @@ export class CommentService {
 
 //   // Sửa comment
   async update(id: string, data: { content: string }) {
-        toast.success("Successfully")
 
     return this.prisma.comments.update({
       where: { id },
