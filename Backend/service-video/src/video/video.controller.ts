@@ -116,9 +116,18 @@ async findLimit(@Param('id') id: string){
     return await this.videoService.removeAllHistory(clerk_user_id);
 
   }
-  @Delete("remove-like-video/all/:id")
-    async removeLikeVideo(@Param("userId") id:string){
-    return await this.videoService.removeLikeVideo(id);
+  // removeVideoHistory
+  @Delete('history/:id')
+  async removeVideoHistory(
+    @Param('id') videoId: string,
+    @Query('clerk_user_id') clerk_user_id: string,
+  ) {
+    return await this.videoService.removeVideoHistory(videoId, clerk_user_id);
+  }
+  @Delete("remove-like-video/:id")
+    async removeLikeVideo(@Param('id') videoId: string,
+    @Query('clerk_user_id') clerk_user_id: string,){
+    return await this.videoService.removeLikeVideo(clerk_user_id,videoId);
 
   }
 

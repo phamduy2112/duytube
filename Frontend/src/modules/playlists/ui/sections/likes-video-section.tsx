@@ -25,20 +25,20 @@ export const LikedVideosSection = () => {
     enabled: isLoaded && !!user?.id,
   });
     const queryClient = useQueryClient();
-    const {mutate:deleteLikedVideo}=useMutation({
-     mutationFn: VideoService.deleteLikeVideo,
-        onSuccess: (data) => {
-          queryClient.invalidateQueries({ queryKey: ["liked-video", user!.id] });
-
-          
-
-        },
-        onError: (error) => {
-          console.error("❌ Lỗi:", error);
-        },
-  })
+    const { mutate: deleteLikedVideo } = useMutation({
+      mutationFn: (data: { videoId: string; userId: string }) =>
+        VideoService.deleteLikeVideo(data),
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['liked-video', user!.id] });
+      },
+    });
   const handleRemove=(id:string)=>{
-    deleteLikedVideo(id)
+  
+    const response={
+      videoId:id,
+      userId:user!.id
+  }
+    deleteLikedVideo(response)
 
   }
   const isDataLoading = isLoading || !isLoaded || isFetching;

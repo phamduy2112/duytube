@@ -166,50 +166,47 @@ export class PlaylistsService {
     return `This action updates a #${id} playlist`;
   }
 
-async removeVideoFromPlaylist(playlist_id: string, video_id: string, type: string) {
-  if (type === "playlists") {
-    // Xoá toàn bộ video trong playlist
-    await this.prismaService.playlist_videos.deleteMany({
-      where: {
-        playlist_id,
-      },
-    });
-
-    // Xoá playlist
-    await this.prismaService.playlists.delete({
-      where: {
-        id: playlist_id,
-      },
-    });
-
-    return this.response.responseSend(null, "Playlist and all videos removed", 200);
-  }
-
-  // Nếu không phải xoá cả playlist, chỉ xoá 1 video trong playlist
+async removeVideoFromPlaylist(playlist_id: string, video_id: string) {
   const existingRelation = await this.prismaService.playlist_videos.findUnique({
     where: {
       playlist_id_video_id: {
-        playlist_id,
-        video_id,
+        playlist_id: playlist_id,
+        video_id: video_id,
       },
     },
   });
 
   if (!existingRelation) {
-    return this.response.responseSend(null, "Video is not in the playlist", 404);
+    return this.response.responseSend(null, 'Video is not in the playlist', 404);
   }
 
   await this.prismaService.playlist_videos.delete({
     where: {
       playlist_id_video_id: {
-        playlist_id,
-        video_id,
+        playlist_id: playlist_id,
+        video_id: video_id,
       },
     },
   });
 
-  return this.response.responseSend(null, "Video removed from playlist", 200);
+  return this.response.responseSend(null, 'Video removed from playlist', 200);
 }
+async deletePlaylist(playlist_id: string) {
+  const playlist = await this.prismaService.playlists.findUnique({
+    where: { id: playlist_id },
+  });
+
+  if (!playlist) {
+    return this.response.responseSend(null, 'Playlist not found', 404);
+  }
+
+  await this.prismaService.playlists.delete({
+    where: { id: playlist_id },
+  });
+
+  return this.response.responseSend(null, 'Playlist deleted', 200);
+}
+
 
 
 }

@@ -4,7 +4,7 @@ import { VideoInfo, VideoInfoSkeleton } from "./video-info"
 
 interface VideoGridCardProps{
     data:any
-    onRemove?:()=>void
+    onRemove?: (id: string) => void;
 }
 export const VideoGridCardSkeleton=()=>{
     return (

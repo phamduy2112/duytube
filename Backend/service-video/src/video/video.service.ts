@@ -508,6 +508,7 @@ async findVideosTrending() {
           clerk_user_id:user_id,
         }
       })  
+      
       const response=await this.prismaService.video_reactions.findMany({
         where:{
           user_id:existingUser?.id,
@@ -529,15 +530,31 @@ async findVideosTrending() {
     }
     
   //  
-  async removeLikeVideo(id:string){
+  async removeLikeVideo(clerk_user_id:string,video_id:string){
    
-    const response=await  this.prismaService.video_reactions.delete({
+    const existingUser=await this.prismaService.users.findFirst({
       where:{
-        id,
-    
+        clerk_user_id,
       }
-    })
-return response
+    })  
+    if(!existingUser){
+      return null
+    }
+    const record = await this.prismaService.video_reactions.findUnique({
+      where: {
+        user_id_video_id: {
+          user_id:existingUser.id,
+          video_id ,
+        }
+      }
+    });
+    if (!record) {
+      throw new Error('Record not found');
+    }
+
+    return await this.prismaService.video_reactions.delete({
+      where: { id: record.id }
+    });
   }
 
   async removeAllHistory(clerk_user_id:string){
@@ -557,6 +574,32 @@ return response
     return response
 
   }
-  
+  async removeVideoHistory(video_id:string,clerk_user_id:string){
+    // clerk_user_id
+    const existingUser=await this.prismaService.users.findFirst({
+      where:{
+        clerk_user_id,
+      }
+    })  
+    if(!existingUser){
+      return null
+    }
+    const record = await this.prismaService.video_views.findUnique({
+      where: {
+        user_id_video_id: {
+          user_id:existingUser.id,
+          video_id ,
+        }
+      }
+    });
+    if (!record) {
+      throw new Error('Record not found');
+    }
+
+    return await this.prismaService.video_views.delete({
+      where: { id: record.id }
+    });
+
+  }
 
 }

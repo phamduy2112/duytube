@@ -82,15 +82,24 @@ export class VideoService{
             return response.data; // trả về { video, upload_url }
     }
 
-    static async deleteLikeVideo(id:string){
-        const response=await axiosWithAuth.delete(`remove-like-video/all/${id}`);
+    static async deleteLikeVideo(data:{videoId: string, userId: string}){
+        const response=await axiosWithAuth.delete(`videos/remove-like-video/${data.videoId}?clerk_user_id=${data.userId}`);
         return response;
     }
     static async deleteHistoryVideos(id:string){
-        const response=await axiosWithAuth.delete(`history/all/${id}`);
+        const response=await axiosWithAuth.delete(`videos/history/all/${id}`);
         return response;
     }
-
+    static async deleteVideoHistory(data:{videoId: string, userId: string}) {
+        const response = await axiosWithAuth.delete(
+          `videos/history/${data.videoId}?clerk_user_id=${data.userId}`
+        );
+        return response;
+      }
+      static async deletePlaylist(id:string){
+        const response=await axiosWithAuth.delete(`videos/history/all/${id}`);
+        return response;
+    }
     
 }
 

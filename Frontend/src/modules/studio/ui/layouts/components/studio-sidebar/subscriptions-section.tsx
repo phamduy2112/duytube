@@ -35,7 +35,6 @@ export const LoadingSkeleton=()=>{
       enabled:!!user?.id,
 
     })
-console.log("1",data)
     
     // const log=data
     return (
@@ -45,9 +44,9 @@ console.log("1",data)
           <SidebarMenu>
           
             
-            {data?.subscriptions_subscriptions_viewer_idTousers?.map((subscription:any) => (
+            {data?.subscriptions_subscriptions_viewer_idTousers?.map((subscription:any,key:number) => (
               
-              <SidebarMenuItem key={`${subscription.creatorId}-${subscription.viewerID}`}>
+              <SidebarMenuItem key={`${key}`}>
                 <SidebarMenuButton asChild 
                 tooltip={subscription?.users_subscriptions_creator_idTousers?.channel_name}
                 isActive={pathname==`/user/${subscription?.users_subscriptions_creator_idTousers?.clerk_user_id	}`}

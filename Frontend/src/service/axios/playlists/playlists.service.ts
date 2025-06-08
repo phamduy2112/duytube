@@ -31,6 +31,15 @@ export class PlaylistsService {
     const response = await axiosWithAuth.get(`playlists/${playlistId}`);
     return response.data;
   }
+
+  static async deletePlaylists(playlist_id:string){
+    const response=await axiosWithAuth.delete(`playlists/${playlist_id}`);
+    return response.data
+  }
+  static async deleteVideosPlaylists(playlist_id:string,video_id:string){
+    const response=await axiosWithAuth.delete(`playlists/${playlist_id}/videos/${video_id}`);
+    return response.data
+  }
 }
 
 // Xuất instance duy nhất để dùng ở mọi nơi
