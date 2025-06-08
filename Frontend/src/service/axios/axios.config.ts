@@ -8,7 +8,7 @@ import axios, { AxiosInstance } from 'axios'
 // }
 
 export const axiosWithAuth = axios.create({
-    // baseURL: "https://duytube-production.up.railway.app/",
-    baseURL:"http://localhost:8080/",
+    baseURL: "https://duytube-production.up.railway.app/",
+    // baseURL:"http://localhost:8080/",
         timeout: 180_000,
 });
