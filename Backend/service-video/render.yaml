@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: duytube-api
+    env: node
+    plan: free
+    rootDir: Backend/service-video
+    buildCommand: yarn install && yarn build
+    startCommand: yarn start:prod
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        value: your_postgres_url
