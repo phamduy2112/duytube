@@ -125,7 +125,7 @@ export class VideoService {
 async findAll() {
   const videos = await this.prismaService.videos.findMany({
     where: {
-    mux_track_status: 'ready', // ⚠️ Chỉ lấy video đã sẵn sàng
+    mux_status: 'ready', // ⚠️ Chỉ lấy video đã sẵn sàng
     },
     orderBy: {
       created_at: 'desc', // ⚠️ Mới nhất trước
