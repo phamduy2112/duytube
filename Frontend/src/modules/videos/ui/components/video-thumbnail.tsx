@@ -30,7 +30,7 @@ export const VideoThumbnail=(
                 {/* <Image src="./placeholder.svg" alt={title} fill className="w-full h-full object-cover group-hover:opacity-0"></Image> */}
                 {/* <Image src={previewUrl??THUMBNAIL_FALLBACK} alt={title} fill className="w-full h-full object-cover group-hover:opacity-100"></Image> */}
                 <img 
-                src={`https://image.mux.com/duonSQNFmIG00kLmLDMdwBbfLCRdNb02RQJQQtorLZMjU/thumbnail.jpg`}
+                src={`https://image.mux.com/${imageUrl}/thumbnail.jpg`}
                 alt={title}  className="w-full h-full object-cover group-hover:opacity-100"></img>
 
             </div>

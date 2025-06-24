@@ -124,16 +124,22 @@ export class VideoService {
   // Lấy tất cả video
 async findAll() {
   const videos = await this.prismaService.videos.findMany({
-    orderBy: { created_at: 'desc' },
+    where: {
+    mux_track_status: 'ready', // ⚠️ Chỉ lấy video đã sẵn sàng
+    },
+    orderBy: {
+      created_at: 'desc', // ⚠️ Mới nhất trước
+    },
     include: {
       users: true,
-      video_views:true,
-      video_reactions:true
-    }
+      video_views: true,
+      video_reactions: true,
+    },
   });
 
   return this.response.responseSend(videos, 'Videos fetched successfully', 200);
 }
+
 async findVideosTrending() {
   // Giả sử trả về 10 video có nhiều view nhất trong 7 ngày gần nhất
   return await this.prismaService.videos.findMany({
