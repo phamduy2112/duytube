@@ -9,6 +9,6 @@ import axios, { AxiosInstance } from 'axios'
 
 export const axiosWithAuth = axios.create({
     // baseURL: "localhost:8080/",
-    baseURL:"http://localhost:8080/",
+    baseURL:"https://duytube.onrender.com/",
         timeout: 180_000,
 });
