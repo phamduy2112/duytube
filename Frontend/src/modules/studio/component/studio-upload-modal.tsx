@@ -41,7 +41,7 @@ export const StudioUpLoadModal = () => {
         title: "Tiêu đề video",
         description: "Mô tả video",
         user_id: user.id,
-        category_id: "6bc022ed-bab7-460d-b50c-c7105f390658", // ID danh mục tạm thời
+        category_id: "4c44e8aa-4e7f-4b66-8b86-fe7f3fe19058", // ID danh mục tạm thời
       });
     }
   }, [isOpen, user?.id]);

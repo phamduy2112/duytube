@@ -1,4 +1,7 @@
 import { Input } from "@/components/ui/input";
+import { VideoService } from "@/service/axios/videos/video";
+import { useUser } from "@clerk/nextjs";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Trash2 } from "lucide-react";
 
 interface Props {
@@ -27,7 +30,21 @@ export const HistorySidebar = ({ inputValue, setInputValue, onSearch }: Props) =
     if (e.key === "Enter") {
       onSearch(); // gọi hàm khi nhấn Enter
     }
+    
   };
+  const {user}=useUser()
+      const queryClient = useQueryClient();
+  
+  const { mutate: deleteHistoryVideo } = useMutation({
+    mutationFn: (id:string) =>
+      VideoService.deleteHistoryVideos(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['history', user!.id] });
+    },
+  });
+  const handleAllVideosHistory=()=>{
+    deleteHistoryVideo(user!.id)
+  }
   return (
     <div className="p-4 space-y-4 text-sm">
       <Input
@@ -39,7 +56,9 @@ export const HistorySidebar = ({ inputValue, setInputValue, onSearch }: Props) =
       />
 
       <ul className="space-y-2">
-        <li className="flex items-center gap-2 cursor-pointer hover:underline">
+        <li 
+        onClick={handleAllVideosHistory}
+        className="flex items-center gap-2 cursor-pointer hover:underline">
           <Trash2 size={16} /> <span>Xoá tất cả nhật ký xem</span>
         </li>
       </ul>
